@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce-grupo03",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JIAraoz/e-commerce-grupo03.git"
+  },
+  "author": "Grupo03",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JIAraoz/e-commerce-grupo03/issues"
+  },
+  "homepage": "https://github.com/JIAraoz/e-commerce-grupo03#readme",
+  "dependencies": {
+    "create-vite": "^5.2.3"
+  }
+}
