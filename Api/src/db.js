@@ -1,8 +1,15 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 
-const sequelize = new Sequelize(`postgres://grupo03:IS8CG0ZRWy6zQaThuKv0DWXML0fl3xvp@dpg-cp1v4u779t8c73fkd8vg-a.oregon-postgres.render.com/ecommercegrupo03`, {
+
+const {
+  DB_URL
+} = process.env;
+
+
+const sequelize = new Sequelize(DB_URL, {
   logging: false, 
   native: false, 
 });
