@@ -1,10 +1,16 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from 'react';
 import Card from '../Card/Card';
 import Nav from '../Nav/Nav';
 import './Home.css';
 import Cards from '../Cards/Cards';
 
+=======
+import Card from "../Card/Card";
+import Nav from "../Nav/Nav";
+>>>>>>> Stashed changes
 
+<Nav/>
 export default function Home() {
   // Estado para almacenar los productos
   const [products, setProducts] = useState([]);
