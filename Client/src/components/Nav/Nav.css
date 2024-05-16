@@ -1,4 +1,4 @@
-.nav button {
+/* .nav button {
 	margin-right: 50px;
 	background-color: #ed5252;
 	color: white;
@@ -23,4 +23,28 @@
 	background-color: #333;
 	color: white;
 	z-index: 100;
+} */
+
+.nav {
+  background-color: #333;
+  padding: 16px;
 }
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.nav-item a:hover {
+  text-decoration: underline;
+}
+
