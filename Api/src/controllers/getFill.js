@@ -4,13 +4,13 @@ const {Article,Category}=require('../db')
 const getFill = async(req, res) => {
     try {
         const resultados = await Article.findAll({
-            attributes: { exclude: ['createdAt', 'updatedAt'],
+            attributes: { exclude: ['createdAt', 'updatedAt']},
             include:{
             model: Category, 
             
             attributes: ['categoryId', 'categoryName'],
             through: { attributes: [] }
-        }}});
+        }});
         if (resultados.length === 0) {
             return res.status(400).json({ message: 'los datos no existen se deben crear' });
         }
