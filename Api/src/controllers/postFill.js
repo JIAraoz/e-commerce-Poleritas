@@ -15,7 +15,13 @@ const postFill= async(req,res)=>{
         ])
         
         const categories = await Category.findAll();
-
+        const createdArticles = await Article.bulkCreatebase_articles.map((e) => ({
+            articleName: e.articleName,
+            articleDescription: e.articleDescription,
+            articlePrice: e.articlePrice,
+            articleImage: e.articleImage,
+            articleStock: e.articleStock
+        }));
         for (const article of createdArticles) {
             const articleCategory = base_articles.find(a => a.id === article.id).category;
             const category = categories.find(cat => cat.categoryName === articleCategory);
