@@ -2,7 +2,7 @@ const {Article,Category}=require('../db')
 const postCreateArticle=async(req,res)=>{
     try {
     
-        const category = await Gender.findAll({where:{categoryName:req.body.Category}})
+        const category = await Category.findAll({where:{categoryName:req.body.Category}})
         const {articleName,articleDescription,articleImage,articlePrice,articleStock}=req.body
         if(!categories||!articleName||!articleImage||!articleDescription||!articlePrice||!articleStock){res.status(400).json({message:"Faltan datos o son inválidos en el cuerpo de la solicitud"})}
         else{
