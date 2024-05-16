@@ -1,6 +1,7 @@
 import Card from "../Card/Card";
 
 export default function Home() {
+
   const shirts = [
     //agrege unas camisetas de ejemplo
     {
@@ -32,4 +33,5 @@ export default function Home() {
       ))}
     </div>
   );
+ 
 }
