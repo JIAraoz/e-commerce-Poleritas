@@ -4,10 +4,10 @@ const postCreateArticle=async(req,res)=>{
     
         const category = await Category.findAll({where:{categoryName:req.body.Category}})
         const {articleName,articleDescription,articleImage,articlePrice,articleStock}=req.body
-        if(!categories||!articleName||!articleImage||!articleDescription||!articlePrice||!articleStock){res.status(400).json({message:"Faltan datos o son inválidos en el cuerpo de la solicitud"})}
+        if(!category||!articleName||!articleImage||!articleDescription||!articlePrice||!articleStock){res.status(400).json({message:"Faltan datos o son inválidos en el cuerpo de la solicitud"})}
         else{
         const createdArticle=await Article.Create({articleName,articleDescription,articleImage,articlePrice,articleStock})
-        await article.addCategory(category)
+        await createdArticle.addCategory(category)
         res.status(201).json({ message: 'Registro creado con éxito',results:createdArticle})
         }
 
