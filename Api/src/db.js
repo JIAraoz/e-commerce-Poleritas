@@ -11,7 +11,14 @@ const {
 
 const sequelize = new Sequelize(DB_URL, {
   logging: false, 
-  native: false, 
+  native: false,
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Solo necesitas esto si tienes problemas con el certificado
+    }
+  } 
 });
 const basename = path.basename(__filename);
 
