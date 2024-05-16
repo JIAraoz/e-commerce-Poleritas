@@ -30,7 +30,7 @@ const postFill= async(req,res)=>{
             }
         }
 
-        res.status(201).json({ message: 'Registros creados con éxito', createdArticles });
+        res.status(201).json({ message: 'Registros creados con éxito', results:createdArticles });
 
     } catch (error) {
         console.error('Error al crear registros:', error);
