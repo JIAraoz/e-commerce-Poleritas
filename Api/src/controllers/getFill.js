@@ -6,7 +6,7 @@ const getFill = async(req, res) => {
         const resultados = await Article.findAll({include:{
             model: Category, 
             
-            attributes: ['id', 'name'],
+            attributes: ['categoryId', 'categoryName'],
             through: { attributes: [] }
         }});
         if (resultados.length === 0) {
