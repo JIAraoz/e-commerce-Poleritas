@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 function article (sequelize){
     sequelize.define('article', {
         articleId: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true,
@@ -25,7 +25,7 @@ function article (sequelize){
             allowNull: false,
         },
         articleStock: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         }
     })
