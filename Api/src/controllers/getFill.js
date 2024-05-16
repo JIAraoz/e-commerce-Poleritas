@@ -10,7 +10,7 @@ const getFill = async(req, res) => {
             
             attributes: ['categoryId', 'categoryName'],
             through: { attributes: [] }
-        }});
+        }}});
         if (resultados.length === 0) {
             return res.status(400).json({ message: 'los datos no existen se deben crear' });
         }
