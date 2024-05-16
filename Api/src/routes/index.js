@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const postFill=require('../controllers/postFill');
 const getFill = require('../controllers/getFill');
-
+const postCreateArticle=require('../controllers/postCreateArticle')
 
 const router = Router();
 
