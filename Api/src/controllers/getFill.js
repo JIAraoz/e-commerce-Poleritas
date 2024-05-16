@@ -1,5 +1,5 @@
 
-const {Article}=require('../db')
+const {Article,Category}=require('../db')
 
 const getFill = async(req, res) => {
     try {
