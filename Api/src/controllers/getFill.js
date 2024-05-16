@@ -3,7 +3,9 @@ const {Article,Category}=require('../db')
 
 const getFill = async(req, res) => {
     try {
-        const resultados = await Article.findAll({include:{
+        const resultados = await Article.findAll({
+            attributes: { exclude: ['createdAt', 'updatedAt'],
+            include:{
             model: Category, 
             
             attributes: ['categoryId', 'categoryName'],
