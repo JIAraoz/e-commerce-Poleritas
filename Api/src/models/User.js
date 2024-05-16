@@ -22,7 +22,7 @@ function user(sequelize){
         },
         userImage: {
             type: DataTypes.STRING,
-            allowNull
+            allowNull:false
         }
     })
 }
