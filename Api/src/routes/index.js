@@ -1,6 +1,8 @@
 const { Router } = require('express');
+
 const postFill=require('../controllers/postFill');
 const getFill = require('../controllers/getFill');
+
 
 const router = Router();
 
@@ -17,5 +19,8 @@ router.get('/articles', getFill)
 
 
 
+
+
+router.post('/createArticle',postCreateArticle)
 
 module.exports = router;
