@@ -55,7 +55,7 @@ const getFill = async (req, res) => {
             message: 'Datos obtenidos con éxito',
             totalPages,
             currentPage: page,
-            resultados
+            result:resultados
         });
     } catch (error) {
         console.log(error);
