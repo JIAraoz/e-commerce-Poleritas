@@ -18,7 +18,7 @@ export default function SearchBar() {
     let filtered = items.filter((item) => 
       item.title.toLowerCase().includes(name.toLowerCase())
     );
-    setFilteredItems(filtered);
+    // setFilteredItems(filtered);
     setName('');
     setShowMessage(filtered.length === 0 && name !== '');
   };
