@@ -13,7 +13,7 @@ const postCreateArticle=async(req,res)=>{
 
     } catch (error) {
         console.error('Error al crear registro:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
+        res.status(500).json({ message: 'Error interno del servidor'});
     }
 
 }
