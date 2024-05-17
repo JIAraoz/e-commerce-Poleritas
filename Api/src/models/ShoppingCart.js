@@ -1,4 +1,5 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
+
 
 function shoppingCart (sequelize){
     sequelize.define('shoppingCart', {
@@ -21,6 +22,7 @@ function shoppingCart (sequelize){
             allowNull: false
         }
     })
+
 }
 
 module.exports = shoppingCart;

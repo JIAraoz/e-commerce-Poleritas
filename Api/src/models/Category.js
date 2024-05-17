@@ -1,5 +1,4 @@
-const { DataTypes } = require('sequelize');
-
+const { DataTypes } = require("sequelize");
 function category(sequelize){
     sequelize.define('category', {
         categoryId: {

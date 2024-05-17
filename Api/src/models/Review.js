@@ -1,4 +1,5 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
+
 
 function review (sequelize){
     sequelize.define('review', {
@@ -17,6 +18,7 @@ function review (sequelize){
             allowNull: true
         }
     })
+
 }
 
 module.exports = review;
