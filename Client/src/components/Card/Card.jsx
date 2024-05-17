@@ -1,15 +1,18 @@
-function Card({ title, description, image, price, size }) {
+
+
+import './card.css';
+
+export default function Card({ title, description, image, price, size }) {
   return (
+    
     <div className="card">
       <img src={image} alt={title} />
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
-        <p className="card-text">Tamaño: {size}</p>
-        <p className="card-text">Precio: ${price}</p>
-      </div>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <p>{`Price: $${price}`}</p>
+      <p>{`Size: ${size}`}</p>
     </div>
   );
 }
 
-export default Card;
+
