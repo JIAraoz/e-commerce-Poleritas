@@ -1,16 +1,11 @@
-<<<<<<< Updated upstream
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios'
 import Card from '../Card/Card';
 import Nav from '../Nav/Nav';
 import './Home.css';
 import Cards from '../Cards/Cards';
 
-=======
-import Card from "../Card/Card";
-import Nav from "../Nav/Nav";
->>>>>>> Stashed changes
 
-<Nav/>
 export default function Home() {
   // Estado para almacenar los productos
   const [products, setProducts] = useState([]);
@@ -19,9 +14,8 @@ export default function Home() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch('/src/items.json');
-        const data = await response.json();
-        setProducts(data);
+        const response = await axios.get("https://e-commerce-grupo03.onrender.com/articles");
+        setProducts(response.data.result);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching the products:', error);
@@ -34,23 +28,9 @@ export default function Home() {
   
   return (
     <div className="home">
+    
       <Nav />
-      <div className="cards-container">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          products.map((product) => (
-            <Card
-              key={product.id}
-              title={product.title}
-              // description={product.description} comente para que no se haga muy grande la card
-              image={product.image}
-              price={product.price}
-              stock={product.stock} 
-            />
-          ))
-        )}
-      </div>
+      <Cards products={products} loading={loading} ></Cards>
     </div>
   );
 }
