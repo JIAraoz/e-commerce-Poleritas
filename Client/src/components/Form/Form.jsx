@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Cloudinary from '../Cloudinary/Cloudinary';
 
 export default function Form() {
     const [articleData, setArticleData] = useState({
@@ -8,7 +9,7 @@ export default function Form() {
         articlePrice: '',
         articleStock: '',
         articleDescription: '',
-        Category: ''
+        category: ''
     });
 
     const [errors, setErrors] = useState({
@@ -17,25 +18,27 @@ export default function Form() {
         articlePrice: '',
         articleStock: '',
         articleDescription: '',
-        Category: ''
+        category: ''
     });
 
     const handleChange = (event) => {
         const property = event.target.name;
         const value = event.target.value;
-
         setArticleData({ ...articleData, [property]: value });
+    };
 
-        // Validation({ ...articleData, [property]: value }, errors, setErrors);
+    const handleImageUpload = (imageUrl) => {
+        setArticleData({ ...articleData, articleImage: imageUrl });
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
+            console.log(articleData)
             const response = await axios.post('https://e-commerce-grupo03.onrender.com/createArticle', articleData);
-            console.log(response)
-            if (response.status[0] === 2) {
+
+            if (("" + response.status)[0] === "2") {
                 alert("Se ha subido tu artículo a la base de datos.");
             } else {
                 alert("Algo ha salido mal.");
@@ -56,7 +59,7 @@ export default function Form() {
 
                 <div className="form-group">
                     <label htmlFor='articleImage'>Imagen:</label>
-                    <input type='text' name='articleImage' value={articleData.articleImage} onChange={handleChange} />
+                    <Cloudinary onImageUpload={handleImageUpload} />
                     {/* {errors.articleImage && <span className="error-message">{errors.articleImage}</span>} */}
                 </div>
 
@@ -79,12 +82,12 @@ export default function Form() {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor='Category'>Categoría:</label>
-                    <input type='text' name='Category' value={articleData.Category} onChange={handleChange} />
-                    {/* {errors.Category && <span className="error-message">{errors.Category}</span>} */}
+                    <label htmlFor='category'>Categoría:</label>
+                    <input type='text' name='category' value={articleData.category} onChange={handleChange} />
+                    {/* {errors.category && <span className="error-message">{errors.category}</span>} */}
                 </div>
 
-                <button onClick={handleSubmit}>Enviar</button>
+                <button type='submit'>Enviar</button>
             </form>
         </div>
     );
