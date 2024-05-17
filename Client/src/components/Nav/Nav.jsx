@@ -14,6 +14,10 @@ export default function Nav() {
             <Link to='/profile'>
                 <button>Perfil</button>
             </Link>
+
+            <Link to='/form'>
+                <button>Form</button>
+            </Link>
         </div>
     )
 }

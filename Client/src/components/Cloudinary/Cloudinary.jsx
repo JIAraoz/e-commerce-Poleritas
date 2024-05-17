@@ -15,7 +15,7 @@ export default function Cloudinary() {
         const response = await axios.post("https://api.cloudinary.com/v1_1/drq4immoc/image/upload", data)
 
         setUrl(response.data.secure_url)
-        // console.log(response)
+        console.log(response)
     }
 
     const deleteImage = () => {
