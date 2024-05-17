@@ -1,6 +1,6 @@
 
 const { Router } = require('express');
-
+const getCategory=require('../controllers/getCategory')
 const postFill=require('../controllers/postFill');
 const getFill = require('../controllers/getFill');
 const postCreateArticle=require('../controllers/postCreateArticle')
@@ -14,13 +14,7 @@ router.post('/fill',postFill)
 
 router.get('/articles', getFill)
 
-
-
-
-
-
-
-
+router.get('/getCategory',getCategory)
 
 router.post('/createArticle',postCreateArticle)
 
