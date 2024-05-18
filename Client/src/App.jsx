@@ -28,6 +28,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/form' element={<Form/>}/>
+        {/* <Route path='/detail/:id' element={<Detail products={products}/>}/> */}
       </Routes>
     </div>
   )

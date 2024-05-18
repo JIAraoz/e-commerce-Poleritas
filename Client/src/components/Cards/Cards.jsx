@@ -2,13 +2,6 @@
 import Card from '../Card/Card';
 
 export default function Cards({ products ,loading }) {
-    
-    
-    
-    
-    
-    
-    
     return( 
          
         <div className="cards-container">
@@ -18,6 +11,7 @@ export default function Cards({ products ,loading }) {
       products.map((product) => (
         <Card
           key={product.articleId}
+          id={product.articleId}
           title={product.articleName}
           image={product.articleImage}
           price={product.articlePrice}
