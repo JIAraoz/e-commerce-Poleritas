@@ -2,14 +2,14 @@ const { Article, Category } = require("../db.js");
 
 const getById = async (req, res) => {
     try {
-        const articleId = req.query.id;
+        const articleId = req.params.id;
 
         if (!articleId) {
             return res.status(400).json({ error: "ID is required" });
         }
 
         const resultado = await Article.findOne({
-            where: { id: articleId },
+            where: { articleId },
             include: {
                 model: Category,
                 attributes: ['categoryId', 'categoryName'],
