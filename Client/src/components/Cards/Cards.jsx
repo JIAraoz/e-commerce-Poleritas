@@ -2,6 +2,13 @@
 import Card from '../Card/Card';
 
 export default function Cards({ products ,loading }) {
+    
+    
+    
+    
+    
+    
+    
     return( 
          
         <div className="cards-container">
