@@ -16,6 +16,7 @@ export default function Cards({ products ,loading }) {
           image={product.articleImage}
           price={product.articlePrice}
           stock={product.articleStock} 
+          product={product} 
         />
       ))
     )}
