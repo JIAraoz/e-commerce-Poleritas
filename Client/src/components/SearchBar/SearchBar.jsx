@@ -1,8 +1,5 @@
-
-
 import { useState } from 'react';
 import items from '../../items.json';
-import './SearchBar.css';
 
 export default function SearchBar() {
   const [name, setName] = useState('');

@@ -1,28 +1,3 @@
-.home {
-  text-align: center;
-
-}
-.nav-container{
-  background-position: center;
-}
-.cards-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.divCards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-.navBar {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-  }
-
 .pagination {
   display: flex;
   justify-content: center;
