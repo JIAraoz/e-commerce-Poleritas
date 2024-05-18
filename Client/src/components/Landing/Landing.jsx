@@ -3,11 +3,11 @@ import Login from '../Auth0/Login/Login';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Landing() {
-  const { isAuthenticated} = useAuth0();
-  return (
-    <div  className="landing">
-      {isAuthenticated ? <Logout /> : <Login />}
-    </div>
-  );
-
+    return (
+        <div className='landing'>
+            <Link to='/home'>
+                <button className="landing-button">Bienvenid@s a nuestra tienda!!</button>
+            </Link>
+        </div>
+    )
 }
