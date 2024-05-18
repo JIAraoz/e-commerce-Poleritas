@@ -1,20 +1,28 @@
 import React from 'react';
 import './Nav.css';
 import SearchBar from '../SearchBar/SearchBar';
+import { Link } from 'react-router-dom';
+
 function Nav() {
   return (
     <nav className="nav">
-      <ul className="nav-list">
-        <li className="nav-item"><a href="/home">Home</a></li>
-        <li className="nav-item"><a href="/products">Products</a></li>
-        <li className="nav-item"><a href="/about">About</a></li>
-        <li className="nav-item"><a href="/contact">Contact</a></li>
-      </ul>
-<SearchBar className='searchBar' />
+      <Link to='/home'>
+        <button>Home</button>
+      </Link>
+      
+      <SearchBar className='searchBar' />
+
+      <Link to='/profile'>
+        <button>Perfil</button>
+      </Link>
+
+      <Link to='/form'>
+          <button>Form</button>
+      </Link>
+      
     </nav>
   );
 }
 
 export default Nav;
-
-
+            

@@ -7,6 +7,7 @@ const getFill = async (req, res) => {
         const page = parseInt(req.query.page, 10) || 1;
         const categoryFilter = req.query.category || null;
         const stockFilter = parseInt(req.query.stock, 10) || 0;
+        const order = req.query.order || null;
 
         // Validar parámetros
         if (pageSize <= 0 || page <= 0 || stockFilter < 0) {
@@ -15,15 +16,39 @@ const getFill = async (req, res) => {
 
         // Construir condición "where"
         const whereCondition = {};
-        if (categoryFilter) {
-            whereCondition.categoryId = categoryFilter;
-        }
         if (stockFilter > 0) {
-            whereCondition.stock = { [Op.gte]: stockFilter };
+            whereCondition.articleStock = { [Op.gte]: stockFilter };
+        }
+
+        // Definir ordenación
+        let orderCondition = [];
+        switch (order) {
+            case 'A-Z':
+                orderCondition = [['articleName', 'ASC']];
+                break;
+            case 'Z-A':
+                orderCondition = [['articleName', 'DESC']];
+                break;
+            case 'price-asc':
+                orderCondition = [['articlePrice', 'ASC']];
+                break;
+            case 'price-desc':
+                orderCondition = [['articlePrice', 'DESC']];
+                break;
+            default:
+                orderCondition = [['createdAt', 'DESC']]; // Orden por defecto
         }
 
         // Obtener el conteo total
-        const totalCount = await Article.count({ where: whereCondition });
+        const totalCount = await Article.count({
+            where: whereCondition,
+            include: categoryFilter ? {
+                model: Category,
+                where: { categoryId: categoryFilter },
+                through: { attributes: [] }
+            } : null
+        });
+
         const totalPages = Math.ceil(totalCount / pageSize);
 
         // Obtener los resultados
@@ -32,11 +57,12 @@ const getFill = async (req, res) => {
             include: {
                 model: Category,
                 attributes: ['categoryId', 'categoryName'],
+                where: categoryFilter ? { categoryId: categoryFilter } : {},
                 through: { attributes: [] }
             },
             offset: (page - 1) * pageSize,
             limit: pageSize,
-            order: [['createdAt', 'DESC']] // Añadir orden por defecto
+            order: orderCondition
         });
 
         // Manejo del caso donde no se encuentran resultados

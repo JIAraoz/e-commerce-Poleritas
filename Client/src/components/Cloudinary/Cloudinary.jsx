@@ -1,40 +1,37 @@
-import axios from 'axios';
-import { useState } from 'react';
+import axios from "axios";
+import { useState } from "react";
 
-export default function Cloudinary() {
-	const [Url, setUrl] = useState('');
+export default function Cloudinary({ onImageUpload }) {
+    const [Url, setUrl] = useState("");
 
-	const changeUploadImage = async (e) => {
-		const file = e.target.files[0];
+    const changeUploadImage = async (e) => {
+        const file = e.target.files[0];
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", "Preset");
 
-		const data = new FormData();
+        const response = await axios.post("https://api.cloudinary.com/v1_1/drq4immoc/image/upload", data);
+        const imageUrl = response.data.secure_url;
 
-		data.append('file', file);
-		data.append('upload_preset', 'Preset');
+        setUrl(imageUrl);
+        onImageUpload(imageUrl);
+    };
 
-		const response = await axios.post(
-			'https://api.cloudinary.com/v1_1/drq4immoc/image/upload',
-			data,
-		);
+    const deleteImage = () => {
+        setUrl("");
+        onImageUpload("");
+    };
 
-		setUrl(response.data.secure_url);
-		// console.log(response)
-	};
-
-	const deleteImage = () => {
-		setUrl('');
-	};
-
-	return (
-		<div>
-			<p>Seleccionar imagen</p>
-			<input type='file' accept='image/*' onChange={changeUploadImage} />
-			{Url && (
-				<div>
-					<img src={Url} />
-					<button onClick={() => deleteImage()}>Eliminar imagen</button>
-				</div>
-			)}
-		</div>
-	);
+    return (
+        <div>
+            <p>Seleccionar imagen</p>
+            <input type='file' accept='image/*' onChange={changeUploadImage} />
+            {Url && (
+                <div>
+                    <img src={Url} alt="Uploaded" />
+                    <button onClick={deleteImage}>Eliminar imagen</button>
+                </div>
+            )}
+        </div>
+    );
 }
