@@ -7,6 +7,7 @@ import Form from "./components/Form/Form"
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Login from './components/Auth0/Login/Login';
 import Logout from './components/Auth0/Logout/Logout';
+import Detail from './components/Detail/Detail'
 
 function App() {
 	const navigate=useNavigate()
@@ -28,7 +29,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/form' element={<Form/>}/>
-        {/* <Route path='/detail/:id' element={<Detail products={products}/>}/> */}
+        <Route path='/detail/:id' element={<Detail />}/>
       </Routes>
     </div>
   )
