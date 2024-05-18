@@ -1,0 +1,14 @@
+.landing-background {
+  background: linear-gradient(to bottom right, #ffcccc, #ffffcc, #ccffcc);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-content {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}

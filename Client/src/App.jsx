@@ -17,7 +17,7 @@ function App() {
   return (
     <div>
       {
-        isAuthenticated ? <Logout/> : <Login/>
+        // isAuthenticated ? <Logout/> : <Login/>
       }
       {
         isAuthenticated ? <Nav/> : null

@@ -1,12 +1,13 @@
-/* eslint-disable react/prop-types */
+
 
 import { Link } from "react-router-dom"
 import './card.css';
 
 export default function Card({ title, image, price, id}) {
+
   return (
-    
     <div className="card">
+
       <Link to={`/detail/${id}`}>
         <div className="image-container" >
         <img src={image} alt={title} />
@@ -16,8 +17,7 @@ export default function Card({ title, image, price, id}) {
       
         <p>{`Price: $${price}`}</p>
       </Link>
+
     </div>
   );
 }
-
-

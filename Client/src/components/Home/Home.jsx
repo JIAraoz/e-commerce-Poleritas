@@ -26,7 +26,6 @@ export default function Home() {
         setLoading(false);
       }
     }
-
     fetchProducts(currentPage);
   }, [currentPage]);
 
@@ -34,14 +33,13 @@ export default function Home() {
 
   return (
     <div className="home">
-      <Nav />
-      <Cards products={products} loading={loading} />
-      <Pagination 
-        productsPerPage={productsPerPage} 
-        totalPages={totalPages} 
-        paginate={paginate} 
-        currentPage={currentPage}
-      />
+      <div className="home-background">
+        <Nav />
+        <div className="home-content">
+          <Cards products={products} loading={loading} />
+          <Pagination productsPerPage={productsPerPage} totalPages={totalPages} paginate={paginate} currentPage={currentPage} />
+        </div>
+      </div>
     </div>
   );
 }

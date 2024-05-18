@@ -1,11 +1,20 @@
-import { Link } from 'react-router-dom';
+import Logout from '../Auth0/Logout/Logout';
+import Login from '../Auth0/Login/Login';
+import { useAuth0 } from '@auth0/auth0-react';
+import "./Landing.css"
 
 export default function Landing() {
-    return (
-        <div className='landing'>
-            <Link to='/home'>
-                <button className="landing-button">Bienvenid@s a nuestra tienda!!</button>
-            </Link>
+  const { isAuthenticated } = useAuth0();
+
+  return (
+    <div className="landing">
+      <div className="landing-background">
+        <div className="landing-content">
+          {isAuthenticated ? <Logout /> : <Login />}
         </div>
-    )
+      </div>
+    </div>
+  );
 }
+
+
