@@ -76,7 +76,7 @@ const getFill = async (req, res) => {
         // Construir condición "where"
         const whereCondition = {};
         if (stockFilter > 0) {
-            whereCondition.stock = { [Op.gte]: stockFilter };
+            whereCondition.articleStock = { [Op.gte]: stockFilter };
         }
 
         // Obtener el conteo total
