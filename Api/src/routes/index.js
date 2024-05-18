@@ -15,7 +15,7 @@ router.post('/fill',postFill)
 
 router.get('/articles', getFill)
 
-router.get('/detail', getById)
+router.get('/detail/:id', getById)
 
 router.get('/getCategory',getCategory)
 
