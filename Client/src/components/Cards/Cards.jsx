@@ -26,4 +26,4 @@ export default function Cards({ products ,loading }) {
       ))
     )}
   </div>)
-}
+

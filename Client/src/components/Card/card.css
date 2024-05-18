@@ -1,0 +1,18 @@
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 20rem;
+  height: auto;
+  text-align: center;
+  margin: 2rem;
+}
+
+.image-container {
+  display: flex;
+  width: 20rem;
+  height: 20rem;
+  overflow: hidden;
+  object-fit: contain;
+  justify-content: center;
+}
+
