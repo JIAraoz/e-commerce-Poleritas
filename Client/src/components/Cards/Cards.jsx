@@ -1,19 +1,29 @@
+/* eslint-disable react/prop-types */
 import Card from '../Card/Card';
 
-export default function Cards({ items }) {
-
-    const cardComponents = items.map((item) => {
-        return (
-            <Card
-                key = {item.title}
-                name = {item.title}
-                description = {item.description}
-                image = {item.image}
-                size = {item.size}
-                price = {item.price}
-            />
-        )
-    })
-
-    return <div className="card-grid">{cardComponents}</div>;
+export default function Cards({ products ,loading }) {
+    
+    
+    
+    
+    
+    
+    
+    return( 
+         
+        <div className="cards-container">
+    {loading ? (
+      <p>Loading...</p>
+    ) : (
+      products.map((product) => (
+        <Card
+          key={product.articleId}
+          title={product.articleName}
+          image={product.articleImage}
+          price={product.articlePrice}
+          stock={product.articleStock} 
+        />
+      ))
+    )}
+  </div>)
 };

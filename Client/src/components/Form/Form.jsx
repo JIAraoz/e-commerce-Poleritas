@@ -9,7 +9,7 @@ export default function Form() {
         articlePrice: '',
         articleStock: '',
         articleDescription: '',
-        category: ''
+        Category: ''
     });
 
     const [errors, setErrors] = useState({
@@ -18,7 +18,7 @@ export default function Form() {
         articlePrice: '',
         articleStock: '',
         articleDescription: '',
-        category: ''
+        Category: ''
     });
 
     const handleChange = (event) => {
@@ -82,9 +82,9 @@ export default function Form() {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor='category'>Categoría:</label>
-                    <input type='text' name='category' value={articleData.category} onChange={handleChange} />
-                    {/* {errors.category && <span className="error-message">{errors.category}</span>} */}
+                    <label htmlFor='Category'>Categoría:</label>
+                    <input type='text' name='Category' value={articleData.Category} onChange={handleChange} />
+                    {/* {errors.Category && <span className="error-message">{errors.Category}</span>} */}
                 </div>
 
                 <button type='submit'>Enviar</button>

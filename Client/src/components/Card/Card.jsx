@@ -1,15 +1,22 @@
-function Card({ title, description, image, price, size }) {
+/* eslint-disable react/prop-types */
+
+
+import './card.css';
+
+export default function Card({ title, image, price}) {
   return (
+    
     <div className="card">
+      <div className="image-container" >
       <img src={image} alt={title} />
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
-        <p className="card-text">Tamaño: {size}</p>
-        <p className="card-text">Precio: ${price}</p>
+
       </div>
+      <h2>{title}</h2>
+     
+      <p>{`Price: $${price}`}</p>
+    
     </div>
   );
 }
 
-export default Card;
+
