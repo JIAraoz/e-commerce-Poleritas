@@ -1,26 +1,29 @@
-import React from "react";
+// Detail.jsx
+import React from 'react';
 import { useLocation } from 'react-router-dom';
-import "./Detail.css";
 
-export default function Detail({ products }) {
-    const location = useLocation();
-    const regex = /\d+/;
-    const id = location.pathname.match(regex)[0];
-    
-    return (
-        <div className='detail-container'>
-            <div className='detail'>
-                <h2>ID: {products[0].articleId}</h2>
-                <h4>Nombre: {products[0].articleName}</h4>
-                <h4>Descripcion: {products[0].articleDescription}</h4>
-                <h4>Precio: {products[0].articlePrice}</h4>
-                <h4>Stock: {products[0].articleStock}</h4>
-                <h4>Categoria: {products[0].Category}</h4>
-            </div>
+export default function Detail() {
+  const location = useLocation();
+  const product = location.state.product
+  console.log(product)
 
-            <div className="photo-container">
-                <img src={products[0].articleImage} alt={products[0].articleId}/>
-            </div>
-        </div>
-    )
+  if (!product) {
+    return <div>Producto no encontrado</div>;
+  }
+
+  return (
+    <div className='detail-container'>
+      <div className='detail'>
+        <h2>ID: {product.articleId}</h2>
+        <h4>Nombre: {product.articleName}</h4>
+        <h4>Descripción: {product.articleDescription}</h4>
+        <h4>Precio: {product.articlePrice}</h4>
+        <h4>Stock: {product.articleStock}</h4>
+        <h4>Categoría: {product.categories[0].categoryName}</h4>
+      </div>
+      <div className="photo-container">
+        <img src={product.articleImage} alt={product.articleName} />
+      </div>
+    </div>
+  );
 }

@@ -43,6 +43,7 @@ import Home from "./components/Home/Home"
 import Landing from "./components/Landing/Landing"
 import Form from "./components/Form/Form"
 import { Routes, Route} from 'react-router-dom';
+import Detail from './components/Detail/Detail'
 
 
 function App() {
@@ -59,7 +60,9 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/form' element={<Form/>}/>
-        {/* {/ <Route path='/detail/:id' element={<Detail products={products}/>}/> */}
+
+        <Route path='/detail/:id' element={<Detail />}/>
+
       </Routes>
      </div>
   )

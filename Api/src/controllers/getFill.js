@@ -8,6 +8,7 @@ const getFill = async (req, res) => {
         const categoryFilter = req.query.category || null;
         const stockFilter = parseInt(req.query.stock, 10) || 0;
         const order = req.query.order || null;
+        const nameFilter = req.query.name || '';
 
         // Validar parámetros
         if (pageSize <= 0 || page <= 0 || stockFilter < 0) {
@@ -18,6 +19,11 @@ const getFill = async (req, res) => {
         const whereCondition = {};
         if (stockFilter > 0) {
             whereCondition.articleStock = { [Op.gte]: stockFilter };
+        }
+        if(nameFilter.length!==0){
+            whereCondition.articleName={
+                [Op.iLike]: `%${nameFilter}%`
+            }
         }
 
         // Definir ordenación
