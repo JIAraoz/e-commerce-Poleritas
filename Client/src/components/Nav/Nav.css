@@ -1,36 +1,31 @@
-
 .nav {
-	display: flex;
-	justify-content: left;
-	padding: 10px;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	background-color: #333;
-	color: white;
-	z-index: 100;
-  padding: 16px;
-  
-} 
-
-
-.nav-list {
-  list-style: none;
   display: flex;
-  justify-content: space-around;
-  margin: 0;
-  padding: 0;
-  
+  justify-content: space-between;
+  align-items: center;
+  background-color: #577B8D; 
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.nav-item a {
-  color: white;
+.nav a {
   text-decoration: none;
-  font-size: 1.2em;
-  margin-right: 25px;
+  color: #6b4e32; /* Color de texto marrón oscuro */
 }
 
-.nav-item a:hover {
-  text-decoration: underline;
+.nav button {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
+.nav button:hover {
+  color: #d2691e; /* Color naranja suave al pasar el cursor */
+}
+
+.searchBar {
+  margin: 0 10px;
+}

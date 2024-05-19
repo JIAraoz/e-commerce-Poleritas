@@ -6,9 +6,8 @@ const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
 
 	return (
-		isAuthenticated && (
+    isAuthenticated && (
       <div className='profile'>
-        <Nav/>
 			<div className='profile-image-container'>
 				<img src={user.picture} alt={user.name} />
         </div>
@@ -17,8 +16,7 @@ const Profile = () => {
 				<p>Correo: {user.email}</p>
         <Logout/>
         </div>
-				
-        </div>
+      </div>
 		)
 	);
 };
