@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Nav from '../Nav/Nav';
 import './Home.css';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
