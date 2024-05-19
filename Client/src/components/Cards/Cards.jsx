@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Card from '../Card/Card';
-
+import "./Cards.css"
 export default function Cards({ products ,loading }) {
     return( 
          
