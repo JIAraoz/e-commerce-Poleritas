@@ -34,7 +34,6 @@ export default function Home() {
   return (
     <div className="home">
       <div className="home-background">
-        <Nav />
         <div className="home-content">
           <Cards products={products} loading={loading} />
           <Pagination productsPerPage={productsPerPage} totalPages={totalPages} paginate={paginate} currentPage={currentPage} />

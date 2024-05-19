@@ -49,21 +49,25 @@ export default function Form() {
         }
     };
 
-    return (
+  return (
+      
+    <div> 
       <div>
-          <Nav/>
             <form className='articleForm' onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor='articleName'>Nombre del artículo:</label>
                     <input type='text' name='articleName' value={articleData.articleName} onChange={handleChange} />
                     {/* {errors.articleName && <span className="error-message">{errors.articleName}</span>} */}
                 </div>
-
-                <div className="form-group">
-                    <label htmlFor='articleImage'>Imagen:</label>
-                    <Cloudinary onImageUpload={handleImageUpload} />
+               
+               <div className="form-group">
+                  <label htmlFor='articleImage'>Imagen:</label>
+                  <div className="image-container">
+                  <Cloudinary onImageUpload={handleImageUpload} />
+                </div>
                     {/* {errors.articleImage && <span className="error-message">{errors.articleImage}</span>} */}
                 </div>
+              
 
                 <div className="form-group">
                     <label htmlFor='articlePrice'>Precio:</label>
@@ -92,5 +96,6 @@ export default function Form() {
                 <button type='submit'>Enviar</button>
             </form>
         </div>
+    </div>
     );
 }

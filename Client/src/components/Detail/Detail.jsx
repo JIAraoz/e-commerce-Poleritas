@@ -1,11 +1,11 @@
 // Detail.jsx
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import './Detail.css'; // Importa el archivo CSS
 
 export default function Detail() {
   const location = useLocation();
   const product = location.state.product
-  console.log(product)
 
   if (!product) {
     return <div>Producto no encontrado</div>;
