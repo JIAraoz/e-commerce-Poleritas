@@ -14,6 +14,8 @@
 		"@auth0/auth0-react": "^2.2.4",
 		"@cloudinary/react": "^1.13.0",
 		"@cloudinary/url-gen": "^1.19.0",
+		"@fortawesome/free-brands-svg-icons": "^6.5.2",
+		"@fortawesome/react-fontawesome": "^0.2.1",
 		"axios": "^1.6.8",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
