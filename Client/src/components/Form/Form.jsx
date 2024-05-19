@@ -1,9 +1,22 @@
-import { useState } from 'react';
+import { useState,useEffect} from 'react';
 import axios from 'axios';
 import Cloudinary from '../Cloudinary/Cloudinary';
 import "./Form.css"
-import Nav from '../Nav/Nav';
 export default function Form() {
+    const [categories,setCategories]=useState([])
+    useEffect(()=>{
+        const axiosCategories=async()=>{
+        try {
+                const {data}= await axios.get("https://e-commerce-grupo03.onrender.com/getCategory")
+                console.log(data);
+                setCategories(data.result)
+        }catch (error) {
+            alert("A ocurrido un error al intentar cargar las categorías")
+            console.log("A ocurrido un error al intentar cargar las categorías "+ error);
+        }
+    } 
+    axiosCategories()
+    },[])
     const [articleData, setArticleData] = useState({
       articleName: '',
       articleImage: '',
@@ -51,8 +64,8 @@ export default function Form() {
 
   return (
       
-    <div> 
-      <div>
+    <div className='back'> 
+      <div className='form-box'>
             <form className='articleForm' onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor='articleName'>Nombre del artículo:</label>
@@ -89,8 +102,12 @@ export default function Form() {
 
                 <div className="form-group">
                     <label htmlFor='Category'>Categoría:</label>
-                    <input type='text' name='Category' value={articleData.Category} onChange={handleChange} />
+                   
                     {/* {errors.Category && <span className="error-message">{errors.Category}</span>} */}
+                    <select name="Category" value={articleData.Category} onChange={handleChange}>
+                        <option value="">Selecciona una categoría</option>
+                        {categories.map((element)=><option value={element.categoryName} key={element.categoryId}>{element.categoryName}</option>)}
+                    </select>
                 </div>
 
                 <button type='submit'>Enviar</button>
