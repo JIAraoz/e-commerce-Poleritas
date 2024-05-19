@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Cloudinary from '../Cloudinary/Cloudinary';
-
+import "./Form.css"
+import Nav from '../Nav/Nav';
 export default function Form() {
     const [articleData, setArticleData] = useState({
-        articleName: '',
-        articleImage: '',
-        articlePrice: '',
-        articleStock: '',
-        articleDescription: '',
-        Category: ''
+      articleName: '',
+      articleImage: '',
+      articlePrice: '',
+      articleStock: '',
+      articleDescription: '',
+      Category: ''
     });
-
+    
     const [errors, setErrors] = useState({
-        articleName: '',
+      articleName: '',
         articleImage: '',
         articlePrice: '',
         articleStock: '',
@@ -35,7 +36,7 @@ export default function Form() {
         event.preventDefault();
 
         try {
-            console.log(articleData)
+          console.log(articleData)
             const response = await axios.post('https://e-commerce-grupo03.onrender.com/createArticle', articleData);
 
             if (("" + response.status)[0] === "2") {
@@ -49,7 +50,8 @@ export default function Form() {
     };
 
     return (
-        <div>
+      <div>
+          <Nav/>
             <form className='articleForm' onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor='articleName'>Nombre del artículo:</label>
