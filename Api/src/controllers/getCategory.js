@@ -5,7 +5,8 @@ const getCategory = async (req, res) =>{
         const response = await Category.findAll({
             attributes: ['categoryId', 'categoryName']
         });
-        if(response.length===0){
+        console.log(response);
+        if(response.length!==0){
             res.status(200).json({
                 message: 'Datos obtenidos con éxito',
                 result: response
