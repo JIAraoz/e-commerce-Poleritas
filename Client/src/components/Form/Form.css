@@ -1,4 +1,14 @@
+.back{
+
+  background: linear-gradient(to bottom right, #ffcccc, #ffffcc, #ccffcc);
+}
+.form-box{
+  padding: 2rem;
+}
+
+
 .articleForm {
+  
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
