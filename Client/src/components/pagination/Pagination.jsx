@@ -9,16 +9,35 @@ const Pagination = ({ productsPerPage, totalPages, paginate, currentPage }) => {
     pageNumbers.push(i);
   }
 
+  const handlePaginate = (number) => {
+    paginate(number);
+    window.scrollTo(0, 0); // Desplazar hacia arriba al cambiar de página
+  };
+
   return (
     <nav>
       <ul className="pagination">
+        {currentPage !== 1 && (
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+            <a onClick={() => handlePaginate(currentPage - 1)} href="#!" className="page-link">
+              Anterior
+            </a>
+          </li>
+        )}
         {pageNumbers.map(number => (
           <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
-            <a onClick={() => paginate(number)} href="#!" className="page-link">
+            <a onClick={() => handlePaginate(number)} href="#!" className="page-link">
               {number}
             </a>
           </li>
         ))}
+        {currentPage !== totalPages && (
+          <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+            <a onClick={() => handlePaginate(currentPage + 1)} href="#!" className="page-link">
+              Siguiente
+            </a>
+          </li>
+        )}
       </ul>
     </nav>
   );

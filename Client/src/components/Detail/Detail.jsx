@@ -1,7 +1,7 @@
 // Detail.jsx
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import './Detail.css'; // Importa el archivo CSS
+import './Detail.css'; 
 
 export default function Detail() {
   const location = useLocation();
