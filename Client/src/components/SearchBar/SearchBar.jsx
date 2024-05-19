@@ -1,23 +1,31 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { updateQuery } from '../../redux/actions';
 import items from '../../items.json';
+import Home from '../Home/Home';
 
 export default function SearchBar() {
   const [name, setName] = useState('');
-  
+
+  const navigate=useNavigate();
+
   const [showMessage, setShowMessage] = useState(false);
+  
+  const dispatch = useDispatch();
+  const query = useSelector(state => state.query)
 
   const handleChange = (event) => {
     setName(event.target.value);
   };
+  const renderizado = () => {Home}
 
   const handleClick = (event) => {
     event.preventDefault();
-    let filtered = items.filter((item) => 
-      item.title.toLowerCase().includes(name.toLowerCase())
-    );
-    // setFilteredItems(filtered);
+    query.search = name;
+    dispatch(updateQuery(query));
+    renderizado()
     setName('');
-    setShowMessage(filtered.length === 0 && name !== '');
   };
 
   return (
