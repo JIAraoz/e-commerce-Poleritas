@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
 import Nav from '../Nav/Nav';
 import './Home.css';
@@ -12,6 +13,10 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [categories, setCategories] = useState([]);
+  const [order, setOrder] = useState('')
+  const [category, setCategory] = useState('')
+
+  const dispatch = useDispatch();
 
   const query = useSelector(state => state.query)
 
@@ -41,9 +46,22 @@ export default function Home() {
     }
     fetchCategories()
     fetchProducts(currentPage);
-  }, [currentPage]);
+  }, [currentPage, query]);
 
-  const handleFilters = (evento) => {
+
+  const handlerOrder = (event) => {
+    setOrder(event.target.value)
+    console.log(order)
+  }
+
+  const handleCategory = (event) => {
+    setCategory(event.target.value)
+  }
+
+  const handleFilters = () => {
+    query.order = order;
+    query.filter = category;
+    dispatch(updateQuery(query))
   }
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -53,16 +71,16 @@ export default function Home() {
       <div className="home-background">
         <div className='filters'>
             <div className="custom-select">
-                <select name="order" defaultValue=''>
+                <select name="order" defaultValue='order' onChange={handlerOrder}>
                 <option value="order" disabled='disabled'>Order</option>
                 <option value="A-Z">A-Z</option>
-                <option value="Z-A">Z-A</option>
+                <option value="Z-A">Z-A</option>  
                 <option value="price-asc">^ price</option>
                 <option value="price-desc">v Price</option>
                 </select>
             </div>
             <div className="custom-select">
-                <select name="Category" defaultValue=''>
+                <select name="Category" defaultValue='' onChange={handleCategory}>
                 <option value=" ">All</option>
                 {categories.map((category, index) => (
                     <option key={index} value={category.categoryName}>{category.categoryName}</option>

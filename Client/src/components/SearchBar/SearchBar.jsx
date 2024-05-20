@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { updateQuery } from '../../redux/actions';
 import items from '../../items.json';
 import Home from '../Home/Home';
@@ -18,13 +18,11 @@ export default function SearchBar() {
   const handleChange = (event) => {
     setName(event.target.value);
   };
-  const renderizado = () => {Home}
 
   const handleClick = (event) => {
     event.preventDefault();
     query.search = name;
     dispatch(updateQuery(query));
-    renderizado()
     setName('');
   };
 
@@ -36,7 +34,9 @@ export default function SearchBar() {
         value={name}
         placeholder="Buscar..."
       />
-      <button onClick={handleClick}>Buscar</button>
+      <Link to='/home'>
+        <button onClick={handleClick}>Buscar</button>
+      </Link>
       {showMessage && <div className="no-results">No se encontraron resultados.</div>}
       <div className="search-results">
      
