@@ -51,7 +51,6 @@ export default function Home() {
 
   const handlerOrder = (event) => {
     setOrder(event.target.value)
-    console.log(order)
   }
 
   const handleCategory = (event) => {
@@ -61,6 +60,7 @@ export default function Home() {
   const handleFilters = () => {
     query.order = order;
     query.filter = category;
+    setCurrentPage(1);
     dispatch(updateQuery(query))
   }
 
@@ -81,9 +81,9 @@ export default function Home() {
             </div>
             <div className="custom-select">
                 <select name="Category" defaultValue='' onChange={handleCategory}>
-                <option value=" ">All</option>
+                <option value="">All</option>
                 {categories.map((category, index) => (
-                    <option key={index} value={category.categoryName}>{category.categoryName}</option>
+                    <option key={index} value={category.categoryId}>{category.categoryName}</option>
                 ))} 
                 </select>
             </div>
