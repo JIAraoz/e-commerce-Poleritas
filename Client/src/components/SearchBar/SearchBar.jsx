@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom';
 import { updateQuery } from '../../redux/actions';
-import items from '../../items.json';
-import Home from '../Home/Home';
+import "./SearchBar.css"
 
 export default function SearchBar() {
 
