@@ -6,12 +6,14 @@
 }
 
 .articleForm {
+
 	max-width: 600px;
 	margin: 0 auto;
 	padding: 20px;
 	background-color: #7ab2b2;
 	border-radius: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 .form-group {
@@ -23,6 +25,7 @@
 }
 
 .image-container img {
+
 	max-width: 100%;
 	height: auto;
 	display: block;
@@ -33,21 +36,25 @@ label {
 	font-weight: bold;
 	margin-bottom: 5px;
 	color: #333;
+
 }
 
 input[type='text'],
 textarea {
+
 	width: 93%;
 	padding: 20px;
 	border: 3px solid #5ab2ff;
 	border-radius: 4px;
 	font-size: 16px;
+
 }
 
 textarea {
 	height: 120px;
 	resize: vertical;
 }
+
 
 button[type='submit'] {
 	display: block;
@@ -61,6 +68,7 @@ button[type='submit'] {
 	font-weight: bold;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+
 }
 
 button[type='submit']:hover {
@@ -72,16 +80,24 @@ button[type='submit']:hover {
 	font-size: 14px;
 	margin-top: 5px;
 }
+input[type="text"],
+  textarea {
+    font-size: 14px;
+    background-color: #b38484;
+  }
 
 @media (max-width: 768px) {
 	.articleForm {
 		padding: 10px;
 	}
 
-	input[type='text'],
-	textarea {
-		font-size: 14px;
-	}
+
+  input[type="text"],
+  textarea {
+    font-size: 14px;
+    background-color: #ffffcc;
+  }
+
 
 	button[type='submit'] {
 		font-size: 14px;
