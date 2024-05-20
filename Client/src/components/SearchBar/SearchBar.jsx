@@ -6,6 +6,7 @@ import items from '../../items.json';
 import Home from '../Home/Home';
 
 export default function SearchBar() {
+
   const [name, setName] = useState('');
 
   const navigate=useNavigate();
@@ -15,9 +16,9 @@ export default function SearchBar() {
   const dispatch = useDispatch();
   const query = useSelector(state => state.query)
 
-  const handleChange = (event) => {
-    setName(event.target.value);
-  };
+
+	const [showMessage, setShowMessage] = useState(false);
+
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -43,4 +44,5 @@ export default function SearchBar() {
       </div>
     </div>
   );
+
 }

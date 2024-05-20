@@ -1,31 +1,33 @@
 .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #577B8D; 
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #577b8d;
+	padding: 10px 20px;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav a {
-  text-decoration: none;
-  color: #6b4e32; /* Color de texto marrón oscuro */
+	text-decoration: none;
+	color: #6b4e32; /* Color de texto marrón oscuro */
 }
 
 .nav button {
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s ease;
+	background-color: transparent;
+	border: none;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: color 0.3s ease;
 }
 
 .nav button:hover {
-  color: #d2691e; /* Color naranja suave al pasar el cursor */
+	color: #d2691e; /* Color naranja suave al pasar el cursor */
+
 }
 
 .searchBar {
-  margin: 0 10px;
+	margin: 0 10px;
 }

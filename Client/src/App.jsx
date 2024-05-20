@@ -1,33 +1,31 @@
 import Profile from './components/Auth0/Profile/Profile';
 import { useAuth0 } from '@auth0/auth0-react';
-import Home from "./components/Home/Home"
-import Landing from "./components/Landing/Landing"
-import Form from "./components/Form/Form"
-import { Routes, Route, useLocation} from 'react-router-dom';
-import Detail from './components/Detail/Detail'
+import Home from './components/Home/Home';
+import Landing from './components/Landing/Landing';
+import Form from './components/Form/Form';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Detail from './components/Detail/Detail';
 import Nav from './components/Nav/Nav';
 
 function App() {
+	const { isLoading } = useAuth0();
+	const { pathname } = useLocation();
+	if (isLoading) return <h1>Cargando sesion...</h1>;
+	return (
+		<div>
+			{/* <Cloudinary/> /} */}
 
-    const { isLoading } = useAuth0();
-    const { pathname } = useLocation();
-  if (isLoading) return <h1>Cargando sesion...</h1>
-  return (
-    <div>
-      {/* <Cloudinary/> /} */}
+			{pathname !== '/' && <Nav />}
+			<Routes>
+				<Route path='/' element={<Landing />} />
+				<Route path='/profile' element={<Profile />} />
+				<Route path='/home' element={<Home />} />
+				<Route path='/form' element={<Form />} />
 
-      {pathname !== "/" && <Nav/>}
-      <Routes>
-        <Route path='/' element={<Landing/>}/>
-        <Route path='/profile' element={<Profile/>}/>
-        <Route path='/home' element={<Home/>}/>
-        <Route path='/form' element={<Form/>}/>
-
-        <Route path='/detail/:id' element={<Detail />}/>
-
-      </Routes>
-     </div>
-  )
+				<Route path='/detail/:id' element={<Detail />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;

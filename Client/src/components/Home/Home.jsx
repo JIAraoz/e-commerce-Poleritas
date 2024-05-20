@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
-import Nav from '../Nav/Nav';
 import './Home.css';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
+import Footer from '../Footer/Footer';
 
 export default function Home() {
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -64,7 +65,8 @@ export default function Home() {
     dispatch(updateQuery(query))
   }
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 
   return (
     <div className="home">
@@ -98,3 +100,4 @@ export default function Home() {
     </div>
   );
 }
+
