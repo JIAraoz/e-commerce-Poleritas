@@ -14,11 +14,12 @@ export default function SearchBar() {
   const [showMessage, setShowMessage] = useState(false);
   
   const dispatch = useDispatch();
-  const query = useSelector(state => state.query)
+  const query = useSelector(state => state.query);
 
 
-	const [showMessage, setShowMessage] = useState(false);
-
+  const handleChange = (event) => {
+		setName(event.target.value);
+	};
 
   const handleClick = (event) => {
     event.preventDefault();
