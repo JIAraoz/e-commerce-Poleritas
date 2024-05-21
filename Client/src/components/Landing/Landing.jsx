@@ -21,8 +21,8 @@ export default function Landing() {
 			<div className='landing-background'>
 				<div className='landing-content'>
 					<div className='texto'>
-						<h1>Bienvenido a Nuestro Sitio Web</h1>
-						<p>La mejor tienda Online</p>
+						<h1>Welcome to our Web Site</h1>
+						<p>The best online store</p>
 					</div>
 					{isAuthenticated ? <Logout /> : <Login />}
 				</div>

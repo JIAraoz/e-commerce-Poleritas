@@ -83,7 +83,7 @@ export default function Form() {
 			<div className='form-box'>
 				<form className='articleForm' onSubmit={handleSubmit}>
 					<div className='form-group'>
-						<label htmlFor='articleName'>Nombre del artículo:</label>
+						<label htmlFor='articleName'>Name of article:</label>
 						<input
 							type='text'
 							name='articleName'
@@ -96,7 +96,7 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='articleImage'>Imagen:</label>
+						<label htmlFor='articleImage'>Image:</label>
 						<div className='image-container'>
 							<Cloudinary onImageUpload={handleImageUpload} />
 						</div>
@@ -106,7 +106,7 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='articlePrice'>Precio:</label>
+						<label htmlFor='articlePrice'>Price:</label>
 						<input
 							type='text'
 							name='articlePrice'
@@ -132,7 +132,7 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='articleDescription'>Descripción:</label>
+						<label htmlFor='articleDescription'>Description:</label>
 						<textarea
 							name='articleDescription'
 							value={articleData.articleDescription}
@@ -144,14 +144,14 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='Category'>Categoría:</label>
+						<label htmlFor='Category'>Category:</label>
 
 						<select
 							name='Category'
 							value={articleData.Category}
 							onChange={handleChange}
 						>
-							<option value=''>Selecciona una categoría</option>
+							<option value=''>Select a category:</option>
 							{categories.map((element) => (
 								<option value={element.categoryName} key={element.categoryId}>
 									{element.categoryName}
@@ -165,7 +165,7 @@ export default function Form() {
 					</div>
 
 					<button type='submit' disabled={hasErrors()}>
-						Enviar
+					Send
 					</button>
 				</form>
 			</div>

@@ -38,7 +38,7 @@ const Footer = () => (
 				</button>
 			</a>
 		</div>
-		<p>© 2022 Nuestro Sitio Web. Todos los derechos reservados.</p>
+		<p>© 2022 Our Web Site. All rights reserved.</p>
 	</footer>
 );
 
