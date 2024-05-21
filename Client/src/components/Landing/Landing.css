@@ -1,0 +1,41 @@
+.landing-background {
+	background: linear-gradient(to bottom right, #ffcccc, #ffffcc, #ccffcc);
+	height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.landing-content {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50%; /* Ajusta esto según tus necesidades */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.footer-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 40px;
+}
+
+.social-buttons {
+	display: flex;
+	gap: 10px;
+}
+
+.texto {
+	color: black;
+}

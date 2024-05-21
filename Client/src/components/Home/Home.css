@@ -1,0 +1,70 @@
+.pagination {
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+	list-style: none;
+}
+
+.page-item {
+	margin: 0 0.5rem;
+}
+
+.page-link {
+	text-decoration: none;
+	color: #007bff;
+	cursor: pointer;
+}
+
+.page-item.active .page-link {
+	font-weight: bold;
+	color: #0056b3;
+}
+/* Home.css */
+.home-background {
+	background: linear-gradient(to bottom right, #ffcccc, #ffffcc, #ccffcc);
+	min-height: 100vh;
+	padding: 2rem;
+}
+
+.home-content {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+
+.filters {
+  display: flex;
+  padding: 20px;
+  background-color: #f8f9fa38;
+  border-radius: 5px;
+}
+
+.custom-select {
+  position: relative;
+  width: 200px;
+}
+
+.custom-select select {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #ffffffb4;
+  font-size: 16px;
+  color: #495057;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

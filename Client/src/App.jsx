@@ -1,22 +1,31 @@
-import Login from "./components/Auth0/Login/Login"
-import Profile from "./components/Auth0/Profile/Profile"
-import Logout from "./components/Auth0/Logout/Logout"
-import { useAuth0 } from "@auth0/auth0-react"
+import Profile from './components/Auth0/Profile/Profile';
+import { useAuth0 } from '@auth0/auth0-react';
+import Home from './components/Home/Home';
+import Landing from './components/Landing/Landing';
+import Form from './components/Form/Form';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Detail from './components/Detail/Detail';
+import Nav from './components/Nav/Nav';
 
 function App() {
-  const { isAuthenticated, isLoading } = useAuth0()
+	const { isLoading } = useAuth0();
+	const { pathname } = useLocation();
+	if (isLoading) return <h1>Cargando sesion...</h1>;
+	return (
+		<div>
+			{/* <Cloudinary/> /} */}
 
-  if (isLoading) return <h1>Cargando sesion...</h1>
+			{pathname !== '/' && <Nav />}
+			<Routes>
+				<Route path='/' element={<Landing />} />
+				<Route path='/profile' element={<Profile />} />
+				<Route path='/home' element={<Home />} />
+				<Route path='/form' element={<Form />} />
 
-  return (
-    <div>
-      <h2>Aplicativo</h2>
-      {
-        isAuthenticated ? <Logout/> : <Login/>
-      }
-      <Profile></Profile>
-    </div>
-  )
+				<Route path='/detail/:id' element={<Detail />} />
+			</Routes>
+		</div>
+	);
 }
 
-export default App
+export default App;
