@@ -18,12 +18,14 @@ export default function SearchBar() {
 		setName(event.target.value);
 	};
 
+
 	const handleClick = (event) => {
 		event.preventDefault();
 		query.search = name;
 		dispatch(updateQuery(query));
 		setName('');
 	};
+
 
 	return (
 		<div className='search-bar'>
