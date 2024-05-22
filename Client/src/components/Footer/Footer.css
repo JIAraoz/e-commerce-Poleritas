@@ -1,16 +1,127 @@
-.footer-content {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	margin-top: auto;
-	background-color: rgb(36, 36, 36);
-	width: 100%;
-	height: 150px; /* Ajusta este valor según tus necesidades */
+:root {
+    
+    font-size: 16px;
 }
 
-.social-buttons {
-	display: flex;
-	gap: 10px;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 1rem; 
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.content {
+    flex: 1;
+}
+
+footer {
+    background-color: #4A707D;
+    color: #fff;
+    padding: 1.25rem 0; 
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 3.125rem; 
+}
+
+.footer-container div {
+    flex: 1;
+}
+
+.logo-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 6.25rem; 
+    height: auto;
+}
+
+.links-section, .social-section, .contact-section {
+    margin: 0 1.25rem; 
+}
+
+h4 {
+    margin-bottom: 0.625rem; 
+    color: #FFFFFF;
+    font-family: 'Merriweather', serif;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 0.3125rem; 
+}
+
+ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+ul li a i {
+    margin-right: 0.5rem; 
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 0.625rem 0; 
+    background-color: #39555D;
+    margin-top: 1.25rem; 
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.875rem; 
+}
+
+.contact-section p {
+    display: flex;
+    align-items: center;
+    margin: 0.3125rem 0; 
+}
+
+.contact-section p i {
+    margin-right: 0.5rem; 
+}
+
+.contact-section a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.contact-section a:hover {
+    text-decoration:none;
+}
+ul li a:hover {
+    color: #FFD700; /* Cambia el color del texto al pasar el cursor */
+	text-decoration:none;
+}
+
+ul li a:active {
+    color: #FF4500; /* Cambia el color del texto al hacer clic */
 }
