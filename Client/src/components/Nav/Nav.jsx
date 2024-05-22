@@ -13,7 +13,7 @@ function Nav() {
 			<SearchBar className='searchBar' />
 
 			<Link to='/profile'>
-				<button>Perfil</button>
+				<button>Profile</button>
 			</Link>
 
 			<Link to='/form'>
