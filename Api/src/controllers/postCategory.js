@@ -6,7 +6,7 @@ const postCategory=async(req,res)=>{
             res.status(400).json({message:'Error en la request: query category no esta definida'})
         }else{
             await Category.create({categoryName})
-            res.status(201).json({message:'Category creada con exito'})
+            res.status(201).json({message:'Category creada con éxito'})
         }
     } catch (error) {
         console.log(error);

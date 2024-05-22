@@ -33,12 +33,12 @@ export default function SearchBar() {
         type="search"
         onChange={handleChange}
         value={name}
-        placeholder="Buscar..."
+        placeholder="Search..."
       />
       <Link to='/home'>
-        <button onClick={handleClick}>Buscar</button>
+        <button onClick={handleClick}>Search</button>
       </Link>
-      {showMessage && <div className="no-results">No se encontraron resultados.</div>}
+      {showMessage && <div className="no-results">No results were found.</div>}
       <div className="search-results">
      
       </div>

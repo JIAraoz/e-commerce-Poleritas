@@ -14,6 +14,7 @@ import {
 	faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 const Footer = () => (
+
 	<div className='wrapper'>
 		<footer>
 			<div className='footer-container'>
@@ -82,6 +83,7 @@ const Footer = () => (
 			</div>
 		</footer>
 	</div>
+
 );
 
 export default Footer;
