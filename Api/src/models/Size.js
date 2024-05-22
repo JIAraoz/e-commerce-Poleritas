@@ -2,8 +2,8 @@ const { DataTypes } = require('sequelize');
 
 function size (sequelize){
     sequelize.define('size', {
-        sizeId: {
-            sizyId: {
+       
+            sizeId: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 allowNull: false,
@@ -13,7 +13,7 @@ function size (sequelize){
                 type: DataTypes.STRING,
                 allowNull: false
             },
-        }
+        
     })
 }
 
