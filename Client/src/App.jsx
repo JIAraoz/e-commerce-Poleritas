@@ -6,10 +6,13 @@ import Form from './components/Form/Form';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Detail from './components/Detail/Detail';
 import Nav from './components/Nav/Nav';
+import { useState } from 'react';
+import Cart from './components/Cart/Cart';
 
 function App() {
 	const { isLoading } = useAuth0();
 	const { pathname } = useLocation();
+	const [allProducts, setAllProducts] = useState([])
 	if (isLoading) return <h1>Cargando sesion...</h1>;
 	return (
 		<div>
@@ -22,7 +25,8 @@ function App() {
 				<Route path='/home' element={<Home />} />
 				<Route path='/form' element={<Form />} />
 
-				<Route path='/detail/:id' element={<Detail />} />
+				<Route path='/detail/:id' element={<Detail allProducts={allProducts} setAllProducts={setAllProducts} />} />
+				<Route path='/cart' element={<Cart allProducts={allProducts} setAllProducts={setAllProducts} />} />
 			</Routes>
 		</div>
 	);

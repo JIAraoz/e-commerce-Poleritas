@@ -16,6 +16,10 @@ function Nav() {
 				<button>Perfil</button>
 			</Link>
 
+			<Link to='/cart'>
+				<button>Cart</button>
+			</Link>
+
 			<Link to='/form'>
 				<button>Form</button>
 			</Link>
