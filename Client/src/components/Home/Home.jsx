@@ -94,7 +94,7 @@ export default function Home() {
 							))}
 						</select>
 					</div>
-					<button onClick={handleFilters}>Aplicar filtros</button>
+					<button onClick={handleFilters}>Apply filters</button>
 				</div>
 
 				<div className='home-content'>
