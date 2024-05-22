@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
-export default function Cart ({ allProducts }) {
+export default function Cart ({ allProducts, setAllProducts }) {
     let totalProducts = allProducts.length;
     let total = 0;
     let productCounts = {};
+    const navigate = useNavigate()
 
     allProducts.forEach(product => {
         total += product.articlePrice;
@@ -19,6 +21,12 @@ export default function Cart ({ allProducts }) {
 
     const productList = Object.values(productCounts);
 
+    const buyCart = () => {
+        alert("Tu compra se ha realizado correctamente!")
+        navigate("/home")
+        setAllProducts([])
+    }
+
     if (totalProducts > 0) {
         return (
             <div>
@@ -32,6 +40,7 @@ export default function Cart ({ allProducts }) {
                 ))}
                 <h2>Cantidad total de productos: {totalProducts}</h2>
                 <h2>Total: ${total}</h2>
+                <button onClick={() => buyCart()}>Comprar</button>
                 <Footer/>
             </div>
         )

@@ -14,6 +14,7 @@ export default function Detail({ allProducts, setAllProducts }) {
 	}
 
 	const toCart = () => {
+		alert("Tu producto se ha agregado al carrito.")
 		setAllProducts([...allProducts, product])
 	}
 
