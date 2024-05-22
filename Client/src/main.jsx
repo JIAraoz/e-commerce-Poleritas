@@ -5,8 +5,8 @@ import './index.css';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux'
-import store from './redux/store'
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const domain = import.meta.env.VITE_APP_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_APP_AUTH0_CLIENT_ID;
@@ -23,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 					<App />
 				</Auth0Provider>
 			</BrowserRouter>
-		</React.StrictMode>,
-	</Provider>
+		</React.StrictMode>
+		,
+	</Provider>,
 );
