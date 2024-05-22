@@ -3,13 +3,18 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './Detail.css';
 import Footer from '../Footer/Footer';
+import { all } from 'axios';
 
-export default function Detail() {
+export default function Detail({ allProducts, setAllProducts }) {
 	const location = useLocation();
 	const product = location.state.product;
 
 	if (!product) {
 		return <div>Producto no encontrado</div>;
+	}
+
+	const toCart = () => {
+		setAllProducts([...allProducts, product])
 	}
 
 	return (
@@ -26,6 +31,7 @@ export default function Detail() {
 				<div className='photo-container'>
 					<img src={product.articleImage} alt={product.articleName} />
 				</div>
+				<button onClick={() => toCart()}>Añadir al carrito</button>
 			</div>
 			<Footer />
 		</div>
