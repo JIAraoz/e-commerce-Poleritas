@@ -6,7 +6,7 @@ const getUserByEmail = async (req, res) => {
 
         const response = await User.findOne({
             where: {
-                email: emailQuery
+                userEmail: emailQuery
             }
         })
 
