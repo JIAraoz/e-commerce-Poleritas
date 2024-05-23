@@ -5,7 +5,6 @@ import axios from 'axios';
 import './Home.css';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
-import Footer from '../Footer/Footer';
 
 export default function Home() {
 	const [products, setProducts] = useState([]);
@@ -107,7 +106,6 @@ export default function Home() {
 					/>
 				</div>
 			</div>
-			<Footer />
 		</div>
 	);
 }

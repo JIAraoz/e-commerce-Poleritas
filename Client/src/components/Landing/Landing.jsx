@@ -5,8 +5,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import './Landing.css';
 import { useEffect } from 'react';
 
-import Footer from '../Footer/Footer';
-
 export default function Landing() {
 	const navigate = useNavigate();
 
@@ -27,7 +25,6 @@ export default function Landing() {
 					{isAuthenticated ? <Logout /> : <Login />}
 				</div>
 			</div>
-			<Footer />
 		</div>
 	);
 }
