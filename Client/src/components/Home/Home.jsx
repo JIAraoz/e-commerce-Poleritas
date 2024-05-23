@@ -5,6 +5,7 @@ import axios from 'axios';
 import './Home.css';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Home() {
 	const [products, setProducts] = useState([]);
@@ -14,6 +15,30 @@ export default function Home() {
 	const [categories, setCategories] = useState([]);
 	const [order, setOrder] = useState('');
 	const [category, setCategory] = useState('');
+	const { user, isAuthenticated } = useAuth0();
+	
+	if (isAuthenticated) {
+		var userData = {
+			userName: user.name,
+			userEmail: user.email,
+			userImage: user.picture
+		}
+
+		useEffect(() => {
+			async function fetchUserData() {
+				try {
+					const response = await axios.post(
+						'https://e-commerce-grupo03.onrender.com/user/postUser',
+						userData,
+					);
+				} catch (error) {
+					alert('Ha ocurrido un error: ' + error.message);
+				}
+			};
+
+			fetchUserData();
+		})
+	}
 
 	const dispatch = useDispatch();
 
@@ -26,7 +51,7 @@ export default function Home() {
 			setLoading(true);
 			try {
 				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`,
+					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`,
 				);
 				setProducts(response.data.result);
 				setTotalPages(response.data.totalPages);
@@ -40,7 +65,7 @@ export default function Home() {
 		async function fetchCategories() {
 			try {
 				const response = await axios.get(
-					'https://e-commerce-grupo03.onrender.com/getCategory',
+					'https://e-commerce-grupo03.onrender.com/categories/category',
 				);
 				setCategories(response.data.result);
 			} catch (error) {

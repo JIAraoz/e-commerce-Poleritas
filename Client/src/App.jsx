@@ -9,15 +9,14 @@ import Nav from './components/Nav/Nav';
 import { useState } from 'react';
 import Cart from './components/Cart/Cart';
 import Footer from './components/Footer/Footer';
+
 function App() {
-	const { isLoading } = useAuth0();
+	const { isLoading, isAuthenticated } = useAuth0();
 	const { pathname } = useLocation();
 	const [allProducts, setAllProducts] = useState([]);
 	if (isLoading) return <h1>Cargando sesion...</h1>;
 	return (
 		<div>
-			{/* <Cloudinary/> /} */}
-
 			{pathname !== '/' && <Nav />}
 			<Routes>
 				<Route path='/' element={<Landing />} />
