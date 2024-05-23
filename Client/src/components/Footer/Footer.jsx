@@ -19,7 +19,7 @@ const Footer = () => (
 		<footer>
 			<div className='footer-container'>
 				<div className='logo-section'>
-					<img src='./OIG2.jpg' alt='Logo' className='logo' />
+					<img src='../public/Poleritas.png' alt='Logo' className='logo' />
 					<p>POLERIITAS</p>
 				</div>
 				<div className='links-section'>
