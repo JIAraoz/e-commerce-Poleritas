@@ -1,9 +1,10 @@
-const { Category } = require('../db');
+const { Size } = require('../../db');
+const size = require('../../models/Size');
 
-const getCategory = async (req, res) =>{
+const getSize = async (req, res) =>{
     try {
-        const response = await Category.findAll({
-            attributes: ['categoryId', 'categoryName']
+        const response = await Size.findAll({
+            attributes: ['sizeId', 'sizeType']
         });
         console.log(response);
         if(response.length!==0){
@@ -21,4 +22,4 @@ const getCategory = async (req, res) =>{
     }
 }
 
-module.exports = getCategory;
+module.exports = getSize;
