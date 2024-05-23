@@ -1,4 +1,4 @@
-const {User} =require('../db')
+const {User} =require('../../db')
 const postUser=async(req,res)=>{
     try {
         if (!req.body.userName||!req.body.userEmail||!req.body.userImage) {

@@ -1,4 +1,4 @@
-const {Article,Category}=require('../db')
+const {Article,Category}=require('../../db')
 const postCreateArticle=async(req,res)=>{
     try {
     

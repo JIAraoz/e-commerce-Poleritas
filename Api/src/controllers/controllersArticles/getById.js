@@ -1,4 +1,4 @@
-const { Article, Category } = require("../db.js");
+const { Article, Category } = require("../../db.js");
 
 const getById = async (req, res) => {
     try {
