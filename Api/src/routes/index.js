@@ -7,7 +7,6 @@ const postCreateArticle=require('../controllers/postCreateArticle');
 const getById = require('../controllers/getById');
 const postCategory =require('../controllers/postCategory');
 const getSize = require('../controllers/getSize');
-const postUser=require('../controllers/postUser')
 const router = Router();
 
 router.get('/healthCheck',(req,res)=>{
@@ -26,7 +25,5 @@ router.get('/getSize', getSize)
 router.post('/createArticle',postCreateArticle)
 
 router.post('/postCategory',postCategory)
-
-router.post('/postUser',postUser)
 
 module.exports = router;
