@@ -2,7 +2,7 @@ const {User} =require('../../db')
 const postUser=async(req,res)=>{
     try {
         if (!req.body.userName||!req.body.userEmail||!req.body.userImage) {
-            res.status(400).json({message:"Faltan datos o son inválidos en el cuerpo de la solicitud"})
+            return res.status(400).json({message:"Faltan datos o son inválidos en el cuerpo de la solicitud"})
         }
         else{
             const userCheck= await User.findOne({
@@ -19,11 +19,11 @@ const postUser=async(req,res)=>{
                 }
                 
                 const createdUser= await User.create(user)
-                res.status(201).json({
+                return res.status(201).json({
                     result:createdUser
                 })
             }else{
-                res.status(200).json({
+                return res.status(200).json({
                     result:userCheck
                 })
             }
