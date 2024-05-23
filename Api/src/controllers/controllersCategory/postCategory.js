@@ -1,4 +1,4 @@
-const {Category}=require("../db")
+const {Category}=require("../../db")
 const postCategory=async(req,res)=>{
     try {
         const categoryName=req.query.categoryName
