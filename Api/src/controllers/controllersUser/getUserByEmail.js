@@ -10,7 +10,7 @@ const getUserByEmail = async (req, res) => {
             }
         })
 
-        if(response.length!==0){
+        if(response){
             res.status(200).json({
                 message: 'Datos obtenidos con éxito',
                 result: response
