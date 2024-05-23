@@ -3,8 +3,8 @@ const routerCategory = require("express").Router();
 const getCategory = require("../../controllers/controllersCategory/getCategory");
 const postCategory = require("../../controllers/controllersCategory/postCategory");
 
-router.get('/category',getCategory)
+routerCategory.get('/category',getCategory)
 
-router.post('/category',postCategory)
+routerCategory.post('/category',postCategory)
 
 module.exports = routerCategory

@@ -1,6 +1,6 @@
 import Logout from '../Auth0/Logout/Logout';
 import Login from '../Auth0/Login/Login';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import './Landing.css';
 import { useEffect } from 'react';
@@ -23,6 +23,9 @@ export default function Landing() {
 						<p>The best online store</p>
 					</div>
 					{isAuthenticated ? <Logout /> : <Login />}
+					<Link to={'/home'}>
+						<button>Ingresar como invitado</button>
+					</Link>
 				</div>
 			</div>
 		</div>

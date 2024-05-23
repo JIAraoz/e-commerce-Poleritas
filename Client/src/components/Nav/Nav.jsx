@@ -2,8 +2,11 @@ import React from 'react';
 import './Nav.css';
 import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import Login from '../Auth0/Login/Login';
 
 function Nav() {
+	const { isAuthenticated } = useAuth0();
 	return (
 		<nav className='nav'>
 			<Link to='/home'>
@@ -12,9 +15,8 @@ function Nav() {
 
 			<SearchBar className='searchBar' />
 
-			<Link to='/profile'>
-				<button>Profile</button>
-			</Link>
+			{isAuthenticated ? <Link to='/profile'><button>Profile</button></Link> : <Login />}
+			
 
 			<Link to='/cart'>
 				<button>Cart</button>

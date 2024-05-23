@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Cart({ allProducts, setAllProducts }) {
 	let totalProducts = allProducts.length;
 	let total = 0;
 	let productCounts = {};
 	const navigate = useNavigate();
+	const { isAuthenticated } = useAuth0();
+	const { loginWithRedirect } = useAuth0();
 
 	allProducts.forEach((product) => {
 		total += product.articlePrice;
@@ -39,7 +42,7 @@ export default function Cart({ allProducts, setAllProducts }) {
 				))}
 				<h2>Cantidad total de productos: {totalProducts}</h2>
 				<h2>Total: ${total}</h2>
-				<button onClick={() => buyCart()}>Comprar</button>
+				{isAuthenticated ? <button onClick={() => buyCart()}>Comprar</button> : <button onClick={() => loginWithRedirect()}>Debes iniciar sesion para poder comprar</button>}
 			</div>
 		);
 	} else {
