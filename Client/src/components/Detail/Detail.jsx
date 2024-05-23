@@ -2,7 +2,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './Detail.css';
-import Footer from '../Footer/Footer';
 import { all } from 'axios';
 
 export default function Detail({ allProducts, setAllProducts }) {
@@ -14,9 +13,9 @@ export default function Detail({ allProducts, setAllProducts }) {
 	}
 
 	const toCart = () => {
-		alert("Tu producto se ha agregado al carrito.")
-		setAllProducts([...allProducts, product])
-	}
+		alert('Tu producto se ha agregado al carrito.');
+		setAllProducts([...allProducts, product]);
+	};
 
 	return (
 		<div>
@@ -34,7 +33,6 @@ export default function Detail({ allProducts, setAllProducts }) {
 				</div>
 				<button onClick={() => toCart()}>Añadir al carrito</button>
 			</div>
-			<Footer />
 		</div>
 	);
 }

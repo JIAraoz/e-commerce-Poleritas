@@ -3,7 +3,6 @@ import axios from 'axios';
 import Cloudinary from '../Cloudinary/Cloudinary';
 import './Form.css';
 import Validation from '../Validation/Validation';
-import Footer from '../Footer/Footer';
 export default function Form() {
 	const [categories, setCategories] = useState([]);
 	useEffect(() => {
@@ -165,11 +164,10 @@ export default function Form() {
 					</div>
 
 					<button type='submit' disabled={hasErrors()}>
-					Send
+						Send
 					</button>
 				</form>
 			</div>
-			<Footer />
 		</div>
 	);
 }
