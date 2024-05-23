@@ -8,12 +8,12 @@ const getShoppingCart=async(req,res)=>{
         where:{
         userId:id
         },
-        include: [{
+        include:{
             model: ShoppingCart,
             where:{
                 cartStatus:"Active"
             }
-        }]
+        }
 
         })
         console.log(user);
