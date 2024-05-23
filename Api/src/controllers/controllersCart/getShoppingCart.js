@@ -1,4 +1,4 @@
-const {User}=require('../../db')
+const {User,ShoppingCart}=require('../../db')
 
 const getShoppingCart=async(req,res)=>{
     try {
