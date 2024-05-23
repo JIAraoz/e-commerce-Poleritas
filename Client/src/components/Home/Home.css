@@ -1,69 +1,94 @@
-.pagination {
-	display: flex;
-	justify-content: center;
-	padding: 1rem;
-	list-style: none;
+.home {
+  background-color: #f5f5f5;
+  padding: 2rem;
 }
 
-.page-item {
-	margin: 0 0.5rem;
-}
-
-.page-link {
-	text-decoration: none;
-	color: #007bff;
-	cursor: pointer;
-}
-
-.page-item.active .page-link {
-	font-weight: bold;
-	color: #0056b3;
-}
-/* Home.css */
 .home-background {
-	background: linear-gradient(to bottom right, #ffcccc, #ffffcc, #ccffcc);
-	min-height: 100vh;
-	padding: 2rem;
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.home-content {
-	background-color: rgba(255, 255, 255, 0.8);
-	padding: 2rem;
-	border-radius: 1rem;
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+.categories {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-.filters {
-	display: flex;
-	padding: 20px;
-	background-color: #f8f9fa38;
-	border-radius: 5px;
+.categories div {
+  text-align: center;
+  margin: 0 1rem;
 }
 
-.custom-select {
-	position: relative;
-	width: 200px;
+.categories img {
+  max-width: 100%;
+  height: auto;
 }
 
-.custom-select select {
-	padding: 10px;
-	border: none;
-	border-radius: 5px;
-	background: #ffffffb4;
-	font-size: 16px;
-	color: #495057;
+.featured-products,
+.new-products {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-button {
-	padding: 10px 20px;
-	border: none;
-	border-radius: 5px;
-	background-color: #007bff;
-	color: #ffffff;
-	cursor: pointer;
-	font-size: 16px;
+.featured-carousel,
+.new-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
-button:hover {
-	background-color: #0056b3;
+.free-shipping {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.free-shipping-content {
+  flex: 1;
+  margin-right: 2rem;
+}
+
+.delivery-truck {
+  flex: 1;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .categories {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .categories div {
+    margin: 1rem 0;
+  }
+
+  .free-shipping {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .free-shipping-content {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+.carrito {
+  width: 30rem;
+  height: auto; 
+  margin-right: 1rem; 
+  float: left; 
+}
+.image {
+  width: 20rem;
+  height: auto; 
 }
