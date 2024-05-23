@@ -24,3 +24,4 @@ const getShoppingCart=async(req,res)=>{
     }
     
 }
+module.exports=getShoppingCart
