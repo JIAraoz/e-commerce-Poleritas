@@ -1,5 +1,5 @@
 import React from 'react';
-/* import './Nav.css'; */
+import './Nav.css';
 import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -31,16 +31,20 @@ function Nav() {
 						<FontAwesomeIcon icon={faCartShopping} />
 					</button>
 				</Link>
-				{isAuthenticated ? <Link to='/profile'>
-					<button>
-						<img
-							src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-							alt='Profile'
-							style={{ borderRadius: '50%', width: '40px', height: '40px' }}
-						/>
-						Mi perfil
-					</button>
-				</Link> : <Login />}
+				{isAuthenticated ? (
+					<Link to='/profile'>
+						<button>
+							<img
+								src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+								alt='Profile'
+								style={{ borderRadius: '50%', width: '40px', height: '40px' }}
+							/>
+							Mi perfil
+						</button>
+					</Link>
+				) : (
+					<Login />
+				)}
 			</div>
 		</div>
 	);
