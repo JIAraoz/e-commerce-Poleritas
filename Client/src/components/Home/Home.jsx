@@ -6,22 +6,22 @@ import './Home.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 
-// export default function Home() {
-// 	const [products, setProducts] = useState([]);
-// 	const [loading, setLoading] = useState(true);
-// 	const [currentPage, setCurrentPage] = useState(1);
-// 	const [totalPages, setTotalPages] = useState(0);
-// 	const [categories, setCategories] = useState([]);
-// 	const [order, setOrder] = useState('');
-// 	const [category, setCategory] = useState('');
-// 	const { user, isAuthenticated } = useAuth0();
+export default function Home() {
+	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [totalPages, setTotalPages] = useState(0);
+	const [categories, setCategories] = useState([]);
+	const [order, setOrder] = useState('');
+	const [category, setCategory] = useState('');
+	const { user, isAuthenticated } = useAuth0();
 
-// 	if (isAuthenticated) {
-// 		var userData = {
-// 			userName: user.name,
-// 			userEmail: user.email,
-// 			userImage: user.picture
-// 		};
+	if (isAuthenticated) {
+		var userData = {
+			userName: user.name,
+			userEmail: user.email,
+			userImage: user.picture
+		};
 
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		useEffect(() => {
@@ -35,7 +35,7 @@ import { Link } from 'react-router-dom';
 
 			fetchUserData();
 		}, [userData]);
-	// }
+	}
 
 	const dispatch = useDispatch();
 
