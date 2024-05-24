@@ -1,4 +1,4 @@
-const {Article,ShoppingCart}=require('../../db');
+const {Article,ShoppingCart,Cart_Articule}=require('../../db');
 
 
 const cleanShoppingCart=async(req,res)=>{
