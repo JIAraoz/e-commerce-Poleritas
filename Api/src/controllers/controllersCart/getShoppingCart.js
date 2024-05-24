@@ -23,7 +23,7 @@ const getShoppingCart=async(req,res)=>{
         const cartTest=await ShoppingCart.create({
             cartSubtotal:2,
             cartPayment:'12345',
-            cartStatus:true
+            isActive:true
         })
        
        
