@@ -23,7 +23,7 @@ const addArticleCart = async (req, res) => {
             return res.status(404).json({ message: 'Artículo no encontrado' });
         }
 
-        await cart.addArticle(article);
+        await cart.addArticle(article, { through: { quantity: quantity } });
 
         const updatedCart = await ShoppingCart.findOne({
             where: { cartId: idCart },
