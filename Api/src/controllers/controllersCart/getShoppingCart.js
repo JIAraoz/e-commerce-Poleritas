@@ -7,12 +7,6 @@ const getShoppingCart=async(req,res)=>{
         const user=await User.findOne({
         where:{
         userId:id
-        },
-        include:{
-            model: ShoppingCart,
-            where:{
-                cartStatus:"Active"
-            }
         }
 
         })
