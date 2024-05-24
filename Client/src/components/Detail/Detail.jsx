@@ -36,7 +36,7 @@ export default function Detail({ allProducts, setAllProducts }) {
 					<img src={product.articleImage} alt={product.articleName} />
 				</div>
 			</div>
-			<Footer />
+
 		</div>
 	);
 }

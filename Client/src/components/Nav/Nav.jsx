@@ -15,7 +15,7 @@ function Nav() {
 				<Link to='/home'>
 					<button>HOME</button>
 				</Link>
-				<Link to='/product'>
+				<Link to='/products'>
 					<button>PRODUCTS</button>
 				</Link>
 				<Link to='/about'>
