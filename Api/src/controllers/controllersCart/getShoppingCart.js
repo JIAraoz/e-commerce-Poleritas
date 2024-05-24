@@ -71,7 +71,7 @@ const getShoppingCart = async (req, res) => {
                     cartStatus: 'Active', // Asegúrate de que este campo existe y es correcto
                     userUserId: user.userId // Asocia el carrito al usuario
                 });
-                await user.addShoppingCart(shoppingCart);
+                await user.addShoppingCarts(shoppingCart);
                 
                 // Volver a buscar el usuario con el carrito recién creado
                 const updatedUser = await User.findOne({
