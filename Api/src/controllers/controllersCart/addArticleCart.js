@@ -4,7 +4,7 @@ const addArticleCart = async (req, res) => {
     try {
         const idCart = req.query.cartid;
         const idArticle = req.query.articleid;
-        const quatity = req.query.quantity;
+        const quantity = req.query.quantity;
 
         const cart = await ShoppingCart.findOne({
             where: {
@@ -24,7 +24,7 @@ const addArticleCart = async (req, res) => {
             return res.status(404).json({ message: 'Artículo no encontrado' });
         }
 
-        await cart.addArticle(article, { through: { quantity: quatity } });
+        await cart.addArticle(article, { through: { articleQuantity: quantity } });
 
         const updatedCart = await ShoppingCart.findOne({
             where: { cartId: idCart },
