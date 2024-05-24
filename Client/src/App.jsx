@@ -9,6 +9,7 @@ import Nav from './components/Nav/Nav';
 import { useState } from 'react';
 import Cart from './components/Cart/Cart';
 import Footer from './components/Footer/Footer';
+import Products from './components/Products/Products';
 
 function App() {
 	const { isLoading, isAuthenticated } = useAuth0();
@@ -23,6 +24,7 @@ function App() {
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/home' element={<Home />} />
 				<Route path='/form' element={<Form />} />
+				<Route path='/products' element={<Products />} />
 
 				<Route
 					path='/detail/:id'
