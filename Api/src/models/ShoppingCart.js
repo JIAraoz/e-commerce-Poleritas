@@ -17,8 +17,8 @@ function shoppingCart (sequelize){
             type: DataTypes.STRING,
             allowNull: false
         },
-        cartStatus: {
-            type: DataTypes.ENUM('Active', 'Inactive'),
+        isActive: {
+            type: DataTypes.BOOLEAN,
             allowNull: false
         }
     })
