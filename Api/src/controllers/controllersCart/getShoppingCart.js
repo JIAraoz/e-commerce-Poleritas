@@ -78,11 +78,11 @@ const getShoppingCart = async (req, res) => {
                     where: { userId: id },
                     include: { model: ShoppingCart }
                 });
-                return res.status(200).json({ result: updatedUser });
+                return res.status(200).json({ result: updatedUser.shoppingCarts });
             }
         } else {
             // Si el usuario ya tiene carritos
-            return res.status(200).json({ result: userCard });
+            return res.status(200).json({ result: userCard.shoppingCarts });
         }
     } catch (error) {
         console.error(error);
