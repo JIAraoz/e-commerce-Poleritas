@@ -58,7 +58,7 @@ const getShoppingCart = async (req, res) => {
             include: { model: ShoppingCart }
         });
 
-        if (userCard === null) {
+        if (userCard === null) {console.log('entre al if de la linea 61');
             // Si no se encuentra el usuario con carrito, buscar el usuario sin carrito
             const user = await User.findOne({ where: { userId: id } });
             if (user === null) {
