@@ -8,6 +8,7 @@ const desactivateShoppingCart=async(req,res)=>{
             const cartToDesactivate=await ShoppingCart.findByPk(cartId)
             if (cartToDesactivate) {
                 cartToDesactivate.isActive = false
+                await cartToDesactivate.save();
             }
             return res.status(200).json({message:'Carrito pagado con éxito'})
         } else {
