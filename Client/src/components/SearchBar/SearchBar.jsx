@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { updateQuery } from '../../redux/actions';
 import './SearchBar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchBar() {
 	const [name, setName] = useState('');
@@ -18,14 +20,12 @@ export default function SearchBar() {
 		setName(event.target.value);
 	};
 
-
 	const handleClick = (event) => {
 		event.preventDefault();
 		query.search = name;
 		dispatch(updateQuery(query));
 		setName('');
 	};
-
 
 	return (
 		<div className='search-bar'>
@@ -36,7 +36,9 @@ export default function SearchBar() {
 				placeholder='Buscar...'
 			/>
 			<Link to='/home'>
-				<button onClick={handleClick}>Buscar</button>
+				<button onClick={handleClick}>
+					<FontAwesomeIcon icon={faSearch} />
+				</button>
 			</Link>
 			{showMessage && (
 				<div className='no-results'>No se encontraron resultados.</div>
