@@ -10,9 +10,7 @@ const getShoppingCart=async(req,res)=>{
         },
         include:{
             model: ShoppingCart,
-            where:{
-                isActive:true
-            }
+           
         }
 
         })
