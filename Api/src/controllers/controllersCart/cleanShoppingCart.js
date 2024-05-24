@@ -15,7 +15,7 @@ const cleanShoppingCart=async(req,res)=>{
             });
             if (cartToClean) {
                 await Cart_Articule.destroy({
-                    where: { cartId: cartId }
+                    where: { shoppingCartCartId: cartId }
                 });
                 await cartToClean.save();
             }
