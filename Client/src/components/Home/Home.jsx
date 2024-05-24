@@ -20,18 +20,21 @@ export default function Home() {
 		var userData = {
 			userName: user.name,
 			userEmail: user.email,
-			userImage: user.picture
+			userImage: user.picture,
 		};
 
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		useEffect(() => {
 			async function fetchUserData() {
 				try {
-					await axios.post('https://e-commerce-grupo03.onrender.com/user/postUser', userData);
+					await axios.post(
+						'https://e-commerce-grupo03.onrender.com/user/postUser',
+						userData,
+					);
 				} catch (error) {
 					alert('Ha ocurrido un error: ' + error.message);
 				}
-			};
+			}
 
 			fetchUserData();
 		}, [userData]);
@@ -48,7 +51,7 @@ export default function Home() {
 			setLoading(true);
 			try {
 				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`
+					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`,
 				);
 				setProducts(response.data.result);
 				setTotalPages(response.data.totalPages);
@@ -61,7 +64,9 @@ export default function Home() {
 		}
 		async function fetchCategories() {
 			try {
-				const response = await axios.get('https://e-commerce-grupo03.onrender.com/categories/category');
+				const response = await axios.get(
+					'https://e-commerce-grupo03.onrender.com/categories/category',
+				);
 				setCategories(response.data.result);
 			} catch (error) {
 				alert(error.message);
@@ -90,48 +95,50 @@ export default function Home() {
 
 	return (
 		<div className='home'>
-			<nav className="nav-bar">HOME</nav>
-			<div className="categories">
-				<div className="category-item">
-          <Link className='a' to="/products?filter=men">
-           <img src="../Men.jpg" alt="Men's" />
-            <p>Mens</p>
-          </Link>
+			<nav className='nav-bar'>HOME</nav>
+			<div className='categories'>
+				<div className='category-item'>
+					<Link className='a' to='/products?filter=men'>
+						<img src='../Men.jpg' alt="Men's" className='img-m' />
+						<p>Mens</p>
+					</Link>
 				</div>
-				<div className="category-item">
-          <Link className='a' to="/products?filter=women">
-           <img src="/CamisetaDeportivaDeMujer.jpg" alt="Women's" />
-            <p>Womens</p>
-          </Link>
+				<div className='category-item'>
+					<Link className='a' to='/products?filter=women'>
+						<img src='/CamisetaDeportivaDeMujer.jpg' alt="Women's" />
+						<p>Womens</p>
+					</Link>
 				</div>
-        <div className="category-item">
-          <Link className='a' to="/products?filter=unisex">
-          	<img src="../unisex.png" alt="Unisex" />
-            <p>Unisex</p>
-          </Link>
-				
+				<div className='category-item'>
+					<Link className='a' to='/products?filter=unisex'>
+						<img src='../unisex.png' alt='Unisex' />
+						<p>Unisex</p>
+					</Link>
 				</div>
 			</div>
-			<div className="products-section">
-				<div className="products-title">Mas Vendidos</div>
-				<div className="product-carousel">
+			<div className='products-section'>
+				<div className='products-title'>Mas Vendidos</div>
+				<div className='product-carousel'>
 					{/* inserta los producto de cards aqui */}
 				</div>
-				<div className="products-title">Nuevos</div>
-				<div className="product-carousel">
+				<div className='products-title'>Nuevos</div>
+				<div className='product-carousel'>
 					{/* inserta los producto de cards aqui*/}
 				</div>
 			</div>
-			<div className="shipping-info">
-        <div className="free-shipping">
-          <img className='img-envio' src="gratis.png" alt="envio gratis" />
-					<img className='img-envio' src="/carrito.png" alt="carro" />
-					<p>Envío Gratis</p>
+			<div className='shipping-info'>
+				<div className='free-shipping'>
+					<img className='img-envio' src='/envios.png' alt='envio gratis' />
 				</div>
-				<div className="international-shipping">
+				<div className='international-shipping'>
 					<h2>Envios internacionales</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum suscipit perferendis tenetur aliquid sit similique nam, voluptate alias nesciunt sint ipsam facilis facere aut, eaque tempore vitae quisquam, neque odio!</p>
-          <img className="envioSeguro" src="/envioSeguro.png" alt="seguro" />
+					<p>
+						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
+						suscipit perferendis tenetur aliquid sit similique nam, voluptate
+						alias nesciunt sint ipsam facilis facere aut, eaque tempore vitae
+						quisquam, neque odio!
+					</p>
+					<img className='envioSeguro' src='/envioSeguro.png' alt='seguro' />
 				</div>
 			</div>
 		</div>
