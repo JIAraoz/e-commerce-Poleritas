@@ -31,7 +31,7 @@ const getShoppingCart=async(req,res)=>{
                     where: { userId: id },
                     include: { model: ShoppingCart }
                 });
-                res.status(200).json({result:updatedUser})
+                return res.status(200).json({result:updatedUser})
             }
             
         }      
