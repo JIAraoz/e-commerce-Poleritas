@@ -58,19 +58,25 @@ const getShoppingCart = async (req, res) => {
             include: { model: ShoppingCart }
         });
 
-        if (userCard === null) {
+        if (userCard.shoppingCarts.length===0) {
+            console.log('entre al if de la linea 61');
             // Si no se encuentra el usuario con carrito, buscar el usuario sin carrito
             const user = await User.findOne({ where: { userId: id } });
+
             if (user === null) {
+
                 return res.status(400).json({ message: 'No se encontró el usuario' });
+
             } else {
+                console.log(" entre al else");
                 // Crear un nuevo carrito para el usuario
                 const shoppingCart = await ShoppingCart.create({
                     cartSubtotal: 0,
                     cartPayment: "None",
-                    cartStatus: 'Active', // Asegúrate de que este campo existe y es correcto
+                    isActive: true, // Asegúrate de que este campo existe y es correcto
                
                 });
+                console.log(ShoppingCart);
                 await user.addShoppingCarts(shoppingCart);
                 
                 // Volver a buscar el usuario con el carrito recién creado
@@ -78,9 +84,11 @@ const getShoppingCart = async (req, res) => {
                     where: { userId: id },
                     include: { model: ShoppingCart }
                 });
+                console.log(updatedUser);
                 return res.status(200).json({ result: updatedUser.shoppingCarts });
             }
         } else {
+            console.log('entre al else 88');
             // Si el usuario ya tiene carritos
             return res.status(200).json({ result: userCard.shoppingCarts });
         }

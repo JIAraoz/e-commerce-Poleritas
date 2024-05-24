@@ -1,12 +1,21 @@
 // Detail.jsx
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import axios from 'axios'
+import { useParams } from 'react-router-dom';
 import './Detail.css';
-import Footer from '../Footer/Footer';
 
-export default function Detail() {
-	const location = useLocation();
-	const product = location.state.product;
+import { useEffect, useState } from 'react';
+
+export default function Detail({ allProducts, setAllProducts }) {
+	const { id } = useParams();
+	const [product,setProduct]=useState()
+	useEffect(()=>{
+		async function getProduct(){
+			const {data}=await axios.get(`https://e-commerce-grupo03.onrender.com/article/detail/${id}`)
+			setProduct(data)
+		}
+		getProduct()
+	},[id])
+
 
 	if (!product) {
 		return <div>Producto no encontrado</div>;
