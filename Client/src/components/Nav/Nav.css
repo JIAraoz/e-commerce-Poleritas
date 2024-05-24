@@ -59,6 +59,3 @@
     flex: 1;
     justify-content: flex-end;
 }
-button {
-    pointer-events: none;
-}
