@@ -73,7 +73,7 @@ const getShoppingCart = async (req, res) => {
                 const shoppingCart = await ShoppingCart.create({
                     cartSubtotal: 0,
                     cartPayment: "None",
-                    cartStatus: 'Active', // Asegúrate de que este campo existe y es correcto
+                    isActive: true, // Asegúrate de que este campo existe y es correcto
                
                 });
                 console.log(ShoppingCart);
