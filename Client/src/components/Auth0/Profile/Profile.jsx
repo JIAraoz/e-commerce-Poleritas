@@ -34,7 +34,7 @@ const Profile = () => {
 						<h2>Nombre: {userData.userName}</h2>
 						<p>Correo: {userData.userEmail}</p>
 						<p>Rol: {userData.userRol}</p>
-						<Logout />
+					
 					</div>
 				</div>
 				<Footer />
