@@ -9,7 +9,7 @@ export default function Form() {
 		const axiosCategories = async () => {
 			try {
 				const { data } = await axios.get(
-					'https://e-commerce-grupo03.onrender.com/getCategory',
+					'https://e-commerce-grupo03.onrender.com/categories/category',
 				);
 				console.log(data);
 				setCategories(data.result);
@@ -59,7 +59,7 @@ export default function Form() {
 		try {
 			console.log(articleData);
 			const response = await axios.post(
-				'https://e-commerce-grupo03.onrender.com/createArticle',
+				'https://e-commerce-grupo03.onrender.com/article/createArticle',
 				articleData,
 			);
 
