@@ -1,5 +1,5 @@
 // Detail.jsx
-import axios from 'axios'
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './Detail.css';
 
@@ -7,15 +7,16 @@ import { useEffect, useState } from 'react';
 
 export default function Detail({ allProducts, setAllProducts }) {
 	const { id } = useParams();
-	const [product,setProduct]=useState()
-	useEffect(()=>{
-		async function getProduct(){
-			const {data}=await axios.get(`https://e-commerce-grupo03.onrender.com/article/detail/${id}`)
-			setProduct(data)
+	const [product, setProduct] = useState();
+	useEffect(() => {
+		async function getProduct() {
+			const { data } = await axios.get(
+				`https://e-commerce-grupo03.onrender.com/article/detail/${id}`,
+			);
+			setProduct(data);
 		}
-		getProduct()
-	},[id])
-
+		getProduct();
+	}, [id]);
 
 	if (!product) {
 		return <div>Producto no encontrado</div>;
@@ -36,7 +37,6 @@ export default function Detail({ allProducts, setAllProducts }) {
 					<img src={product.articleImage} alt={product.articleName} />
 				</div>
 			</div>
-			<Footer />
 		</div>
 	);
 }
