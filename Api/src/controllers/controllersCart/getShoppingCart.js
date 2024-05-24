@@ -10,8 +10,9 @@ const getShoppingCart=async(req,res)=>{
         }
 
         })
+        const carts= await user.getShoppingCarts()
         console.log(user);
-        res.json({user})        
+        res.json({user,carts})        
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Error interno del servidor'});
