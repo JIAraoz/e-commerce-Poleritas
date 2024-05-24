@@ -69,7 +69,7 @@ const getShoppingCart = async (req, res) => {
                     cartSubtotal: 0,
                     cartPayment: "None",
                     cartStatus: 'Active', // Asegúrate de que este campo existe y es correcto
-                    userUserId: user.userId // Asocia el carrito al usuario
+               
                 });
                 await user.addShoppingCarts(shoppingCart);
                 
