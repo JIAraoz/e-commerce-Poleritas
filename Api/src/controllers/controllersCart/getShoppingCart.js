@@ -11,11 +11,12 @@ const getShoppingCart=async(req,res)=>{
         include:{
             model: ShoppingCart,
             where:{
-                cartStatus:"Active"
+                isActive:true
             }
         }
 
         })
+
         console.log(user);
         res.json({user})        
     } catch (error) {
