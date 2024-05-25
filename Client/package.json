@@ -24,7 +24,8 @@
 		"react-router-dom": "^6.23.1",
 		"redux": "^4.2.1",
 		"redux-devtools-extension": "^2.13.9",
-		"redux-thunk": "^2.4.2"
+		"redux-thunk": "^2.4.2",
+		"sweetalert2": "^11.11.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.2.0",

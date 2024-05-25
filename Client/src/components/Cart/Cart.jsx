@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import Swal from 'sweetalert2'
+
 
 export default function Cart({ allProducts, setAllProducts }) {
 	let totalProducts = allProducts.length;
@@ -24,7 +26,12 @@ export default function Cart({ allProducts, setAllProducts }) {
 	const productList = Object.values(productCounts);
 
 	const buyCart = () => {
-		alert('Tu compra se ha realizado correctamente!');
+    // alert('Tu compra se ha realizado correctamente!');
+    Swal.fire({
+      title: "Good buy!",
+      text: "Your purchase has been successfully completed!",
+      icon: "success"
+    });
 		navigate('/home');
 		setAllProducts([]);
 	};
