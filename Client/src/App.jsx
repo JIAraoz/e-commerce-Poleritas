@@ -35,7 +35,7 @@ function App() {
 				<Route
 					path='/cart'
 					element={
-						<Cart allProducts={allProducts} setAllProducts={setAllProducts} />
+						<Cart />
 					}
 				/>
 			</Routes>
