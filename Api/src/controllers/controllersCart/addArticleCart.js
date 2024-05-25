@@ -1,4 +1,4 @@
-const { ShoppingCart, Article } = require('../../db');
+const { ShoppingCart, Article,Cart_Articule } = require('../../db');
 
 const addArticleCart = async (req, res) => {
     try {
@@ -23,9 +23,19 @@ const addArticleCart = async (req, res) => {
         if (!article) {
             return res.status(404).json({ message: 'Artículo no encontrado' });
         }
+        const articleExist=await Cart_Articule.findOne({where:{
+            articleArticleId:article.articleId,
+            shoppingCartCartId:cart.cartId
 
-        await cart.addArticle(article, { through: { articleQuantity: quantity } });
+        }})
+        if(articleExist===null){
+            await cart.addArticle(article, { through: { articleQuantity:quantity } });
 
+          
+        }else{
+            articleExist.articleQuantity += quantity;
+            await articleExist.save();
+        }
         const updatedCart = await ShoppingCart.findOne({
             where: { cartId: idCart },
             include: { model: Article }
@@ -35,6 +45,8 @@ const addArticleCart = async (req, res) => {
             message: 'Artículo agregado al carrito con éxito',
             cart: updatedCart
         });
+
+       
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error interno del servidor' });
