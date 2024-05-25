@@ -4,7 +4,7 @@ const addArticleCart = async (req, res) => {
     try {
         const idCart = req.query.cartid;
         const idArticle = req.query.articleid;
-        const quantity = req.query.quantity;
+        const quantity = parseInt(req.query.quantity, 10);
 
         const cart = await ShoppingCart.findOne({
             where: {
