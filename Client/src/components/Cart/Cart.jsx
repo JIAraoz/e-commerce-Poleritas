@@ -1,7 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react';
+
+import Swal from 'sweetalert2'
+
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+
 
 export default function Cart() {
     const { user } = useAuth0();
@@ -28,8 +32,20 @@ export default function Cart() {
             }
         }
 
+	const buyCart = () => {
+    // alert('Tu compra se ha realizado correctamente!');
+    Swal.fire({
+      title: "Good buy!",
+      text: "Your purchase has been successfully completed!",
+      icon: "success"
+    });
+		navigate('/home');
+		setAllProducts([]);
+	};
+
         fetchData();
     }, [user.email]);
+
 
     if (cartItems.length > 0) {
         return (
