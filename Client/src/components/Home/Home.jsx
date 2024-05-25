@@ -117,21 +117,21 @@ export default function Home() {
 				</div>
 			</div>
 			<div className='products-section'>
-				<div className='products-title'>Mas Vendidos</div>
+				<div className='products-title'>Best Sellers</div>
 				<div className='product-carousel'>
 					{/* inserta los producto de cards aqui */}
 				</div>
-				<div className='products-title'>Nuevos</div>
+				<div className='products-title'>New</div>
 				<div className='product-carousel'>
 					{/* inserta los producto de cards aqui*/}
 				</div>
 			</div>
 			<div className='shipping-info'>
 				<div className='free-shipping'>
-					<img className='img-envio' src='/envios.png' alt='envio gratis' />
+					<img className='img-envio' src='/Envios.png' alt='envio gratis' />
 				</div>
 				<div className='international-shipping'>
-					<h2>Envios internacionales</h2>
+					<h2>International Shipping</h2>
 					<p>
 						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
 						suscipit perferendis tenetur aliquid sit similique nam, voluptate
