@@ -13,11 +13,16 @@ export default function Products() {
   const [categories, setCategories] = useState([]);
   const [order, setOrder] = useState('');
   const [category, setCategory] = useState('');
+  const [showFilters, setShowFilters] = useState(false); 
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query);
   const productsPerPage = 5;
 
   useEffect(() => {
+    setOrder(query.order);
+    setCategory(query.filter);
+    setShowFilters(query.order || query.filter); 
+
     async function fetchProducts(page) {
       setLoading(true);
       try {
@@ -51,6 +56,10 @@ export default function Products() {
     fetchProducts(currentPage);
   }, [currentPage, query]);
 
+  useEffect(() => {
+    setShowFilters(order || category);
+  }, [order, category]);
+
   const handlerOrder = (event) => {
     setOrder(event.target.value);
   };
@@ -67,27 +76,26 @@ export default function Products() {
     query.filter = category;
     setCurrentPage(1);
     dispatch(updateQuery(query));
+    setShowFilters(true);
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
-      <div className='filters'>
-        <div className='custom-select'>
-          <select name='order' defaultValue='order' onChange={handlerOrder}>
-            <option value='order' disabled='disabled'>
-              Order
-            </option>
-            <option value='A-Z'>A-Z</option>
-            <option value='Z-A'>Z-A</option>
-            <option value='price-asc'>^ price</option>
-            <option value='price-desc'>v Price</option>
+      <div className="filters">
+        <div className="custom-select">
+          <select name="order" value={order} onChange={handlerOrder}>
+            <option value="">Order</option>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+            <option value="price-asc">^ price</option>
+            <option value="price-desc">v Price</option>
           </select>
         </div>
-        <div className='custom-select'>
-          <select name='Category' defaultValue='' onChange={handleCategory}>
-            <option value=''>All</option>
+        <div className="custom-select">
+          <select name="Category" value={category} onChange={handleCategory}>
+            <option value="">All</option>
             {categories.map((category, index) => (
               <option key={index} value={category.categoryId}>
                 {category.categoryName}
@@ -96,6 +104,15 @@ export default function Products() {
           </select>
         </div>
         <button onClick={handleFilters}>Aplicar filtros</button>
+        {showFilters && (
+          <div className="applied-filters">
+            <span>
+             Filtros aplicados:{' '}
+              {order ? `Orden: ${order}` : ''}{' '}
+              {category ? `Categoría: ${category}` : ''}
+            </span>
+          </div>
+        )}
       </div>
       <div>
         <Cards products={products} loading={loading} />
