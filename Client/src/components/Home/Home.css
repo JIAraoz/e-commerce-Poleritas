@@ -4,11 +4,11 @@
 
 .nav-bar {
     background-color: #ffffff;
-    padding: 1em;
+    padding: 1rem;
     text-align: center;
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: bold;
-	padding-top: 3em;
+	padding-top: 3rem;
     margin-right: 100em; /* Añade un margen izquierdo */
 	color: #4a707a9d;
 }

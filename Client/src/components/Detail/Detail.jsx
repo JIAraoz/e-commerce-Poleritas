@@ -24,18 +24,40 @@ export default function Detail({ allProducts, setAllProducts }) {
 
 	return (
 		<div>
+			<button id='back-button'>Back</button>
 			<div className='detail-container'>
-				<div className='detail'>
-					<h2>ID: {product.articleId}</h2>
-					<h4>Nombre: {product.articleName}</h4>
-					<h4>Descripción: {product.articleDescription}</h4>
-					<h4>Precio: {product.articlePrice}</h4>
-					<h4>Stock: {product.articleStock}</h4>
-					<h4>Categoría: {product.categories[0].categoryName}</h4>
-				</div>
 				<div className='photo-container'>
 					<img src={product.articleImage} alt={product.articleName} />
 				</div>
+				<div className='detail'>
+					<h1 className='name'>{product.articleName}</h1>
+					<h4 className='price'>${product.articlePrice}</h4>
+					<div className='pay'>
+						<div className='size-options'>
+							<p>Size:</p>
+							<select>
+								<option value='xs'>XS</option>
+								<option value='s'>S</option>
+								<option value='m'>M</option>
+								<option value='l'>L</option>
+							</select>
+						</div>
+						<div className='payment-methods'>
+							<p>Payment Methods</p>
+							<img src='/pagos.png' alt='pay' />
+						</div>
+					</div>
+					<p className='stock'>Stock: {product.articleStock} pcs</p>
+					<div className='cart-container'>
+						<button className='add-to-cart'>Add to Cart</button>
+						<p className='free-shipping'>Free Shipping!!</p>
+					</div>
+				</div>
+			</div>
+			<div className='description-container'>
+				<h1>Description:</h1>
+				<h4>{product.articleDescription}</h4>
+				<h4>Category: {product.categories[0].categoryName}</h4>
 			</div>
 		</div>
 	);
