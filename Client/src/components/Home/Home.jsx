@@ -135,7 +135,7 @@ export default function Home() {
 			</div>
 			<div className='shipping-info'>
 				<div className='free-shipping'>
-					<img className='img-envio' src='/Envios.png' alt='envio gratis' />
+					<img className='img-envio' src='../../../public/envios.png' alt='envio gratis' />
 				</div>
 				<div className='international-shipping'>
 					<h2>International Shipping</h2>

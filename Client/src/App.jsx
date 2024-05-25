@@ -14,7 +14,7 @@ import Products from './components/Products/Products';
 function App() {
 	const { isLoading, isAuthenticated } = useAuth0();
 	const { pathname } = useLocation();
-	const [allProducts, setAllProducts] = useState([]);
+	
 	if (isLoading) return <h1>Cargando sesion...</h1>;
 	return (
 		<div>
@@ -29,13 +29,13 @@ function App() {
 				<Route
 					path='/detail/:id'
 					element={
-						<Detail allProducts={allProducts} setAllProducts={setAllProducts} />
+						<Detail />
 					}
 				/>
 				<Route
 					path='/cart'
 					element={
-						<Cart allProducts={allProducts} setAllProducts={setAllProducts} />
+						<Cart />
 					}
 				/>
 			</Routes>
