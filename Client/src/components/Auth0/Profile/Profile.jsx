@@ -7,18 +7,7 @@ import axios from 'axios';
 
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
-	const [ userData, setUserData ] = useState(
-		window.localStorage.getItem("userData")
-	);
-
-	const setLocalStorage = value => {
-		try {
-			setUserData(value)
-			window.localStorage.setItem("userData", value)
-		} catch (error) {
-			console.error(error)
-		}
-	}
+	const [ userData, setUserData ] = useState({});
 
 	useEffect(() => {
 		async function fetchUserData() {
@@ -26,14 +15,20 @@ const Profile = () => {
 				const response = await axios.get(
 					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
 				);
-				setLocalStorage(response.data.result)
+				window.localStorage.setItem("userData", JSON.stringify(response.data.result));
 			} catch (error) {
 				alert('Ha ocurrido un error: ' + error.message);
 			}
 		};
 
 		fetchUserData();
-	})
+	}, [userData])
+
+	useEffect(() => {
+		const data = window.localStorage.getItem("userData")
+		if (data !== null) setUserData(JSON.parse(data))
+	}, [])
+
 	return (
 		isAuthenticated && (
 			<div>
