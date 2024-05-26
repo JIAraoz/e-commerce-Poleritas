@@ -4,7 +4,7 @@ import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -15,6 +15,7 @@ export default function Products() {
   const [order, setOrder] = useState('');
   const [category, setCategory] = useState('');
   const [showFilters, setShowFilters] = useState(false); 
+  const [noResults, setNoResults] = useState(false);
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query);
   const productsPerPage = 5;
@@ -22,22 +23,31 @@ export default function Products() {
   useEffect(() => {
     setOrder(query.order);
     setCategory(query.filter);
-    setShowFilters(query.order || query.filter); 
+    setShowFilters(query.order || query.filter);
 
     async function fetchProducts(page) {
       setLoading(true);
+      setNoResults(false); // Reset no results state
       try {
-        console.log(`URL de solicitud: https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`);
         const response = await axios.get(
-          `https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`,
+          `https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`
         );
-        setProducts(response.data.result);
-        console.log('Datos recibidos:', response.data.result);
-        setTotalPages(response.data.totalPages);
-        setCurrentPage(response.data.currentPage);
+        if (response.data.result.length === 0) {
+          setNoResults(true);
+        } else {
+          setProducts(response.data.result);
+          setTotalPages(response.data.totalPages);
+          setCurrentPage(response.data.currentPage);
+        }
         setLoading(false);
       } catch (error) {
         console.error('Error fetching the products:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No se encontraron productos con los filtros aplicados o hubo un error en la solicitud.",
+        });
+        setNoResults(true);
         setLoading(false);
       }
     }
@@ -45,11 +55,10 @@ export default function Products() {
     async function fetchCategories() {
       try {
         const response = await axios.get(
-          'https://e-commerce-grupo03.onrender.com/categories/category',
+          'https://e-commerce-grupo03.onrender.com/categories/category'
         );
         setCategories(response.data.result);
       } catch (error) {
-        // alert(error.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -73,9 +82,6 @@ export default function Products() {
   const handleCategory = (event) => {
     setCategory(event.target.value);
   };
-
-  console.log(JSON.stringify(query, null, 2));
-  console.log('Valores antes del filtro:', order, category, query);
 
   const handleFilters = () => {
     query.order = order;
@@ -109,11 +115,12 @@ export default function Products() {
             ))}
           </select>
         </div>
+        
         <button onClick={handleFilters}>Aplicar filtros</button>
         {showFilters && (
           <div className="applied-filters">
             <span>
-             Filtros aplicados:{' '}
+              Filtros aplicados: {' '}
               {order ? `Orden: ${order}` : ''}{' '}
               {category ? `Categoría: ${category}` : ''}
             </span>
@@ -121,13 +128,19 @@ export default function Products() {
         )}
       </div>
       <div>
-        <Cards products={products} loading={loading} />
-        <Pagination
-          productsPerPage={productsPerPage}
-          totalPages={totalPages}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
+        {noResults && !loading ? (
+          <h2 className='E-rror'>we did not find what you are looking for, please choose another filter or another search</h2>
+        ) : (
+          <>
+            <Cards products={products} loading={loading} />
+            <Pagination
+              productsPerPage={productsPerPage}
+              totalPages={totalPages}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </>
+        )}
       </div>
     </div>
   );
