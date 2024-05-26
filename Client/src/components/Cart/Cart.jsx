@@ -66,6 +66,7 @@ export default function Cart() {
         }
     };
 
+
     const handleCleanButton = async (value) => {
         try {
             if (cartResponse) {
@@ -80,6 +81,7 @@ export default function Cart() {
             console.error(error);
         }
     }
+
 
     if (cartItems.length > 0) {
         return (
