@@ -1,0 +1,19 @@
+.logout-button {
+  background-color: #4A707D; /* Color naranja */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #395a65; /* Color naranja más oscuro al hacer hover */
+}
+
+.logout-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 112, 125, 0.5); /* Sombra suave al enfocar */
+}
