@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
     const { user } = useAuth0();
@@ -22,6 +22,7 @@ export default function Cart() {
                     const cartResponse = await axios.get(
                         `https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`
                     );
+                    console.log(cartResponse.data)
 
                     const activeCart = cartResponse.data.result.find((cart) => cart.isActive === true);
                     if (activeCart && activeCart.articles) {
@@ -70,12 +71,7 @@ export default function Cart() {
     const handleBuyCart = async () => {
         try {
             if (cartResponse) {
-                const cartId = cartResponse.cartId;
-                const response = await axios.get(
-                    `https://e-commerce-grupo03.onrender.com/cart/desactivateShoppingCart?cartId=${cartId}`
-                );
-                alert("Carrito comprado con éxito");
-                if (response) window.location.reload();
+                navigate('/checkout', { state: { cartItems, cartSubtotal: cartResponse.cartSubtotal, cartId: cartResponse.cartId } });
             }
         } catch (error) {
             console.error(error);
