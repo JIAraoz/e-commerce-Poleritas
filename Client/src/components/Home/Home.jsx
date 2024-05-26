@@ -5,6 +5,7 @@ import axios from 'axios';
 import './Home.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 export default function Home() {
 	const [products, setProducts] = useState([]);
@@ -69,7 +70,13 @@ export default function Home() {
 				);
 				setCategories(response.data.result);
 			} catch (error) {
-				alert(error.message);
+        // alert(error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+
 			}
 		}
 		fetchCategories();
@@ -128,7 +135,7 @@ export default function Home() {
 			</div>
 			<div className='shipping-info'>
 				<div className='free-shipping'>
-					<img className='img-envio' src='/Envios.png' alt='envio gratis' />
+					<img className='img-envio' src='../envios.png' alt='envio gratis' />
 				</div>
 				<div className='international-shipping'>
 					<h2>International Shipping</h2>

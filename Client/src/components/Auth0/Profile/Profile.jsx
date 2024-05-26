@@ -1,9 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import './Profile.css';
 import Logout from '../Logout/Logout';
-import Footer from '../../Footer/Footer';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
@@ -15,14 +15,25 @@ const Profile = () => {
 				const response = await axios.get(
 					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
 				);
-				setUserData(response.data.result)
+				window.localStorage.setItem("userData", JSON.stringify(response.data.result));
 			} catch (error) {
-				alert('Ha ocurrido un error: ' + error.message);
+        // alert('Ha ocurrido un error: ' + error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "An error has occurred:" + error.message,
+        });
 			}
 		};
 
 		fetchUserData();
-	})
+	}, [userData])
+
+	useEffect(() => {
+		const data = window.localStorage.getItem("userData")
+		if (data !== null) setUserData(JSON.parse(data))
+	}, [])
+
 	return (
 		isAuthenticated && (
 			<div>
