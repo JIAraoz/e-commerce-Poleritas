@@ -82,7 +82,7 @@ export default function Detail() {
 					</div>
 					<p className='stock'>Stock: {product.articleStock} pcs</p>
 					<div className='cart-container'>
-						<button className='add-to-cart'>Add to Cart</button>
+						<button className='add-to-cart' onClick={() => handleAddToCart()}>Add to Cart</button>
 						<p className='free-shipping'>Free Shipping!!</p>
 					</div>
 				</div>
