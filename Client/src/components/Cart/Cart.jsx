@@ -22,10 +22,11 @@ export default function Cart() {
                     const cartResponse = await axios.get(
                         `https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`
                     );
-                    console.log(cartResponse.data.result);
-                    if (cartResponse.data.result[0].articles) {
-                        setCartItems(cartResponse.data.result[0].articles);
-                        setCartResponse(cartResponse.data.result);
+
+                    const activeCart = cartResponse.data.result.find((cart) => cart.isActive === true);
+                    if (activeCart && activeCart.articles) {
+                        setCartItems(activeCart.articles);
+                        setCartResponse(activeCart);
                     }
                 }
             } catch (error) {
@@ -39,11 +40,11 @@ export default function Cart() {
     const handleRemoveButton = async (value) => {
         try {
             if (cartResponse) {
-                const cartId = cartResponse[0].cartId;
+                const cartId = cartResponse.cartId;
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/remove_article_cart?cartid=${cartId}&articleid=${value.articleId}`
                 );
-                alert("Producto eliminado con exito");
+                alert("Producto eliminado con éxito");
                 if (response) window.location.reload();
             }
         } catch (error) {
@@ -51,35 +52,35 @@ export default function Cart() {
         }
     };
 
-    const handleCleanButton = async (value) => {
+    const handleCleanButton = async () => {
         try {
             if (cartResponse) {
-                const cartId = cartResponse[0].cartId;
+                const cartId = cartResponse.cartId;
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
                 );
-                alert("Carrito limpiado con exito");
+                alert("Carrito limpiado con éxito");
                 if (response) window.location.reload();
             }
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     const handleBuyCart = async () => {
         try {
             if (cartResponse) {
-                const cartId = cartResponse[0].cartId;
+                const cartId = cartResponse.cartId;
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/desactivateShoppingCart?cartId=${cartId}`
                 );
-                alert("Carrito comprado con exito");
+                alert("Carrito comprado con éxito");
                 if (response) window.location.reload();
             }
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     if (cartItems.length > 0) {
         return (

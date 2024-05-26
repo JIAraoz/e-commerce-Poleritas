@@ -1,6 +1,6 @@
 // Detail.jsx
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios'
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './Detail.css';
 
@@ -8,17 +8,20 @@ import { useEffect, useState } from 'react';
 
 export default function Detail() {
 	const { id } = useParams();
-	const [product,setProduct]=useState()
+	const [product, setProduct] = useState(null);
 	const { user } = useAuth0();
 
-	useEffect(()=>{
-		async function getProduct(){
-			const {data}=await axios.get(`https://e-commerce-grupo03.onrender.com/article/detail/${id}`)
-			setProduct(data)
+	useEffect(() => {
+		async function getProduct() {
+			try {
+				const { data } = await axios.get(`https://e-commerce-grupo03.onrender.com/article/detail/${id}`);
+				setProduct(data);
+			} catch (error) {
+				console.error('Error fetching product details:', error);
+			}
 		}
-		getProduct()
-	},[id])
-
+		getProduct();
+	}, [id]);
 
 	if (!product) {
 		return <div>Producto no encontrado</div>;
@@ -26,23 +29,31 @@ export default function Detail() {
 
 	const handleAddToCart = async () => {
 		try {
-			var userResponse = await axios.get(
+			const userResponse = await axios.get(
 				`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
 			);
 
 			if (userResponse.data.result.userId) {
-				var cartResponse = await axios.get(`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`);
-				console.log(cartResponse.data.result);
-			}
+				const cartResponse = await axios.get(
+					`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`
+				);
 
-			var addArticleResponse = await axios.get(`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${cartResponse.data.result[0].cartId}&articleid=${id}&quantity=${1}`)
-			if (addArticleResponse) {
-				alert("Tu producto ha sido agregado al carrito")
+				const activeCart = cartResponse.data.result.find(cart => cart.isActive === true);
+				if (activeCart) {
+					const addArticleResponse = await axios.get(
+						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${1}`
+					);
+					if (addArticleResponse) {
+						alert("Tu producto ha sido agregado al carrito");
+					}
+				} else {
+					alert("No hay carrito activo disponible.");
+				}
 			}
 		} catch (error) {
 			console.error('Ha ocurrido un error: ' + error.message);
 		}
-	}
+	};
 
 	return (
 		<div>
@@ -60,7 +71,6 @@ export default function Detail() {
 					<img src={product.articleImage} alt={product.articleName} />
 				</div>
 			</div>
-
 		</div>
 	);
 }
