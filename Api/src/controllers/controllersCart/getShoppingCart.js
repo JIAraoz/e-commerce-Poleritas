@@ -10,6 +10,9 @@ const getShoppingCart = async (req, res) => {
             where: { userId: id },
             include: { 
                 model: ShoppingCart,
+                where:{
+                    isActive:true
+                },
                 include: {
                     model: Article
                 }
