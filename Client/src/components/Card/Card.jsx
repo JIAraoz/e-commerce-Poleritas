@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './card.css';
 
-export default function Card({ title, image, price, id, product }) {
+export default function Card({ id, title, image, price, product}) {
 	return (
 		<div className='card'>
 			<Link to={`/detail/${id}`} state={{ product }}>
