@@ -66,9 +66,27 @@ export default function Cart() {
         }
     };
 
+
+    const handleCleanButton = async (value) => {
+        try {
+            if (cartResponse) {
+                const cartId = cartResponse[0].cartId;
+                const response = await axios.get(
+                    `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
+                );
+                alert("Carrito limpiado con exito");
+                if (response) window.location.reload();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
     if (cartItems.length > 0) {
         return (
             <div>
+                <button onClick={() => handleCleanButton()}>Limpiar carrito</button>
                 {cartItems.map((product) => (
                     <div key={product.articleId}>
                         <img src={product.articleImage} alt={product.articleName} />
