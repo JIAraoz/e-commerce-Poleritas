@@ -1,55 +1,56 @@
 .card {
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	width: 20rem;
-	height: auto;
-	text-align: center;
-	margin: 2rem;
+    width: 20rem;
+    height: auto;
+    text-align: left; 
+    margin: 2rem;
+    background-color: #fff;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex; /* Añade esto para convertir .card en un contenedor flex */
+    justify-content: space-between; /* Añade esto para alinear los elementos a los extremos opuestos */
+	flex-direction: column;
 }
-
+.card-footer {
+    display: flex; /* Añade esto para convertir .card-footer en un contenedor flex */
+    justify-content: space-between; /* Añade esto para alinear los elementos a los extremos opuestos */
+    margin-top: 0.5rem; /* Añade esto para reducir el margen superior */
+}
 .image-container {
-	display: flex;
-	width: 20rem;
-	height: 20rem;
-	overflow: hidden;
-	object-fit: contain;
-	justify-content: center;
-}
-
-.card {
-	background-color: #fff;
-	border-radius: 1rem;
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-	overflow: hidden;
-	transition: transform 0.2s ease-in-out;
+    display: flex;
+    width: 20rem;
+    height: 25rem;
+    overflow: hidden;
+    object-fit: contain;
+    justify-content: center;
 }
 
 .card:hover {
-	transform: translateY(-0.5rem);
+    transform: scale(1.02);
+    background-color: rgba(128, 128, 128, 0.11);
 }
 
-.card-image-container {
-	height: 200px;
-	overflow: hidden;
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.card-image-container img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+.name {
+    font-size: 1.5rem;
+    color: black;
+    box-shadow: none;
+    margin-bottom: 0.5rem; /* Añade esto para reducir el margen inferior */
 }
 
-.card-content {
-	padding: 1rem;
+.price {
+    color: #4A707A;
+    font-weight: bold;
 }
 
-.card-content h2 {
-	color: #333;
-	font-size: 1.2rem;
-	margin-bottom: 0.5rem;
-}
-
-.card-price {
-	color: #666;
-	font-weight: bold;
+.icoFS {
+    height: 100px;
+    color: #4A707A;
+	margin-right: 20px;
 }
