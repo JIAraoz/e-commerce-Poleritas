@@ -66,6 +66,21 @@ export default function Cart() {
         }
     }
 
+    const handleBuyCart = async () => {
+        try {
+            if (cartResponse) {
+                const cartId = cartResponse[0].cartId;
+                const response = await axios.get(
+                    `https://e-commerce-grupo03.onrender.com/cart/desactivateShoppingCart?cartId=${cartId}`
+                );
+                alert("Carrito comprado con exito");
+                if (response) window.location.reload();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     if (cartItems.length > 0) {
         return (
             <div>
@@ -79,6 +94,7 @@ export default function Cart() {
                         <button onClick={() => handleRemoveButton(product)}>Eliminar producto</button>
                     </div>
                 ))}
+                <button onClick={() => handleBuyCart()}>Comprar carrito</button>
             </div>
         );
     } else {
