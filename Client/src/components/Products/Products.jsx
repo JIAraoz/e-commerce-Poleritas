@@ -4,6 +4,7 @@ import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
+import Swal from 'sweetalert2'
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -48,7 +49,12 @@ export default function Products() {
         );
         setCategories(response.data.result);
       } catch (error) {
-        alert(error.message);
+        // alert(error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
       }
     }
 

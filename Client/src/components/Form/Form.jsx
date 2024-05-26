@@ -3,6 +3,8 @@ import axios from 'axios';
 import Cloudinary from '../Cloudinary/Cloudinary';
 import './Form.css';
 import Validation from '../Validation/Validation';
+import Swal from 'sweetalert2'
+
 export default function Form() {
 	const [categories, setCategories] = useState([]);
 	useEffect(() => {
@@ -14,7 +16,12 @@ export default function Form() {
 				console.log(data);
 				setCategories(data.result);
 			} catch (error) {
-				alert('A ocurrido un error al intentar cargar las categorías');
+        // alert('A ocurrido un error al intentar cargar las categorías');
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "An error occurred while trying to load the categories!",
+        });
 				console.log(
 					'A ocurrido un error al intentar cargar las categorías ' + error,
 				);
@@ -64,12 +71,29 @@ export default function Form() {
 			);
 
 			if (('' + response.status)[0] === '2') {
-				alert('Se ha subido tu artículo a la base de datos.');
+        // alert('Se ha subido tu artículo a la base de datos.');
+        Swal.fire({
+          title: "Good job!",
+          text: "Your article has been uploaded to the database.",
+          icon: "success"
+        });
+        
 			} else {
-				alert('Algo ha salido mal.');
+        // alert('Algo ha salido mal.');
+       Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+      });
+        
 			}
 		} catch (error) {
-			alert('Ha ocurrido un error: ' + error.message);
+      // alert('Ha ocurrido un error: ' + error.message);
+      Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error.message,
+      });
 		}
 	};
 
