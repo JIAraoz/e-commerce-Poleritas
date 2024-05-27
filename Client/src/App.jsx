@@ -11,7 +11,7 @@ import Cart from './components/Cart/Cart';
 import Footer from './components/Footer/Footer';
 import Products from './components/Products/Products';
 import Checkout from './components/Checkout/Checkout';
-
+import "./App.css"
 function App() {
     const { isLoading } = useAuth0();
     const { pathname } = useLocation();
@@ -19,8 +19,9 @@ function App() {
     if (isLoading) return <h1>Cargando sesión...</h1>;
 
     return (
-        <div>
-            {pathname !== '/' && <Nav />}
+        <div className='app-container'>
+        {pathname !== '/' && <Nav />}
+        <div className='content'>
             <Routes>
                 <Route path='/' element={<Landing />} />
                 <Route path='/profile' element={<Profile />} />
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/checkout' element={<Checkout />} />
             </Routes>
+        </div>
             <Footer />
         </div>
     );
