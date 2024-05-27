@@ -4,6 +4,7 @@ import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
+import './Products.css';
 import Swal from 'sweetalert2';
 
 export default function Products() {
@@ -67,21 +68,23 @@ export default function Products() {
       }
     }
 
-    fetchCategories();
-    fetchProducts(currentPage);
-  }, [currentPage, query]);
 
-  useEffect(() => {
-    setShowFilters(order || category);
-  }, [order, category]);
+		fetchCategories();
+		fetchProducts(currentPage);
+	}, [currentPage, query]);
 
-  const handlerOrder = (event) => {
-    setOrder(event.target.value);
-  };
+	useEffect(() => {
+		setShowFilters(order || category);
+	}, [order, category]);
 
-  const handleCategory = (event) => {
-    setCategory(event.target.value);
-  };
+	const handlerOrder = (event) => {
+		setOrder(event.target.value);
+	};
+
+	const handleCategory = (event) => {
+		setCategory(event.target.value);
+	};
+
 
   const handleFilters = () => {
     query.order = order;
@@ -91,7 +94,10 @@ export default function Products() {
     setShowFilters(true);
   };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+
 
   return (
     <div>
@@ -144,4 +150,5 @@ export default function Products() {
       </div>
     </div>
   );
+
 }
