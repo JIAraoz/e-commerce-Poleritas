@@ -104,21 +104,21 @@ export default function Home() {
 		<div className='home'>
 			<div className='categories'>
 				<div className='category-item'>
-					<Link className='a' to='/products?filter=men'>
+					<Link className='a' to='/products?category=3'>
 						<img src='../Men.jpg' alt="Men's" className='img-m' />
 						<p>Sports</p>
 					</Link>
 				</div>
 				<div className='category-item'>
-					<Link className='a' to='/products'>
-						<img src='/CamisetaDeportivaDeMujer.jpg' alt="casual" />
+					<Link className='a' to='/products?category=1'>
+						<img src='/casual.jpg' alt="casual" />
 						<p>Casual</p>
 					</Link>
 				</div>
 				<div className='category-item'>
-					<Link className='a' to='/products?filter=unisex'>
-						<img src='../unisex.png' alt='Unisex' />
-						<p>Unisex</p>
+					<Link className='a' to='/products?category=4'>
+						<img src='../polos.jpg' alt='Unisex' />
+						<p>Polo</p>
 					</Link>
 				</div>
 			</div>
