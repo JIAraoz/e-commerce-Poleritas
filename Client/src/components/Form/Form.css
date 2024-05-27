@@ -1,17 +1,17 @@
 .back {
-	background: linear-gradient(to bottom right, #ffcccc, #ffffcc, #ccffcc);
+	background-color: white;
 }
 .form-box {
 	padding: 2rem;
 }
 
 .articleForm {
-	max-width: 600px;
+	max-width: 40rem;
 	margin: 0 auto;
-	padding: 20px;
-	background-color: #ccffcc;
+	padding: 1.5rem;
+	background-color:#4A707D;
 	border-radius: 8px;
-	box-shadow: 0 2px 4px #e76060;
+	box-shadow: 0 2px 4px #000000;
 }
 
 .form-group {
@@ -33,16 +33,16 @@ label {
 	display: block;
 	font-weight: bold;
 	margin-bottom: 5px;
-	color: #000000;
+
 }
 
 input[type='text'],
 textarea {
 	width: 93%;
 	padding: 20px;
-	border: 3px solid #ffcccc;
-	border-radius: 4px;
-	font-size: 16px;
+	
+	border-radius:0.2rem;
+	
 }
 
 textarea {
@@ -50,23 +50,31 @@ textarea {
 	resize: vertical;
 }
 
-button[type='submit'] {
+button[type='submit']:disabled {
 	display: block;
 	width: 100%;
 	padding: 10px;
-	background-color: #bacd92;
+	background-color: #a4b7bc;
 	color: #fff;
 	border: none;
 	border-radius: 4px;
-	font-size: 16px;
 	font-weight: bold;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
-
-button[type='submit']:hover {
+button[type='submit']{
+	display: block;
+	width: 100%;
+	padding: 10px;
 	background-color: #5aa0eb;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	
+	font-weight: bold;
+	cursor: pointer;
 }
+
 
 .error-message {
 	color: #d70101;
@@ -76,7 +84,10 @@ button[type='submit']:hover {
 input[type='text'],
 textarea {
 	font-size: 14px;
-	background-color: #ef8a8a;
+	
+}
+.articlePrice{
+	height: 0rem;
 }
 
 @media (max-width: 768px) {
@@ -87,7 +98,7 @@ textarea {
 	input[type='text'],
 	textarea {
 		font-size: 14px;
-		background-color: #ffffcc;
+		
 	}
 
 	button[type='submit'] {

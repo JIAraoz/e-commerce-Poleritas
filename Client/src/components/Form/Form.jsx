@@ -131,6 +131,7 @@ export default function Form() {
 					<div className='form-group'>
 						<label htmlFor='articlePrice'>Price:</label>
 						<input
+							className='articlePrice'
 							type='text'
 							name='articlePrice'
 							value={articleData.articlePrice}
