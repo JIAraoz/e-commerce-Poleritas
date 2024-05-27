@@ -24,7 +24,7 @@ const desactivateShoppingCart = async (req, res) => {
                     }
                 }
 
-                for (const article of cartToDesactivate.Articles) {
+                for (const article of cartToDesactivate.articles) {
                     article.articleStock -= article.Cart_Articles.articleQuantity;
                     await article.save();
                 }
@@ -35,7 +35,7 @@ const desactivateShoppingCart = async (req, res) => {
                 return res.status(404).json({ message: 'Cart not found' });
             }
         } else {
-            return res.status(400).json({ message: 'Faltan datos o son inválidos en el cuerpo de la solicitud' });
+            return res.status(400).json({ message: 'Missing or invalid data in the request body' });
         }
     } catch (error) {
         console.log(error);
