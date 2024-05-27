@@ -12,7 +12,6 @@ function Nav() {
 	return (
 		<div className='nav'>
 			<div className='left'>
-				<img src='/Poleritas.png' alt='Poleritas' className='Logo-NavBar' />
 				<Link to='/home'>
 					<button>HOME</button>
 				</Link>

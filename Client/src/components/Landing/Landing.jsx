@@ -18,16 +18,19 @@ export default function Landing() {
 		<div className='landing'>
 			<div className='landing-background'>
 				<div className='landing-content'>
+					<img src='/Poleritas.png' alt='Poleritas' className='Logo' />
 					<div className='texto'>
 						<h1>Welcome to our Web Site</h1>
 						<p>The best online store</p>
 					</div>
-					{isAuthenticated ? <Logout /> : <Login />}
-          <Link to={'/home'}>
-            <div className='invitado'>
-						<button>Ingresar como invitado</button>
-            </div>
-					</Link>
+					<div className='buttoms_zone'>
+						{isAuthenticated ? <Logout /> : <Login />}
+						<Link to={'/home'}>
+						<div className='invitado'>
+									<button>Ingresar como invitado</button>
+						</div>
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>
