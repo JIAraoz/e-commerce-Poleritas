@@ -30,7 +30,6 @@ const addArticleCart = async (req, res) => {
         }})
         if(articleExist===null){
             await cart.addArticle(article, { through: { articleQuantity:quantity } });
-            console.log("Estoy dentro del if")
         }else{
             articleExist.articleQuantity += quantity;
             await articleExist.save();
