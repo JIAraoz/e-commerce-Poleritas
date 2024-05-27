@@ -12,9 +12,7 @@ export default function Cart() {
     const navigate = useNavigate();
     const location=useLocation()
 
-    useEffect(()=>{
-        console.log('2');
-    },[location])
+   
 
 
 
@@ -66,7 +64,7 @@ export default function Cart() {
                   text: "Product successfully removed!",
                   icon: "success"
                 });
-                if (response) navigate('/cart',{props:1})
+                if (response)  window.location.reload();
             }
         } catch (error) {
             console.error(error);
@@ -86,8 +84,8 @@ export default function Cart() {
                   text: "Cart successfully cleaned!",
                   icon: "success"
                 });
-                if (response) navigate('/cart2')
-                /* window.location.reload(); */
+                if (response)  window.location.reload();
+               
             }
         } catch (error) {
             console.error(error);
