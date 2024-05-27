@@ -14,7 +14,9 @@ export default function Detail() {
 	useEffect(() => {
 		async function getProduct() {
 			try {
-				const { data } = await axios.get(`https://e-commerce-grupo03.onrender.com/article/detail/${id}`);
+				const { data } = await axios.get(
+					`https://e-commerce-grupo03.onrender.com/article/detail/${id}`,
+				);
 				setProduct(data);
 			} catch (error) {
 				console.error('Error fetching product details:', error);
@@ -30,24 +32,26 @@ export default function Detail() {
 	const handleAddToCart = async () => {
 		try {
 			const userResponse = await axios.get(
-				`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
+				`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`,
 			);
 
 			if (userResponse.data.result.userId) {
 				const cartResponse = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`
+					`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`,
 				);
 
-				const activeCart = cartResponse.data.result.find(cart => cart.isActive === true);
+				const activeCart = cartResponse.data.result.find(
+					(cart) => cart.isActive === true,
+				);
 				if (activeCart) {
 					const addArticleResponse = await axios.get(
-						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${1}`
+						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${1}`,
 					);
 					if (addArticleResponse) {
-						alert("Tu producto ha sido agregado al carrito");
+						alert('Tu producto ha sido agregado al carrito');
 					}
 				} else {
-					alert("No hay carrito activo disponible.");
+					alert('No hay carrito activo disponible.');
 				}
 			}
 		} catch (error) {
@@ -66,7 +70,7 @@ export default function Detail() {
 					<h1 className='name'>{product.articleName}</h1>
 					<h4 className='price'>${product.articlePrice}</h4>
 					<div className='pay'>
-						<div className='size-options'>
+						{/*<div className='size-options'>
 							<p>Size:</p>
 							<select>
 								<option value='xs'>XS</option>
@@ -74,7 +78,7 @@ export default function Detail() {
 								<option value='m'>M</option>
 								<option value='l'>L</option>
 							</select>
-						</div>
+						</div>?*/}
 						<div className='payment-methods'>
 							<p>Payment Methods</p>
 							<img src='/pagos.png' alt='pay' />
@@ -82,7 +86,9 @@ export default function Detail() {
 					</div>
 					<p className='stock'>Stock: {product.articleStock} pcs</p>
 					<div className='cart-container'>
-						<button className='add-to-cart' onClick={() => handleAddToCart()}>Add to Cart</button>
+						<button className='add-to-cart' onClick={() => handleAddToCart()}>
+							Add to Cart
+						</button>
 						<p className='free-shipping'>Free Shipping!!</p>
 					</div>
 				</div>
