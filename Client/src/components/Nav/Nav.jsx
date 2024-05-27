@@ -19,9 +19,12 @@ function Nav() {
 				<Link to='/products'>
 					<button>PRODUCTS</button>
 				</Link>
-				<Link to='/about'>
-					<button>ABOUT</button>
+				<Link to={'/form'}>
+					<button>FORM</button>
 				</Link>
+				{/* <Link to='/about'>
+					<button>ABOUT</button>
+				</Link> */}
 			</div>
 			<div className='center'>
 				<SearchBar className='searchBar' />
