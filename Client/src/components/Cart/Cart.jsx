@@ -66,7 +66,7 @@ export default function Cart() {
                   text: "Product successfully removed!",
                   icon: "success"
                 });
-                if (response) navigate('/cart')
+                if (response) navigate('/cart',{props:1})
             }
         } catch (error) {
             console.error(error);
@@ -86,7 +86,7 @@ export default function Cart() {
                   text: "Cart successfully cleaned!",
                   icon: "success"
                 });
-                if (response) navigate('/cart')
+                if (response) navigate('/cart2')
                 /* window.location.reload(); */
             }
         } catch (error) {
