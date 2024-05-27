@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 export default function Cart() {
@@ -10,8 +10,17 @@ export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [cartResponse, setCartResponse] = useState(null);
     const navigate = useNavigate();
-   
+    const location=useLocation()
+
+    useEffect(()=>{
+        console.log('2');
+    },[location])
+
+
+
     useEffect(() => {
+        
+
         async function fetchData() {
             try {
                 const userResponse = await axios.get(
@@ -57,7 +66,7 @@ export default function Cart() {
                   text: "Product successfully removed!",
                   icon: "success"
                 });
-                if (response) return navigate('/cart')
+                if (response) navigate('/cart')
             }
         } catch (error) {
             console.error(error);
@@ -98,23 +107,23 @@ export default function Cart() {
     if (cartItems.length > 0) {
         return (
             <div>
-                <button onClick={() => handleCleanButton()}>Limpiar carrito</button>
+                <button onClick={() => handleCleanButton()}>Clean Shopping Cart</button>
                 {cartItems.map((product) => (
                     <div key={product.articleId}>
                         <img src={product.articleImage} alt={product.articleName} />
                         <h2>{product.articleName}</h2>
                         <p>Precio: ${product.articlePrice}</p>
                         <p>Cantidad: {product.Cart_Articule.articleQuantity}</p>
-                        <button onClick={() => handleRemoveButton(product)}>Eliminar producto</button>
+                        <button onClick={() => handleRemoveButton(product)}>Delete product</button>
                     </div>
                 ))}
-                <button onClick={() => handleBuyCart()}>Comprar carrito</button>
+                <button onClick={() => handleBuyCart()}>Buy Shopping Cart</button>
             </div>
         );
     } else {
         return (
             <div>
-                <h2>No tiene ningún artículo en el carrito.</h2>
+                <h2>Empty Shopping Cart.</h2>
             </div>
         );
     }
