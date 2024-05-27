@@ -17,10 +17,10 @@ const desactivateShoppingCart = async (req, res) => {
             if (cartToDesactivate) {
                 cartToDesactivate.isActive = false;
 
-                for (const article of cartToDesactivate.Articles) {
+                for (const article of cartToDesactivate.articles) {
                     const newStock = article.articleStock - article.Cart_Articles.articleQuantity;
                     if (newStock < 0) {
-                        return res.status(400).json({ message: `Insufficient stock for the article ${article.title}` });
+                        return res.status(400).json({ message: `Insufsicient stock for the article ${article.title}` });
                     }
                 }
 
