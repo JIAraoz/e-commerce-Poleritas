@@ -1,4 +1,4 @@
-const { ShoppingCart, Article,  Cart_Article} = require('../../db');
+const { ShoppingCart, Article,  Cart_Articule} = require('../../db');
 
 const desactivateShoppingCart = async (req, res) => {
     try {
