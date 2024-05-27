@@ -8,7 +8,7 @@ const CheckoutForm = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { cartItems, cartSubtotal, cartId } = location.state || { cartItems: [], cartSubtotal: 0 };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -48,6 +48,7 @@ const CheckoutForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            
             <CardElement />
             <button type="submit" disabled={!stripe}>Buy ${cartSubtotal}</button>
         </form>
