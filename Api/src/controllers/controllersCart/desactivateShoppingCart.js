@@ -1,4 +1,4 @@
-const { User, ShoppingCart, Article } = require('../../db');
+const { ShoppingCart, Article,  Cart_Article} = require('../../db');
 
 const desactivateShoppingCart = async (req, res) => {
     try {
@@ -25,7 +25,7 @@ const desactivateShoppingCart = async (req, res) => {
                 }
 
                 for (const article of cartToDesactivate.articles) {
-                    article.articleStock -= article.Cart_Articles.articleQuantity;
+                    article.articleStock -= article.Cart_Articules.articleQuantity;
                     await article.save();
                 }
 
