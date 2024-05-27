@@ -10,7 +10,9 @@ export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [cartResponse, setCartResponse] = useState(null);
     const navigate = useNavigate();
+    useEffect(()=>{
 
+    },[refresh])
     useEffect(() => {
         async function fetchData() {
             try {
