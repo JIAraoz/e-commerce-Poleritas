@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
     const { user } = useAuth0();
+    const [refresh,setRefresh]=useState(true)
     const [userData, setUserData] = useState({});
     const [cartItems, setCartItems] = useState([]);
     const [cartResponse, setCartResponse] = useState(null);
@@ -46,7 +47,7 @@ export default function Cart() {
                     `https://e-commerce-grupo03.onrender.com/cart/remove_article_cart?cartid=${cartId}&articleid=${value.articleId}`
                 );
                 alert("Producto eliminado con éxito");
-                if (response) window.location.reload();
+                if (response) setRefresh(!refresh)
             }
         } catch (error) {
             console.error(error);
@@ -61,7 +62,8 @@ export default function Cart() {
                     `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
                 );
                 alert("Carrito limpiado con éxito");
-                if (response) window.location.reload();
+                if (response) setRefresh(!refresh)
+                /* window.location.reload(); */
             }
         } catch (error) {
             console.error(error);
