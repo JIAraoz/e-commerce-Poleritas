@@ -1,15 +1,14 @@
-// Detail.jsx
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Detail.css';
-
 import { useEffect, useState } from 'react';
 
 export default function Detail() {
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	const { user } = useAuth0();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		async function getProduct() {
@@ -59,9 +58,13 @@ export default function Detail() {
 		}
 	};
 
+	const handleBack = () => {
+		navigate(-1);
+	};
+
 	return (
 		<div>
-			<button id='back-button'>Back</button>
+			<button id="back-button" onClick={handleBack}>Back</button>
 			<div className='detail-container'>
 				<div className='photo-container'>
 					<img src={product.articleImage} alt={product.articleName} />
@@ -70,15 +73,6 @@ export default function Detail() {
 					<h1 className='name'>{product.articleName}</h1>
 					<h4 className='price'>${product.articlePrice}</h4>
 					<div className='pay'>
-						{/*<div className='size-options'>
-							<p>Size:</p>
-							<select>
-								<option value='xs'>XS</option>
-								<option value='s'>S</option>
-								<option value='m'>M</option>
-								<option value='l'>L</option>
-							</select>
-						</div>?*/}
 						<div className='payment-methods'>
 							<p>Payment Methods</p>
 							<img src='/pagos.png' alt='pay' />
