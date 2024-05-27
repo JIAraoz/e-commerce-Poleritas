@@ -39,3 +39,25 @@
 .texto {
 	color: black;
 }
+
+.landing-content button {
+  background-color: #4A707D;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; /* Agrega un margen derecho de 10px */
+}
+
+.landing-content button:hover {
+  background-color: #3b585f;
+}
+
+.landing-content button:last-child {
+  margin-right: 0;
+}
+.invitado{
+  margin-top: 0.9rem;
+}

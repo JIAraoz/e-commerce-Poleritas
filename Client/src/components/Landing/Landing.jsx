@@ -23,8 +23,10 @@ export default function Landing() {
 						<p>The best online store</p>
 					</div>
 					{isAuthenticated ? <Logout /> : <Login />}
-					<Link to={'/home'}>
+          <Link to={'/home'}>
+            <div className='invitado'>
 						<button>Ingresar como invitado</button>
+            </div>
 					</Link>
 				</div>
 			</div>

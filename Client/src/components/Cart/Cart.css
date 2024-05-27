@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+.card-product{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    height: 15rem;
+    width: 40rem;
+    background-color: #4A707D;
+    margin: 1rem;
+}
+.card-image{
+  height: 15rem;
+  width: 15rem;
+ 
+}
+.card-image-container{
+    overflow: hidden;
+    height: 15rem;
+    width: 15rem;
+    background-color: aqua;
+}
+.cart-body{
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.cart-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 3% auto;
+    background-color: #4a707a80;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+.cart{
+    min-height: 45rem;
+    max-height: 45rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+.empty-cart{
+    height:45rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.see-products{
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    background-color:  #4a707d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.see-products:hover{
+    background-color: #3b5a6c
+}
+.remove-product{ font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: white;
+    background-color: black;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+
+}
