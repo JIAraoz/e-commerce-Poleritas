@@ -1,18 +1,15 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 
 export default function Cart() {
     const { user } = useAuth0();
-    const [refresh,setRefresh]=useState(true)
     const [userData, setUserData] = useState({});
     const [cartItems, setCartItems] = useState([]);
     const [cartResponse, setCartResponse] = useState(null);
     const navigate = useNavigate();
-    useEffect(()=>{
-
-    },[refresh])
+   
     useEffect(() => {
         async function fetchData() {
             try {
@@ -49,7 +46,7 @@ export default function Cart() {
                     `https://e-commerce-grupo03.onrender.com/cart/remove_article_cart?cartid=${cartId}&articleid=${value.articleId}`
                 );
                 alert("Producto eliminado con éxito");
-                if (response) return setRefresh(!refresh)
+                if (response) return navigate('/cart')
             }
         } catch (error) {
             console.error(error);
@@ -64,7 +61,7 @@ export default function Cart() {
                     `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
                 );
                 alert("Carrito limpiado con éxito");
-                if (response) return setRefresh(!refresh)
+                if (response) navigate('/cart')
                 /* window.location.reload(); */
             }
         } catch (error) {
