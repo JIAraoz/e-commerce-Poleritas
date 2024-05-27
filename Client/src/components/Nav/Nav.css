@@ -1,34 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #CA8787; 
-  padding: 15px 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#4A707D;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif; 
+    height: 5rem;
 }
 
 .nav a {
-  text-decoration: none;
-  color: #7d6b5a;
+    text-decoration: none;
+    color: #7d6b5a;
+    font-family: 'Roboto', sans-serif; 
 }
 
 .nav button {
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  padding: 5px 10px;
-  border-radius: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: white;
+    font-family: 'Roboto', sans-serif; 
 }
 
-.nav button:hover {
-  color: #d2691e; 
-  background-color: #f5e0c9; 
-}
+
 
 .searchBar {
-  margin: 0 10px;
+    margin: 0 10px;
+    
+}
+.left, .center, .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.left {
+    flex: 1;
+    justify-content: flex-start;
+    margin-left: 5rem; /* Ajusta este valor según tus necesidades */
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.right {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.Logo-NavBar {
+    height: 4rem;
+    padding: 1.5em;
+    
 }

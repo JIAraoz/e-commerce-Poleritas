@@ -9,16 +9,16 @@ function shoppingCart (sequelize){
             allowNull: false,
             primaryKey: true,
         },
-        cartQuantity: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         cartSubtotal: {
             type: DataTypes.FLOAT,
             allowNull: false
         },
         cartPayment: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
             allowNull: false
         }
     })

@@ -1,33 +1,110 @@
-// Detail.jsx
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Detail.css';
-import Footer from '../Footer/Footer';
+
+import Swal from 'sweetalert2';
+
+import { useEffect, useState } from 'react';
 
 export default function Detail() {
-	const location = useLocation();
-	const product = location.state.product;
+	const { id } = useParams();
+	const [product, setProduct] = useState(null);
+	const { user } = useAuth0();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		async function getProduct() {
+			try {
+				const { data } = await axios.get(
+					`https://e-commerce-grupo03.onrender.com/article/detail/${id}`,
+				);
+				setProduct(data);
+			} catch (error) {
+				console.error('Error fetching product details:', error);
+			}
+		}
+		getProduct();
+	}, [id]);
 
 	if (!product) {
 		return <div>Producto no encontrado</div>;
 	}
 
+	const handleAddToCart = async () => {
+		try {
+			const userResponse = await axios.get(
+				`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`,
+			);
+
+			if (userResponse.data.result.userId) {
+				const cartResponse = await axios.get(
+					`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`,
+				);
+
+				const activeCart = cartResponse.data.result.find(
+					(cart) => cart.isActive === true,
+				);
+				if (activeCart) {
+					const addArticleResponse = await axios.get(
+						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${1}`,
+					);
+					if (addArticleResponse) {
+            // alert('Tu producto ha sido agregado al carrito');
+            Swal.fire({
+                  title: "Your product has been added!",
+                  text: "Your product has been successfully added!",
+                  icon: "success"
+                });
+					}
+				} else {
+          // alert('No hay carrito activo disponible.');
+            Swal.fire({
+                icon: "error",
+                title: "No active cart available.",
+                text: "There is no active cart available at this time.",
+              });
+				}
+			}
+		} catch (error) {
+			console.error('Ha ocurrido un error: ' + error.message);
+		}
+	};
+
+	const handleBack = () => {
+		navigate(-1);
+	};
+
 	return (
 		<div>
+			<button id="back-button" onClick={handleBack}>Back</button>
 			<div className='detail-container'>
-				<div className='detail'>
-					<h2>ID: {product.articleId}</h2>
-					<h4>Nombre: {product.articleName}</h4>
-					<h4>Descripción: {product.articleDescription}</h4>
-					<h4>Precio: {product.articlePrice}</h4>
-					<h4>Stock: {product.articleStock}</h4>
-					<h4>Categoría: {product.categories[0].categoryName}</h4>
-				</div>
 				<div className='photo-container'>
 					<img src={product.articleImage} alt={product.articleName} />
 				</div>
+				<div className='detail'>
+					<h1 className='name'>{product.articleName}</h1>
+					<h4 className='price'>${product.articlePrice}</h4>
+					<div className='pay'>
+						<div className='payment-methods'>
+							<p>Payment Methods</p>
+							<img src='/pagos.png' alt='pay' />
+						</div>
+					</div>
+					<p className='stock'>Stock: {product.articleStock} pcs</p>
+					<div className='cart-container'>
+						<button className='add-to-cart' onClick={() => handleAddToCart()}>
+							Add to Cart
+						</button>
+						<p className='free-shipping'>Free Shipping!!</p>
+					</div>
+				</div>
 			</div>
-			<Footer />
+			<div className='description-container'>
+				<h1>Description:</h1>
+				<h4>{product.articleDescription}</h4>
+				<h4>Category: {product.categories[0].categoryName}</h4>
+			</div>
 		</div>
 	);
 }

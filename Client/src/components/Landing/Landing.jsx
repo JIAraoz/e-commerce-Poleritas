@@ -1,11 +1,9 @@
 import Logout from '../Auth0/Logout/Logout';
 import Login from '../Auth0/Login/Login';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import './Landing.css';
 import { useEffect } from 'react';
-
-import Footer from '../Footer/Footer';
 
 export default function Landing() {
 	const navigate = useNavigate();
@@ -21,13 +19,15 @@ export default function Landing() {
 			<div className='landing-background'>
 				<div className='landing-content'>
 					<div className='texto'>
-						<h1>Bienvenido a Nuestro Sitio Web</h1>
-						<p>La mejor tienda Online</p>
+						<h1>Welcome to our Web Site</h1>
+						<p>The best online store</p>
 					</div>
 					{isAuthenticated ? <Logout /> : <Login />}
+					<Link to={'/home'}>
+						<button>Ingresar como invitado</button>
+					</Link>
 				</div>
 			</div>
-			<Footer />
 		</div>
 	);
 }

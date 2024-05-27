@@ -3,19 +3,25 @@ import axios from 'axios';
 import Cloudinary from '../Cloudinary/Cloudinary';
 import './Form.css';
 import Validation from '../Validation/Validation';
-import Footer from '../Footer/Footer';
+import Swal from 'sweetalert2'
+
 export default function Form() {
 	const [categories, setCategories] = useState([]);
 	useEffect(() => {
 		const axiosCategories = async () => {
 			try {
 				const { data } = await axios.get(
-					'https://e-commerce-grupo03.onrender.com/getCategory',
+					'https://e-commerce-grupo03.onrender.com/categories/category',
 				);
 				console.log(data);
 				setCategories(data.result);
 			} catch (error) {
-				alert('A ocurrido un error al intentar cargar las categorías');
+        // alert('A ocurrido un error al intentar cargar las categorías');
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "An error occurred while trying to load the categories!",
+        });
 				console.log(
 					'A ocurrido un error al intentar cargar las categorías ' + error,
 				);
@@ -60,17 +66,34 @@ export default function Form() {
 		try {
 			console.log(articleData);
 			const response = await axios.post(
-				'https://e-commerce-grupo03.onrender.com/createArticle',
+				'https://e-commerce-grupo03.onrender.com/article/createArticle',
 				articleData,
 			);
 
 			if (('' + response.status)[0] === '2') {
-				alert('Se ha subido tu artículo a la base de datos.');
+        // alert('Se ha subido tu artículo a la base de datos.');
+        Swal.fire({
+          title: "Good job!",
+          text: "Your article has been uploaded to the database.",
+          icon: "success"
+        });
+        
 			} else {
-				alert('Algo ha salido mal.');
+        // alert('Algo ha salido mal.');
+       Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+      });
+        
 			}
 		} catch (error) {
-			alert('Ha ocurrido un error: ' + error.message);
+      // alert('Ha ocurrido un error: ' + error.message);
+      Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error.message,
+      });
 		}
 	};
 
@@ -83,7 +106,7 @@ export default function Form() {
 			<div className='form-box'>
 				<form className='articleForm' onSubmit={handleSubmit}>
 					<div className='form-group'>
-						<label htmlFor='articleName'>Nombre del artículo:</label>
+						<label htmlFor='articleName'>Name of article:</label>
 						<input
 							type='text'
 							name='articleName'
@@ -96,7 +119,7 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='articleImage'>Imagen:</label>
+						<label htmlFor='articleImage'>Image:</label>
 						<div className='image-container'>
 							<Cloudinary onImageUpload={handleImageUpload} />
 						</div>
@@ -106,7 +129,7 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='articlePrice'>Precio:</label>
+						<label htmlFor='articlePrice'>Price:</label>
 						<input
 							type='text'
 							name='articlePrice'
@@ -132,7 +155,7 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='articleDescription'>Descripción:</label>
+						<label htmlFor='articleDescription'>Description:</label>
 						<textarea
 							name='articleDescription'
 							value={articleData.articleDescription}
@@ -144,14 +167,14 @@ export default function Form() {
 					</div>
 
 					<div className='form-group'>
-						<label htmlFor='Category'>Categoría:</label>
+						<label htmlFor='Category'>Category:</label>
 
 						<select
 							name='Category'
 							value={articleData.Category}
 							onChange={handleChange}
 						>
-							<option value=''>Selecciona una categoría</option>
+							<option value=''>Select a category:</option>
 							{categories.map((element) => (
 								<option value={element.categoryName} key={element.categoryId}>
 									{element.categoryName}
@@ -165,11 +188,10 @@ export default function Form() {
 					</div>
 
 					<button type='submit' disabled={hasErrors()}>
-						Enviar
+						Send
 					</button>
 				</form>
 			</div>
-			<Footer />
 		</div>
 	);
 }

@@ -6,4 +6,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+	width: 80%;
+	margin: auto;
+}
+.loading{
+	height: 50vh;
 }

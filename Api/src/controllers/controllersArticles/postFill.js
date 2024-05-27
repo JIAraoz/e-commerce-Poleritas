@@ -1,5 +1,5 @@
-const { Article, Category } = require('../db');
-const base_articles = require('../utils/base_articles');
+const { Article, Category } = require('../../db');
+const base_articles = require('../../utils/base_articles');
 
 const postFill = async (req, res) => {
     try {

@@ -24,7 +24,7 @@ const Pagination = ({ productsPerPage, totalPages, paginate, currentPage }) => {
 							href='#!'
 							className='page-link'
 						>
-							Anterior
+							←
 						</a>
 					</li>
 				)}
@@ -51,7 +51,7 @@ const Pagination = ({ productsPerPage, totalPages, paginate, currentPage }) => {
 							href='#!'
 							className='page-link'
 						>
-							Siguiente
+							→
 						</a>
 					</li>
 				)}
