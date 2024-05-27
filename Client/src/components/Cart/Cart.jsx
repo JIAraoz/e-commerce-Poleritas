@@ -10,7 +10,9 @@ export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [cartResponse, setCartResponse] = useState(null);
     const navigate = useNavigate();
+    useEffect(()=>{
 
+    },[refresh])
     useEffect(() => {
         async function fetchData() {
             try {
@@ -47,7 +49,7 @@ export default function Cart() {
                     `https://e-commerce-grupo03.onrender.com/cart/remove_article_cart?cartid=${cartId}&articleid=${value.articleId}`
                 );
                 alert("Producto eliminado con éxito");
-                if (response) setRefresh(!refresh)
+                if (response) return setRefresh(!refresh)
             }
         } catch (error) {
             console.error(error);
@@ -62,7 +64,7 @@ export default function Cart() {
                     `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
                 );
                 alert("Carrito limpiado con éxito");
-                if (response) setRefresh(!refresh)
+                if (response) return setRefresh(!refresh)
                 /* window.location.reload(); */
             }
         } catch (error) {
