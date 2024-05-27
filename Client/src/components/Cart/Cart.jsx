@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate,Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 export default function Cart() {
     const { user } = useAuth0();
@@ -31,7 +32,12 @@ export default function Cart() {
                     }
                 }
             } catch (error) {
-                alert('Ha ocurrido un error: ' + error.message);
+              // alert('Ha ocurrido un error: ' + error.message);
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "An error has occurred:" + error.message,
+              });
             }
         }
 
@@ -45,7 +51,12 @@ export default function Cart() {
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/remove_article_cart?cartid=${cartId}&articleid=${value.articleId}`
                 );
-                alert("Producto eliminado con éxito");
+              // alert("Producto eliminado con éxito");
+                Swal.fire({
+                  title: "Eliminated product ",
+                  text: "Product successfully removed!",
+                  icon: "success"
+                });
                 if (response) return navigate('/cart')
             }
         } catch (error) {
@@ -60,7 +71,12 @@ export default function Cart() {
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
                 );
-                alert("Carrito limpiado con éxito");
+              // alert("Carrito limpiado con éxito");
+              Swal.fire({
+                  title: "Trolley cleaned",
+                  text: "Cart successfully cleaned!",
+                  icon: "success"
+                });
                 if (response) navigate('/cart')
                 /* window.location.reload(); */
             }
