@@ -1,4 +1,5 @@
 
+
 .filters {
     display: flex;
     justify-content: space-between;
@@ -62,3 +63,9 @@
 .applied-filters span {
     color: #333;
 }
+
+.E-rror{
+  color: black;
+  font-size: 10rem;
+}
+

@@ -5,7 +5,10 @@ export default function Cards({ products, loading }) {
 	return (
 		<div className='cards-container'>
 			{loading ? (
+				<div className='loading'>
+
 				<p>Loading...</p>
+				</div>
 			) : (
 				products.map((product) => (
 					<Card

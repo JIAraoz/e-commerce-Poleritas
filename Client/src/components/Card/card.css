@@ -49,8 +49,26 @@
     font-weight: bold;
 }
 
+
 .icoFS {
     height: 100px;
     color: #4A707A;
 	margin-right: 20px;
 }
+
+.card-content h2 {
+	color: #333;
+	font-size: 1.2rem;
+	margin-bottom: 0.5rem;
+}
+
+.card-price {
+	color: #666;
+	font-weight: bold;
+}
+
+.link-0{
+  text-decoration: none;
+  color: #2f69cd;
+}
+
