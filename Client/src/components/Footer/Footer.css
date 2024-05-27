@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.wrapper {
+    font-family: 'Roboto', sans-serif;
+}
 :root {
-    
     font-size: 16px;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -48,7 +52,7 @@ footer {
     justify-content: center;
 }
 
-.logo {
+.footer-logo {
     width: 6.25rem; 
     height: auto;
 }
@@ -57,33 +61,33 @@ footer {
     margin: 0 1.25rem; 
 }
 
-h4 {
+.wrapper p {
     margin-bottom: 0.625rem; 
     color: #FFFFFF;
-    font-family: 'Merriweather', serif;
+    
 }
 
-ul {
+.wrapper ul {
     list-style: none;
     padding: 0;
 }
 
-ul li {
+.wrapper ul li {
     margin-bottom: 0.3125rem; 
 }
 
-ul li a {
+.wrapper ul li a {
     color: #fff;
     text-decoration: none;
     display: flex;
     align-items: center;
 }
 
-ul li a:hover {
+.wrapper ul li a:hover {
     text-decoration: underline;
 }
 
-ul li a i {
+.wrapper ul li a i {
     margin-right: 0.5rem; 
 }
 
@@ -95,6 +99,7 @@ ul li a i {
 }
 
 .footer-bottom p {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     font-size: 0.875rem; 
 }
@@ -103,6 +108,7 @@ ul li a i {
     display: flex;
     align-items: center;
     margin: 0.3125rem 0; 
+
 }
 
 .contact-section p i {
@@ -117,11 +123,11 @@ ul li a i {
 .contact-section a:hover {
     text-decoration:none;
 }
-ul li a:hover {
-    color: #FFD700; /* Cambia el color del texto al pasar el cursor */
+.wrapper ul li a:hover {
+    color: #ffffff94; /* Cambia el color del texto al pasar el cursor */
 	text-decoration:none;
 }
 
-ul li a:active {
-    color: #FF4500; /* Cambia el color del texto al hacer clic */
+.wrapper ul li a:active {
+    color: #a7a7a7; /* Cambia el color del texto al hacer clic */
 }
