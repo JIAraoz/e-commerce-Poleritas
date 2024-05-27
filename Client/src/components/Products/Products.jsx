@@ -6,6 +6,7 @@ import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
 import './Products.css';
 import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -19,19 +20,24 @@ export default function Products() {
   const [noResults, setNoResults] = useState(false);
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query);
+  const location = useLocation();
+  const navigate = useNavigate();
   const productsPerPage = 5;
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const initialCategory = searchParams.get('category') || '';
+    
     setOrder(query.order);
-    setCategory(query.filter);
-    setShowFilters(query.order || query.filter);
+    setCategory(initialCategory || query.filter);
+    setShowFilters(query.order || initialCategory || query.filter);
 
     async function fetchProducts(page) {
       setLoading(true);
       setNoResults(false); // Reset no results state
       try {
         const response = await axios.get(
-          `https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`
+          `https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}`
         );
         if (response.data.result.length === 0) {
           setNoResults(true);
@@ -68,10 +74,10 @@ export default function Products() {
       }
     }
 
+    fetchCategories();
+    fetchProducts(currentPage);
+  }, [currentPage, query, location.search]);
 
-		fetchCategories();
-		fetchProducts(currentPage);
-	}, [currentPage, query]);
 
 	useEffect(() => {
 		setShowFilters(order || category);
@@ -87,10 +93,16 @@ export default function Products() {
 
 
   const handleFilters = () => {
-    query.order = order;
-    query.filter = category;
+    const newQuery = { ...query, order, filter: category };
+    dispatch(updateQuery(newQuery));
     setCurrentPage(1);
-    dispatch(updateQuery(query));
+
+    // Update the URL with the new filters
+    const searchParams = new URLSearchParams();
+    if (order) searchParams.set('order', order);
+    if (category) searchParams.set('category', category);
+    navigate({ search: searchParams.toString() });
+
     setShowFilters(true);
   };
 
