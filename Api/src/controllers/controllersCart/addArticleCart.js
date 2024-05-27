@@ -33,7 +33,10 @@ const addArticleCart = async (req, res) => {
 
           
         }else{
+            const subtotalAux = articleExist.articlePrice * quantity;
+            cart.subtotal += subtotalAux;
             articleExist.articleQuantity += quantity;
+            await cart.save();
             await articleExist.save();
         }
         const updatedCart = await ShoppingCart.findOne({
