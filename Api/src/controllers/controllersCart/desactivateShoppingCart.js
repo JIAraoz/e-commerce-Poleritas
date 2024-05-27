@@ -24,7 +24,7 @@ const desactivateShoppingCart = async (req, res) => {
                     }
                 }
 
-                for (const article of cartToDesactivate.Articles) {
+                for (const article of cartToDesactivate.articles) {
                     article.articleStock -= article.Cart_Articles.articleQuantity;
                     await article.save();
                 }
