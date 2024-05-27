@@ -2,6 +2,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Detail.css';
+
+import Swal from 'sweetalert2';
+
 import { useEffect, useState } from 'react';
 
 export default function Detail() {
@@ -47,10 +50,20 @@ export default function Detail() {
 						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${1}`,
 					);
 					if (addArticleResponse) {
-						alert('Tu producto ha sido agregado al carrito');
+            // alert('Tu producto ha sido agregado al carrito');
+            Swal.fire({
+                  title: "Your product has been added!",
+                  text: "Your product has been successfully added!",
+                  icon: "success"
+                });
 					}
 				} else {
-					alert('No hay carrito activo disponible.');
+          // alert('No hay carrito activo disponible.');
+            Swal.fire({
+                icon: "error",
+                title: "No active cart available.",
+                text: "There is no active cart available at this time.",
+              });
 				}
 			}
 		} catch (error) {
