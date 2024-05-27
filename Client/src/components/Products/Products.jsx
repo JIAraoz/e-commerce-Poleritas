@@ -115,7 +115,7 @@ export default function Products() {
     <div>
       <div className="filters">
         <div className="custom-select">
-          <select name="order" value={order} onChange={handlerOrder}>
+          <select name="order" className='order' value={order} onChange={handlerOrder}>
             <option value="">Order</option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
@@ -124,7 +124,7 @@ export default function Products() {
           </select>
         </div>
         <div className="custom-select">
-          <select name="Category" value={category} onChange={handleCategory}>
+          <select name="Category" className='order' value={category} onChange={handleCategory}>
             <option value="">All</option>
             {categories.map((category, index) => (
               <option key={index} value={category.categoryId}>
@@ -134,7 +134,7 @@ export default function Products() {
           </select>
         </div>
         
-        <button onClick={handleFilters}>Aplicar filtros</button>
+        <button className='ApplyFilters' onClick={handleFilters}>Aplicar filtros</button>
         {/* {showFilters && (
           <div className="applied-filters">
             <span>
