@@ -123,7 +123,7 @@ export default function Products() {
         </div>
         
         <button onClick={handleFilters}>Aplicar filtros</button>
-        {showFilters && (
+        {/* {showFilters && (
           <div className="applied-filters">
             <span>
               Filtros aplicados: {' '}
@@ -131,7 +131,7 @@ export default function Products() {
               {category ? `Categoría: ${category}` : ''}
             </span>
           </div>
-        )}
+        )} */}
       </div>
       <div>
         {noResults && !loading ? (
