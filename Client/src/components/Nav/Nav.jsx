@@ -20,7 +20,7 @@ function Nav() {
 					<button>PRODUCTS</button>
 				</Link>
 				<Link to={'/form'}>
-					<button>ABOUT</button>
+					<button>FORM</button>
 				</Link>
 				{/* <Link to='/about'>
 					<button>ABOUT</button>
