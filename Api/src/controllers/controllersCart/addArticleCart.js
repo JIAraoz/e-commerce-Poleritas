@@ -30,13 +30,18 @@ const addArticleCart = async (req, res) => {
         }})
         if(articleExist===null){
             await cart.addArticle(article, { through: { articleQuantity:quantity } });
+            const subtotalAux = article.articlePrice * parent(quantity);
+            cart.subtotal += subtotalAux;
+            console.log("Existente")
+            await cart.save();
         }else{
+            const subtotalAux = articleExist.articlePrice * parent(quantity);
+            cart.subtotal += subtotalAux;
+            console.log("No existente")
+            await cart.save();
             articleExist.articleQuantity += quantity;
             await articleExist.save();
         }
-        const subtotalAux = articleExist.articlePrice * parent(quantity);
-        cart.subtotal += subtotalAux;
-        await cart.save();
         const updatedCart = await ShoppingCart.findOne({
             where: { cartId: idCart },
             include: { model: Article }
