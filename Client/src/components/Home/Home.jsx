@@ -102,18 +102,17 @@ export default function Home() {
 
 	return (
 		<div className='home'>
-			<nav className='nav-bar'>HOME</nav>
 			<div className='categories'>
 				<div className='category-item'>
 					<Link className='a' to='/products?filter=men'>
 						<img src='../Men.jpg' alt="Men's" className='img-m' />
-						<p>Mens</p>
+						<p>Sports</p>
 					</Link>
 				</div>
 				<div className='category-item'>
-					<Link className='a' to='/products?filter=women'>
-						<img src='/CamisetaDeportivaDeMujer.jpg' alt="Women's" />
-						<p>Womens</p>
+					<Link className='a' to='/products'>
+						<img src='/CamisetaDeportivaDeMujer.jpg' alt="casual" />
+						<p>Casual</p>
 					</Link>
 				</div>
 				<div className='category-item'>
@@ -123,16 +122,16 @@ export default function Home() {
 					</Link>
 				</div>
 			</div>
-			<div className='products-section'>
-				<div className='products-title'>Best Sellers</div>
-				<div className='product-carousel'>
+			{/* <div className='products-section'> */}
+				{/* <div className='products-title'>Best Sellers</div> */}
+				{/* <div className='product-carousel'> */}
 					{/* inserta los producto de cards aqui */}
-				</div>
-				<div className='products-title'>New</div>
-				<div className='product-carousel'>
+				{/* </div> */}
+				{/* <div className='products-title'>New</div> */}
+				{/* <div className='product-carousel'> */}
 					{/* inserta los producto de cards aqui*/}
-				</div>
-			</div>
+				{/* </div>
+			</div> */}
 			<div className='shipping-info'>
 				<div className='free-shipping'>
 					<img className='img-envio' src='../envios.png' alt='envio gratis' />
