@@ -29,17 +29,17 @@ const addArticleCart = async (req, res) => {
         }})
         if(articleExist===null){
             await cart.addArticle(article, { through: { articleQuantity:quantity } });
-            console.log(article.articlePrice)
-            console.log(parseInt(quantity))
-            const subtotalAux = article.articlePrice * parseInt(quantity);
+            
+            const response = await Article.findByPk(article.articleArticleId);
+            console.log(response)
+            const subtotalAux = response.articlePrice * parseInt(quantity);
             cart.subtotal += subtotalAux;
             console.log("Existente")
             await cart.save();
         }else{
-            console.log(articleExist)
-            console.log(articleExist.articlePrice)
-            const subtotalAux = articleExist.articlePrice * parseInt(quantity);
-            cart.subtotal += subtotalAux;
+            const response = await Article.findByPk(articleExist.articleArticleId);
+            console.log(response)
+            const subtotalAux = response.articlePrice * parseInt(quantity);
             console.log("No existente")
             await cart.save();
             articleExist.articleQuantity += quantity;
