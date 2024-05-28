@@ -13,24 +13,25 @@
 .page-link {
 	display: inline-block;
 	padding: 8px 12px;
-	background-color: #f9e6d8;
-	color: #6c5c4d;
+	background-color: #d6d6d6;
+	color: #000000;
 	text-decoration: none;
 	border-radius: 4px;
 	transition: background-color 0.3s ease;
 }
 
 .page-link:hover {
-	background-color: #f3d2b5;
+	background-color: #68B8BF ;
+	color: white;
 }
-
-.active .page-link {
-	background-color: #c9a995;
-	color: #fff;
+/* donde estoy */
+.active .page-link { 
+	background-color: #68B8BF;
+	color: #ffffff;
 }
-
+/* donde no estoy */
 .disabled .page-link {
-	background-color: #e8e8e8;
-	color: #bbb;
+	background-color: #000000;
+	color: #ffffff;
 	cursor: not-allowed;
 }

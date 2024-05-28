@@ -26,13 +26,28 @@ const addArticleCart = async (req, res) => {
         const articleExist=await Cart_Articule.findOne({where:{
             articleArticleId:article.articleId,
             shoppingCartCartId:cart.cartId
-
         }})
         if(articleExist===null){
             await cart.addArticle(article, { through: { articleQuantity:quantity } });
-
-          
+            
+            const response = await Article.findByPk(article.articleArticleId);
+            console.log(response.dataValues.articlePrice)
+            const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
+            console.log(subtotalAux);
+            cart.cartSubtotal += subtotalAux;
+           
+            
+            await cart.save();
         }else{
+            const response = await Article.findByPk(articleExist.articleArticleId);
+            console.log(response.dataValues.articlePrice)
+            const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
+            console.log(subtotalAux);
+            cart.cartSubtotal += subtotalAux;
+            
+          
+            
+            await cart.save();
             articleExist.articleQuantity += quantity;
             await articleExist.save();
         }

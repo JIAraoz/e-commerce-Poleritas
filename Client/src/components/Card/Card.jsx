@@ -8,9 +8,11 @@ export default function Card({ id, title, image, price, product}) {
 				<div className='image-container'>
 					<img src={image} alt={title} />
 				</div>
-				<h2>{title}</h2>
-
-				<p>{`Price: $${price}`}</p>
+				<h1 className='name'>{title}</h1>
+				<div className='card-footer'>
+					<p className='price'>{`Price: $${price}`}</p>
+					<img className='icoFS' src='/EnvioGratis.png' alt='' />
+				</div>
 			</Link>
 		</div>
 	);

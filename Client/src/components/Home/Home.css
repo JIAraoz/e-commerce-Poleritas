@@ -1,16 +1,17 @@
-.home {
-	font-family: Arial, sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+.home {
+    font-family: 'Roboto', sans-serif;
+}
 .nav-bar {
     background-color: #ffffff;
     padding: 1em;
     text-align: center;
     font-size: 1em;
     font-weight: bold;
-	padding-top: 3em;
+    padding-top: 3em;
     margin-right: 100em; /* Añade un margen izquierdo */
-	color: #4a707a9d;
+    color: #4a707a9d;
 }
 
 .categories {
@@ -24,6 +25,7 @@
 .category-item {
 	text-align: center;
 }
+
 .a{
   text-decoration: none;
   color: #4A707A;
@@ -60,7 +62,7 @@
 	justify-content: space-around;
 	align-items: center;
 	margin: 2em 0;
-	max-width: 75%; /* Ajusta este valor según tus necesidades */
+	max-width: 85%; /* Ajusta este valor según tus necesidades */
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 10em;
@@ -73,6 +75,8 @@
 .img-envio{
 	width:38rem;
 	height: 34rem;
+	
+	
 }
 
 .international-shipping {

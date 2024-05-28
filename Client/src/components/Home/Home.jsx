@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Home.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default function Home() {
 	const [products, setProducts] = useState([]);
@@ -70,13 +70,12 @@ export default function Home() {
 				);
 				setCategories(response.data.result);
 			} catch (error) {
-        // alert(error.message);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: error.message,
-        });
-
+				// alert(error.message);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: error.message,
+				});
 			}
 		}
 		fetchCategories();
@@ -102,37 +101,36 @@ export default function Home() {
 
 	return (
 		<div className='home'>
-			<nav className='nav-bar'>HOME</nav>
 			<div className='categories'>
 				<div className='category-item'>
-					<Link className='a' to='/products?filter=men'>
+					<Link className='a' to='/products?category=3'>
 						<img src='../Men.jpg' alt="Men's" className='img-m' />
-						<p>Mens</p>
+						<p>Sports</p>
 					</Link>
 				</div>
 				<div className='category-item'>
-					<Link className='a' to='/products?filter=women'>
-						<img src='/CamisetaDeportivaDeMujer.jpg' alt="Women's" />
-						<p>Womens</p>
+					<Link className='a' to='/products?category=1'>
+						<img src='/casual.jpg' alt="casual" />
+						<p>Casual</p>
 					</Link>
 				</div>
 				<div className='category-item'>
-					<Link className='a' to='/products?filter=unisex'>
-						<img src='../unisex.png' alt='Unisex' />
-						<p>Unisex</p>
+					<Link className='a' to='/products?category=4'>
+						<img src='../polos.jpg' alt='Unisex' />
+						<p>Polo</p>
 					</Link>
 				</div>
 			</div>
-			<div className='products-section'>
-				<div className='products-title'>Best Sellers</div>
-				<div className='product-carousel'>
+			{/* <div className='products-section'> */}
+				{/* <div className='products-title'>Best Sellers</div> */}
+				{/* <div className='product-carousel'> */}
 					{/* inserta los producto de cards aqui */}
-				</div>
-				<div className='products-title'>New</div>
-				<div className='product-carousel'>
+				{/* </div> */}
+				{/* <div className='products-title'>New</div> */}
+				{/* <div className='product-carousel'> */}
 					{/* inserta los producto de cards aqui*/}
-				</div>
-			</div>
+				{/* </div>
+			</div> */}
 			<div className='shipping-info'>
 				<div className='free-shipping'>
 					<img className='img-envio' src='../envios.png' alt='envio gratis' />

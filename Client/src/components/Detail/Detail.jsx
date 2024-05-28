@@ -1,8 +1,9 @@
-// Detail.jsx
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Detail.css';
+
+import Swal from 'sweetalert2';
 
 import { useEffect, useState } from 'react';
 
@@ -11,11 +12,14 @@ export default function Detail() {
 	const [product, setProduct] = useState(null);
 	const { user } = useAuth0();
 	const [ quantity, setQuantity ] = useState(1);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		async function getProduct() {
 			try {
-				const { data } = await axios.get(`https://e-commerce-grupo03.onrender.com/article/detail/${id}`);
+				const { data } = await axios.get(
+					`https://e-commerce-grupo03.onrender.com/article/detail/${id}`,
+				);
 				setProduct(data);
 			} catch (error) {
 				console.error('Error fetching product details:', error);
@@ -31,24 +35,36 @@ export default function Detail() {
 	const handleAddToCart = async () => {
 		try {
 			const userResponse = await axios.get(
-				`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
+				`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`,
 			);
 
 			if (userResponse.data.result.userId) {
 				const cartResponse = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`
+					`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`,
 				);
 
-				const activeCart = cartResponse.data.result.find(cart => cart.isActive === true);
+				const activeCart = cartResponse.data.result.find(
+					(cart) => cart.isActive === true,
+				);
 				if (activeCart) {
 					const addArticleResponse = await axios.get(
-						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${1}`
+						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${quantity}`,
 					);
 					if (addArticleResponse) {
-						alert("Tu producto ha sido agregado al carrito");
+            // alert('Tu producto ha sido agregado al carrito');
+            Swal.fire({
+                  title: "Your product has been added!",
+                  text: "Your product has been successfully added!",
+                  icon: "success"
+                });
 					}
 				} else {
-					alert("No hay carrito activo disponible.");
+          // alert('No hay carrito activo disponible.');
+            Swal.fire({
+                icon: "error",
+                title: "No active cart available.",
+                text: "There is no active cart available at this time.",
+              });
 				}
 			}
 		} catch (error) {
@@ -67,10 +83,14 @@ export default function Detail() {
 			setQuantity(quantity - 1);
 		}
 	};
+		
+	const handleBack = () => {
+		navigate(-1);
+	};
 
 	return (
 		<div>
-			<button id='back-button'>Back</button>
+			<button id="back-button" onClick={handleBack}>Back</button>
 			<div className='detail-container'>
 				<div className='photo-container'>
 					<img src={product.articleImage} alt={product.articleName} />
@@ -79,15 +99,6 @@ export default function Detail() {
 					<h1 className='name'>{product.articleName}</h1>
 					<h4 className='price'>${product.articlePrice}</h4>
 					<div className='pay'>
-						<div className='size-options'>
-							<p>Size:</p>
-							<select>
-								<option value='xs'>XS</option>
-								<option value='s'>S</option>
-								<option value='m'>M</option>
-								<option value='l'>L</option>
-							</select>
-						</div>
 						<div className='payment-methods'>
 							<p>Payment Methods</p>
 							<img src='/pagos.png' alt='pay' />
@@ -103,7 +114,9 @@ export default function Detail() {
 						</div>
 					</div>
 					<div className='cart-container'>
-						<button className='add-to-cart' onClick={() => handleAddToCart()}>Add to Cart</button>
+						<button className='add-to-cart' onClick={() => handleAddToCart()}>
+							Add to Cart
+						</button>
 						<p className='free-shipping'>Free Shipping!!</p>
 					</div>
 				</div>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 :root {
     --main-color: #4a707d;
     --secondary-color: #333;
@@ -12,6 +14,7 @@
     background-color: var(--background-color);
     height: 70vh; 
     flex-direction: row;
+    font-family: 'Roboto', sans-serif;
 }
 
 .detail {
@@ -36,7 +39,6 @@
 
 .stock {
     color: var(--black-color);
-    margin-top: 0; 
 }
 
 .photo-container {
@@ -74,6 +76,7 @@
 
 .description-container h4 {
     color: var(--black-color);
+    font-family: 'Roboto', sans-serif;
 }
 
 .description-container h1{
@@ -88,7 +91,7 @@
 .pay {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: flex-end;/*cuando se agregue talla, cambia esto a start*/
     width: 80%;
 }
 

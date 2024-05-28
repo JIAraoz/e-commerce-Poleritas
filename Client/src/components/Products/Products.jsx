@@ -4,7 +4,9 @@ import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
 import Cards from '../Cards/Cards';
 import Pagination from '../pagination/Pagination';
-import Swal from 'sweetalert2'
+import './Products.css';
+import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -15,29 +17,44 @@ export default function Products() {
   const [order, setOrder] = useState('');
   const [category, setCategory] = useState('');
   const [showFilters, setShowFilters] = useState(false); 
+  const [noResults, setNoResults] = useState(false);
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query);
+  const location = useLocation();
+  const navigate = useNavigate();
   const productsPerPage = 5;
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const initialCategory = searchParams.get('category') || '';
+    
     setOrder(query.order);
-    setCategory(query.filter);
-    setShowFilters(query.order || query.filter); 
+    setCategory(initialCategory || query.filter);
+    setShowFilters(query.order || initialCategory || query.filter);
 
     async function fetchProducts(page) {
       setLoading(true);
+      setNoResults(false); // Reset no results state
       try {
-        console.log(`URL de solicitud: https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`);
         const response = await axios.get(
-          `https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${query.filter}&order=${query.order}&name=${query.search}`,
+          `https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}`
         );
-        setProducts(response.data.result);
-        console.log('Datos recibidos:', response.data.result);
-        setTotalPages(response.data.totalPages);
-        setCurrentPage(response.data.currentPage);
+        if (response.data.result.length === 0) {
+          setNoResults(true);
+        } else {
+          setProducts(response.data.result);
+          setTotalPages(response.data.totalPages);
+          setCurrentPage(response.data.currentPage);
+        }
         setLoading(false);
       } catch (error) {
         console.error('Error fetching the products:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No se encontraron productos con los filtros aplicados o hubo un error en la solicitud.",
+        });
+        setNoResults(true);
         setLoading(false);
       }
     }
@@ -45,11 +62,10 @@ export default function Products() {
     async function fetchCategories() {
       try {
         const response = await axios.get(
-          'https://e-commerce-grupo03.onrender.com/categories/category',
+          'https://e-commerce-grupo03.onrender.com/categories/category'
         );
         setCategories(response.data.result);
       } catch (error) {
-        // alert(error.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -60,29 +76,37 @@ export default function Products() {
 
     fetchCategories();
     fetchProducts(currentPage);
-  }, [currentPage, query]);
+  }, [currentPage, query, location.search]);
+
 
   useEffect(() => {
     setShowFilters(order || category);
   }, [order, category]);
 
+  const updateFilters = (newOrder, newCategory) => {
+    const newQuery = { ...query, order: newOrder, filter: newCategory };
+    dispatch(updateQuery(newQuery));
+    setCurrentPage(1);
+
+    // Update the URL with the new filters
+    const searchParams = new URLSearchParams();
+    if (newOrder) searchParams.set('order', newOrder);
+    if (newCategory) searchParams.set('category', newCategory);
+    navigate({ search: searchParams.toString() });
+
+    setShowFilters(true);
+  };
+
   const handlerOrder = (event) => {
-    setOrder(event.target.value);
+    const newOrder = event.target.value;
+    setOrder(newOrder);
+    updateFilters(newOrder, category);
   };
 
   const handleCategory = (event) => {
-    setCategory(event.target.value);
-  };
-
-  console.log(JSON.stringify(query, null, 2));
-  console.log('Valores antes del filtro:', order, category, query);
-
-  const handleFilters = () => {
-    query.order = order;
-    query.filter = category;
-    setCurrentPage(1);
-    dispatch(updateQuery(query));
-    setShowFilters(true);
+    const newCategory = event.target.value;
+    setCategory(newCategory);
+    updateFilters(order, newCategory);
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -91,7 +115,7 @@ export default function Products() {
     <div>
       <div className="filters">
         <div className="custom-select">
-          <select name="order" value={order} onChange={handlerOrder}>
+          <select name="order" className='order' value={order} onChange={handlerOrder}>
             <option value="">Order</option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
@@ -100,7 +124,7 @@ export default function Products() {
           </select>
         </div>
         <div className="custom-select">
-          <select name="Category" value={category} onChange={handleCategory}>
+          <select name="Category" className='order' value={category} onChange={handleCategory}>
             <option value="">All</option>
             {categories.map((category, index) => (
               <option key={index} value={category.categoryId}>
@@ -109,25 +133,21 @@ export default function Products() {
             ))}
           </select>
         </div>
-        <button onClick={handleFilters}>Aplicar filtros</button>
-        {showFilters && (
-          <div className="applied-filters">
-            <span>
-             Filtros aplicados:{' '}
-              {order ? `Orden: ${order}` : ''}{' '}
-              {category ? `Categoría: ${category}` : ''}
-            </span>
-          </div>
-        )}
       </div>
       <div>
-        <Cards products={products} loading={loading} />
-        <Pagination
-          productsPerPage={productsPerPage}
-          totalPages={totalPages}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
+        {noResults && !loading ? (
+          <h2 className='E-rror'>we did not find what you are looking for, please choose another filter or another search</h2>
+        ) : (
+          <>
+            <Cards products={products} loading={loading} />
+            <Pagination
+              productsPerPage={productsPerPage}
+              totalPages={totalPages}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </>
+        )}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 function Nav() {
-	const { isAuthenticated } = useAuth0();
+	const { user, isAuthenticated } = useAuth0();
 	return (
 		<div className='nav'>
 			<div className='left'>
@@ -18,9 +18,12 @@ function Nav() {
 				<Link to='/products'>
 					<button>PRODUCTS</button>
 				</Link>
-				<Link to='/about'>
-					<button>ABOUT</button>
+				<Link to={'/form'}>
+					<button>FORM</button>
 				</Link>
+				{/* <Link to='/about'>
+					<button>ABOUT</button>
+				</Link> */}
 			</div>
 			<div className='center'>
 				<SearchBar className='searchBar' />
@@ -32,16 +35,24 @@ function Nav() {
 					</button>
 				</Link>
 				{isAuthenticated ? (
-					<Link to='/profile'>
-						<button>
-							<img
-								src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-								alt='Profile'
-								style={{ borderRadius: '50%', width: '40px', height: '40px' }}
-							/>
-							Mi perfil
-						</button>
-					</Link>
+		 <Link to='/profile'>
+      <button style={{ display: 'flex', alignItems: 'center', border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}>
+        {isAuthenticated && user.picture ? (
+          <img
+            src={user.picture}
+            alt='Profile'
+            style={{ borderRadius: '50%', width: '40px', height: '40px', marginRight: '8px' }}
+          />
+        ) : (
+          <img
+            src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+            alt='Default Profile'
+            style={{ borderRadius: '50%', width: '40px', height: '40px', marginRight: '8px' }}
+          />
+        )}
+        <span style={{ fontSize: '16px' }}>Mi perfil</span>
+      </button>
+    </Link>
 				) : (
 					<Login />
 				)}

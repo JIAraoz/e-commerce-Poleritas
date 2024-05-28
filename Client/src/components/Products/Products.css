@@ -1,0 +1,104 @@
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 3% auto;
+    background-color: #4a707a80;
+    padding: 0.625rem; /* 10px */
+    border-radius: 0.3125rem; /* 5px */
+}
+
+.custom-select {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-filters, .right-filters {
+    display: flex;
+    align-items: center;
+}
+
+.order, .category {
+    padding: 0.625rem; /* 10px */
+    border: 0.0625rem solid #ccc; /* 1px */
+    border-radius: 0.625rem; /* 10px */
+    background: #4A707D;
+    color: #fff;
+    margin-right: 0.625rem; /* 10px */
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    width: 12.5rem; /* 200px */
+    text-align: center;
+    position: relative; /* Needed for the custom arrow */
+}
+
+.order:focus, .category:focus {
+    border-color: #3b595e;
+    outline: none;
+}
+
+.order option, .category option {
+    background: #fff;
+    color: #4A707D;
+    text-align: center;
+}
+
+/* Estilo del menú desplegable */
+.order::-ms-expand, .category::-ms-expand {
+    display: none;
+}
+
+.order::after, .category::after {
+    content: '▼';
+    position: absolute;
+    right: 0.9375rem; /* 15px */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: white;
+}
+
+.ApplyFilters {
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    background-color: #4A707D;
+    border: none;
+    border-radius: 0.625rem; /* 10px */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-size: 1rem; /* 16px */
+    width: 12.5rem; /* 200px */
+    display: inline-block;
+}
+
+.ApplyFilters:hover {
+    background-color: #3b595e;
+}
+
+.applied-filters {
+    border-radius: 0.3125rem; /* 5px */
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filtros2 {
+    width: 80%;
+    margin: auto;
+}
+
+.applied-filters span {
+    color: #333;
+}
+
+.E-rror {
+    color: black;
+    font-size: 10rem;
+}

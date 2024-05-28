@@ -25,7 +25,7 @@ const postCreateArticle = async (req, res) => {
         const { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, sizes } = req.body;
 
         // Verificar datos requeridos
-        if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock || !sizes) {
+        if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock||!sizes) {
             return res.status(400).json({ message: "Faltan datos o son inválidos en el cuerpo de la solicitud" });
         }
 
@@ -48,7 +48,7 @@ const postCreateArticle = async (req, res) => {
         await createdArticle.addCategory(category);
 
         // Procesar y asociar tallas (sizes)
-        if (sizes && Array.isArray(sizes) && sizes.length > 0) {
+       if (sizes && Array.isArray(sizes) && sizes.length > 0) {
             for (const sizeName of sizes) {
                 let size = await Size.findOne({ where: { sizeType:sizeName } });
                 await createdArticle.addSize(size);

@@ -27,7 +27,7 @@ export default function Cloudinary({ onImageUpload }) {
 
 	return (
 		<div>
-			<p>Seleccionar imagen</p>
+			<p>Select image</p>
 			<input type='file' accept='image/*' onChange={changeUploadImage} />
 			{Url && (
 				<div>
