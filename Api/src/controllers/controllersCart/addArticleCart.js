@@ -30,6 +30,7 @@ const addArticleCart = async (req, res) => {
         if(articleExist===null){
             await cart.addArticle(article, { through: { articleQuantity:quantity } });
             console.log(article.articlePrice)
+            console.log(parseInt(quantity))
             const subtotalAux = article.articlePrice * parseInt(quantity);
             cart.subtotal += subtotalAux;
             console.log("Existente")
