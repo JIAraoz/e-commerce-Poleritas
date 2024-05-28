@@ -34,18 +34,19 @@ const addArticleCart = async (req, res) => {
             console.log(response.dataValues.articlePrice)
             const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
             console.log(subtotalAux);
-            cart.dataValues.subtotal += subtotalAux;
-            console.log("Existente")
-            console.log(cart)
+            cart.cartSubtotal += subtotalAux;
+           
+            
             await cart.save();
         }else{
             const response = await Article.findByPk(articleExist.articleArticleId);
             console.log(response.dataValues.articlePrice)
             const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
-            cart.dataValues.subtotal += subtotalAux;
             console.log(subtotalAux);
-            console.log("No existente")
-            console.log(cart)
+            cart.cartSubtotal += subtotalAux;
+            
+          
+            
             await cart.save();
             articleExist.articleQuantity += quantity;
             await articleExist.save();
