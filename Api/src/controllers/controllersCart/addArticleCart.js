@@ -36,6 +36,7 @@ const addArticleCart = async (req, res) => {
             console.log("Existente")
             await cart.save();
         }else{
+            console.log(articleExist)
             console.log(articleExist.articlePrice)
             const subtotalAux = articleExist.articlePrice * parseInt(quantity);
             cart.subtotal += subtotalAux;
