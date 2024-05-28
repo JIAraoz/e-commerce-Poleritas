@@ -10,6 +10,7 @@ export default function Detail() {
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	const { user } = useAuth0();
+	const [ quantity, setQuantity ] = useState(1);
 
 	useEffect(() => {
 		async function getProduct() {
@@ -55,6 +56,18 @@ export default function Detail() {
 		}
 	};
 
+	const incrementQuantity = () => {
+		if (quantity < product.articleStock) {
+			setQuantity(quantity + 1);
+		}
+	};
+
+	const decrementQuantity = () => {
+		if (quantity > 1) {
+			setQuantity(quantity - 1);
+		}
+	};
+
 	return (
 		<div>
 			<button id='back-button'>Back</button>
@@ -81,6 +94,14 @@ export default function Detail() {
 						</div>
 					</div>
 					<p className='stock'>Stock: {product.articleStock} pcs</p>
+					<div className='quantity-container'>
+						<label htmlFor='quantity'>Quantity:</label>
+						<div className='quantity-controls'>
+							<button onClick={decrementQuantity} disabled={quantity <= 1}>-</button>
+							<span>{quantity}</span>
+							<button onClick={incrementQuantity} disabled={quantity >= product.articleStock}>+</button>
+						</div>
+					</div>
 					<div className='cart-container'>
 						<button className='add-to-cart' onClick={() => handleAddToCart()}>Add to Cart</button>
 						<p className='free-shipping'>Free Shipping!!</p>
