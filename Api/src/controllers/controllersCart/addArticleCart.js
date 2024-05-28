@@ -33,7 +33,7 @@ const addArticleCart = async (req, res) => {
             const response = await Article.findByPk(article.articleArticleId);
             console.log(response.dataValues)
             const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
-            cart.subtotal += subtotalAux;
+            cart.dataValues.subtotal += subtotalAux;
             console.log("Existente")
             console.log(cart)
             await cart.save();
@@ -41,7 +41,7 @@ const addArticleCart = async (req, res) => {
             const response = await Article.findByPk(articleExist.articleArticleId);
             console.log(response.dataValues)
             const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
-            cart.subtotal += subtotalAux;
+            cart.dataValues.subtotal += subtotalAux;
             console.log("No existente")
             console.log(cart)
             await cart.save();
