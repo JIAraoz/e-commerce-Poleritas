@@ -40,6 +40,7 @@ const addArticleCart = async (req, res) => {
             const response = await Article.findByPk(articleExist.articleArticleId);
             console.log(response)
             const subtotalAux = response.articlePrice * parseInt(quantity);
+            cart.subtotal += subtotalAux;
             console.log("No existente")
             await cart.save();
             articleExist.articleQuantity += quantity;
