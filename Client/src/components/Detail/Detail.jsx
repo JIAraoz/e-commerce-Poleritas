@@ -51,12 +51,12 @@ export default function Detail() {
 						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${quantity}`,
 					);
 					if (addArticleResponse) {
-            // alert('Tu producto ha sido agregado al carrito');
-            Swal.fire({
-                  title: "Your product has been added!",
-                  text: "Your product has been successfully added!",
-                  icon: "success"
-                });
+						// alert('Tu producto ha sido agregado al carrito');
+						Swal.fire({
+							title: "Your product has been added!",
+							text: "Your product has been successfully added!",
+							icon: "success"
+						});
 					}
 				} else {
           // alert('No hay carrito activo disponible.');
