@@ -1,4 +1,5 @@
 import './Footer.css';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faHome,
@@ -14,31 +15,31 @@ import {
 	faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 const Footer = () => (
-
 	<div className='wrapper'>
 		<footer>
 			<div className='footer-container'>
 				<div className='logo-section'>
-					<img src='../Poleritas.png' alt='Logo' className='logo' />
-					<p>POLERITAS</p>
+					<img src='../Poleritas.png' alt='Logo' className='footer-logo' />
 				</div>
 				<div className='links-section'>
 					<h4>Links</h4>
 					<ul>
 						<li>
-							<a href='/home'>
+							<Link to='/home'>
 								<FontAwesomeIcon icon={faHome} /> Home
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href='#'>
+							<Link to='/products'>
 								<FontAwesomeIcon icon={faTshirt} /> Products
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href='#'>
+							<Link to='/home'>
+								{' '}
+								{/* hay que cambiar a about, cuando sea creado */}
 								<FontAwesomeIcon icon={faUser} /> About
-							</a>
+							</Link>
 						</li>
 					</ul>
 				</div>
@@ -83,7 +84,6 @@ const Footer = () => (
 			</div>
 		</footer>
 	</div>
-
 );
 
 export default Footer;
