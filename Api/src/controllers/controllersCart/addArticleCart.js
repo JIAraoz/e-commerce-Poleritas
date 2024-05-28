@@ -31,17 +31,19 @@ const addArticleCart = async (req, res) => {
             await cart.addArticle(article, { through: { articleQuantity:quantity } });
             
             const response = await Article.findByPk(article.articleArticleId);
-            console.log(response)
-            const subtotalAux = response.articlePrice * parseInt(quantity);
+            console.log(response.dataValues)
+            const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
             cart.subtotal += subtotalAux;
             console.log("Existente")
+            console.log(cart)
             await cart.save();
         }else{
             const response = await Article.findByPk(articleExist.articleArticleId);
-            console.log(response)
-            const subtotalAux = response.articlePrice * parseInt(quantity);
+            console.log(response.dataValues)
+            const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
             cart.subtotal += subtotalAux;
             console.log("No existente")
+            console.log(cart)
             await cart.save();
             articleExist.articleQuantity += quantity;
             await articleExist.save();
