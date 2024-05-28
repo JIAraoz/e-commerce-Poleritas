@@ -79,37 +79,37 @@ export default function Products() {
   }, [currentPage, query, location.search]);
 
 
-	useEffect(() => {
-		setShowFilters(order || category);
-	}, [order, category]);
+  useEffect(() => {
+    setShowFilters(order || category);
+  }, [order, category]);
 
-	const handlerOrder = (event) => {
-		setOrder(event.target.value);
-	};
-
-	const handleCategory = (event) => {
-		setCategory(event.target.value);
-	};
-
-
-  const handleFilters = () => {
-    const newQuery = { ...query, order, filter: category };
+  const updateFilters = (newOrder, newCategory) => {
+    const newQuery = { ...query, order: newOrder, filter: newCategory };
     dispatch(updateQuery(newQuery));
     setCurrentPage(1);
 
     // Update the URL with the new filters
     const searchParams = new URLSearchParams();
-    if (order) searchParams.set('order', order);
-    if (category) searchParams.set('category', category);
+    if (newOrder) searchParams.set('order', newOrder);
+    if (newCategory) searchParams.set('category', newCategory);
     navigate({ search: searchParams.toString() });
 
     setShowFilters(true);
   };
 
+  const handlerOrder = (event) => {
+    const newOrder = event.target.value;
+    setOrder(newOrder);
+    updateFilters(newOrder, category);
+  };
 
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const handleCategory = (event) => {
+    const newCategory = event.target.value;
+    setCategory(newCategory);
+    updateFilters(order, newCategory);
+  };
 
-
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -133,17 +133,6 @@ export default function Products() {
             ))}
           </select>
         </div>
-        
-        <button className='ApplyFilters' onClick={handleFilters}>Aplicar filtros</button>
-        {/* {showFilters && (
-          <div className="applied-filters">
-            <span>
-              Filtros aplicados: {' '}
-              {order ? `Orden: ${order}` : ''}{' '}
-              {category ? `Categoría: ${category}` : ''}
-            </span>
-          </div>
-        )} */}
       </div>
       <div>
         {noResults && !loading ? (
@@ -162,5 +151,4 @@ export default function Products() {
       </div>
     </div>
   );
-
 }
