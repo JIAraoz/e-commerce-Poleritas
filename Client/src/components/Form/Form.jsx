@@ -19,7 +19,7 @@ export default function Form() {
         // alert('A ocurrido un error al intentar cargar las categorías');
         Swal.fire({
           icon: "error",
-          title: "Oops...",
+          title: error,
           text: "An error occurred while trying to load the categories!",
         });
 				console.log(
@@ -89,10 +89,11 @@ export default function Form() {
 			}
 		} catch (error) {
       // alert('Ha ocurrido un error: ' + error.message);
+      console.log(error)
       Swal.fire({
       icon: "error",
-      title: "Oops...",
-      text: error.message,
+      title: "an error has occurred:" + error.response.status,
+      text: error.response.data.message,
       });
 		}
 	};
