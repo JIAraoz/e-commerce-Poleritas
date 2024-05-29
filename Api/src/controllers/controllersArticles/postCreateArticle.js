@@ -1,7 +1,7 @@
 const { Article, Category, Size, Article_Size } = require('../../db');
 const postCreateArticle = async (req, res) => {
     try {
-        const { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, S,M,L,XL,XXL} = req.body;
+        const { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, articleS,articleM,articleL,articleXL,articleXXL} = req.body;
 
         // Verificar datos requeridos
         if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock) {
@@ -21,11 +21,11 @@ const postCreateArticle = async (req, res) => {
             articleImage,
             articlePrice,
             articleStock,
-            S,
-            M,
-            L,
-            XL,
-            XXL,
+            articleS,
+            articleM,
+            articleL,
+            articleXL,
+            articleXXL,
 
         });
 
