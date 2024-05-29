@@ -28,27 +28,27 @@ function article(sequelize) {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    S: {
+    articleS: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
     },
-    L: {
+    articleL: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
     },
-    M: {
+    articleM: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
     },
-    XL: {
+    articleXL: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
     },
-    XXL: {
+    articleXXL: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
