@@ -37,7 +37,6 @@ const addArticleCart = async (req, res) => {
             const response = await Article.findByPk(article.articleArticleId);
             const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
             cart.cartSubtotal += subtotalAux;
-           
             
             await cart.save();
         }else{
@@ -47,13 +46,13 @@ const addArticleCart = async (req, res) => {
             console.log(subtotalAux);
             cart.cartSubtotal += subtotalAux;
             await cart.save();
-            articleExist.XS = XS;
-            articleExist.S = S;
-            articleExist.M = M;
-            articleExist.L = L;
-            articleExist.XL = XL;
-            articleExist.XXL = XXL;
-            articleExist.XXXL = XXXL;
+            articleExist.XS += XS;
+            articleExist.S += S;
+            articleExist.M += M;
+            articleExist.L += L;
+            articleExist.XL += XL;
+            articleExist.XXL += XXL;
+            articleExist.XXXL += XXXL;
             articleExist.articleQuantity += quantity;
             await articleExist.save();
         }
