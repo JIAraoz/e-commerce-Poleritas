@@ -11,7 +11,7 @@ export default function Detail() {
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	const { user } = useAuth0();
-	const [ quantity, setQuantity ] = useState(1);
+	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -29,7 +29,7 @@ export default function Detail() {
 	}, [id]);
 
 	if (!product) {
-		return <div>Producto no encontrado</div>;
+		return <div>Product not found</div>;
 	}
 
 	const handleAddToCart = async () => {
@@ -53,18 +53,18 @@ export default function Detail() {
 					if (addArticleResponse) {
 						// alert('Tu producto ha sido agregado al carrito');
 						Swal.fire({
-							title: "Your product has been added!",
-							text: "Your product has been successfully added!",
-							icon: "success"
+							title: 'Your product has been added!',
+							text: 'Your product has been successfully added!',
+							icon: 'success',
 						});
 					}
 				} else {
-          // alert('No hay carrito activo disponible.');
-            Swal.fire({
-                icon: "error",
-                title: "No active cart available.",
-                text: "There is no active cart available at this time.",
-              });
+					// alert('No hay carrito activo disponible.');
+					Swal.fire({
+						icon: 'error',
+						title: 'No active cart available.',
+						text: 'There is no active cart available at this time.',
+					});
 				}
 			}
 		} catch (error) {
@@ -83,14 +83,16 @@ export default function Detail() {
 			setQuantity(quantity - 1);
 		}
 	};
-		
+
 	const handleBack = () => {
 		navigate(-1);
 	};
 
 	return (
 		<div>
-			<button id="back-button" onClick={handleBack}>Back</button>
+			<button id='back-button' onClick={handleBack}>
+				Back
+			</button>
 			<div className='detail-container'>
 				<div className='photo-container'>
 					<img src={product.articleImage} alt={product.articleName} />
@@ -108,9 +110,16 @@ export default function Detail() {
 					<div className='quantity-container'>
 						<label htmlFor='quantity'>Quantity:</label>
 						<div className='quantity-controls'>
-							<button onClick={decrementQuantity} disabled={quantity <= 1}>-</button>
+							<button onClick={decrementQuantity} disabled={quantity <= 1}>
+								-
+							</button>
 							<span>{quantity}</span>
-							<button onClick={incrementQuantity} disabled={quantity >= product.articleStock}>+</button>
+							<button
+								onClick={incrementQuantity}
+								disabled={quantity >= product.articleStock}
+							>
+								+
+							</button>
 						</div>
 					</div>
 					<div className='cart-container'>
