@@ -11,6 +11,7 @@ export default function Detail() {
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	const { user } = useAuth0();
+	const [ quantity, setQuantity ] = useState(1);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -47,15 +48,15 @@ export default function Detail() {
 				);
 				if (activeCart) {
 					const addArticleResponse = await axios.get(
-						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${1}`,
+						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${quantity}`,
 					);
 					if (addArticleResponse) {
-            // alert('Tu producto ha sido agregado al carrito');
-            Swal.fire({
-                  title: "Your product has been added!",
-                  text: "Your product has been successfully added!",
-                  icon: "success"
-                });
+						// alert('Tu producto ha sido agregado al carrito');
+						Swal.fire({
+							title: "Your product has been added!",
+							text: "Your product has been successfully added!",
+							icon: "success"
+						});
 					}
 				} else {
           // alert('No hay carrito activo disponible.');
@@ -71,6 +72,18 @@ export default function Detail() {
 		}
 	};
 
+	const incrementQuantity = () => {
+		if (quantity < product.articleStock) {
+			setQuantity(quantity + 1);
+		}
+	};
+
+	const decrementQuantity = () => {
+		if (quantity > 1) {
+			setQuantity(quantity - 1);
+		}
+	};
+		
 	const handleBack = () => {
 		navigate(-1);
 	};
@@ -92,6 +105,14 @@ export default function Detail() {
 						</div>
 					</div>
 					<p className='stock'>Stock: {product.articleStock} pcs</p>
+					<div className='quantity-container'>
+						<label htmlFor='quantity'>Quantity:</label>
+						<div className='quantity-controls'>
+							<button onClick={decrementQuantity} disabled={quantity <= 1}>-</button>
+							<span>{quantity}</span>
+							<button onClick={incrementQuantity} disabled={quantity >= product.articleStock}>+</button>
+						</div>
+					</div>
 					<div className='cart-container'>
 						<button className='add-to-cart' onClick={() => handleAddToCart()}>
 							Add to Cart
