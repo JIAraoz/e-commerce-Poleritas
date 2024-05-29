@@ -72,12 +72,12 @@ const getShoppingCart = async (req, res) => {
                     model: Article
                 }
             }
-        });
+        });console.log(userCard);
 
         if (!userCard) {
             return res.status(400).json({ message: 'No se encontró el usuario' });
         }
-
+        
         // Verificar si todos los carritos están inactivos
         const activeCart = userCard.shoppingCarts.find(cart => cart.isActive);
 
