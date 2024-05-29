@@ -29,10 +29,12 @@
     margin-right: 20px;
     margin-bottom: 20px;
     text-align: center;
+    min-height: 60vh; 
 }
 
 .details-container {
     flex: 2;
+    
 }
 
 .form-group {
@@ -79,3 +81,4 @@ button:disabled {
     display: flex;
     justify-content: center;
 }
+
