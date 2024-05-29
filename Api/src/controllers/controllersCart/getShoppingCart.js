@@ -61,7 +61,9 @@ const { User, ShoppingCart, Article } = require('../../db');
 const getShoppingCart = async (req, res) => {
     try {
         const id = req.query.id;
-        if (!id) return res.status(400).json({ message: 'Faltan datos o son inválidos en el cuerpo de la solicitud' });
+        if (!id) {
+            return res.status(400).json({ message: 'Faltan datos o son inválidos en el cuerpo de la solicitud' });
+        }
 
         // Buscar el usuario con sus carritos
         const userCard = await User.findOne({
@@ -75,22 +77,23 @@ const getShoppingCart = async (req, res) => {
         });
 
         if (!userCard) {
-            return res.status(400).json({ message: 'No se encontró el usuario' });
+            return res.status(404).json({ message: 'No se encontró el usuario' });
         }
 
         // Verificar si todos los carritos están inactivos
-        const activeCart = userCard.shoppingCarts.find(cart => cart.isActive);
+        let activeCart = userCard.shoppingCarts.find(cart => cart.isActive);
 
         if (!activeCart) {
             // Si no hay carritos activos, crear uno nuevo
-            const newShoppingCart = await ShoppingCart.create({
+            activeCart = await ShoppingCart.create({
                 cartSubtotal: 0,
                 cartPayment: "None",
                 isActive: true,
+                userId: userCard.userId // asegúrate de asignar el userId aquí
             });
 
-            await userCard.addShoppingCarts(newShoppingCart);
-
+            await userCard.addShoppingCart(activeCart);
+            
             // Volver a buscar el usuario con el carrito recién creado
             const updatedUser = await User.findOne({
                 where: { userId: id },
