@@ -33,7 +33,13 @@ export default function Home() {
 						userData,
 					);
 				} catch (error) {
-					alert('Ha ocurrido un error: ' + error.message);
+          // alert('Ha ocurrido un error: ' + error.message);
+          console.log(error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "An error has occurred: " + error.message,
+          });
 				}
 			}
 
@@ -59,7 +65,12 @@ export default function Home() {
 				setCurrentPage(response.data.currentPage);
 				setLoading(false);
 			} catch (error) {
-				console.error('Error fetching the products:', error);
+        console.error('Error fetching the products:', error);
+        Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: "Error fetching the products: " + error,
+				});
 				setLoading(false);
 			}
 		}
