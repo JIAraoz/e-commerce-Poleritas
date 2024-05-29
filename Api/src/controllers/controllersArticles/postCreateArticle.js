@@ -30,7 +30,7 @@ const postCreateArticle = async (req, res) => {
      
             for (let sizeName in sizes) {
                 console.log(sizeName);
-                console.log(size[sizeName]);
+                console.log(sizes[sizeName]);
 
                 let size = await Size.findOne({ where: { sizeType:sizeName } });
                 const size_id=size.sizeId
