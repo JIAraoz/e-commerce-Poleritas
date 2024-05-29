@@ -28,7 +28,10 @@ const postCreateArticle = async (req, res) => {
 
         // Procesar y asociar tallas (sizes)
      
-            for (let sizeName of sizes) {
+            for (let sizeName in sizes) {
+                console.log(sizeName);
+                console.log(size[sizeName]);
+
                 let size = await Size.findOne({ where: { sizeType:sizeName } });
                 const size_id=size.sizeId
                 const article_id=createdArticle.articleId
@@ -37,7 +40,8 @@ const postCreateArticle = async (req, res) => {
                     sizeSizeId:size_id,
                     articleArticleId:article_id
                 }})
-                articleSize.sizeQuantity
+                articleSize.sizeQuantity +=size[sizeName]
+                await articleSize.save()
             }
       
 
