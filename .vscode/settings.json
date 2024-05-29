@@ -4,6 +4,4 @@
         "titleBar.activeBackground": "#5C12A1",
         "titleBar.activeForeground": "#FDFBFF"
     },
-    "github.copilot.chat.localeOverride": "es",
-    "github.copilot.chat.terminalChatLocation": "chatView"
 }
