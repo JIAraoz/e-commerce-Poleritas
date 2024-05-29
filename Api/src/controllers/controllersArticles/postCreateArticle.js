@@ -32,15 +32,17 @@ const postCreateArticle = async (req, res) => {
                 console.log(sizeName);
                 console.log(sizes[sizeName]);
 
-                let size = await Size.findOne({ where: { sizeType:sizeName } });
+                const size = await Size.findOne({ where: { sizeType:sizeName } });
                 const size_id=size.sizeId
                 const article_id=createdArticle.articleId
-                await createdArticle.addSize(size);
+                await createdArticle.addSize(size,{through:{
+                    sizeQuantity:sizes[sizeName]
+                }});
                 const articleSize=await Article_Size.findOne({where:{
                     sizeSizeId:size_id,
                     articleArticleId:article_id
                 }})
-                articleSize.sizeQuantity +=size[sizeName]
+               
                 await articleSize.save()
             }
       
