@@ -5,7 +5,7 @@ const Stripe = require('stripe');
 const {STRIPE_URL}=process.env
 const stripe = new Stripe(STRIPE_URL);
 
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   console.log("Conexion con base de datos con exito");
   server.listen(3001, () => {
     console.log("Servidor levantado con exito");
