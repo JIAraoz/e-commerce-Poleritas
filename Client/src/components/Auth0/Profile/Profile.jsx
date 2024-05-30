@@ -69,7 +69,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `https://e-commerce-grupo03.onrender.com/user/update?id=${userData.id}`,
+        `https://e-commerce-grupo03.onrender.com/user/editUser?id=${userData.id}`,
         formData
       );
       Swal.fire({
