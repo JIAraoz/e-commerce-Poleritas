@@ -13,6 +13,7 @@ export default function Detail() {
 	const { user } = useAuth0();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
+	const [size, setSize] = useState('articleS');
 
 	useEffect(() => {
 		async function getProduct() {
@@ -72,8 +73,24 @@ export default function Detail() {
 		}
 	};
 
+	const selectSize = (value) => {
+		setQuantity(1);
+		switch (value) {
+			case 'S':
+				return setSize('articleS');
+			case 'M':
+				return setSize('articleM');
+			case 'L':
+				return setSize('articleL');
+			case 'XL':
+				return setSize('articleXL');
+			case 'XXL':
+				return setSize('articleXXL');
+		}
+	};
+
 	const incrementQuantity = () => {
-		if (quantity < product.articleStock) {
+		if (quantity < product[size]) {
 			setQuantity(quantity + 1);
 		}
 	};
@@ -106,7 +123,40 @@ export default function Detail() {
 							<img src='/pagos.png' alt='pay' />
 						</div>
 					</div>
-					<p className='stock'>Stock: {product.articleStock} pcs</p>
+					<p className='stock'>Stock: {product[size]} pcs</p>
+					<div className='botones-size'>
+						<p className='size-text'>Size:</p>
+						<button
+							onClick={() => selectSize('S')}
+							className={size === 'articleS' ? 'button-selected' : 'button'}
+						>
+							S
+						</button>
+						<button
+							onClick={() => selectSize('M')}
+							className={size === 'articleM' ? 'button-selected' : 'button'}
+						>
+							M
+						</button>
+						<button
+							onClick={() => selectSize('L')}
+							className={size === 'articleL' ? 'button-selected' : 'button'}
+						>
+							L
+						</button>
+						<button
+							onClick={() => selectSize('XL')}
+							className={size === 'articleXL' ? 'button-selected' : 'button'}
+						>
+							XL
+						</button>
+						<button
+							onClick={() => selectSize('XXL')}
+							className={size === 'articleXXL' ? 'button-selected' : 'button'}
+						>
+							XXL
+						</button>
+					</div>
 					<div className='quantity-container'>
 						<label htmlFor='quantity'>Quantity:</label>
 						<div className='quantity-controls'>
@@ -116,7 +166,7 @@ export default function Detail() {
 							<span>{quantity}</span>
 							<button
 								onClick={incrementQuantity}
-								disabled={quantity >= product.articleStock}
+								disabled={quantity >= product[size]}
 							>
 								+
 							</button>

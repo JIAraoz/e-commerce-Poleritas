@@ -1,7 +1,7 @@
 const { Article, Category, Size, Article_Size } = require('../../db');
 const postCreateArticle = async (req, res) => {
     try {
-        const { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, sizes } = req.body;
+        const { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, articleS,articleM,articleL,articleXL,articleXXL} = req.body;
 
         // Verificar datos requeridos
         if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock) {
@@ -20,7 +20,13 @@ const postCreateArticle = async (req, res) => {
             articleDescription,
             articleImage,
             articlePrice,
-            articleStock
+            articleStock,
+            articleS,
+            articleM,
+            articleL,
+            articleXL,
+            articleXXL,
+
         });
 
         // Asociar categoría al artículo
@@ -28,26 +34,9 @@ const postCreateArticle = async (req, res) => {
 
         // Procesar y asociar tallas (sizes)
      
-            for (let sizeName in sizes) {
-                console.log(sizeName);
-                console.log(sizes[sizeName]);
+     
 
-                const size = await Size.findOne({ where: { sizeType:sizeName } });
-                const size_id=size.sizeId
-                const article_id=createdArticle.articleId
-                await createdArticle.addSize(size,{through:{
-                    sizeQuantity:sizes[sizeName]
-                }});
-                const articleSize=await Article_Size.findOne({where:{
-                    sizeSizeId:size_id,
-                    articleArticleId:article_id
-                }})
-               
-                await articleSize.save()
-            }
-      
-
-        res.status(201).json({ message: 'Registro creado con éxito', results: createdArticle });
+        res.status(201).json({ message: 'Record created successfully', results: createdArticle });
 
     } catch (error) {
         console.error('Error al crear registro:', error);

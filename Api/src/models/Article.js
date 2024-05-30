@@ -57,3 +57,4 @@ function article(sequelize) {
 }
 
 module.exports = article;
+

@@ -19,14 +19,14 @@ const cleanShoppingCart=async(req,res)=>{
                 });
                 await cartToClean.save();
             }
-            return res.status(200).json({message:'Carrito limpiado'})
+            return res.status(200).json({message:'The shopping cart was properly cleaned'})
         } else {
             return res.status(400).json({message:'Faltan datos o son inválidos en el cuerpo de la solicitud'})
         }
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Error interno del servidor'});
+        res.status(500).json({ message: 'Server error'});
     }
 }
 module.exports=cleanShoppingCart

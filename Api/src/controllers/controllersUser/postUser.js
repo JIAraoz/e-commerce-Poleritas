@@ -2,7 +2,7 @@ const {User} =require('../../db')
 const postUser=async(req,res)=>{
     try {
         if (!req.body.userName||!req.body.userEmail||!req.body.userImage) {
-            return res.status(400).json({message:"Faltan datos o son inválidos en el cuerpo de la solicitud"})
+            return res.status(400).json({message:"user data is missing"})
         }
         else{
             const userCheck= await User.findOne({
@@ -34,7 +34,7 @@ const postUser=async(req,res)=>{
        
     } catch (error) {
         console.log(error)
-        res.status(500).json({message:'Error en el servidor: '+ error.message})
+        res.status(500).json({message:'Server error: '+ error.message})
     }
 }
 module.exports=postUser

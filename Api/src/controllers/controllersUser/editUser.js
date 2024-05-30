@@ -1,6 +1,8 @@
-const { User } = require('../../db');
 
-const editUser = async (req, res) => {
+const {User} = require('../../db');
+
+const editUser = async ( req, res ) => {
+
     try {
         const { id } = req.query;
         const user = await User.findByPk(id);
@@ -24,6 +26,7 @@ const editUser = async (req, res) => {
         }
         if (req.body.userCity) {
             updatedFields.userCity = req.body.userCity;
+
         }
 
         await user.update(updatedFields);
