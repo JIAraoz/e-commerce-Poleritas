@@ -5,6 +5,7 @@ const removeArticleCart = async (req, res) => {
         const idCart = req.query.cartid;
         const idArticle = req.query.articleid;
 
+
         const cart = await ShoppingCart.findOne({
             where: {
                 cartId: idCart
@@ -19,10 +20,15 @@ const removeArticleCart = async (req, res) => {
         }
 
         const article = await Article.findByPk(idArticle);
+
         if (!article) {
             return res.status(404).json({ message: 'Artículo no encontrado' });
         }
 
+        const articleQuantity = cart.articles.find(art => art.dataValues.articleId === article.articleId)
+        console.log(articleQuantity.Cart_Articule.articleQuantity)
+        cart.cartSubtotal -= articleQuantity.Cart_Articule.articleQuantity
+        await cart.save()
         await cart.removeArticle(article);
 
         const updatedCart = await ShoppingCart.findOne({
