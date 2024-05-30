@@ -24,6 +24,22 @@ function user(sequelize) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    userDoorNumber: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    userStreetName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    userCountry: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    userCity: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   });
 }
 
