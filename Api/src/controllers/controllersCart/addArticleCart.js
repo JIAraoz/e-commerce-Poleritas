@@ -38,7 +38,7 @@ const addArticleCart = async (req, res) => {
             shoppingCartCartId:cart.cartId
         }})
         if(articleExist===null){
-            const response = await Article.findByPk(articleId);
+            const response = await Article.findByPk(idArticle);
             const subtotalAux = response.dataValues.articlePrice * parseInt(stock);
             cart.cartSubtotal += subtotalAux;
             
