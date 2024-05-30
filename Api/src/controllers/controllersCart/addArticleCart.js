@@ -3,9 +3,7 @@ const { ShoppingCart, Article, Size, Cart_Articule, Article_Size } = require('..
 const addArticleCart = async (req, res) => {
     try {
 
-        const { idCart, idArticle, XS, S, M, L, XL, XXL, XXXL } = req.body;
-
-        const quantity = XS + S + M + L + XL + XXL + XXXL;
+        const { idCart, idArticle, stock, S, M, L, XL, XXL } = req.body;
 
         const cart = await ShoppingCart.findOne({
             where: {
@@ -13,9 +11,6 @@ const addArticleCart = async (req, res) => {
             },
             include: {
                 model: Article,
-                include: {
-                    model: Size
-                }
             }
         });
 
@@ -27,33 +22,39 @@ const addArticleCart = async (req, res) => {
         if (!article) {
             return res.status(404).json({ message: 'Article not found' });
         }
+        if(article.stock < 1 || 
+            article.articleS < S || 
+            article.articleM < M || 
+            article.articleL < L || 
+            article.articleXL < XL || 
+            article.articleXXL < XXL){
+                return res.status(404).json({
+                    message: 'Article out of stock'
+                });
+            }
+        
         const articleExist=await Cart_Articule.findOne({where:{
             articleArticleId:article.articleId,
             shoppingCartCartId:cart.cartId
         }})
         if(articleExist===null){
-            await cart.addArticle(article, { through: { articleQuantity:quantity, XS, S, M, L, XL, XXL, XXXL } });
-            
+            await cart.addArticle(article, { through: { articleQuantity:stock, S, M, L, XL, XXL } });
             const response = await Article.findByPk(article.articleArticleId);
-            const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
+            const subtotalAux = response.dataValues.articlePrice * parseInt(stock);
             cart.cartSubtotal += subtotalAux;
             
             await cart.save();
         }else{
             const response = await Article.findByPk(articleExist.articleArticleId);
-            console.log(response.dataValues.articlePrice)
-            const subtotalAux = response.dataValues.articlePrice * parseInt(quantity);
-            console.log(subtotalAux);
+            const subtotalAux = response.dataValues.articlePrice * parseInt(stock);
             cart.cartSubtotal += subtotalAux;
             await cart.save();
-            articleExist.XS += XS;
             articleExist.S += S;
             articleExist.M += M;
             articleExist.L += L;
             articleExist.XL += XL;
             articleExist.XXL += XXL;
-            articleExist.XXXL += XXXL;
-            articleExist.articleQuantity += quantity;
+            articleExist.articleQuantity += stock;
             await articleExist.save();
         }
         const updatedCart = await ShoppingCart.findOne({
