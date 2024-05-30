@@ -12,7 +12,7 @@ const getFill = async (req, res) => {
 
         // Validar parámetros
         if (pageSize <= 0 || page <= 0 || stockFilter < 0) {
-            return res.status(400).json({ message: 'Parámetros de consulta no válidos' });
+            return res.status(400).json({ message: 'Invalid query parameters' });
         }
 
         // Construir condición "where"
@@ -73,12 +73,12 @@ const getFill = async (req, res) => {
 
         // Manejo del caso donde no se encuentran resultados
         if (resultados.length === 0) {
-            return res.status(404).json({ message: 'No se han encontrado elementos con esta característica' });
+            return res.status(404).json({ message: 'No elements with this characteristic have been found' });
         }
 
         // Enviar respuesta exitosa
         res.status(200).json({
-            message: 'Datos obtenidos con éxito',
+            message: 'Data successfully obtained',
             totalPages,
             currentPage: page,
             result: resultados
