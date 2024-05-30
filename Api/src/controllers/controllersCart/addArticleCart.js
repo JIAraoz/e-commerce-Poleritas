@@ -38,7 +38,6 @@ const addArticleCart = async (req, res) => {
             shoppingCartCartId:cart.cartId
         }})
         if(articleExist===null){
-            console.log(article)
             const subtotalAux = article.dataValues.articlePrice * parseInt(stock);
             cart.cartSubtotal += subtotalAux;
             
