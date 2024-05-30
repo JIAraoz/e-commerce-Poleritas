@@ -184,3 +184,30 @@
     justify-content: start;
     align-items: center;
 }
+
+.button, .button-selected{
+    width: 50px;  /* Ajusta según sea necesario */
+    height: 50px;  /* Ajusta según sea necesario */
+    border-radius: 50%;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #4a707d;
+    border-width: 2px;
+    border-color: #4a707d ;
+  }
+  
+  .button-selected {
+    background-color: #4a707d;
+    color: white;
+    /* otros estilos para botones seleccionados */
+  }
+  .botones-size {
+    display: flex;
+    align-items: center;
+}
+
+.size-text {
+    margin-right: 10px;  /* Ajusta según sea necesario */
+}
