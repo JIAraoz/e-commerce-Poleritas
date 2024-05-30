@@ -36,15 +36,24 @@ export default function Form() {
 		articleStock: '',
 		articleDescription: '',
 		Category: '',
+		articleS: '',
+		articleM: '',
+		articleL: '',
+		articleXL: '',
+		articleXXL: '',
 	});
 
 	const [errors, setErrors] = useState({
 		articleName: '',
 		articleImage: '',
 		articlePrice: '',
-		articleStock: '',
 		articleDescription: '',
 		Category: '',
+		articleS: '',
+		articleM: '',
+		articleL: '',
+		articleXL: '',
+		articleXXL: '',
 	});
 
 	useEffect(() => {
@@ -55,8 +64,28 @@ export default function Form() {
 		const property = event.target.name;
 		const value = event.target.value;
 
-		setArticleData({ ...articleData, [property]: value });
-		Validation({ ...articleData, [property]: value }, errors, setErrors);
+		const updatedData = { ...articleData, [property]: value };
+
+		setArticleData(updatedData);
+		Validation(updatedData, errors, setErrors);
+
+		if (
+			['articleS', 'articleM', 'articleL', 'articleXL', 'articleXXL'].includes(
+				property,
+			)
+		) {
+			const totalStock = [
+				'articleS',
+				'articleM',
+				'articleL',
+				'articleXL',
+				'articleXXL',
+			].reduce((sum, key) => {
+				return sum + Number(updatedData[key] || 0);
+			}, 0);
+
+			setArticleData({ ...updatedData, articleStock: totalStock });
+		}
 	};
 
 	const handleImageUpload = (imageUrl) => {
@@ -147,18 +176,85 @@ export default function Form() {
 							</div>
 
 							<div className='form-group'>
-								<input
-									type='text'
-									name='articleStock'
-									placeholder='Stock'
-									value={articleData.articleStock}
-									onChange={handleChange}
-								/>
-								{errors.articleStock && (
-									<span className='error-message'>{errors.articleStock}</span>
-								)}
-							</div>
+								<div className='input-group'>
+									<div>
+										<input
+											type='number'
+											name='articleS'
+											placeholder='Stock S'
+											value={articleData.articleS}
+											onChange={handleChange}
+											min='0'
+										/>
+										{errors.articleS && (
+											<span className='error-message'>{errors.articleS}</span>
+										)}
+									</div>
+								</div>
 
+								<div className='input-group'>
+									<div>
+										<input
+											type='number'
+											name='articleM'
+											placeholder='Stock M'
+											value={articleData.articleM}
+											onChange={handleChange}
+											min='0'
+										/>
+										{errors.articleM && (
+											<span className='error-message'>{errors.articleM}</span>
+										)}
+									</div>
+								</div>
+								<div className='input-group'>
+									<div>
+										<input
+											type='number'
+											name='articleL'
+											placeholder='Stock L'
+											value={articleData.articleL}
+											onChange={handleChange}
+											min='0'
+										/>
+										{errors.articleL && (
+											<span className='error-message'>{errors.articleL}</span>
+										)}
+									</div>
+								</div>
+
+								<div className='input-group'>
+									<div>
+										<input
+											type='number'
+											name='articleXL'
+											placeholder='Stock XL'
+											value={articleData.articleXL}
+											onChange={handleChange}
+											min='0'
+										/>
+										{errors.articleXL && (
+											<span className='error-message'>{errors.articleXL}</span>
+										)}
+									</div>
+								</div>
+
+								<div className='input-group'>
+									<div>
+										<input
+											type='number'
+											name='articleXXL'
+											placeholder='Stock XXL'
+											value={articleData.articleXXL}
+											onChange={handleChange}
+											min='0'
+										/>
+										{errors.articleXXL && (
+											<span className='error-message'>{errors.articleXXL}</span>
+										)}
+									</div>
+								</div>
+							</div>
 							<div className='form-group'>
 								<textarea
 									name='articleDescription'
