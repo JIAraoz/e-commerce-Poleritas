@@ -29,30 +29,30 @@ function article(sequelize) {
       allowNull: false,
     },
     articleS: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
     },
     articleL: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
     },
     articleM: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
     },
     articleXL: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
     },
     articleXXL: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
-    }
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
   });
 }
 

@@ -1,8 +1,8 @@
 require("dotenv").config();
 const server = require("./src/server.js");
 const { conn } = require("./src/db.js");
-const Stripe = require('stripe');
-const {STRIPE_URL}=process.env
+const Stripe = require("stripe");
+const { STRIPE_URL } = process.env;
 const stripe = new Stripe(STRIPE_URL);
 
 conn.sync({ force: false }).then(() => {
