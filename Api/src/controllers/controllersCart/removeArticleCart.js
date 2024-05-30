@@ -22,7 +22,7 @@ const removeArticleCart = async (req, res) => {
         if (!article) {
             return res.status(404).json({ message: 'Artículo no encontrado' });
         }
-
+ 
         await cart.removeArticle(article);
 
         const updatedCart = await ShoppingCart.findOne({
