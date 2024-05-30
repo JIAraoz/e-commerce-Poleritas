@@ -209,5 +209,11 @@
 }
 
 .size-text {
-    margin-right: 10px;  /* Ajusta según sea necesario */
+    margin-right: 10px;  
 }
+
+.button-disabled {
+    background-color: gray;
+    color: white;
+    
+  }
