@@ -26,8 +26,7 @@ const removeArticleCart = async (req, res) => {
         }
 
         const articleQuantity = cart.articles.find(art => art.dataValues.articleId === article.articleId)
-        console.log(articleQuantity.Cart_Articule.articleQuantity)
-        cart.cartSubtotal -= articleQuantity.Cart_Articule.articleQuantity
+        cart.cartSubtotal -= article.articlePrice * articleQuantity.Cart_Articule.articleQuantity
         await cart.save()
         await cart.removeArticle(article);
 
