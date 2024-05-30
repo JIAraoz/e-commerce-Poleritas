@@ -3,9 +3,14 @@ import "./logout.css"
 const Logout = () => {
 	const { logout } = useAuth0();
 
+	const handleLogout = () => {
+		logout();
+		window.localStorage.removeItem("userData");
+	}
+
 	return (
 		<div>
-			<button className='logout-button' onClick={() => logout()}>Logout</button>
+			<button className='logout-button' onClick={() => handleLogout()}>Logout</button>
 		</div>
 	);
 };

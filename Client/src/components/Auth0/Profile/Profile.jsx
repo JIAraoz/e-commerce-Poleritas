@@ -26,7 +26,6 @@ const Profile = () => {
 				const response = await axios.get(
 					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
 				);
-				window.localStorage.setItem("userData", JSON.stringify(response.data.result));
         setUserData(response.data.result);
         setFormData({
           userName: response.data.result.userName || '',
