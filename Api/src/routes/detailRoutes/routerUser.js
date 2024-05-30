@@ -8,6 +8,6 @@ const editUser = require('../../controllers/controllersUser/editUser');
 routerUser.get('/user_email', getUserByEmail);
 routerUser.get('/list-users', getUser);
 routerUser.post('/postUser',postUser);
-routerUser.get('/editUser', editUser);
+routerUser.put('/editUser', editUser);
 
 module.exports = routerUser;
