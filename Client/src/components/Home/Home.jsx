@@ -47,6 +47,25 @@ export default function Home() {
 		}, [userData]);
 	}
 
+	useEffect(() => {
+		async function fetchUserData() {
+			try {
+				const response = await axios.get(
+					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
+				);
+				window.localStorage.setItem("userData", JSON.stringify(response.data.result));
+			} catch (error) {
+				Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "An error has occurred:" + error.message,
+				});
+			}
+		};
+
+		fetchUserData();
+	}, [])
+
 	const dispatch = useDispatch();
 
 	const query = useSelector((state) => state.query);
