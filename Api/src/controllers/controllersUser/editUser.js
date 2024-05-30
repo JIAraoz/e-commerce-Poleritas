@@ -1,29 +1,29 @@
-const {User} = require('../../db');
+const { User } = require('../../db');
 
-const editUser = async ( req, res ) => {
+const editUser = async (req, res) => {
     try {
         const { id } = req.query;
         const user = await User.findByPk(id);
 
         const updatedFields = {};
         
-        if (req.query.userName) {
-            updatedFields.userName = req.query.userName;
+        if (req.body.userName) {
+            updatedFields.userName = req.body.userName;
         }
-        if (req.query.userImage) {
-            updatedFields.userImage = req.query.userImage;
+        if (req.body.userImage) {
+            updatedFields.userImage = req.body.userImage;
         }
-        if (req.query.userDoorNumber) {
-            updatedFields.userDoorNumber = req.query.userDoorNumber;
+        if (req.body.userDoorNumber) {
+            updatedFields.userDoorNumber = req.body.userDoorNumber;
         }
-        if (req.query.userStreetName) {
-            updatedFields.userStreetName = req.query.userStreetName;
+        if (req.body.userStreetName) {
+            updatedFields.userStreetName = req.body.userStreetName;
         }
-        if (req.query.userCountry) {
-            updatedFields.userCountry = req.query.userCountry;
+        if (req.body.userCountry) {
+            updatedFields.userCountry = req.body.userCountry;
         }
-        if (req.query.userCity) {
-            updatedFields.userCity = req.query.userCity;
+        if (req.body.userCity) {
+            updatedFields.userCity = req.body.userCity;
         }
 
         await user.update(updatedFields);
@@ -32,7 +32,7 @@ const editUser = async ( req, res ) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({message:'Error en el servidor: '+ error.message})
+        res.status(500).json({ message: 'Error en el servidor: ' + error.message });
     }
 }
 
