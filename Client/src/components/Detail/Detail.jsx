@@ -87,7 +87,7 @@ export default function Detail() {
 			case 'XXL':
 				return setSize('articleXXL');
 		}
-	}
+	};
 
 	const incrementQuantity = () => {
 		if (quantity < product[size]) {
@@ -124,12 +124,38 @@ export default function Detail() {
 						</div>
 					</div>
 					<p className='stock'>Stock: {product[size]} pcs</p>
-					<div>
-						<button onClick={() => selectSize('S')}>S</button>
-						<button onClick={() => selectSize('M')}>M</button>
-						<button onClick={() => selectSize('L')}>L</button>
-						<button onClick={() => selectSize('XL')}>XL</button>
-						<button onClick={() => selectSize('XXL')}>XXL</button>
+					<div className='botones-size'>
+						<p className='size-text'>Size:</p>
+						<button
+							onClick={() => selectSize('S')}
+							className={size === 'articleS' ? 'button-selected' : 'button'}
+						>
+							S
+						</button>
+						<button
+							onClick={() => selectSize('M')}
+							className={size === 'articleM' ? 'button-selected' : 'button'}
+						>
+							M
+						</button>
+						<button
+							onClick={() => selectSize('L')}
+							className={size === 'articleL' ? 'button-selected' : 'button'}
+						>
+							L
+						</button>
+						<button
+							onClick={() => selectSize('XL')}
+							className={size === 'articleXL' ? 'button-selected' : 'button'}
+						>
+							XL
+						</button>
+						<button
+							onClick={() => selectSize('XXL')}
+							className={size === 'articleXXL' ? 'button-selected' : 'button'}
+						>
+							XXL
+						</button>
 					</div>
 					<div className='quantity-container'>
 						<label htmlFor='quantity'>Quantity:</label>
