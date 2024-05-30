@@ -44,21 +44,31 @@ export default function Detail() {
 					`https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`,
 				);
 
-				const activeCart = cartResponse.data.result.find(
-					(cart) => cart.isActive === true,
+				const body = {
+					S: product.articleS,
+					M: product.articleM,
+					L: product.articleL,
+					XL: product.articleXL,
+					XXL: product.articleXXL,
+					stock: product.articleStock,
+					idArticle: product.articleId,
+					idCart: cartResponse.data.result.cartId
+				};
+					
+				const addArticleResponse = await axios.post(
+					`https://e-commerce-grupo03.onrender.com/cart/add_article_cart`, body
 				);
-				if (activeCart) {
-					const addArticleResponse = await axios.get(
-						`https://e-commerce-grupo03.onrender.com/cart/add_article_cart?cartid=${activeCart.cartId}&articleid=${id}&quantity=${quantity}`,
-					);
-					if (addArticleResponse) {
-						// alert('Tu producto ha sido agregado al carrito');
-						Swal.fire({
-							title: 'Your product has been added!',
-							text: 'Your product has been successfully added!',
-							icon: 'success',
-						});
-					}
+
+				console.log(body)
+
+				if (addArticleResponse) {
+					// alert('Tu producto ha sido agregado al carrito');
+					Swal.fire({
+						title: 'Your product has been added!',
+						text: 'Your product has been successfully added!',
+						icon: 'success',
+					});
+				}
 				} else {
 					// alert('No hay carrito activo disponible.');
 					Swal.fire({
@@ -67,7 +77,6 @@ export default function Detail() {
 						text: 'There is no active cart available at this time.',
 					});
 				}
-			}
 		} catch (error) {
 			console.error('Ha ocurrido un error: ' + error.message);
 		}
