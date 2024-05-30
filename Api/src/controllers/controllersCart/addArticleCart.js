@@ -38,14 +38,14 @@ const addArticleCart = async (req, res) => {
             shoppingCartCartId:cart.cartId
         }})
         if(articleExist===null){
-            await cart.addArticle(article, { through: { articleQuantity:stock, S, M, L, XL, XXL } });
-            const response = await Article.findByPk(article.articleArticleId);
-            const subtotalAux = response.dataValues.articlePrice * parseInt(stock);
+            console.log(article)
+            const subtotalAux = article.dataValues.articlePrice * parseInt(stock);
             cart.cartSubtotal += subtotalAux;
             
             await cart.save();
+            await cart.addArticle(article, { through: { articleQuantity:stock, S, M, L, XL, XXL } });
         }else{
-            const response = await Article.findByPk(articleExist.articleArticleId);
+            const response = await Article.findByPk(idArticle);
             const subtotalAux = response.dataValues.articlePrice * parseInt(stock);
             cart.cartSubtotal += subtotalAux;
             await cart.save();
