@@ -62,7 +62,7 @@ const getShoppingCart = async (req, res) => {
     try {
         const id = req.query.id;
         if (!id) {
-            return res.status(400).json({ message: 'Faltan datos o son inválidos en el cuerpo de la solicitud' });
+            return res.status(400).json({ message: 'Missing or invalid data in the request body' });
         }
 
         // Buscar el usuario con sus carritos
@@ -77,7 +77,7 @@ const getShoppingCart = async (req, res) => {
         });console.log(userCard);
 
         if (!userCard) {
-            return res.status(404).json({ message: 'No se encontró el usuario' });
+            return res.status(404).json({ message: 'User not found' });
         }
         
         // Verificar si todos los carritos están inactivos

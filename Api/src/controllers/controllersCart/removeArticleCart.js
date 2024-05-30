@@ -16,13 +16,13 @@ const removeArticleCart = async (req, res) => {
         });
 
         if (!cart) {
-            return res.status(404).json({ message: 'Carrito no encontrado' });
+            return res.status(404).json({ message: 'Shopping cart not found' });
         }
 
         const article = await Article.findByPk(idArticle);
 
         if (!article) {
-            return res.status(404).json({ message: 'Artículo no encontrado' });
+            return res.status(404).json({ message: 'Article not found' });
         }
 
         const articleQuantity = cart.articles.find(art => art.dataValues.articleId === article.articleId)
@@ -37,7 +37,7 @@ const removeArticleCart = async (req, res) => {
         });
 
         res.status(200).json({
-            message: 'Artículo removido del carrito con éxito',
+            message: 'Article successfully removed',
             cart: updatedCart
         });
     } catch (error) {

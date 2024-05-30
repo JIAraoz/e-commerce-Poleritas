@@ -36,7 +36,7 @@ const postCreateArticle = async (req, res) => {
      
      
 
-        res.status(201).json({ message: 'Registro creado con éxito', results: createdArticle });
+        res.status(201).json({ message: 'Record created successfully', results: createdArticle });
 
     } catch (error) {
         console.error('Error al crear registro:', error);

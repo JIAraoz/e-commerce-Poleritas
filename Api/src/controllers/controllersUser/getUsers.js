@@ -7,15 +7,15 @@ const getUser = async(req,res) => {
         console.log(response);
         if(response.length!==0){
             res.status(200).json({
-                message: 'Datos obtenidos con éxito',
+                message: 'Data successfully obtained',
                 result: response
             });
         }else{
-            return res.status(404).json({ message: 'No se han encontrado elementos con esta característica' })
+            return res.status(404).json({ message: 'No elements with this characteristic have been found' })
         }
     } catch (error) {
         console.log(error)
-        res.status(500).json({message:'Error en el servidor: '+ error.message})
+        res.status(500).json({message:'Server error: '+ error.message})
     }
 }
 
