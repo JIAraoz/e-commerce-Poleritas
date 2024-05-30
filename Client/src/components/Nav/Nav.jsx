@@ -29,11 +29,13 @@ function Nav() {
 				<SearchBar className='searchBar' />
 			</div>
 			<div className='right'>
-				<Link to='/cart'>
-					<button>
-						<FontAwesomeIcon icon={faCartShopping} />
-					</button>
-				</Link>
+				{isAuthenticated ? <Link to='/cart'>
+										<button>
+											<FontAwesomeIcon icon={faCartShopping} />
+										</button>
+									</Link> 
+									: null}
+				
 				{isAuthenticated ? (
 		 <Link to='/profile'>
       <button style={{ display: 'flex', alignItems: 'center', border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}>
