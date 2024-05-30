@@ -211,3 +211,9 @@
 .size-text {
     margin-right: 10px;  /* Ajusta según sea necesario */
 }
+
+.button-disabled {
+    background-color: gray;
+    color: white;
+    /* otros estilos para botones deshabilitados */
+  }

@@ -13,7 +13,7 @@ export default function Detail() {
 	const { user } = useAuth0();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
-	const [size, setSize] = useState('articleS');
+	const [size, setSize] = useState('');
 
 	useEffect(() => {
 		async function getProduct() {
@@ -50,33 +50,29 @@ export default function Detail() {
 					L: product.articleL,
 					XL: product.articleXL,
 					XXL: product.articleXXL,
-					stock: product.articleStock,
+					stock: product[`article${size}`],
 					idArticle: product.articleId,
-					idCart: cartResponse.data.result.cartId
+					idCart: cartResponse.data.result.cartId,
 				};
-					
 				const addArticleResponse = await axios.post(
-					`https://e-commerce-grupo03.onrender.com/cart/add_article_cart`, body
+					`https://e-commerce-grupo03.onrender.com/cart/add_article_cart`,
+					body,
 				);
 
-				console.log(body)
-
 				if (addArticleResponse) {
-					// alert('Tu producto ha sido agregado al carrito');
 					Swal.fire({
 						title: 'Your product has been added!',
 						text: 'Your product has been successfully added!',
 						icon: 'success',
 					});
 				}
-				} else {
-					// alert('No hay carrito activo disponible.');
-					Swal.fire({
-						icon: 'error',
-						title: 'No active cart available.',
-						text: 'There is no active cart available at this time.',
-					});
-				}
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: 'No active cart available.',
+					text: 'There is no active cart available at this time.',
+				});
+			}
 		} catch (error) {
 			console.error('Ha ocurrido un error: ' + error.message);
 		}
@@ -84,22 +80,11 @@ export default function Detail() {
 
 	const selectSize = (value) => {
 		setQuantity(1);
-		switch (value) {
-			case 'S':
-				return setSize('articleS');
-			case 'M':
-				return setSize('articleM');
-			case 'L':
-				return setSize('articleL');
-			case 'XL':
-				return setSize('articleXL');
-			case 'XXL':
-				return setSize('articleXXL');
-		}
+		setSize(value);
 	};
 
 	const incrementQuantity = () => {
-		if (quantity < product[size]) {
+		if (quantity < product[`article${size}`]) {
 			setQuantity(quantity + 1);
 		}
 	};
@@ -132,36 +117,41 @@ export default function Detail() {
 							<img src='/pagos.png' alt='pay' />
 						</div>
 					</div>
-					<p className='stock'>Stock: {product[size]} pcs</p>
+					<p className='stock'>Stock: {product[`article${size}`]} pcs</p>
 					<div className='botones-size'>
 						<p className='size-text'>Size:</p>
 						<button
 							onClick={() => selectSize('S')}
-							className={size === 'articleS' ? 'button-selected' : 'button'}
+							className={`${size === 'S' ? 'button-selected' : 'button'} ${product.articleS === 0 ? 'button-disabled' : ''}`}
+							disabled={product.articleS === 0}
 						>
 							S
 						</button>
 						<button
 							onClick={() => selectSize('M')}
-							className={size === 'articleM' ? 'button-selected' : 'button'}
+							className={`${size === 'M' ? 'button-selected' : 'button'} ${product.articleM === 0 ? 'button-disabled' : ''}`}
+							disabled={product.articleM === 0}
 						>
 							M
 						</button>
 						<button
 							onClick={() => selectSize('L')}
-							className={size === 'articleL' ? 'button-selected' : 'button'}
+							className={`${size === 'L' ? 'button-selected' : 'button'} ${product.articleL === 0 ? 'button-disabled' : ''}`}
+							disabled={product.articleL === 0}
 						>
 							L
 						</button>
 						<button
 							onClick={() => selectSize('XL')}
-							className={size === 'articleXL' ? 'button-selected' : 'button'}
+							className={`${size === 'XL' ? 'button-selected' : 'button'} ${product.articleXL === 0 ? 'button-disabled' : ''}`}
+							disabled={product.articleXL === 0}
 						>
 							XL
 						</button>
 						<button
 							onClick={() => selectSize('XXL')}
-							className={size === 'articleXXL' ? 'button-selected' : 'button'}
+							className={`${size === 'XXL' ? 'button-selected' : 'button'} ${product.articleXXL === 0 ? 'button-disabled' : ''}`}
+							disabled={product.articleXXL === 0}
 						>
 							XXL
 						</button>
@@ -175,7 +165,7 @@ export default function Detail() {
 							<span>{quantity}</span>
 							<button
 								onClick={incrementQuantity}
-								disabled={quantity >= product[size]}
+								disabled={quantity >= product[`article${size}`]}
 							>
 								+
 							</button>
