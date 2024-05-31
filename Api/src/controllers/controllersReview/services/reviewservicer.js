@@ -14,3 +14,5 @@ const verifyFirstPurchase = async (userId) => {
   const existingReview = await Review.findOne({ where: { userId } });
   return { existingReview, canProceed: true };
 };
+
+module.exports = verifyFirstPurchase
