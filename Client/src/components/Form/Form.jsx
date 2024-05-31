@@ -35,7 +35,7 @@ export default function Form() {
 		articlePrice: '',
 		articleStock: '',
 		articleDescription: '',
-		Category: '',
+		categoryName: '',
 		articleS: '',
 		articleM: '',
 		articleL: '',
@@ -48,7 +48,7 @@ export default function Form() {
 		articleImage: '',
 		articlePrice: '',
 		articleDescription: '',
-		Category: '',
+		categoryName: '',
 		articleS: '',
 		articleM: '',
 		articleL: '',
@@ -132,7 +132,6 @@ export default function Form() {
 	const hasErrors = () => {
 		return Object.keys(errors).some((key) => errors[key]);
 	};
-
 	return (
 		<div className='back'>
 			<div className='form-box'>
@@ -238,7 +237,6 @@ export default function Form() {
 										)}
 									</div>
 								</div>
-
 								<div className='input-group'>
 									<div>
 										<input
@@ -271,8 +269,8 @@ export default function Form() {
 
 							<div className='form-group'>
 								<select
-									name='Category'
-									value={articleData.Category}
+									name='categoryName'
+									value={articleData.categoryName}
 									onChange={handleChange}
 								>
 									<option value=''>Select a category:</option>
