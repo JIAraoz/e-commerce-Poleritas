@@ -12,6 +12,6 @@ router.use('/article', routerArticle);
 router.use('/categories', routerCategory);
 router.use('/cart', routerCart);
 router.use('/review', routerReview);
-router.use('./admin', routerAdmin)
+router.use('/admin', routerAdmin)
 
 module.exports = router;
