@@ -5,7 +5,7 @@ export default function Validation(articleData, errors, setErrors) {
 		switch (key) {
 			case 'articleName':
 				if (!articleData.articleName.trim()) {
-					errorsCopy.articleName = 'El nombre es obligatorio';
+					errorsCopy.articleName = '*El nombre es obligatorio';
 				} else if (articleData.articleName.length > 40) {
 					errorsCopy.articleName =
 						'El nombre debe tener menos de 40 caracteres';
@@ -15,7 +15,7 @@ export default function Validation(articleData, errors, setErrors) {
 				break;
 			case 'articleImage':
 				if (!articleData.articleImage.trim()) {
-					errorsCopy.articleImage = 'La imagen es obligatoria';
+					errorsCopy.articleImage = '*La imagen es obligatoria';
 				} else {
 					delete errorsCopy.articleImage;
 				}
@@ -25,33 +25,59 @@ export default function Validation(articleData, errors, setErrors) {
 					!articleData.articlePrice.trim() ||
 					isNaN(articleData.articlePrice)
 				) {
-					errorsCopy.articlePrice = 'El precio debe ser un número';
+					errorsCopy.articlePrice = '*El precio debe ser un número';
 				} else {
 					delete errorsCopy.articlePrice;
 				}
 				break;
-			case 'articleStock':
-				if (
-					!articleData.articleStock.trim() ||
-					isNaN(articleData.articleStock)
-				) {
-					errorsCopy.articleStock = 'El stock debe ser un número';
-				} else {
-					delete errorsCopy.articleStock;
-				}
-				break;
+
 			case 'articleDescription':
 				if (!articleData.articleDescription.trim()) {
-					errorsCopy.articleDescription = 'La descripción es obligatoria';
+					errorsCopy.articleDescription = '*La descripción es obligatoria';
 				} else {
 					delete errorsCopy.articleDescription;
 				}
 				break;
 			case 'Category':
 				if (!articleData.Category.trim()) {
-					errorsCopy.Category = 'La categoría es obligatoria';
+					errorsCopy.Category = '*La categoría es obligatoria';
 				} else {
 					delete errorsCopy.Category;
+				}
+				break;
+			case 'articleS':
+				if (!articleData.articleS.trim()) {
+					errorsCopy.articleS = '*El stock para S es obligatorio';
+				} else {
+					delete errorsCopy.articleS;
+				}
+				break;
+			case 'articleM':
+				if (!articleData.articleM.trim()) {
+					errorsCopy.articleM = '*El stock para M es obligatorio';
+				} else {
+					delete errorsCopy.articleM;
+				}
+				break;
+			case 'articleL':
+				if (!articleData.articleL.trim()) {
+					errorsCopy.articleL = '*El stock para L es obligatorio';
+				} else {
+					delete errorsCopy.articleL;
+				}
+				break;
+			case 'articleXL':
+				if (!articleData.articleXL.trim()) {
+					errorsCopy.articleXL = '*El stock para XL es obligatorio';
+				} else {
+					delete errorsCopy.articleXL;
+				}
+				break;
+			case 'articleXXL':
+				if (!articleData.articleXXL.trim()) {
+					errorsCopy.articleXXL = '*El stock para XXL es obligatorio';
+				} else {
+					delete errorsCopy.articleXXL;
 				}
 				break;
 			default:
