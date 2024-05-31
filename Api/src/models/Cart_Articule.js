@@ -7,7 +7,7 @@ function Cart_Articule (sequelize){
             allowNull: false,
             defaultValue: 0
         },
-        tipo: {
+        sizeType: {
             type: DataTypes.INTEGER,
             allowNull: true,
             defaultValue: 0
