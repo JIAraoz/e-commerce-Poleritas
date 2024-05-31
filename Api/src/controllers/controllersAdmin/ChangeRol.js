@@ -23,6 +23,7 @@ const ChangeRol = async (req, res) => {
         return res.status(200).json({ message: "Role updated successfully", user });
 
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: "Internal server error", error: error.message });
     }
 };
