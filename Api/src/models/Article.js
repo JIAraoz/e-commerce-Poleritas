@@ -52,7 +52,11 @@ function article(sequelize) {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
-    }
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+  }
   });
 }
 

@@ -26,6 +26,7 @@ const postCreateArticle = async (req, res) => {
             articleL,
             articleXL,
             articleXXL,
+            isActive:true
 
         });
 
