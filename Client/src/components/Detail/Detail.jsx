@@ -13,7 +13,7 @@ export default function Detail() {
 	const { user } = useAuth0();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
-	const [size, setSize] = useState('');
+	const [size, setSize] = useState('S');
 
 	useEffect(() => {
 		async function getProduct() {
@@ -117,7 +117,8 @@ export default function Detail() {
 							<img src='/pagos.png' alt='pay' />
 						</div>
 					</div>
-					<p className='stock'>Stock: {product[`article${size}`]} pcs</p>
+					<p className='stock'>Stock en {size}: {product[`article${size}`]} pcs</p>
+					<p className='stock'>Stock total: {product.articleStock} pcs</p>
 					<div className='botones-size'>
 						<p className='size-text'>Size:</p>
 						<button

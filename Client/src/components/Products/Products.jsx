@@ -110,6 +110,10 @@ export default function Products() {
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+	const filteredProducts = products.filter(
+        (product) => product.articleStock > 0 && product.isActive
+    );
+
 	return (
 		<div>
 			<div className='filters'>
@@ -161,7 +165,7 @@ export default function Products() {
 					</div>
 				) : (
 					<>
-						<Cards products={products} loading={loading} />
+						<Cards products={filteredProducts} loading={loading} />
 						<Pagination
 							productsPerPage={productsPerPage}
 							totalPages={totalPages}
