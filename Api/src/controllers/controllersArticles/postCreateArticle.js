@@ -1,11 +1,12 @@
 const { Article, Category, Size, Article_Size } = require('../../db');
 const postCreateArticle = async (req, res) => {
     try {
-        const { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, articleS,articleM,articleL,articleXL,articleXXL} = req.body;
+        let { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, articleS,articleM,articleL,articleXL,articleXXL} = req.body;
+        if (( Number(articleS) + Number(articleM) + Number(articleL) + Number(articleXL) + Number(articleXXL) ) === 0) articleStock = 0;
 
         // Verificar datos requeridos
-        if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock) {
-            return res.status(400).json({ message: "Data is missing or invalid in the article creation form" });
+        if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || articleStock === null || articleStock === undefined) {
+            return res.status(400).json({ message: "Data is missing or invalid in the article creation form" }, articleStock);
         }
 
         // Buscar categoría
