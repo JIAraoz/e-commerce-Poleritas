@@ -1,7 +1,24 @@
-const { Review } = require('../../db.js');
+const { Review, User, ShoppingCart } = require('../../db');
+
 const getReviews = async (req, res) => {
   try {
-    const review = await Review.findOne({ where: { userId: req.params.userId } });
+    const userId = req.params.userId;
+
+    // Buscar el usuario y sus carritos desactivados
+    const user = await User.findOne({
+      where: { userId },
+      include: {
+        model: ShoppingCart,
+        where: { isActive: false }
+      }
+    });
+
+    // Si el usuario no tiene carritos desactivados, no puede obtener una reseña
+    if (!user || user.shoppingCarts.length === 0) {
+      return res.status(400).json({ message: 'El usuario no ha realizado ninguna compra.' });
+    }
+
+    const review = await Review.findOne({ where: { userId } });
     if (!review) {
       return res.status(404).json({ message: 'Reseña no encontrada.' });
     }
@@ -11,4 +28,4 @@ const getReviews = async (req, res) => {
   }
 };
 
-mnodule.export = getReviews
+module.exports = getReviews;

@@ -1,20 +1,31 @@
-const { Review } = require('.././db.js');
-const { verifyFirstPurchase } = require('../../controllers/controllersReview/services/reviewservicer.js');
+const { Review, User, ShoppingCart } = require('../../db');
 
 const postReviews = async (req, res) => {
   const { userId, reviewRating, reviewDescription } = req.body;
 
   try {
-    const { existingReview, canProceed } = await verifyFirstPurchase(userId);
+    // Buscar el usuario y sus carritos desactivados
+   
+    const user = await User.findOne({
+      where: { userId },
+      include: {
+        model: ShoppingCart,
+        where: { isActive: false }
+      }
+    });
 
-    if (!canProceed) {
+    // Si el usuario no tiene carritos desactivados, no puede crear una reseña
+    if (!user || user.shoppingCarts.length === 0) {
       return res.status(400).json({ message: 'El usuario no ha realizado ninguna compra.' });
     }
 
+    // Verificar si el usuario ya tiene una reseña
+    const existingReview = await Review.findOne({ where: { userId } });
     if (existingReview) {
       return res.status(400).json({ message: 'El usuario ya tiene una reseña. Use PUT para actualizar.' });
     }
 
+    // Crear la nueva reseña
     const review = await Review.create({ userId, reviewRating, reviewDescription });
     return res.status(201).json(review);
   } catch (error) {
@@ -22,4 +33,4 @@ const postReviews = async (req, res) => {
   }
 };
 
-module.exports=postReviews
+module.exports = postReviews;

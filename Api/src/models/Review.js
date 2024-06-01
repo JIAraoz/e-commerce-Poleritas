@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-
-function review (sequelize){
+function review(sequelize) {
     sequelize.define('review', {
         reviewId: {
             type: DataTypes.INTEGER,
@@ -17,8 +16,8 @@ function review (sequelize){
             type: DataTypes.TEXT,
             allowNull: true
         }
-    })
-
+        
+    });
 }
 
 module.exports = review;

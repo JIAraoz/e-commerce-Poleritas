@@ -1,14 +1,25 @@
-const { verifyFirstPurchase } = require('../../controllers/controllersReview/services/reviewservicer.js');
+const { Review, User, ShoppingCart } = require('../../db');
 
 const updateReview = async (req, res) => {
   const { userId, reviewRating, reviewDescription } = req.body;
 
   try {
-    const { existingReview, canProceed } = await verifyFirstPurchase(userId);
+    // Buscar el usuario y sus carritos desactivados
+    const user = await User.findOne({
+      where: { userId },
+      include: {
+        model: ShoppingCart,
+        where: { isActive: false }
+      }
+    });
 
-    if (!canProceed) {
+    // Si el usuario no tiene carritos desactivados, no puede actualizar una reseña
+    if (!user || user.shoppingCarts.length === 0) {
       return res.status(400).json({ message: 'El usuario no ha realizado ninguna compra.' });
     }
+
+    // Buscar la reseña existente
+    const existingReview = await Review.findOne({ where: { userId } });
 
     if (!existingReview) {
       return res.status(400).json({ message: 'No se encontró una reseña para editar. Use POST para crear una nueva.' });
@@ -24,4 +35,4 @@ const updateReview = async (req, res) => {
   }
 };
 
-module.exports = updateReview
+module.exports = updateReview;

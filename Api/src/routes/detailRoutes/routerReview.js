@@ -4,8 +4,8 @@ const getReviews = require('../../controllers/controllersReview/getReviews');
 const postReviews = require('../../controllers/controllersReview/postReviews');
 const updateReview = require('../../controllers/controllersReview/putReview');
 
-router.put('/reviews/:reviewId', updateReview);
-router.post('/reviews', postReviews);
-router.get('/reviews/:productId', getReviews);
+routerReview.put('/reviews/:reviewId', updateReview);
+routerReview.post('/reviews', postReviews);
+routerReview.get('/reviews/:userId', getReviews);
 
 module.exports = routerReview;
