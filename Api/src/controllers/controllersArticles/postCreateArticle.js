@@ -5,7 +5,7 @@ const postCreateArticle = async (req, res) => {
         if (( Number(articleS) + Number(articleM) + Number(articleL) + Number(articleXL) + Number(articleXXL) ) === 0) articleStock = 0;
 
         // Verificar datos requeridos
-        if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock) {
+        if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || articleStock === null || articleStock === undefined) {
             return res.status(400).json({ message: "Data is missing or invalid in the article creation form" }, articleStock);
         }
 
