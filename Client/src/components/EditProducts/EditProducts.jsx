@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
-import Cards from '../Cards/Cards';
+import Cards from '../Cards/CardsEdit';
 import Pagination from '../pagination/Pagination';
-import './Products.css';
+import './EditProduct.css';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -37,7 +37,7 @@ export default function Products() {
 			setNoResults(false); // Reset no results state
 			try {
 				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}`,
+					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}&status=false`,
 				);
 				if (response.data.result.length === 0) {
 					setNoResults(true);
