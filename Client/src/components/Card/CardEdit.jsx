@@ -1,20 +1,18 @@
 import { Link } from 'react-router-dom';
 import './cardEdit.css';
 
-export default function CardEdit({ id, title, image, price, product }) {
-	const handleButtonClick = (status) => {
-		const url = `https://e-commerce-grupo03.onrender.com/admin/ChangeStatusArticle?id=${id}&status=${status}`;
+export default function CardEdit({ id, title, image, price }) {
+	const handleButtonClick = (statusSend) => {
+		const url = `https://e-commerce-grupo03.onrender.com/admin/ChangeStatusArticle?id=${id}&status=${statusSend}`;
 		console.log(`Enviando solicitud a: ${url}`);
 		fetch(url, { method: 'POST' })
 			.then((response) => {
-				console.log(response); // Imprime la respuesta completa
 				return response.json();
 			})
 			.then((data) => {
-				console.log(data); // Imprime los datos de la respuesta
 				if (data.message === 'item status changed successfully') {
 					alert(
-						`El producto ha sido ${status ? 'activado' : 'desactivado'} exitosamente.`,
+						`El producto ha sido ${statusSend ? 'activado' : 'desactivado'} exitosamente.`,
 					);
 				} else {
 					alert('Hubo un error al intentar cambiar el estado del producto.');
