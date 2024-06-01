@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './card.css';
+import './cardEdit.css';
 
 export default function CardEdit({ id, title, image, price, product }) {
 	const handleButtonClick = (status) => {
@@ -23,16 +23,19 @@ export default function CardEdit({ id, title, image, price, product }) {
 			.catch((error) => console.error(error));
 	};
 	return (
-		<div className='card'>
-			<div className='image-container'>
-				<img src={image} alt={title} />
-			</div>
-			<h1 className='name'>{title}</h1>
-			<div className='card-footer'>
-				<p className='price'>{`Price: $${price}`}</p>
-				<img className='icoFS' src='/EnvioGratis.png' alt='' />
-				<button onClick={() => handleButtonClick(true)}>Activar</button>
-				<button onClick={() => handleButtonClick(false)}>Desactivar</button>
+		<div className='Mi-Componente'>
+			<div className='Mi-Item'>
+				<div className='image-container'>
+					<img src={image} alt={title} />
+				</div>
+				<div className='Mi-Item-Details'>
+					<h2 className='Mi-Componente-title'>{title}</h2>
+					<p className='price'>${price}</p>
+				</div>
+				<div className='card-footer'>
+					<button onClick={() => handleButtonClick(true)}>Activar</button>
+					<button onClick={() => handleButtonClick(false)}>Desactivar</button>
+				</div>
 			</div>
 		</div>
 	);

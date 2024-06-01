@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
-import Cards from '../Cards/CardsEdit';
+import CardsEdit from '../Cards/CardsEdit';
 import Pagination from '../pagination/Pagination';
 import './EditProduct.css';
 import Swal from 'sweetalert2';
@@ -37,7 +37,7 @@ export default function Products() {
 			setNoResults(false); // Reset no results state
 			try {
 				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}&status=false`,
+					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}&status=ALL`,
 				);
 				if (response.data.result.length === 0) {
 					setNoResults(true);
@@ -111,7 +111,7 @@ export default function Products() {
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	const filteredProducts = products.filter(
-		(product) => product.articleStock > 0 && product.isActive,
+		(product) => product.articleStock > 0,
 	);
 
 	return (
@@ -165,7 +165,7 @@ export default function Products() {
 					</div>
 				) : (
 					<>
-						<Cards products={filteredProducts} loading={loading} />
+						<CardsEdit products={filteredProducts} loading={loading} />
 						<Pagination
 							productsPerPage={productsPerPage}
 							totalPages={totalPages}

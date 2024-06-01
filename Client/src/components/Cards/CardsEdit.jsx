@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import Card from '../Card/CardEdit';
-import './Cards.css';
+import './CardsEdit.css';
 export default function CardsEdit({ products, loading }) {
 	return (
-		<div className='cards-container'>
+		<div className='cardsEdit-container-'>
 			{loading ? (
 				<div className='loading'>
 					<p>Loading...</p>
