@@ -2,7 +2,7 @@ const { Article, Category, Size, Article_Size } = require('../../db');
 const postCreateArticle = async (req, res) => {
     try {
         let { categoryName, articleName, articleDescription, articleImage, articlePrice, articleStock, articleS,articleM,articleL,articleXL,articleXXL} = req.body;
-        if (Number( articleS + articleM + articleL + articleXL + articleXXL ) === 0) articleStock = 0;
+        if (( Number(articleS) + Number(articleM) + Number(articleL) + Number(articleXL) + Number(articleXXL) ) === 0) articleStock = 0;
 
         // Verificar datos requeridos
         if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock) {
