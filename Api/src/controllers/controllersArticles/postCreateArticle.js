@@ -6,7 +6,7 @@ const postCreateArticle = async (req, res) => {
 
         // Verificar datos requeridos
         if (!categoryName || !articleName || !articleImage || !articleDescription || !articlePrice || !articleStock) {
-            return res.status(400).json({ message: "Data is missing or invalid in the article creation form" });
+            return res.status(400).json({ message: "Data is missing or invalid in the article creation form" }, articleStock);
         }
 
         // Buscar categoría
