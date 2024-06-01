@@ -22,7 +22,7 @@ async function editArticle(req, res) {
         }
 
         if (articleName) article.articleName = articleName;
-        if (articleName) article.articleDescription = articleDescription;
+        if (articleDescription) article.articleDescription = articleDescription;
         if (articlePrice) article.articlePrice = articlePrice;
         if (articleImage) article.articleImage = articleImage;
         if (articleS) article.articleS = articleS;
