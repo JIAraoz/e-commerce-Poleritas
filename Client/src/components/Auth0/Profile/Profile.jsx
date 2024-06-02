@@ -4,6 +4,7 @@ import Logout from '../Logout/Logout';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import Cloudinary from '../../Cloudinary/Cloudinary';
 // import Review from '../../Review/Review';
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
@@ -87,6 +88,11 @@ const Profile = () => {
     }
   };
 
+  const handleImageUpload = (imageUrl) => {
+    setFormData({...formData, userImage: imageUrl});
+    setUserData({...userData, userImage: imageUrl});
+  };
+
 	return (
     isAuthenticated && (
       <div>
@@ -110,13 +116,7 @@ const Profile = () => {
                                     onChange={handleInputChange}
                                     placeholder="Name"
                                 />
-                                <input
-                                    type="text"
-                                    name="userImage"
-                                    value={formData.userImage}
-                                    onChange={handleInputChange}
-                                    placeholder="Image URL"
-                                />
+                                <Cloudinary onImageUpload={handleImageUpload}/>
                                 <input
                                     type="text"
                                     name="userDoorNumber"
