@@ -22,6 +22,7 @@ const CheckoutForm = () => {
 
             try {
                 const { data } = await axios.post('https://e-commerce-grupo03.onrender.com/cart/checkout', {
+                    cartId,
                     id,
                     amount: cartSubtotal * 100 + 50
                 });
