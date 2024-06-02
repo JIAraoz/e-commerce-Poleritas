@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.Mi-Componente {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+  
+.Mi-Componente button {
+    background-color: #4A707A;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+  
+.Mi-Componente button:hover {
+    background-color: #4a6c96;
+}
+  
+.Mi-Componente-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+  
+.Mi-Item {
+    display: flex;
+    align-items: center; /* Alinea los elementos hijos verticalmente en el centro */
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    width: 80%;
+    height: 300px; /* Define una altura específica para .Mi-Item */
+    margin: auto;
+}
+
+.Mi-Item img {
+    width: 15rem;
+    height: 100%; /* Cambia esto a un porcentaje del contenedor */
+    object-fit: contain;
+    
+}
+
+.Mi-Item-Details {
+    flex-grow: 1;
+    margin-right: 20px;
+    max-width: 40%; /* Ajusta este valor según tus necesidades */
+    overflow-wrap: break-word; /* Esto hará que las palabras largas se rompan y pasen a la siguiente línea */
+}
