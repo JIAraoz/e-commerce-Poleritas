@@ -5,7 +5,7 @@ const postReviews = async (req, res) => {
 
   try {
     // Buscar el usuario y sus carritos desactivados
-   
+
     const user = await User.findOne({
       where: { userId },
       include: {
@@ -26,7 +26,8 @@ const postReviews = async (req, res) => {
     }
 
     // Crear la nueva reseña
-    const review = await Review.create({ userId, reviewRating, reviewDescription });
+    const review = await Review.create({ reviewRating, reviewDescription });
+    await user.addReview(review)
     return res.status(201).json(review);
   } catch (error) {
     res.status(500).json({ message: 'Error al crear la reseña.', error: error.message });
