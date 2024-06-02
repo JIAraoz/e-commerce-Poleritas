@@ -16,14 +16,13 @@ const CheckoutForm = () => {
             type: 'card',
             card: elements.getElement(CardElement)
         });
-        
+
 
         if (!error) {
             const { id } = paymentMethod;
 
             try {
                 const { data } = await axios.post('https://e-commerce-grupo03.onrender.com/cart/checkout', {
-                    cartId,
                     id,
                     amount: cartSubtotal * 100 + 50
                 });

@@ -3,7 +3,7 @@ const { ShoppingCart, Article} = require('../../db');
 
 const checkoutCart = async (req, res) => {
    
-    const { cartId, id, amount } = req.body;
+    const { id, amount } = req.body;
 
     try {
         const paymentIntent = await stripe.paymentIntents.create({
