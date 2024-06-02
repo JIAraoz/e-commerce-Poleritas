@@ -22,3 +22,5 @@ const postReviews = async (req, res) => {
     res.status(500).json({ message: 'Error al crear la reseña.', error: error.message });
   }
 };
+
+module.exports=postReviews
