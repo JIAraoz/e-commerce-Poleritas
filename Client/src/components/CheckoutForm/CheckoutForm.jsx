@@ -17,6 +17,7 @@ const CheckoutForm = () => {
             card: elements.getElement(CardElement)
         });
 
+
         if (!error) {
             const { id } = paymentMethod;
 
