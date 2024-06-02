@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import Card from '../Card/CardEdit';
+import CardEdit from '../Card/CardEdit';
 import './CardsEdit.css';
 export default function CardsEdit({ products, loading }) {
 	return (
@@ -9,17 +9,20 @@ export default function CardsEdit({ products, loading }) {
 					<p>Loading...</p>
 				</div>
 			) : (
-				products.map((product) => (
-					<Card
-						key={product.articleId}
-						id={product.articleId}
-						title={product.articleName}
-						image={product.articleImage}
-						price={product.articlePrice}
-						stock={product.articleStock}
-						product={product}
-					/>
-				))
+				products.map((product) => {
+					return (
+						<CardEdit
+							key={product.articleId}
+							id={product.articleId}
+							title={product.articleName}
+							image={product.articleImage}
+							price={product.articlePrice}
+							stock={product.articleStock}
+							isActive={product.isActive}
+							product={product}
+						/>
+					);
+				})
 			)}
 		</div>
 	);

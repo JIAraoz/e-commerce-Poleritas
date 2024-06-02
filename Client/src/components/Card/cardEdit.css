@@ -39,13 +39,15 @@
 }
 
 .Mi-Item img {
-    width: 100%;
-    height: 100%; /* La imagen tomará la altura de su contenedor */
-    object-fit: contain; /* Asegura que la imagen se ajuste dentro de sus dimensiones definidas sin recortarla */
-    margin-right: 20px;
+    width: 15rem;
+    height: 100%; /* Cambia esto a un porcentaje del contenedor */
+    object-fit: contain;
+    
 }
 
 .Mi-Item-Details {
     flex-grow: 1;
     margin-right: 20px;
+    max-width: 40%; /* Ajusta este valor según tus necesidades */
+    overflow-wrap: break-word; /* Esto hará que las palabras largas se rompan y pasen a la siguiente línea */
 }

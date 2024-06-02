@@ -4,12 +4,14 @@ import Logout from '../Logout/Logout';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import EditProducts from "../../EditProducts/EditProducts";
 // import Review from '../../Review/Review';
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
 	const [userData, setUserData] = useState({});
 	const [isImageExpanded, setIsImageExpanded] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
+	const [isEditProductsVisible, setIsEditProductsVisible] = useState(false);
 	const [formData, setFormData] = useState({
 		userName: '',
 		userImage: '',
@@ -50,7 +52,9 @@ const Profile = () => {
 	const toggleImageExpansion = () => {
 		setIsImageExpanded(!isImageExpanded);
 	};
-
+	const handleEditProductsClick = () => {
+		setIsEditProductsVisible(prevIsEditProductsVisible => !prevIsEditProductsVisible);
+	};
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
 	};
@@ -152,6 +156,8 @@ const Profile = () => {
 						)}
 						<Logout />
 					</div>
+					<button onClick={handleEditProductsClick}>Edit products</button>
+					{isEditProductsVisible && <EditProducts />}
 				</div>
 			</div>
 		)

@@ -8,7 +8,7 @@ import './EditProduct.css';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function Products() {
+export default function EditProducts() {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -127,8 +127,8 @@ export default function Products() {
 						<option value=''>Order</option>
 						<option value='A-Z'>A-Z</option>
 						<option value='Z-A'>Z-A</option>
-						<option value='price-asc'>^ price</option>
-						<option value='price-desc'>v Price</option>
+						<option value='price-asc'>↑ price</option>
+						<option value='price-desc'>↓ Price</option>
 					</select>
 				</div>
 				<div className='custom-select'>
