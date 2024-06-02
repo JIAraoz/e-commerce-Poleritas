@@ -9,6 +9,7 @@ const getFill = async (req, res) => {
         const stockFilter = parseInt(req.query.stock, 10) || 0;
         const order = req.query.order || null;
         const nameFilter = req.query.name || '';
+        const sizeFilter = req.query.sizeFilter || null; // Nuevo filtro de talla única
 
         // Validar parámetros
         if (pageSize <= 0 || page <= 0 || stockFilter < 0) {
@@ -20,9 +21,32 @@ const getFill = async (req, res) => {
         if (stockFilter > 0) {
             whereCondition.articleStock = { [Op.gte]: stockFilter };
         }
-        if(nameFilter.length!==0){
-            whereCondition.articleName={
+        if (nameFilter.length !== 0) {
+            whereCondition.articleName = {
                 [Op.iLike]: `%${nameFilter}%`
+            };
+        }
+
+        // Filtrar por talla única
+        if (sizeFilter) {
+            switch (sizeFilter) {
+                case 'S':
+                    whereCondition.articleS = { [Op.gt]: 0 };
+                    break;
+                case 'M':
+                    whereCondition.articleM = { [Op.gt]: 0 };
+                    break;
+                case 'L':
+                    whereCondition.articleL = { [Op.gt]: 0 };
+                    break;
+                case 'XL':
+                    whereCondition.articleXL = { [Op.gt]: 0 };
+                    break;
+                case 'XXL':
+                    whereCondition.articleXXL = { [Op.gt]: 0 };
+                    break;
+                default:
+                    return res.status(400).json({ message: 'Invalid size filter' });
             }
         }
 
@@ -85,7 +109,7 @@ const getFill = async (req, res) => {
         });
     } catch (error) {
         console.error('Error al obtener datos:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
 

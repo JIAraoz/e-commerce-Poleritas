@@ -11,31 +11,33 @@ import Cart from './components/Cart/Cart';
 import Footer from './components/Footer/Footer';
 import Products from './components/Products/Products';
 import Checkout from './components/Checkout/Checkout';
-import "./App.css"
+import EditProduct from './components/EditProducts/EditProducts';
+import './App.css';
 function App() {
-    const { isLoading } = useAuth0();
-    const { pathname } = useLocation();
+	const { isLoading } = useAuth0();
+	const { pathname } = useLocation();
 
-    if (isLoading) return <h1>Cargando sesión...</h1>;
+	if (isLoading) return <h1>Cargando sesión...</h1>;
 
-    return (
-        <div className='app-container'>
-        {pathname !== '/' && <Nav />}
-        <div className='content'>
-            <Routes>
-                <Route path='/' element={<Landing />} />
-                <Route path='/profile' element={<Profile />} />
-                <Route path='/home' element={<Home />} />
-                <Route path='/form' element={<Form />} />
-                <Route path='/products' element={<Products />} />
-                <Route path='/detail/:id' element={<Detail />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/checkout' element={<Checkout />} />
-            </Routes>
-        </div>
-            <Footer />
-        </div>
-    );
+	return (
+		<div className='app-container'>
+			{pathname !== '/' && <Nav />}
+			<div className='content'>
+				<Routes>
+					<Route path='/' element={<Landing />} />
+					<Route path='/profile' element={<Profile />} />
+					<Route path='/home' element={<Home />} />
+					<Route path='/form' element={<Form />} />
+					<Route path='/products' element={<Products />} />
+					<Route path='/detail/:id' element={<Detail />} />
+					<Route path='/cart' element={<Cart />} />
+					<Route path='/checkout' element={<Checkout />} />
+					<Route path='/EditProduct' element={<EditProduct />} />
+				</Routes>
+			</div>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
