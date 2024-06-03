@@ -48,12 +48,12 @@ export default function Products() {
 				}
 				setLoading(false);
 			} catch (error) {
-				console.error('Error fetching the products:', error);
-				Swal.fire({
-					icon: 'error',
-					title: 'Oops...',
-					text: 'No products were found with the applied filters or there was an error in the request.',
-				});
+				// console.error('Error fetching the products:', error);
+				// Swal.fire({
+				// 	icon: 'error',
+				// 	title: 'Oops...',
+				// 	text: 'No products were found with the applied filters or there was an error in the request.',
+				// });
 				setNoResults(true);
 				setLoading(false);
 			}
