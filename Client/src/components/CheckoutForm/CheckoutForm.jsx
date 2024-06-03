@@ -1,6 +1,7 @@
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const CheckoutForm = () => {
     const stripe = useStripe();
@@ -28,16 +29,25 @@ const CheckoutForm = () => {
 
                 console.log(data);
                 if (data.message === 'successful payment') {
-                    navigate('/home');
+                    elements.getElement(CardElement).clear();
+
+                    Swal.fire({
+                        title: 'Compra Exitosa!',
+                        text: 'Muchas gracias por su compra. Le invitamos a dejar una review acerca de la pagina en su perfil.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            navigate('/home');
+                        }
+                    });
 
                     try {
-                        axios.get(`https://e-commerce-grupo03.onrender.com/cart/desactivateShoppingCart?cartId=${cartId}`)
+                        await axios.get(`https://e-commerce-grupo03.onrender.com/cart/desactivateShoppingCart?cartId=${cartId}`);
                     } catch (error) {
-                        console.error(error)
+                        console.error(error);
                     }
                 }
-
-                elements.getElement(CardElement).clear();
             } catch (error) {
                 console.error(error);
             }
@@ -48,7 +58,6 @@ const CheckoutForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            
             <CardElement />
             <button type="submit" disabled={!stripe}>Buy ${cartSubtotal}</button>
         </form>
