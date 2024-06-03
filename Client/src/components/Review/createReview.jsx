@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+// eslint-disable-next-line react/prop-types
 const CreateReview = ({ userId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');

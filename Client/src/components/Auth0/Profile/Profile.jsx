@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import CreateReview from '../../Review/createReview';
+import Review from "../../Review/Review"
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
 	const [ userData, setUserData ] = useState({});
@@ -151,7 +152,10 @@ const Profile = () => {
             <Logout />
           </div>
         </div>
-       <CreateReview userId={userData.userId} />
+        <div>
+        <CreateReview userId={userData.userId} />
+        </div>
+        <Review/>
       </div>
     )
   );
