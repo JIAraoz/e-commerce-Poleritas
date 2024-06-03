@@ -3,9 +3,11 @@ import './Profile.css';
 import Logout from '../Logout/Logout';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cloudinary from '../../Cloudinary/Cloudinary';
 import Swal from 'sweetalert2';
 import EditProducts from '../../EditProducts/EditProducts';
 import ListUsers from '../../ListUsers/ListUsers';
+
 // import Review from '../../Review/Review';
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();

@@ -5,7 +5,7 @@ const postReviews = async (req, res) => {
 
   try {
     // Buscar el usuario y sus carritos desactivados
-   
+
     const user = await User.findOne({
       where: { userId },
       include: {
@@ -20,13 +20,14 @@ const postReviews = async (req, res) => {
     }
 
     // Verificar si el usuario ya tiene una reseña
-    const existingReview = await Review.findOne({ where: { userId } });
+    const existingReview = await user.getReview();
     if (existingReview) {
       return res.status(400).json({ message: 'El usuario ya tiene una reseña. Use PUT para actualizar.' });
     }
 
     // Crear la nueva reseña
-    const review = await Review.create({ userId, reviewRating, reviewDescription });
+    const review = await Review.create({ reviewRating, reviewDescription });
+    await user.setReview(review)
     return res.status(201).json(review);
   } catch (error) {
     res.status(500).json({ message: 'Error al crear la reseña.', error: error.message });
