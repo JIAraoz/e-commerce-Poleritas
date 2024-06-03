@@ -6,7 +6,7 @@ import './Home.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import ViewReviews from "../Review/ViewReviews"
+// import ViewReviews from "../Review/ViewReviews"
 export default function Home() {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -176,7 +176,7 @@ export default function Home() {
 					<img className='envioSeguro' src='/envioSeguro.png' alt='seguro' />
 				</div>
       </div>
-      <ViewReviews/>
+      {/* <ViewReviews/> */}
 		</div>
 	);
 }

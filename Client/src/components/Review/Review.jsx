@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Rating from 'react-rating-stars-component';
 
 // eslint-disable-next-line react/prop-types
 const UserReview = ({ userId }) => {
@@ -29,8 +30,8 @@ const UserReview = ({ userId }) => {
     fetchUserReview();
   }, [userId]);
 
-  const handleRatingChange = (e) => {
-    setRating(e.target.value);
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
   };
 
   const handleCommentChange = (e) => {
@@ -46,6 +47,7 @@ const UserReview = ({ userId }) => {
       const response = await axios.put(`https://e-commerce-grupo03.onrender.com/review/reviews/${review.id}`, {
         reviewRating: rating,
         reviewDescription: comment,
+        userId
       });
       setReview(response.data);
       setEditing(false);
@@ -63,32 +65,34 @@ const UserReview = ({ userId }) => {
   return (
     <div>
       <h2>Tu Reseña</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
       {review ? (
         <div>
           {editing ? (
             <div>
               <label>Calificación:</label>
-              <input
-                type="number"
+              <Rating
+                count={5}
                 value={rating}
                 onChange={handleRatingChange}
-                min="0"
-                max="5"
+                size={24}
+                activeColor="#ffd700"
               />
               <label>Comentario:</label>
               <textarea value={comment} onChange={handleCommentChange} />
-              <button onClick={handleUpdateReview}>Guardar</button>
+              {editing && (
+                <button onClick={handleUpdateReview}>Guardar</button>
+              )}
               <button onClick={() => setEditing(false)}>Cancelar</button>
             </div>
           ) : (
             <div>
-              <p>Calificación: {review.reviewRating}</p>
+              <p>Calificación: <Rating count={5} value={review.reviewRating} size={24} edit={false} activeColor="#ffd700" /></p>
               <p>Comentario: {review.reviewDescription}</p>
               <button onClick={handleEditReview}>Editar</button>
             </div>
           )}
-        </div>
+        </div>  
       ) : (
         <p>No tienes una reseña aún.</p>
       )}

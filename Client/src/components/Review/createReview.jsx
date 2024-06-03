@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Rating from 'react-rating-stars-component';
 
 // eslint-disable-next-line react/prop-types
 const CreateReview = ({ userId }) => {
@@ -8,9 +9,8 @@ const CreateReview = ({ userId }) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const handleRatingChange = (e) => {
-    const value = Math.max(0, Math.min(5, e.target.value)); // Limitar el rango de 0 a 5
-    setRating(value);
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
   };
 
   const handleCommentChange = (e) => {
@@ -36,15 +36,12 @@ const CreateReview = ({ userId }) => {
       console.error('Error al crear la reseña:', error);
 
       if (error.response) {
-        // El servidor respondió con un código de estado fuera del rango 2xx
         console.error('Respuesta del servidor:', error.response.data);
         setError(error.response.data.message || 'Error al crear la reseña.');
       } else if (error.request) {
-        // La solicitud se hizo pero no se recibió respuesta
         console.error('No se recibió respuesta:', error.request);
         setError('No se recibió respuesta del servidor.');
       } else {
-        // Algo sucedió al configurar la solicitud que desencadenó un error
         console.error('Error al configurar la solicitud:', error.message);
         setError('Error al configurar la solicitud.');
       }
@@ -55,18 +52,17 @@ const CreateReview = ({ userId }) => {
   return (
     <div>
       <h2>Crear Reseña</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>No puede crear una reseña por que ya tiene una o por que no tiene ninguna compra</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="rating">Calificación:</label>
-          <input
-            type="number"
-            id="rating"
+          <Rating
+            count={5}
             value={rating}
             onChange={handleRatingChange}
-            min="0"
-            max="5"
+            size={24}
+            activeColor="#ffd700"
           />
         </div>
         <div>
@@ -84,4 +80,3 @@ const CreateReview = ({ userId }) => {
 };
 
 export default CreateReview;
-

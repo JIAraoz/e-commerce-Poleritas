@@ -155,7 +155,7 @@ const Profile = () => {
         <div>
         <CreateReview userId={userData.userId} />
         </div>
-        <Review/>
+        <Review userId={userData.userId} />
       </div>
     )
   );
