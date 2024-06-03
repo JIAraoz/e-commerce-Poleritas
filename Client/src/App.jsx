@@ -11,7 +11,7 @@ import Cart from './components/Cart/Cart';
 import Footer from './components/Footer/Footer';
 import Products from './components/Products/Products';
 import Checkout from './components/Checkout/Checkout';
-import EditProduct from './components/EditProducts/EditProducts';
+import ListUsers from './components/ListUsers/ListUsers';
 import './App.css';
 function App() {
 	const { isLoading } = useAuth0();
@@ -32,7 +32,7 @@ function App() {
 					<Route path='/detail/:id' element={<Detail />} />
 					<Route path='/cart' element={<Cart />} />
 					<Route path='/checkout' element={<Checkout />} />
-					<Route path='/EditProduct' element={<EditProduct />} />
+					<Route path='/ListUsers' element={<ListUsers />} />
 				</Routes>
 			</div>
 			<Footer />

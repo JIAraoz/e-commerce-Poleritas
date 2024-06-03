@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cloudinary from '../../Cloudinary/Cloudinary';
 import Swal from 'sweetalert2';
-import EditProducts from "../../EditProducts/EditProducts";
+import EditProducts from '../../EditProducts/EditProducts';
+import ListUsers from '../../ListUsers/ListUsers';
 
 // import Review from '../../Review/Review';
 const Profile = () => {
@@ -14,6 +15,7 @@ const Profile = () => {
 	const [isImageExpanded, setIsImageExpanded] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [isEditProductsVisible, setIsEditProductsVisible] = useState(false);
+	const [showListUsers, setShowListUsers] = useState(false);
 	const [formData, setFormData] = useState({
 		userName: '',
 		userImage: '',
@@ -55,7 +57,12 @@ const Profile = () => {
 		setIsImageExpanded(!isImageExpanded);
 	};
 	const handleEditProductsClick = () => {
-		setIsEditProductsVisible(prevIsEditProductsVisible => !prevIsEditProductsVisible);
+		setIsEditProductsVisible(
+			(prevIsEditProductsVisible) => !prevIsEditProductsVisible,
+		);
+		if (showListUsers) {
+			setShowListUsers(false);
+		}
 	};
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
@@ -92,73 +99,92 @@ const Profile = () => {
 		}
 	};
 
-  const handleImageUpload = (imageUrl) => {
-    setFormData({...formData, userImage: imageUrl});
-    setUserData({...userData, userImage: imageUrl});
-  };
-
+	const handleButtonClick = () => {
+		setShowListUsers(!showListUsers);
+		if (isEditProductsVisible) {
+			setIsEditProductsVisible(false);
+		}
+	};
 	return (
-    isAuthenticated && (
-      <div>
-        <div className='profile'>
-          <div className={`profile-image-container ${isImageExpanded ? 'expanded' : ''}`} onClick={toggleImageExpansion}>
-            <img src={userData.userImage} alt={userData.userName} />
-          </div>
-          <div className='profile-info'>
-            <h2>Nombre: {userData.userName}</h2>
-            <p>Correo: {userData.userEmail}</p>
-            <p>Rol: {userData.userRol}</p>
-            <button onClick={handleEditClick}>
-                            {isEditing ? 'Cancel' : 'Edit Profile'}
-                        </button>
-                        {isEditing && (
-                            <form onSubmit={handleFormSubmit}>
-                                <input
-                                    type="text"
-                                    name="userName"
-                                    value={formData.userName}
-                                    onChange={handleInputChange}
-                                    placeholder="Name"
-                                />
-                                <Cloudinary onImageUpload={handleImageUpload}/>
-                                <input
-                                    type="text"
-                                    name="userDoorNumber"
-                                    value={formData.userDoorNumber}
-                                    onChange={handleInputChange}
-                                    placeholder="Door Number"
-                                />
-                                <input
-                                    type="text"
-                                    name="userStreetName"
-                                    value={formData.userStreetName}
-                                    onChange={handleInputChange}
-                                    placeholder="Street Name"
-                                />
-                                <input
-                                    type="text"
-                                    name="userCountry"
-                                    value={formData.userCountry}
-                                    onChange={handleInputChange}
-                                    placeholder="Country"
-                                />
-                                <input
-                                    type="text"
-                                    name="userCity"
-                                    value={formData.userCity}
-                                    onChange={handleInputChange}
-                                    placeholder="City"
-                                />
-                                <button type="submit">Save Changes</button>
-                            </form>
-                        )}
-            <Logout />
-          </div>
-        </div>
-      </div>
-    )
-  );
-
+		isAuthenticated && (
+			<div>
+				<div className='profile'>
+					<div
+						className={`profile-image-container ${isImageExpanded ? 'expanded' : ''}`}
+						onClick={toggleImageExpansion}
+					>
+						<img src={userData.userImage} alt={userData.userName} />
+					</div>
+					<div className='profile-info'>
+						<h2>Nombre: {userData.userName}</h2>
+						<p>Correo: {userData.userEmail}</p>
+						<p>Rol: {userData.userRol}</p>
+						<button onClick={handleEditClick}>
+							{isEditing ? 'Cancel' : 'Edit Profile'}
+						</button>
+						{isEditing && (
+							<form onSubmit={handleFormSubmit}>
+								<input
+									type='text'
+									name='userName'
+									value={formData.userName}
+									onChange={handleInputChange}
+									placeholder='Name'
+								/>
+								<input
+									type='text'
+									name='userImage'
+									value={formData.userImage}
+									onChange={handleInputChange}
+									placeholder='Image URL'
+								/>
+								<input
+									type='text'
+									name='userDoorNumber'
+									value={formData.userDoorNumber}
+									onChange={handleInputChange}
+									placeholder='Door Number'
+								/>
+								<input
+									type='text'
+									name='userStreetName'
+									value={formData.userStreetName}
+									onChange={handleInputChange}
+									placeholder='Street Name'
+								/>
+								<input
+									type='text'
+									name='userCountry'
+									value={formData.userCountry}
+									onChange={handleInputChange}
+									placeholder='Country'
+								/>
+								<input
+									type='text'
+									name='userCity'
+									value={formData.userCity}
+									onChange={handleInputChange}
+									placeholder='City'
+								/>
+								<button type='submit'>Save Changes</button>
+							</form>
+						)}
+						<Logout />
+					</div>
+					<div className='button-container'>
+						<button onClick={handleEditProductsClick}>Edit products</button>
+						<button onClick={handleButtonClick}>
+							{showListUsers
+								? 'Cerrar lista de usuarios'
+								: 'Mostrar lista de usuarios'}
+						</button>
+					</div>
+					{isEditProductsVisible && <EditProducts />}
+					{showListUsers && <ListUsers />}
+				</div>
+			</div>
+		)
+	);
 };
 
 export default Profile;
