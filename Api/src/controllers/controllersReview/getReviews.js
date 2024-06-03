@@ -18,7 +18,7 @@ const getReviews = async (req, res) => {
       return res.status(400).json({ message: 'El usuario no ha realizado ninguna compra.' });
     }
 
-    const review = await Review.findOne({ where: { userId } });
+    const review = await Review.getReview()
     if (!review) {
       return res.status(404).json({ message: 'Reseña no encontrada.' });
     }

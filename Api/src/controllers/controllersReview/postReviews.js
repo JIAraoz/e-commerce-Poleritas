@@ -20,7 +20,7 @@ const postReviews = async (req, res) => {
     }
 
     // Verificar si el usuario ya tiene una reseña
-    const existingReview = await Review.findOne({ where: { userId } });
+    const existingReview = await User.getReview();
     if (existingReview) {
       return res.status(400).json({ message: 'El usuario ya tiene una reseña. Use PUT para actualizar.' });
     }
