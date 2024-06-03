@@ -19,7 +19,7 @@ const updateReview = async (req, res) => {
     }
 
     // Buscar la reseña existente
-    const existingReview = await Review.findOne({ where: { userId } });
+    const existingReview = await user.getReview()
 
     if (!existingReview) {
       return res.status(400).json({ message: 'No se encontró una reseña para editar. Use POST para crear una nueva.' });

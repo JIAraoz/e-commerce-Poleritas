@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateQuery } from '../../redux/actions';
 import axios from 'axios';
-import Cards from '../Cards/Cards';
+import CardsEdit from '../Cards/CardsEdit';
 import Pagination from '../pagination/Pagination';
-import './Products.css';
+import './EditProduct.css';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function Products() {
+export default function EditProducts() {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +37,7 @@ export default function Products() {
 			setNoResults(false); // Reset no results state
 			try {
 				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}`,
+					`https://e-commerce-grupo03.onrender.com/article/articles?page=${page}&limit=${productsPerPage}&category=${initialCategory || query.filter}&order=${query.order}&name=${query.search}&status=ALL`,
 				);
 				if (response.data.result.length === 0) {
 					setNoResults(true);
@@ -111,7 +111,7 @@ export default function Products() {
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	const filteredProducts = products.filter(
-		(product) => product.articleStock > 0 && product.isActive,
+		(product) => product.articleStock > 0,
 	);
 
 	return (
@@ -127,8 +127,8 @@ export default function Products() {
 						<option value=''>Order</option>
 						<option value='A-Z'>A-Z</option>
 						<option value='Z-A'>Z-A</option>
-						<option value='price-asc'>^ price</option>
-						<option value='price-desc'>v Price</option>
+						<option value='price-asc'>↑ price</option>
+						<option value='price-desc'>↓ Price</option>
 					</select>
 				</div>
 				<div className='custom-select'>
@@ -165,7 +165,7 @@ export default function Products() {
 					</div>
 				) : (
 					<>
-						<Cards products={filteredProducts} loading={loading} />
+						<CardsEdit products={filteredProducts} loading={loading} />
 						<Pagination
 							productsPerPage={productsPerPage}
 							totalPages={totalPages}
