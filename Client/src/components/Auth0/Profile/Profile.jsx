@@ -107,6 +107,11 @@ const Profile = () => {
 			setIsEditProductsVisible(false);
 		}
 	};
+
+	const handleImageUpload = (imageUrl) => {
+        setFormData({ ...formData, userImage: imageUrl });
+    };
+
 	return (
 		isAuthenticated && (
 			<div>
@@ -133,13 +138,7 @@ const Profile = () => {
 									onChange={handleInputChange}
 									placeholder='Name'
 								/>
-								<input
-									type='text'
-									name='userImage'
-									value={formData.userImage}
-									onChange={handleInputChange}
-									placeholder='Image URL'
-								/>
+								<Cloudinary onImageUpload={handleImageUpload} />
 								<input
 									type='text'
 									name='userDoorNumber'
