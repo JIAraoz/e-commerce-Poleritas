@@ -17,15 +17,15 @@ export default function Home() {
 	const [category, setCategory] = useState('');
 	const { user, isAuthenticated } = useAuth0();
 
-	if (isAuthenticated) {
-		var userData = {
-			userName: user.name,
-			userEmail: user.email,
-			userImage: user.picture,
-		};
+	useEffect(() => {
+		if (isAuthenticated && user) {
+			const userData = {
+				userName: user.name,
+				userEmail: user.email,
+				userImage: user.picture,
+			};
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		useEffect(() => {
+			// eslint-disable-next-line no-inner-declarations
 			async function fetchUserData() {
 				try {
 					await axios.post(
@@ -33,38 +33,40 @@ export default function Home() {
 						userData,
 					);
 				} catch (error) {
-          // alert('Ha ocurrido un error: ' + error.message);
-          console.log(error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "An error has occurred: " + error.message,
-          });
+					console.log(error);
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'An error has occurred: ' + error.message,
+					});
 				}
 			}
 
 			fetchUserData();
-		}, [userData]);
-	}
+		}
+	}, [isAuthenticated, user]);
 
 	useEffect(() => {
-		async function fetchUserData() {
-			try {
-				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
-				);
-				window.localStorage.setItem("userData", JSON.stringify(response.data.result));
-			} catch (error) {
-				Swal.fire({
-				icon: "error",
-				title: "Oops...",
-				text: "An error has occurred:" + error.message,
-				});
+		if (isAuthenticated && user) {
+			// eslint-disable-next-line no-inner-declarations
+			async function fetchUserData() {
+				try {
+					const response = await axios.get(
+						`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
+					);
+					window.localStorage.setItem('userData', JSON.stringify(response.data.result));
+				} catch (error) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'An error has occurred:' + error.message,
+					});
+				}
 			}
-		};
 
-		fetchUserData();
-	}, [])
+			fetchUserData();
+		}
+	}, [isAuthenticated, user]);
 
 	const dispatch = useDispatch();
 
@@ -84,15 +86,16 @@ export default function Home() {
 				setCurrentPage(response.data.currentPage);
 				setLoading(false);
 			} catch (error) {
-        console.error('Error fetching the products:', error);
-        Swal.fire({
+				console.error('Error fetching the products:', error);
+				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
-					text: "Error fetching the products: " + error,
+					text: 'Error fetching the products: ' + error,
 				});
 				setLoading(false);
 			}
 		}
+
 		async function fetchCategories() {
 			try {
 				const response = await axios.get(
@@ -100,7 +103,6 @@ export default function Home() {
 				);
 				setCategories(response.data.result);
 			} catch (error) {
-				// alert(error.message);
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
@@ -108,11 +110,9 @@ export default function Home() {
 				});
 			}
 		}
-		fetchCategories();
-		fetchProducts(currentPage);
-	}, [currentPage, query]);
 
-	// const handlerOrder = (event) => {
+
+    // const handlerOrder = (event) => {
 	// 	setOrder(event.target.value);
 	// };
 
@@ -127,7 +127,12 @@ export default function Home() {
 	// 	dispatch(updateQuery(query));
 	// };
 
-	// const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    
+
+		fetchCategories();
+		fetchProducts(currentPage);
+	}, [currentPage, query]);
 
 	return (
 		<div className='home'>
@@ -150,8 +155,8 @@ export default function Home() {
 						<p>Polo</p>
 					</Link>
 				</div>
-			</div>
-			{/* <div className='products-section'> */}
+      </div>
+      {/* <div className='products-section'> */}
 				{/* <div className='products-title'>Best Sellers</div> */}
 				{/* <div className='product-carousel'> */}
 					{/* inserta los producto de cards aqui */}
