@@ -36,7 +36,7 @@ const getUser = async (req, res) => {
             where: whereCondition,
             offset,
             limit: pageSize,
-            attributes: ['userId', 'userName', 'userEmail', 'userRol', 'createdAt'] // Selecciona solo los campos necesarios
+            attributes: ['userId', 'userName', 'userEmail', 'userRol','userImage', 'createdAt'] // Selecciona solo los campos necesarios
         });
 
         // Verificar si se encontraron usuarios
