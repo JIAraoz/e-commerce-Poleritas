@@ -7,6 +7,8 @@ import Cloudinary from '../../Cloudinary/Cloudinary';
 import Swal from 'sweetalert2';
 import EditProducts from '../../EditProducts/EditProducts';
 import ListUsers from '../../ListUsers/ListUsers';
+import CreateReview from '../../Review/createReview';
+import Review from "../../Review/Review"
 
 // import Review from '../../Review/Review';
 const Profile = () => {
@@ -181,7 +183,13 @@ const Profile = () => {
 					</div>
 					{isEditProductsVisible && <EditProducts />}
 					{showListUsers && <ListUsers />}
-				</div>
+        </div>
+          <div>
+        <CreateReview userId={userData.userId} />
+        </div>
+        <div>
+        <Review userId={userData.userId} />
+        </div>
 			</div>
 		)
 	);
