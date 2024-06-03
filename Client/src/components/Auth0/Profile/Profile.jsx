@@ -4,7 +4,8 @@ import Logout from '../Logout/Logout';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import EditProducts from "../../EditProducts/EditProducts";
+import EditProducts from '../../EditProducts/EditProducts';
+import ListUsers from '../../ListUsers/ListUsers';
 // import Review from '../../Review/Review';
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
@@ -12,6 +13,7 @@ const Profile = () => {
 	const [isImageExpanded, setIsImageExpanded] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [isEditProductsVisible, setIsEditProductsVisible] = useState(false);
+	const [showListUsers, setShowListUsers] = useState(false);
 	const [formData, setFormData] = useState({
 		userName: '',
 		userImage: '',
@@ -53,7 +55,12 @@ const Profile = () => {
 		setIsImageExpanded(!isImageExpanded);
 	};
 	const handleEditProductsClick = () => {
-		setIsEditProductsVisible(prevIsEditProductsVisible => !prevIsEditProductsVisible);
+		setIsEditProductsVisible(
+			(prevIsEditProductsVisible) => !prevIsEditProductsVisible,
+		);
+		if (showListUsers) {
+			setShowListUsers(false);
+		}
 	};
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
@@ -90,6 +97,12 @@ const Profile = () => {
 		}
 	};
 
+	const handleButtonClick = () => {
+		setShowListUsers(!showListUsers);
+		if (isEditProductsVisible) {
+			setIsEditProductsVisible(false);
+		}
+	};
 	return (
 		isAuthenticated && (
 			<div>
@@ -156,8 +169,16 @@ const Profile = () => {
 						)}
 						<Logout />
 					</div>
-					<button onClick={handleEditProductsClick}>Edit products</button>
+					<div className='button-container'>
+						<button onClick={handleEditProductsClick}>Edit products</button>
+						<button onClick={handleButtonClick}>
+							{showListUsers
+								? 'Cerrar lista de usuarios'
+								: 'Mostrar lista de usuarios'}
+						</button>
+					</div>
 					{isEditProductsVisible && <EditProducts />}
+					{showListUsers && <ListUsers />}
 				</div>
 			</div>
 		)
