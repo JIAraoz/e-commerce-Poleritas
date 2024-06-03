@@ -88,7 +88,6 @@ const CheckoutForm = () => {
                     <h3>User Details</h3>
                     <p><strong>Name:</strong> {userData.userName}</p>
                     <p><strong>Email:</strong> {userData.userEmail}</p>
-                    {/* Puedes añadir más detalles si es necesario */}
                 </div>
             )}
             {cartResponse && cartResponse.articles.length > 0 ? (
