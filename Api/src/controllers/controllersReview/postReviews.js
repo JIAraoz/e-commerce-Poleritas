@@ -27,7 +27,7 @@ const postReviews = async (req, res) => {
 
     // Crear la nueva reseña
     const review = await Review.create({ reviewRating, reviewDescription });
-    await user.addReview(review)
+    await user.setReview(review)
     return res.status(201).json(review);
   } catch (error) {
     res.status(500).json({ message: 'Error al crear la reseña.', error: error.message });
