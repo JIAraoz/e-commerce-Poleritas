@@ -16,6 +16,7 @@ export default function EditProducts() {
 	const [categories, setCategories] = useState([]);
 	const [order, setOrder] = useState('');
 	const [category, setCategory] = useState('');
+	const [isActive, setIsActive] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
 	const [noResults, setNoResults] = useState(false);
 	const dispatch = useDispatch();
@@ -79,23 +80,32 @@ export default function EditProducts() {
 	}, [currentPage, query, location.search]);
 
 	useEffect(() => {
-		setShowFilters(order || category);
-	}, [order, category]);
+		updateFilters(order, category, isActive);
+	}, [isActive]);
 
-	const updateFilters = (newOrder, newCategory) => {
-		const newQuery = { ...query, order: newOrder, filter: newCategory };
+	const updateFilters = (newOrder, newCategory, newIsActive) => {
+		const newQuery = {
+			...query,
+			order: newOrder,
+			filter: newCategory,
+			isActive: newIsActive,
+		};
 		dispatch(updateQuery(newQuery));
 		setCurrentPage(1);
 
-		// Update the URL with the new filters
 		const searchParams = new URLSearchParams();
 		if (newOrder) searchParams.set('order', newOrder);
 		if (newCategory) searchParams.set('category', newCategory);
+		if (newIsActive) searchParams.set('isActive', newIsActive);
 		navigate({ search: searchParams.toString() });
 
 		setShowFilters(true);
 	};
 
+	const handleIsActiveChange = (e) => {
+		const newIsActive = e.target.value;
+		setIsActive(newIsActive);
+	};
 	const handlerOrder = (event) => {
 		const newOrder = event.target.value;
 		setOrder(newOrder);
@@ -110,13 +120,29 @@ export default function EditProducts() {
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-	const filteredProducts = products.filter(
-		(product) => product.articleStock > 0,
-	);
+	const filteredProducts = products.filter((product) => {
+		if (isActive === '') {
+			return product.articleStock > 0;
+		} else if (isActive === 'true') {
+			return product.articleStock > 0 && product.isActive;
+		} else {
+			return product.articleStock > 0 && !product.isActive;
+		}
+	});
 
 	return (
 		<div>
 			<div className='filters'>
+				<div className='custom-select'>
+					<label>
+						Filter by active status:
+						<select value={isActive} onChange={handleIsActiveChange}>
+							<option value=''>All</option>
+							<option value='true'>Active</option>
+							<option value='false'>Inactive</option>
+						</select>
+					</label>
+				</div>
 				<div className='custom-select'>
 					<select
 						name='order'
