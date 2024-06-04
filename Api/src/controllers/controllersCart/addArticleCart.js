@@ -46,7 +46,7 @@ const addArticleCart = async (req, res) => {
             await cart.addArticle(article, { through: { articleQuantity:stock, S, M, L, XL, XXL } });
         }else{
             const response = await Article.findByPk(articleExist.articleArticleId);
-            const subtotalAux = response.dataValues.articlePrice * parseInt(stock);
+            const subtotalAux = parseFloat((response.dataValues.articlePrice * parseInt(stock)).toFixed(2));
             cart.cartSubtotal += subtotalAux;
             await cart.save();
             articleExist.S += S;
