@@ -26,7 +26,7 @@ const removeArticleCart = async (req, res) => {
         }
 
         const articleQuantity = cart.articles.find(art => art.dataValues.articleId === article.articleId)
-        cart.cartSubtotal -= article.articlePrice * articleQuantity.Cart_Articule.articleQuantity
+        cart.cartSubtotal -= parseFloat((article.articlePrice * articleQuantity.Cart_Articule.articleQuantity).toFixed(2));
         await cart.save()
         await cart.removeArticle(article);
 

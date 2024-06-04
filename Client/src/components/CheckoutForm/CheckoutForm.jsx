@@ -82,10 +82,18 @@ const CheckoutForm = () => {
                     }
                 }
             } catch (error) {
-                console.error(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "An error has occurred:" + error.message,
+                });
             }
         } else {
-            console.error(error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "An error has occurred:" + error.message,
+            });
         }
     };
 
@@ -106,7 +114,7 @@ const CheckoutForm = () => {
                         {cartResponse.articles.map((article, index) => (
                             <li key={index}>
                                 <img src={article.articleImage} alt="item" />
-                                {article.articleName} - ${article.articlePrice}
+                                {article.articleName} {} - ${article.articlePrice}
                             </li>
                         ))}
                     </ul>
