@@ -189,7 +189,8 @@ const Profile = () => {
 					{isEditProductsVisible && <EditProducts />}
 					{showListUsers && <ListUsers />}
 					{isCreateReviewVisible && <CreateReview userId={userData.userId} />}
-				</div>
+        <Review userId={userData.userId} />
+        </div>
 			</div>
 		)
 	);
