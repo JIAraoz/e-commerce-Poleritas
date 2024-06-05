@@ -7,7 +7,7 @@ const ListUsers = () => {
 	const [users, setUsers] = useState([]);
 	const [query,setQuery]=useState({
 		email:"",
-		filter:""
+		filter:"All"
 	})
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);

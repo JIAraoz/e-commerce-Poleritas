@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
+import {useEffect } from 'react';
 import axios from 'axios';
 export default function UsersSearchBar({query,setQuery,setUsers,setCurrentPage,currentPage,setTotalPages}) {
 	
 	useEffect(() => {
 		axios
-			.get(`https://e-commerce-grupo03.onrender.com/user/list-users?page=${currentPage}`)
+			.get(`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${query.email}&role=${query.filter}&page=${currentPage}`)
 			.then((response) => {
 				if (response.data && Array.isArray(response.data.result)) {
 					setUsers(response.data.result);
@@ -31,7 +31,7 @@ export default function UsersSearchBar({query,setQuery,setUsers,setCurrentPage,c
 	const handleSearch = () => {
 		axios
 			.get(
-				`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${query.email}&role=${query.filter}$page=${1}`,
+				`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${query.email}&role=${query.filter}&page=${1}`,
 			)
 			.then(({ data }) => {
 				setUsers(data.result);
