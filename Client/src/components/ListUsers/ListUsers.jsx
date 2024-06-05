@@ -9,6 +9,7 @@ const ListUsers = () => {
 		email:"",
 		filter:"All"
 	})
+	const [notFound,setNotFound]=useState(false)
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
 	const productsPerPage=10
@@ -17,11 +18,14 @@ const ListUsers = () => {
 	return (
 		<div>
 			<h1>User List</h1>
-			<UsersSearchBar setUsers={setUsers} query={query} setQuery={setQuery} setCurrentPage={setCurrentPage}currentPage={currentPage} setTotalPages={setTotalPages}/>
-			{Array.isArray(users) &&
+			<UsersSearchBar setUsers={setUsers} query={query} setQuery={setQuery} setCurrentPage={setCurrentPage}currentPage={currentPage} setTotalPages={setTotalPages} setNotFound={setNotFound} notFound={notFound}/>
+			{notFound ?(<>
+				<h2>Users not found</h2>
+				</>):
 				users.map((user, index) => {
 					return <UserCard key={index} user={user} setUsers={setUsers} />;
-				})}
+				})
+				}
 				<Pagination
 							productsPerPage={productsPerPage}
 							totalPages={totalPages}
