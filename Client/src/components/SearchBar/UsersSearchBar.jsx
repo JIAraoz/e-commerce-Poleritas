@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-export default function UsersSearchBar({query,setQuery,setUsers,setCurrentPage,setTotalPages}) {
+export default function UsersSearchBar({query,setQuery,setUsers,setCurrentPage,currentPage,setTotalPages}) {
 	
 	useEffect(() => {
 		axios
-			.get('https://e-commerce-grupo03.onrender.com/user/list-users')
+			.get(`https://e-commerce-grupo03.onrender.com/user/list-users?page=${currentPage}`)
 			.then((response) => {
 				if (response.data && Array.isArray(response.data.result)) {
-					console.log('se setearon los user');
 					setUsers(response.data.result);
 					setTotalPages(response.data.totalPages)
 					setCurrentPage(response.data.currentPage)
@@ -23,7 +22,8 @@ export default function UsersSearchBar({query,setQuery,setUsers,setCurrentPage,s
 			.catch((error) => {
 				console.error('Hubo un error al obtener los usuarios: ', error);
 			});
-	}, []);
+	}, [currentPage]);
+	
 
 	const handleChange = (e) => {
 		setQuery({...query,email:e.target.value});
@@ -31,10 +31,13 @@ export default function UsersSearchBar({query,setQuery,setUsers,setCurrentPage,s
 	const handleSearch = () => {
 		axios
 			.get(
-				`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${query.email}&role=${query.filter}`,
+				`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${query.email}&role=${query.filter}$page=${1}`,
 			)
 			.then(({ data }) => {
 				setUsers(data.result);
+				console.log(data);
+				setTotalPages(data.totalPages)
+				setCurrentPage(1)
 			});
 	};
 
