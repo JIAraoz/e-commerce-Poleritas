@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Rating from 'react-rating-stars-component';
-import "./review-list.css"
+import "./review-list.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -31,14 +33,24 @@ const ReviewList = () => {
     fetchReviews();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
+    }, 4000); // La reseña se muestra por 4 segundos
+
+    return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonte
+  }, [reviews.length]);
+
   return (
-    <div className="review-carousel"> {/* Agrega una clase para el carrusel */}
-      <h2>Todas las Reseñas</h2>
-      {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
-      <FontAwesomeIcon icon={faArrowRight} />
-      <div className="carousel"> {/* Contenedor del carrusel */}
-        {reviews.map((review) => (
-          <div key={review.reviewId} className="review-card"> {/* Estilos para cada tarjeta de reseña */}
+    <div className="review-carousel">
+      <div className="carousel">
+        {reviews.map((review, index) => (
+          <div
+          key={review.reviewId}
+          className={`review-card ${index === currentIndex ? 'active' : ''}`}
+          >
+            <h2>Todas las Reseñas</h2>
+            <FontAwesomeIcon icon={faArrowRight} />
             <p>
               <strong>Usuario:</strong> {review.user ? review.user.userName : 'Anónimo'}
             </p>
@@ -56,11 +68,9 @@ const ReviewList = () => {
               <strong>Comentario:</strong> {review.reviewDescription}
             </p>
           </div>
-          
         ))}
       </div>
     </div>
   );
 };
-
 export default ReviewList;
