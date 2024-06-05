@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Rating from 'react-rating-stars-component';
 import "./review-list.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
@@ -33,6 +35,7 @@ const ReviewList = () => {
     <div className="review-carousel"> {/* Agrega una clase para el carrusel */}
       <h2>Todas las Reseñas</h2>
       {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
+      <FontAwesomeIcon icon={faArrowRight} />
       <div className="carousel"> {/* Contenedor del carrusel */}
         {reviews.map((review) => (
           <div key={review.reviewId} className="review-card"> {/* Estilos para cada tarjeta de reseña */}
@@ -53,6 +56,7 @@ const ReviewList = () => {
               <strong>Comentario:</strong> {review.reviewDescription}
             </p>
           </div>
+          
         ))}
       </div>
     </div>
