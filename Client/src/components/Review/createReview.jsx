@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Rating from 'react-rating-stars-component';
 
 // eslint-disable-next-line react/prop-types
-const CreateReview = ({ userId }) => {
+const CreateReview = ({ userId, onReviewCreated }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [error, setError] = useState(null);
@@ -11,6 +11,7 @@ const CreateReview = ({ userId }) => {
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
+    setError(null); // Clear error when user starts changing the rating
   };
 
   const handleCommentChange = (e) => {
@@ -19,6 +20,11 @@ const CreateReview = ({ userId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (rating === 0) {
+      setError('Falta datos por llenar.');
+      return;
+    }
 
     try {
       const backendUrl = 'https://e-commerce-grupo03.onrender.com/review/reviews';
@@ -32,6 +38,7 @@ const CreateReview = ({ userId }) => {
       setError(null);
       setRating(0);
       setComment('');
+      onReviewCreated(); // Llamar a la función proporcionada por el padre para indicar que se ha creado la reseña
     } catch (error) {
       console.error('Error al crear la reseña:', error);
 
@@ -52,7 +59,7 @@ const CreateReview = ({ userId }) => {
   return (
     <div>
       <h2>Crear Reseña</h2>
-      {error && <p style={{ color: 'red' }}>No puede crear una reseña por que ya tiene una o por que no tiene ninguna compra</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
       <form onSubmit={handleSubmit}>
         <div>
@@ -73,7 +80,9 @@ const CreateReview = ({ userId }) => {
             onChange={handleCommentChange}
           ></textarea>
         </div>
-        <button type="submit">Enviar Reseña</button>
+        <button type="submit" disabled={rating === 0}>
+          Enviar Reseña
+        </button>
       </form>
     </div>
   );

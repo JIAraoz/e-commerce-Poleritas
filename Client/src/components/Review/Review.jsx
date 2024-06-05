@@ -14,9 +14,11 @@ const UserReview = ({ userId }) => {
     const fetchUserReview = async () => {
       try {
         const response = await axios.get(`https://e-commerce-grupo03.onrender.com/review/reviews/${userId}`);
-        setReview(response.data);
-        setRating(response.data.reviewRating);
-        setComment(response.data.reviewDescription);
+        if (response.data) {
+          setReview(response.data);
+          setRating(response.data.reviewRating);
+          setComment(response.data.reviewDescription);
+        }
       } catch (error) {
         console.error('Error al obtener la reseña del usuario:', error);
         if (error.response && error.response.data.message) {
@@ -64,10 +66,10 @@ const UserReview = ({ userId }) => {
 
   return (
     <div>
-      <h2>Tu Reseña</h2>
       {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
       {review ? (
         <div>
+          <h2>Tu Reseña</h2>
           {editing ? (
             <div>
               <label>Calificación:</label>
@@ -80,9 +82,7 @@ const UserReview = ({ userId }) => {
               />
               <label>Comentario:</label>
               <textarea value={comment} onChange={handleCommentChange} />
-              {editing && (
-                <button onClick={handleUpdateReview}>Guardar</button>
-              )}
+              <button onClick={handleUpdateReview}>Guardar</button>
               <button onClick={() => setEditing(false)}>Cancelar</button>
             </div>
           ) : (
@@ -92,9 +92,9 @@ const UserReview = ({ userId }) => {
               <button onClick={handleEditReview}>Editar</button>
             </div>
           )}
-        </div>  
+        </div>
       ) : (
-        <p>No tienes una reseña aún.</p>
+        !error && <p>No tienes una reseña aún.</p>
       )}
     </div>
   );
