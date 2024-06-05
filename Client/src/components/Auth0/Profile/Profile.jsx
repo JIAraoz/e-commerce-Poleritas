@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import EditProducts from '../../EditProducts/EditProducts';
 import ListUsers from '../../ListUsers/ListUsers';
 import CreateReview from '../../Review/createReview';
-import Review from "../../Review/Review"
+import Review from '../../Review/Review';
 
 // import Review from '../../Review/Review';
 const Profile = () => {
@@ -18,6 +18,7 @@ const Profile = () => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [isEditProductsVisible, setIsEditProductsVisible] = useState(false);
 	const [showListUsers, setShowListUsers] = useState(false);
+	const [isCreateReviewVisible, setIsCreateReviewVisible] = useState(false);
 	const [formData, setFormData] = useState({
 		userName: '',
 		userImage: '',
@@ -59,12 +60,9 @@ const Profile = () => {
 		setIsImageExpanded(!isImageExpanded);
 	};
 	const handleEditProductsClick = () => {
-		setIsEditProductsVisible(
-			(prevIsEditProductsVisible) => !prevIsEditProductsVisible,
-		);
-		if (showListUsers) {
-			setShowListUsers(false);
-		}
+		setShowListUsers(false);
+		setIsCreateReviewVisible(false);
+		setIsEditProductsVisible(!isEditProductsVisible);
 	};
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
@@ -102,15 +100,20 @@ const Profile = () => {
 	};
 
 	const handleButtonClick = () => {
+		setIsEditProductsVisible(false);
+		setIsCreateReviewVisible(false);
 		setShowListUsers(!showListUsers);
-		if (isEditProductsVisible) {
-			setIsEditProductsVisible(false);
-		}
+	};
+
+	const handleCreateReviewClick = () => {
+		setIsEditProductsVisible(false);
+		setShowListUsers(false);
+		setIsCreateReviewVisible(!isCreateReviewVisible);
 	};
 
 	const handleImageUpload = (imageUrl) => {
-        setFormData({ ...formData, userImage: imageUrl });
-    };
+		setFormData({ ...formData, userImage: imageUrl });
+	};
 
 	return (
 		isAuthenticated && (
@@ -123,8 +126,8 @@ const Profile = () => {
 						<img src={userData.userImage} alt={userData.userName} />
 					</div>
 					<div className='profile-info'>
-						<h2>Nombre: {userData.userName}</h2>
-						<p>Correo: {userData.userEmail}</p>
+						<h2>Name: {userData.userName}</h2>
+						<p>Email: {userData.userEmail}</p>
 						<p>Rol: {userData.userRol}</p>
 						<button onClick={handleEditClick}>
 							{isEditing ? 'Cancel' : 'Edit Profile'}
@@ -175,20 +178,18 @@ const Profile = () => {
 					<div className='button-container'>
 						<button onClick={handleEditProductsClick}>Edit products</button>
 						<button onClick={handleButtonClick}>
-							{showListUsers
-								? 'Cerrar lista de usuarios'
-								: 'Mostrar lista de usuarios'}
+							{showListUsers ? 'Close user list' : 'Open user list'}
+						</button>
+						<button onClick={handleCreateReviewClick}>
+							{isCreateReviewVisible
+								? 'Close create review'
+								: 'Open create review'}
 						</button>
 					</div>
 					{isEditProductsVisible && <EditProducts />}
 					{showListUsers && <ListUsers />}
-        </div>
-          <div>
-        <CreateReview userId={userData.userId} />
-        </div>
-        <div>
-        <Review userId={userData.userId} />
-        </div>
+					{isCreateReviewVisible && <CreateReview userId={userData.userId} />}
+				</div>
 			</div>
 		)
 	);

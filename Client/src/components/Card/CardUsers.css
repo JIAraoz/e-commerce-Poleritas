@@ -1,33 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-.Mi-Componente-CardEdit {
+.Mi-Componente-CardUser {
     width: 100%;
-    height: 100%;
+    background-color: aqua;
     font-family: 'Roboto', sans-serif;
-    background-color: rgba(226, 226, 226, 0.644);
 }
   
-.Mi-Componente-CardEdit button {
+.card-footer-CardUser button {
+    display: block;
     background-color: #4A707A;
     color: white;
     border: none;
-    padding: 10px 20px;
     cursor: pointer;
     margin-top: 10px;
-    margin-bottom: 20px;
+    font-size: 15px;
+    width: 225px;
 }
   
-.Mi-Componente-CardEdit button:hover {
+.card-footer-CardUser button:hover {
     background-color: #4a6c96;
 }
   
-.Mi-Componente-title-CardEdit {
+.Mi-Componente-title-CardUser {
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 0px;
 }
   
-.Mi-Item-CardEdit {
+.Mi-Item-CardUser {
     display: flex;
     align-items: center; /* Alinea los elementos hijos verticalmente en el centro */
     justify-content: space-around;
@@ -38,14 +38,15 @@
    
 }
 
-.Mi-Item-CardEdit img {
+.Mi-Item-CardUser img {
     width: 10rem;
     height: 100%; /* Cambia esto a un porcentaje del contenedor */
     object-fit: contain;
+    margin-right: 20px;
     
 }
 
-.Mi-Item-Details-CardEdit {
+.Mi-Item-Details-CardUser {
     flex-grow: 1;
     margin-right: 20px;
     max-width: 40%; /* Ajusta este valor según tus necesidades */
