@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 
 const getUser = async (req, res) => {
     try {
-        const pageSize = parseInt(req.query.size, 10) || 5;
+        const pageSize = parseInt(req.query.size, 10) || 10;
         const page = parseInt(req.query.page, 10) || 1;
         const roleFilter = req.query.role || null;
         const emailFilter = req.query.userEmail || null;
