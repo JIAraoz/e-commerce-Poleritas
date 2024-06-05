@@ -158,7 +158,7 @@ export default function Home() {
         	<div className='category-item'>
 					<Link className='a' to='/products?category=9'>
 						<img src='../tanktop.jpg' alt='tanktop' />
-						<p>Polo</p>
+						<p>tank top</p>
 					</Link>
 				</div>
       </div>
