@@ -3,7 +3,7 @@ const { Article, Category } = require('../../db');
 
 const getFill = async (req, res) => {
     try {
-        const pageSize = parseInt(req.query.size, 10) || 5;
+        const pageSize = parseInt(req.query.size, 10) || 10;
         const page = parseInt(req.query.page, 10) || 1;
         const categoryFilter = req.query.category || null;
         const stockFilter = parseInt(req.query.stock, 10) || 0;
