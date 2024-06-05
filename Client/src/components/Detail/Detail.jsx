@@ -8,12 +8,15 @@ import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
 
 export default function Detail() {
+	const { loginWithRedirect } = useAuth0();
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	const { user } = useAuth0();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
 	const [size, setSize] = useState('S');
+
+	const userData = window.localStorage.getItem("userData");
 
 	useEffect(() => {
 		async function getProduct() {
@@ -54,7 +57,7 @@ export default function Detail() {
 					idArticle: product.articleId,
 					idCart: cartResponse.data.result.cartId
 				};
-				
+
 				const addArticleResponse = await axios.post(
 					`https://e-commerce-grupo03.onrender.com/cart/add_article_cart`,
 					body,
@@ -174,10 +177,14 @@ export default function Detail() {
 						</div>
 					</div>
 					<div className='cart-container'>
-						<button className='add-to-cart' onClick={() => handleAddToCart()}>
-							Add to Cart
-						</button>
-						<p className='free-shipping'>Free Shipping!!</p>
+						{userData ? (
+							<div>
+								<button className='add-to-cart' onClick={() => handleAddToCart()}>
+									Add to Cart
+								</button>
+								<p className='free-shipping'>Free Shipping!!</p>
+							</div>
+							) : <button className='add-to-cart' onClick={() => loginWithRedirect()}>Log in to purchase</button>}
 					</div>
 				</div>
 			</div>
