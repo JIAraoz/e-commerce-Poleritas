@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+const nodemailer = require('nodemailer');
 
 const { DB_URL } = process.env;
 
@@ -17,6 +18,16 @@ const sequelize = new Sequelize(DB_URL, {
   },
 });
 const basename = path.basename(__filename);
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "mateo.giampietro.10@gmail.com",
+    pass: "wdfr sfkp yeai wfqc",
+  },
+});
 
 const modelDefiners = [];
 
@@ -61,4 +72,5 @@ Category.belongsToMany(Article, { through: "ArticleCategory" });
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  transporter: transporter
 };
