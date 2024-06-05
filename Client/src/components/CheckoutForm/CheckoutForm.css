@@ -57,7 +57,9 @@
     margin-bottom: 10px;
 }
 
-.card-element-wrapper {
+.elementosCard {
+    padding: 12px;
+    width: 40%;
     margin-bottom: 20px;
 }
 
