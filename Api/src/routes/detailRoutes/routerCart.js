@@ -7,7 +7,7 @@ const checkoutCart = require('../../controllers/controllersCart/checkoutCart');
 const routerCart = require("express").Router();
 
 routerCart.get('/getShoppingCart',getShoppingCart);
-routerCart.get('/add_article_cart', addArticleCart);
+routerCart.post('/add_article_cart', addArticleCart);
 routerCart.get('/remove_article_cart', removeArticleCart);
 routerCart.get('/desactivateShoppingCart', desactivateShoppingCart);
 routerCart.get('/cleanShoppingCart', cleanShoppingCart);

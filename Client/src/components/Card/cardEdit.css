@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.Mi-Componente-CardEdit {
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(226, 226, 226, 0.644);
+}
+  
+.Mi-Componente-CardEdit button {
+    background-color: #4A707A;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+  
+.Mi-Componente-CardEdit button:hover {
+    background-color: #4a6c96;
+}
+  
+.Mi-Componente-title-CardEdit {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+  
+.Mi-Item-CardEdit {
+    display: flex;
+    align-items: center; /* Alinea los elementos hijos verticalmente en el centro */
+    justify-content: space-around;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    width: 100vh;
+    height: 200px; /* Define una altura específica para .Mi-Item */
+   
+}
+
+.Mi-Item-CardEdit img {
+    width: 10rem;
+    height: 100%; /* Cambia esto a un porcentaje del contenedor */
+    object-fit: contain;
+    
+}
+
+.Mi-Item-Details-CardEdit {
+    flex-grow: 1;
+    margin-right: 20px;
+    max-width: 40%; /* Ajusta este valor según tus necesidades */
+    overflow-wrap: break-word; /* Esto hará que las palabras largas se rompan y pasen a la siguiente línea */
+}

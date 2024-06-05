@@ -35,10 +35,10 @@ const Footer = () => (
 							</Link>
 						</li>
 						<li>
-							<Link to='/home'>
+							<Link to='/form'>
 								{' '}
 								{/* hay que cambiar a about, cuando sea creado */}
-								<FontAwesomeIcon icon={faUser} /> About
+								<FontAwesomeIcon icon={faUser} /> Form
 							</Link>
 						</li>
 					</ul>
@@ -47,17 +47,23 @@ const Footer = () => (
 					<h4>Follow us</h4>
 					<ul>
 						<li>
-							<a href='https://www.facebook.com/tuNombreDeUsuario'>
+							<a
+								href='https://www.facebook.com/tuNombreDeUsuario'
+								target='_blank'
+							>
 								<FontAwesomeIcon icon={faFacebook} /> Facebook
 							</a>
 						</li>
 						<li>
-							<a href='https://twitter.com/tuNombreDeUsuario'>
+							<a href='https://twitter.com/tuNombreDeUsuario' target='_blank'>
 								<FontAwesomeIcon icon={faTwitter} /> Twitter
 							</a>
 						</li>
 						<li>
-							<a href='https://www.instagram.com/tuNombreDeUsuario'>
+							<a
+								href='https://www.instagram.com/tuNombreDeUsuario'
+								target='_blank'
+							>
 								<FontAwesomeIcon icon={faInstagram} /> Instagram
 							</a>
 						</li>
@@ -66,15 +72,15 @@ const Footer = () => (
 				<div className='contact-section'>
 					<h4>Address</h4>
 					<p>
-						<FontAwesomeIcon icon={faMapMarkerAlt} /> Avenida Inventada, calle
-						falsa #1234
+						<FontAwesomeIcon icon={faMapMarkerAlt} /> Invented Avenue, fake
+						street #1234
 					</p>
 					<p>
 						<FontAwesomeIcon icon={faPhone} /> +52 638 123 4567
 					</p>
 					<p>
-						<a href='mailto:CorreoFalso@Dominio.com'>
-							<FontAwesomeIcon icon={faEnvelope} /> CorreoFalso@Dominio.com
+						<a>
+							<FontAwesomeIcon icon={faEnvelope} /> FakeEmail@Domain.com
 						</a>
 					</p>
 				</div>

@@ -1,0 +1,98 @@
+.review-carousel {
+  width: 40%; /* Ancho del carrusel */
+  margin: 0 auto; /* Centra el carrusel en la página */
+  overflow: hidden; /* Oculta el contenido que se desborde del carrusel */
+  position: relative; /* Establece posición relativa para los controles de navegación */
+}
+
+.carousel {
+  display: flex; /* Muestra las tarjetas de reseña en una fila */
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+  scroll-snap-type: x mandatory; /* Hace que el desplazamiento se detenga en cada tarjeta */
+  -webkit-overflow-scrolling: touch; /* Añade desplazamiento suave en dispositivos móviles */
+  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+  -ms-overflow-style: none; /* Oculta la barra de desplazamiento en Internet Explorer y Edge */
+  transition: transform 0.2s ease-in-out; /* Transición rápida */
+}
+
+.carousel::-webkit-scrollbar {
+  display: none; /* Oculta la barra de desplazamiento en Chrome y Safari */
+}
+
+.review-card {
+  flex: 0 0 auto; /* No se redimensiona */
+  width: 100%; /* Ocupa todo el ancho del carrusel */
+  scroll-snap-align: start; /* Alinea cada tarjeta al inicio del carrusel */
+  margin-right: 10px; /* Espacio entre tarjetas */
+}
+
+.review-card:last-child {
+  margin-right: 0; /* Elimina el margen derecho de la última tarjeta */
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
+}
+
+.arrow-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  cursor: default; /* Cambia el cursor a predeterminado */
+  z-index: 1; /* Asegura que las flechas estén por encima del carrusel */
+}
+
+.arrow-indicator.left {
+  left: 0;
+}
+
+.arrow-indicator.right {
+  right: 0;
+}
+
+/* Flecha izquierda */
+.arrow-indicator.left:before {
+  content: "<"; /* Agrega el símbolo de la flecha izquierda */
+}
+
+/* Flecha derecha */
+.arrow-indicator.right:before {
+  content: ">"; /* Agrega el símbolo de la flecha derecha */
+}
+
+
+.review-card {
+  flex: 0 0 100%;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out; /* Transición rápida */
+  width: 100%;
+}
+
+.review-card.active {
+  display: block;
+  opacity: 1;
+}

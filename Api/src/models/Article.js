@@ -28,7 +28,37 @@ function article(sequelize) {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    articleS: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    },
+    articleL: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    },
+    articleM: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    },
+    articleXL: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    },
+    articleXXL: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+  }
   });
 }
 
 module.exports = article;
+

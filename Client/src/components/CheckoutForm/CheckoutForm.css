@@ -1,0 +1,90 @@
+.checkout-form {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left-section {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.right-section {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.separator {
+    width: 2px;
+    background-color: #ccc;
+}
+
+.user-details, .cart-summary {
+    margin-bottom: 20px;
+}
+
+.user-details h3, .cart-summary h3 {
+    margin-bottom: 10px;
+}
+
+.user-details p, .cart-summary ul {
+    margin: 5px 0;
+}
+
+.cart-summary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-summary li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-summary img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.address-edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.address-edit-form label {
+    margin-bottom: 10px;
+}
+
+.elementosCard {
+    padding: 12px;
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.card-element-wrapper label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.btnSave {
+    padding: 10px 20px;
+    background-color: #28a3a7;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btnSave:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.btnSave:not(:disabled) {
+    background-color: #299999;
+}
+
+.btnSave:hover:not(:disabled) {
+    background-color: #216b88;
+}

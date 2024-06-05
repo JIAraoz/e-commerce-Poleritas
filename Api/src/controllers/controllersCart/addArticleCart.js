@@ -1,45 +1,60 @@
-const { ShoppingCart, Article,Cart_Articule } = require('../../db');
+const { ShoppingCart, Article, Size, Cart_Articule, Article_Size } = require('../../db');
 
 const addArticleCart = async (req, res) => {
     try {
-        const idCart = req.query.cartid;
-        const idArticle = req.query.articleid;
-        const quantity = parseInt(req.query.quantity, 10);
+
+        const { idCart, idArticle, stock, S, M, L, XL, XXL } = req.body;
 
         const cart = await ShoppingCart.findOne({
             where: {
                 cartId: idCart
             },
             include: {
-                model: Article
+                model: Article,
             }
         });
 
         if (!cart) {
-            return res.status(404).json({ message: 'Carrito no encontrado' });
+            return res.status(404).json({ message: 'Cart not found' });
         }
 
         const article = await Article.findByPk(idArticle);
         if (!article) {
-            return res.status(404).json({ message: 'Artículo no encontrado' });
+            return res.status(404).json({ message: 'Article not found' });
         }
+        if(article.stock < 1 || 
+            article.articleS < S || 
+            article.articleM < M || 
+            article.articleL < L || 
+            article.articleXL < XL || 
+            article.articleXXL < XXL){
+                return res.status(404).json({
+                    message: 'Article out of stock'
+                });
+            }
+        
         const articleExist=await Cart_Articule.findOne({where:{
             articleArticleId:article.articleId,
             shoppingCartCartId:cart.cartId
-
         }})
         if(articleExist===null){
-            await cart.addArticle(article, { through: { articleQuantity:quantity } });
-            const subtotalAux = article.articlePrice * parseInt(quantity);
-            cart.subtotal += subtotalAux;
-            console.log("Existente")
+            const response = await Article.findByPk(idArticle);
+            const subtotalAux = parseFloat((response.dataValues.articlePrice * parseInt(stock)).toFixed(2));
+            cart.cartSubtotal += subtotalAux;
+            
             await cart.save();
+            await cart.addArticle(article, { through: { articleQuantity:stock, S, M, L, XL, XXL } });
         }else{
-            const subtotalAux = articleExist.articlePrice * parseInt(quantity);
-            cart.subtotal += subtotalAux;
-            console.log("No existente")
+            const response = await Article.findByPk(articleExist.articleArticleId);
+            const subtotalAux = parseFloat((response.dataValues.articlePrice * parseInt(stock)).toFixed(2));
+            cart.cartSubtotal += subtotalAux;
             await cart.save();
-            articleExist.articleQuantity += quantity;
+            articleExist.S += S;
+            articleExist.M += M;
+            articleExist.L += L;
+            articleExist.XL += XL;
+            articleExist.XXL += XXL;
+            articleExist.articleQuantity += stock;
             await articleExist.save();
         }
         const updatedCart = await ShoppingCart.findOne({
@@ -48,14 +63,14 @@ const addArticleCart = async (req, res) => {
         });
 
         res.status(200).json({
-            message: 'Artículo agregado al carrito con éxito',
+            message: 'Article successfully added to cart',
             cart: updatedCart
         });
 
        
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Error interno del servidor' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 }
 

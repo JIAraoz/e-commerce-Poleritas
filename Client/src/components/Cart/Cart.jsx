@@ -1,26 +1,18 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate,useLocation } from 'react-router-dom';
-import Swal from 'sweetalert2'
+import { useNavigate, Link } from 'react-router-dom';
+import './Cart.css';
+import Swal from 'sweetalert2';
 
 export default function Cart() {
     const { user } = useAuth0();
     const [userData, setUserData] = useState({});
     const [cartItems, setCartItems] = useState([]);
-    const [cartResponse, setCartResponse] = useState(null);
+    const [cartResponse, setCartResponse] = useState(null);  // Nuevo estado para cartResponse
     const navigate = useNavigate();
-    const location=useLocation()
-
-    useEffect(()=>{
-        console.log('2');
-    },[location])
-
-
 
     useEffect(() => {
-        
-
         async function fetchData() {
             try {
                 const userResponse = await axios.get(
@@ -30,26 +22,20 @@ export default function Cart() {
 
                 if (userResponse.data.result.userId) {
                     const cartResponse = await axios.get(
-                        `https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`
+                        `https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`,
                     );
-                    console.log(cartResponse.data)
-
-                    const activeCart = cartResponse.data.result.find((cart) => cart.isActive === true);
-                    if (activeCart && activeCart.articles) {
-                        setCartItems(activeCart.articles);
-                        setCartResponse(activeCart);
-                    }
+                    setCartResponse(cartResponse.data.result);  // Guardar cartResponse en el estado
+                    setCartItems(cartResponse.data.result.articles);
+                    console.log(cartItems)
                 }
             } catch (error) {
-              // alert('Ha ocurrido un error: ' + error.message);
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "An error has occurred:" + error.message,
-              });
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "An error has occurred:" + error.message,
+                });
             }
         }
-
         fetchData();
     }, [user.email]);
 
@@ -60,13 +46,16 @@ export default function Cart() {
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/remove_article_cart?cartid=${cartId}&articleid=${value.articleId}`
                 );
-              // alert("Producto eliminado con éxito");
-                Swal.fire({
-                  title: "Eliminated product ",
-                  text: "Product successfully removed!",
-                  icon: "success"
-                });
-                if (response) navigate('/cart',{props:1})
+    
+                if (response) {
+                    Swal.fire({
+                        title: "Eliminated product",
+                        text: "Product successfully removed!",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                }
             }
         } catch (error) {
             console.error(error);
@@ -80,14 +69,16 @@ export default function Cart() {
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
                 );
-              // alert("Carrito limpiado con éxito");
-              Swal.fire({
-                  title: "Trolley cleaned",
-                  text: "Cart successfully cleaned!",
-                  icon: "success"
-                });
-                if (response) navigate('/cart2')
-                /* window.location.reload(); */
+    
+                if (response) {
+                    Swal.fire({
+                        title: "Trolley cleaned",
+                        text: "Cart successfully cleaned!",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                }
             }
         } catch (error) {
             console.error(error);
@@ -97,7 +88,13 @@ export default function Cart() {
     const handleBuyCart = async () => {
         try {
             if (cartResponse) {
-                navigate('/checkout', { state: { cartItems, cartSubtotal: cartResponse.cartSubtotal, cartId: cartResponse.cartId } });
+                navigate('/checkout', {
+                    state: {
+                        cartItems,
+                        cartSubtotal: cartResponse.cartSubtotal,
+                        cartId: cartResponse.cartId
+                    }
+                });
             }
         } catch (error) {
             console.error(error);
@@ -106,24 +103,40 @@ export default function Cart() {
 
     if (cartItems.length > 0) {
         return (
-            <div>
-                <button onClick={() => handleCleanButton()}>Clean Shopping Cart</button>
+            <div className='Shooping-Cart'>
+                <button onClick={() => handleCleanButton()}>Clean Cart</button>
+                <p className='Shopping-Cart-title'>Shopping Cart</p>
                 {cartItems.map((product) => (
-                    <div key={product.articleId}>
+                    <div key={product.articleId} className='Cart-Item'>
                         <img src={product.articleImage} alt={product.articleName} />
-                        <h2>{product.articleName}</h2>
-                        <p>Precio: ${product.articlePrice}</p>
-                        <p>Cantidad: {product.Cart_Articule.articleQuantity}</p>
-                        <button onClick={() => handleRemoveButton(product)}>Delete product</button>
+                        <div className='Cart-Item-Details'>
+                            <h2>{product.articleName}</h2>
+                            <p>Price: ${product.articlePrice}</p>
+                            <p>Quantity: {product.Cart_Articule.articleQuantity}</p>
+                        </div>
+                        <button
+                            onClick={() => handleRemoveButton(product)}
+                            className='Remove-Button'
+                        >
+                            Remove item
+                        </button>
                     </div>
                 ))}
-                <button onClick={() => handleBuyCart()}>Buy Shopping Cart</button>
+                <div className='Cart-Totals'>
+                    <p>Total: ${cartResponse.cartSubtotal}</p>
+                </div>
+                <div className='Cart-Checkout'>
+                    <button onClick={() => handleBuyCart()}>Checkout</button>
+                </div>
             </div>
         );
     } else {
         return (
-            <div>
+            <div className='empty-cart'>
                 <h2>Empty Shopping Cart.</h2>
+                <Link to={'/products'}>
+                    <button className='see-products'>See products</button>
+                </Link>
             </div>
         );
     }

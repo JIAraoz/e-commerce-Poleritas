@@ -6,8 +6,7 @@ export default function Cards({ products, loading }) {
 		<div className='cards-container'>
 			{loading ? (
 				<div className='loading'>
-
-				<p>Loading...</p>
+					<p>Loading...</p>
 				</div>
 			) : (
 				products.map((product) => (

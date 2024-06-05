@@ -1,21 +1,63 @@
-const {User} =require('../../db')
+const { User } = require('../../db');
+const { Op } = require('sequelize');
 
-const getUser = async(req,res) => {
+const getUser = async (req, res) => {
     try {
-        const response = await User.findAll();
+        const pageSize = parseInt(req.query.size, 10) || 10;
+        const page = parseInt(req.query.page, 10) || 1;
+        const roleFilter = req.query.role || null;
+        const emailFilter = req.query.userEmail || null;
 
-        console.log(response);
-        if(response.length!==0){
-            res.status(200).json({
-                message: 'Datos obtenidos con éxito',
-                result: response
-            });
-        }else{
-            return res.status(404).json({ message: 'No se han encontrado elementos con esta característica' })
+        // Validar parámetros de paginación
+        if (isNaN(pageSize) || pageSize <= 0 || isNaN(page) || page <= 0) {
+            return res.status(400).json({ message: 'Invalid pagination parameters' });
         }
+
+        // Validar filtro de rol
+        const validRoles = ['Admin', 'User', 'Banned','All'];
+        if (roleFilter && !validRoles.includes(roleFilter)) {
+            return res.status(400).json({ message: 'Invalid role filter' });
+        }
+
+        // Calcular el offset
+        const offset = (page - 1) * pageSize;
+
+        // Construir condición "where"
+        const whereCondition = {};
+        if (roleFilter&&roleFilter!=='All') {
+            whereCondition.userRol = roleFilter;
+        }
+        if (emailFilter) {
+            whereCondition.userEmail = { [Op.iLike]: `%${emailFilter}%` };
+        }
+
+        // Consultar usuarios con paginación y filtros de rol y email
+        const { count, rows } = await User.findAndCountAll({
+            where: whereCondition,
+            offset,
+            limit: pageSize,
+            attributes: ['userId', 'userName', 'userEmail', 'userRol','userImage', 'createdAt'] // Selecciona solo los campos necesarios
+        });
+
+        // Verificar si se encontraron usuarios
+        if (count === 0) {
+            return res.status(404).json({ message: 'No users found' });
+        }
+
+        // Calcular el total de páginas
+        const totalPages = Math.ceil(count / pageSize);
+
+        // Devolver la respuesta con los datos y la información de paginación
+        res.status(200).json({
+            message: 'Data successfully obtained',
+            totalPages,
+            currentPage: page,
+            result: rows
+        });
+
     } catch (error) {
-        console.log(error)
-        res.status(500).json({message:'Error en el servidor: '+ error.message})
+        console.error('Server error:', error);
+        res.status(500).json({ message: 'Server error: ' + error.message });
     }
 }
 

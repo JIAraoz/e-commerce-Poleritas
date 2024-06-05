@@ -1,5 +1,5 @@
 .landing-background {
-	background: linear-gradient(to bottom right, #ffcccc, #ffffcc, #ccffcc);
+	background: #ffffff;
 	height: 80vh;
 	display: flex;
 	justify-content: center;
@@ -7,19 +7,25 @@
 }
 
 .landing-content {
-	background-color: rgba(255, 255, 255, 0.8);
-	padding: 2rem;
+	background-color: rgba(180, 204, 221, 0.726);
+	padding: 4rem;
 	border-radius: 1rem;
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 50%; /* Ajusta esto según tus necesidades */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
+}
+
+.Logo {
+	margin-right: 5em;
+	width: 10em;
+	border-radius: 2em;
+
 }
 
 .footer-content {
@@ -38,4 +44,37 @@
 
 .texto {
 	color: black;
+}
+
+.landing-content button {
+  background-color: #4A707D;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+  border-radius: 12px;
+}
+
+.landing-content button:hover {
+  background-color: #3b585f;
+}
+
+.landing-content button:last-child {
+  margin-right: 0;
+}
+
+.buttoms_zone {
+	margin-left: 2em;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+    align-items: center;
+	flex-direction: column;
+}
+
+.invitado {
+	margin-top: 1em;
 }
