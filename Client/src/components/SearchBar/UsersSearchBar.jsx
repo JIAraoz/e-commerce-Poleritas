@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useState,useEffect } from "react"
-import axios from "axios"
-export default function UsersSearchBar({setUsers}){
-    const [email,setEmail]=useState('')
-    useEffect(() => {
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+export default function UsersSearchBar({ setUsers }) {
+	const [email, setEmail] = useState('');
+	useEffect(() => {
 		axios
 			.get('https://e-commerce-grupo03.onrender.com/user/list-users')
 			.then((response) => {
 				if (response.data && Array.isArray(response.data.result)) {
-                    console.log('se setearon los user');
+					console.log('se setearon los user');
 					setUsers(response.data.result);
 				} else {
 					console.error(
@@ -22,26 +22,29 @@ export default function UsersSearchBar({setUsers}){
 			});
 	}, []);
 
-    const handleChange=(e)=>{
-        setEmail(e.target.value)
-    }
-    const handleSearch = () => {
-        axios.get(`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${email}`).then(({data})=>{
-            console.log('sebusco');
-            setUsers(data.result)
-        })
-      };
+	const handleChange = (e) => {
+		setEmail(e.target.value);
+	};
+	const handleSearch = () => {
+		axios
+			.get(
+				`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${email}`,
+			)
+			.then(({ data }) => {
+				console.log('sebusco');
+				setUsers(data.result);
+			});
+	};
 
-    return(<>
-      
-        <input
-        type='search'
-        onChange={handleChange}
-        value={email}
-        placeholder='Buscar por email...'
-        />
-      <button onClick={() => handleSearch()}>
-      </button>
-        </>
-    )
+	return (
+		<>
+			<input
+				type='search'
+				onChange={handleChange}
+				value={email}
+				placeholder='Search by email'
+			/>
+			<button onClick={() => handleSearch()}></button>
+		</>
+	);
 }
