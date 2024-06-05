@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-export default function UsersSearchBar({ setUsers }) {
-	const [email, setEmail] = useState('');
+export default function UsersSearchBar({query,setQuery,setUsers,setCurrentPage,setTotalPages}) {
+	
 	useEffect(() => {
 		axios
 			.get('https://e-commerce-grupo03.onrender.com/user/list-users')
@@ -10,6 +10,9 @@ export default function UsersSearchBar({ setUsers }) {
 				if (response.data && Array.isArray(response.data.result)) {
 					console.log('se setearon los user');
 					setUsers(response.data.result);
+					setTotalPages(response.data.totalPages)
+					setCurrentPage(response.data.currentPage)
+					console.log(response.data);
 				} else {
 					console.error(
 						'La API no devolvió un array en la propiedad result: ',
@@ -23,15 +26,14 @@ export default function UsersSearchBar({ setUsers }) {
 	}, []);
 
 	const handleChange = (e) => {
-		setEmail(e.target.value);
+		setQuery({...query,email:e.target.value});
 	};
 	const handleSearch = () => {
 		axios
 			.get(
-				`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${email}`,
+				`https://e-commerce-grupo03.onrender.com/user/list-users?userEmail=${query.email}&role=${query.filter}`,
 			)
 			.then(({ data }) => {
-				console.log('sebusco');
 				setUsers(data.result);
 			});
 	};
@@ -41,7 +43,7 @@ export default function UsersSearchBar({ setUsers }) {
 			<input
 				type='search'
 				onChange={handleChange}
-				value={email}
+				value={query.email}
 				placeholder='Search by email'
 			/>
 			<button onClick={() => handleSearch()}></button>
