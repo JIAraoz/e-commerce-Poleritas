@@ -14,7 +14,7 @@ const getUser = async (req, res) => {
         }
 
         // Validar filtro de rol
-        const validRoles = ['Admin', 'User', 'Banned'];
+        const validRoles = ['Admin', 'User', 'Banned','All'];
         if (roleFilter && !validRoles.includes(roleFilter)) {
             return res.status(400).json({ message: 'Invalid role filter' });
         }
@@ -24,7 +24,7 @@ const getUser = async (req, res) => {
 
         // Construir condición "where"
         const whereCondition = {};
-        if (roleFilter) {
+        if (roleFilter&&roleFilter!=='All') {
             whereCondition.userRol = roleFilter;
         }
         if (emailFilter) {
