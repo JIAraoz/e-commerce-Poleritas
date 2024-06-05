@@ -50,10 +50,11 @@ export default function Detail() {
 					L: product.articleL,
 					XL: product.articleXL,
 					XXL: product.articleXXL,
-					stock: product[`article${size}`],
+					stock: quantity,
 					idArticle: product.articleId,
-					idCart: cartResponse.data.result.cartId,
+					idCart: cartResponse.data.result.cartId
 				};
+				
 				const addArticleResponse = await axios.post(
 					`https://e-commerce-grupo03.onrender.com/cart/add_article_cart`,
 					body,
