@@ -29,32 +29,52 @@ function Nav() {
 				<SearchBar className='searchBar' />
 			</div>
 			<div className='right'>
-				{isAuthenticated ? <Link to='/cart'>
-										<button>
-											<FontAwesomeIcon icon={faCartShopping} />
-										</button>
-									</Link> 
-									: null}
-				
 				{isAuthenticated ? (
-		 <Link to='/profile'>
-      <button style={{ display: 'flex', alignItems: 'center', border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}>
-        {isAuthenticated && user.picture ? (
-          <img
-            src={user.picture}
-            alt='Profile'
-            style={{ borderRadius: '50%', width: '40px', height: '40px', marginRight: '8px' }}
-          />
-        ) : (
-          <img
-            src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-            alt='Default Profile'
-            style={{ borderRadius: '50%', width: '40px', height: '40px', marginRight: '8px' }}
-          />
-        )}
-        <span style={{ fontSize: '16px' }}>Mi perfil</span>
-      </button>
-    </Link>
+					<Link to='/cart'>
+						<button>
+							<FontAwesomeIcon icon={faCartShopping} />
+						</button>
+					</Link>
+				) : null}
+
+				{isAuthenticated ? (
+					<Link to='/profile'>
+						<button
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								border: 'none',
+								background: 'none',
+								cursor: 'pointer',
+								padding: 0,
+							}}
+						>
+							{isAuthenticated && user.picture ? (
+								<img
+									src={user.picture}
+									alt='Profile'
+									style={{
+										borderRadius: '50%',
+										width: '40px',
+										height: '40px',
+										marginRight: '8px',
+									}}
+								/>
+							) : (
+								<img
+									src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+									alt='Default Profile'
+									style={{
+										borderRadius: '50%',
+										width: '40px',
+										height: '40px',
+										marginRight: '8px',
+									}}
+								/>
+							)}
+							<span style={{ fontSize: '16px' }}>My Profile</span>
+						</button>
+					</Link>
 				) : (
 					<Login />
 				)}

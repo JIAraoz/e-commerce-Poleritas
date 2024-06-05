@@ -7,40 +7,39 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './SearchBar.css';
 
 export default function SearchBar() {
-  const [name, setName] = useState('');
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const query = useSelector((state) => state.query);
+	const [name, setName] = useState('');
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const query = useSelector((state) => state.query);
 
-  useEffect(() => {
-    setName(query.search || '');
-  }, [query.search]);
+	useEffect(() => {
+		setName(query.search || '');
+	}, [query.search]);
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setName(value);
-    handleSearch(value);
-  };
+	const handleChange = (event) => {
+		const value = event.target.value;
+		setName(value);
+		handleSearch(value);
+	};
 
-  const handleSearch = (searchTerm) => {
-    const updatedQuery = { ...query, search: searchTerm };
-    dispatch(updateQuery(updatedQuery));
-    navigate('/products');
-  };
+	const handleSearch = (searchTerm) => {
+		const updatedQuery = { ...query, search: searchTerm };
+		dispatch(updateQuery(updatedQuery));
+		navigate('/products');
+	};
 
-  return (
-    <div className='search-bar'>
-      <input
-        type='search'
-        onChange={handleChange}
-        value={name}
-        placeholder='Buscar...'
-      />
-      <Link to='/products'>
-        <button onClick={() => handleSearch(name)}>
-        </button>
-      </Link>
-      <div className='search-results'></div>
-    </div>
-  );
+	return (
+		<div className='search-bar'>
+			<input
+				type='search'
+				onChange={handleChange}
+				value={name}
+				placeholder='search...'
+			/>
+			<Link to='/products'>
+				<button onClick={() => handleSearch(name)}></button>
+			</Link>
+			<div className='search-results'></div>
+		</div>
+	);
 }
