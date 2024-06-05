@@ -8,7 +8,8 @@ import Swal from 'sweetalert2';
 import EditProducts from '../../EditProducts/EditProducts';
 import ListUsers from '../../ListUsers/ListUsers';
 import CreateReview from '../../Review/createReview';
-import Review from '../../Review/Review';const Profile = () => {
+import Review from '../../Review/Review';
+const Profile = () => {
     const { user, isAuthenticated } = useAuth0();
     const [userData, setUserData] = useState({});
     const [isImageExpanded, setIsImageExpanded] = useState(false);
