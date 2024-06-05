@@ -3,7 +3,6 @@ import UserCard from '../Card/CardUsers';
 import UsersSearchBar from '../SearchBar/UsersSearchBar';
 const ListUsers = () => {
 	const [users, setUsers] = useState([]);
-
 	return (
 		<div>
 			<h1>User List</h1>
