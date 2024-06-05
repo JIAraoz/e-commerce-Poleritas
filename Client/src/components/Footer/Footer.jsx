@@ -34,13 +34,13 @@ const Footer = () => (
 								<FontAwesomeIcon icon={faTshirt} /> Products
 							</Link>
 						</li>
-						<li>
+						{/* <li>
 							<Link to='/form'>
 								{' '}
-								{/* hay que cambiar a about, cuando sea creado */}
+							
 								<FontAwesomeIcon icon={faUser} /> Form
 							</Link>
-						</li>
+						</li> */}
 					</ul>
 				</div>
 				<div className='social-section'>
