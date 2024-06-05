@@ -105,9 +105,9 @@ const CheckoutForm = () => {
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card: {
-                number: cardNumberElement,
-                expiry: cardExpiryElement,
-                cvc: cardCvcElement,
+                number: cardNumberElement.current.value,
+                expiry: cardExpiryElement.current.value,
+                cvc: cardCvcElement.current.value,
                 billing_details: {
                     address: {
                         postal_code: showZip ? zip : ''
@@ -115,6 +115,7 @@ const CheckoutForm = () => {
                 }
             }
         });
+        
 
         if (!error) {
             const { id } = paymentMethod;
