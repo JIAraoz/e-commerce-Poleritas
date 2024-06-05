@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -64,56 +64,12 @@ const CheckoutForm = () => {
         fetchData();
     }, [user.email]);
 
-    const handleCardNumberChange = (event) => {
-        if (event.brand === 'visa') {
-            setShowZip(true);
-        } else {
-            setShowZip(false);
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (isEditingAddress) {
-            try {
-                const response = await axios.put(
-                    `https://e-commerce-grupo03.onrender.com/user/editUser?id=${userData.userId}`,
-                    formData,
-                );
-                setUserData({ ...userData, ...formData });
-                setIsEditingAddress(false);
-                Swal.fire({
-                    icon: "success",
-                    title: "Address updated!",
-                    text: "Your address has been updated successfully.",
-                });
-            } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "An error has occurred:" + error.message,
-                });
-                return;
-            }
-        }
-
-        const cardNumberElement = elements.getElement(CardNumberElement);
-        const cardExpiryElement = elements.getElement(CardExpiryElement);
-        const cardCvcElement = elements.getElement(CardCvcElement);
-
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
-            card: {
-                number: cardNumberElement.current.value,
-                expiry: cardExpiryElement.current.value,
-                cvc: cardCvcElement.current.value,
-                billing_details: {
-                    address: {
-                        postal_code: showZip ? zip : ''
-                    }
-                }
-            }
+            card: elements.getElement(CardElement)
         });
         
 
@@ -128,10 +84,7 @@ const CheckoutForm = () => {
 
                 console.log(data);
                 if (data.message === 'successful payment') {
-                    cardNumberElement.clear();
-                    cardExpiryElement.clear();
-                    cardCvcElement.clear();
-                    setZip('');
+                    elements.getElement(CardElement).clear();
 
                     Swal.fire({
                         title: 'Compra Exitosa!',
@@ -259,27 +212,8 @@ const CheckoutForm = () => {
                 )}
                 <form onSubmit={handleSubmit}>
                     <div className="card-element-wrapper">
-                        <label>Card Number</label>
-                        <CardNumberElement onChange={handleCardNumberChange} />
+                        <CardElement className='elementosCard'/>
                     </div>
-                    <div className="card-element-wrapper">
-                        <label>Expiration Date</label>
-                        <CardExpiryElement />
-                    </div>
-                    <div className="card-element-wrapper">
-                        <label>CVC</label>
-                        <CardCvcElement />
-                    </div>
-                    {showZip && (
-                        <div className="card-element-wrapper">
-                            <label>ZIP Code</label>
-                            <input
-                                type="text"
-                                value={zip}
-                                onChange={(e) => setZip(e.target.value)}
-                            />
-                        </div>
-                    )}
                     <button className='btnSave' type="submit" disabled={!stripe}>
                         Buy ${cartSubtotal}
                     </button>
