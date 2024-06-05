@@ -1,4 +1,5 @@
-const {User} =require('../../db')
+const {User, transporter} =require('../../db')
+
 const postUser=async(req,res)=>{
     try {
         if (!req.body.userName||!req.body.userEmail||!req.body.userImage) {
@@ -19,6 +20,17 @@ const postUser=async(req,res)=>{
                 }
                 
                 const createdUser= await User.create(user)
+
+                if (createdUser) {
+                    const info = await transporter.sendMail({
+                        from: '"Welcome to Poleritas!" <mateo.giampietro.10@gmail.com>', // sender address
+                        to: user.userEmail,
+                        subject: "Welcome to Poleritas!", // Subject line
+                        text: "Hello world?", // plain text body
+                        html: "<b>Hello world?</b>", // html body
+                    });
+                }
+
                 return res.status(201).json({
                     result:createdUser
                 })
