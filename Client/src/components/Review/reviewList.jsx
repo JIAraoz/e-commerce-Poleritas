@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Rating from 'react-rating-stars-component';
+import "./review-list.css"
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
@@ -29,26 +30,31 @@ const ReviewList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="review-carousel"> {/* Agrega una clase para el carrusel */}
       <h2>Todas las Reseñas</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {reviews.length > 0 ? (
-        reviews.map((review) => (
-          <div key={review.reviewId} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+      {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
+      <div className="carousel"> {/* Contenedor del carrusel */}
+        {reviews.map((review) => (
+          <div key={review.reviewId} className="review-card"> {/* Estilos para cada tarjeta de reseña */}
             <p>
               <strong>Usuario:</strong> {review.user ? review.user.userName : 'Anónimo'}
             </p>
             <p>
-              <strong>Calificación:</strong> {review.reviewRating}
+              <strong>Calificación:</strong> 
+              <Rating
+                count={5}
+                size={24}
+                value={review.reviewRating}
+                edit={false}
+                activeColor="#ffd700"
+              />
             </p>
             <p>
               <strong>Comentario:</strong> {review.reviewDescription}
             </p>
           </div>
-        ))
-      ) : (
-        !error && <p>No hay reseñas disponibles.</p>
-      )}
+        ))}
+      </div>
     </div>
   );
 };

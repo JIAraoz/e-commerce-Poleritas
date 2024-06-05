@@ -180,8 +180,8 @@ export default function Home() {
 					</p>
 					<img className='envioSeguro' src='/envioSeguro.png' alt='seguro' />
         </div>
-        <ReviewList/>
 			</div>
+        <ReviewList/>
 		</div>
 	);
 }
