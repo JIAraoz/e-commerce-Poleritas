@@ -4,70 +4,41 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.main-container {
+    display: flex;
+}
+
 .filters {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 20%;
     margin: 3% auto;
     background-color: #4a707a80;
     padding: 0.625rem; /* 10px */
     border-radius: 0.3125rem; /* 5px */
 }
 
+.products-container {
+    width: 80%;
+    margin: 3% auto;
+}
+
 .custom-select {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .left-filters, .right-filters {
     display: flex;
-    align-items: center;
-}
-
-.order, .category {
-    padding: 0.625rem; /* 10px */
-    border: 0.0625rem solid #ccc; /* 1px */
-    border-radius: 0.625rem; /* 10px */
-    background: #4A707D;
-    color: #fff;
-    margin-right: 0.625rem; /* 10px */
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    font-family: inherit;
-    width: 12.5rem; /* 200px */
-    text-align: center;
-    position: relative; /* Needed for the custom arrow */
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .order:focus, .category:focus {
     border-color: #3b595e;
     outline: none;
-}
-
-.order option, .category option {
-    background: #fff;
-    color: #4A707D;
-    text-align: center;
-}
-
-/* Estilo del menú desplegable */
-.order::-ms-expand, .category::-ms-expand {
-    display: none;
-}
-
-.order::after, .category::after {
-    content: '▼';
-    position: absolute;
-    right: 0.9375rem; /* 15px */
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: white;
 }
 
 .ApplyFilters {
@@ -103,19 +74,21 @@
 .applied-filters span {
     color: #333;
 }
-.container-error{
+
+.container-error {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 70vh;
     width: 80%;
-    
 }
+
 .container-parent {
     display: flex;
     justify-content: center;
     align-items: center; /* Asegúrate de que el contenedor padre ocupa toda la altura de la pantalla */
 }
+
 .text-err p {
     color: black;
     font-size: 2rem;
@@ -130,4 +103,83 @@
 .text-err h1 {
     font-size: 5rem;
     color: rgb(73, 73, 73);
+}
+
+.custom-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.custom-radio label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.custom-radio input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 1.25rem; /* 20px */
+    height: 1.25rem; /* 20px */
+    border: 2px solid #4A707D;
+    border-radius: 50%;
+    margin-right: 0.5rem; /* 8px */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-radio input[type="radio"]:checked::before {
+    content: "";
+    width: 0.75rem; /* 12px */
+    height: 0.75rem; /* 12px */
+    border-radius: 50%;
+    background-color: #4A707D;
+}
+
+.name-filter{
+  font-size: 1.25rem; /* Ajusta el tamaño según sea necesario */
+    font-weight: bold; /* Opcional: hace el texto en negrita */
+    color: #000000;
+}
+
+.custom-checkbox label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #d8e1e5;
+    border: 2px solid #476c7b;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked {
+    background-color: #476c7b;
+    border-color: #476c7b;
+    position: relative;
+}
+
+.custom-checkbox input[type="checkbox"]:checked::after {
+    content: '✓';
+    font-size: 14px;
+    color: #d8e1e5;
+    position: absolute;
+    top: -2px;
+    left: 3px;
 }
