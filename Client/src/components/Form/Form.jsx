@@ -137,46 +137,50 @@ export default function Form() {
 			<div className='form-box'>
 				<form className='articleForm' onSubmit={handleSubmit}>
 					<div className='product-container'>
-						<div className='image-container'>
-							<div className='form-group'>
+						<div className='image-container-form'>
+							<div>
 								<Cloudinary onImageUpload={handleImageUpload} />
 								{errors.articleImage && (
 									<span className='error-message'>{errors.articleImage}</span>
 								)}
 							</div>
 						</div>
-
 						<div className='details-container'>
 							<div className='form-group'>
-								<input
-									type='text'
-									name='articleName'
-									placeholder='Name of article'
-									value={articleData.articleName}
-									onChange={handleChange}
-								/>
-								{errors.articleName && (
-									<span className='error-message'>{errors.articleName}</span>
-								)}
+								<div className='input-label-group'>
+									<p>Name:</p>
+									<input
+										type='text'
+										name='articleName'
+										placeholder='Name of article'
+										value={articleData.articleName}
+										onChange={handleChange}
+									/>
+									{errors.articleName && (
+										<span className='error-message'>{errors.articleName}</span>
+									)}
+								</div>
 							</div>
-
 							<div className='form-group'>
-								<input
-									className='articlePrice'
-									type='text'
-									name='articlePrice'
-									placeholder='Price'
-									value={articleData.articlePrice}
-									onChange={handleChange}
-								/>
-								{errors.articlePrice && (
-									<span className='error-message'>{errors.articlePrice}</span>
-								)}
+								<div className='input-label-group'>
+									<p>Price:</p>
+									<input
+										className='articlePrice'
+										type='text'
+										name='articlePrice'
+										placeholder='Price'
+										value={articleData.articlePrice}
+										onChange={handleChange}
+									/>
+									{errors.articlePrice && (
+										<span className='error-message'>{errors.articlePrice}</span>
+									)}
+								</div>
 							</div>
-
 							<div className='form-group'>
 								<div className='input-group'>
-									<div>
+									<div className='input-label-group'>
+										<p>Stock S:</p>
 										<input
 											type='number'
 											name='articleS'
@@ -190,9 +194,9 @@ export default function Form() {
 										)}
 									</div>
 								</div>
-
 								<div className='input-group'>
-									<div>
+									<div className='input-label-group'>
+										<p>Stock M:</p>
 										<input
 											type='number'
 											name='articleM'
@@ -207,7 +211,8 @@ export default function Form() {
 									</div>
 								</div>
 								<div className='input-group'>
-									<div>
+									<div className='input-label-group'>
+										<p>Stock L:</p>
 										<input
 											type='number'
 											name='articleL'
@@ -223,7 +228,8 @@ export default function Form() {
 								</div>
 
 								<div className='input-group'>
-									<div>
+									<div className='input-label-group'>
+										<p>Stock XL:</p>
 										<input
 											type='number'
 											name='articleXL'
@@ -238,7 +244,8 @@ export default function Form() {
 									</div>
 								</div>
 								<div className='input-group'>
-									<div>
+									<div className='input-label-group'>
+										<p>Stock XXL:</p>
 										<input
 											type='number'
 											name='articleXXL'
@@ -254,6 +261,7 @@ export default function Form() {
 								</div>
 							</div>
 							<div className='form-group'>
+								<p>Description:</p>
 								<textarea
 									name='articleDescription'
 									placeholder='Description'
@@ -266,7 +274,6 @@ export default function Form() {
 									</span>
 								)}
 							</div>
-
 							<div className='form-group'>
 								<select
 									name='categoryName'
@@ -288,12 +295,12 @@ export default function Form() {
 									<span className='error-message'>{errors.Category}</span>
 								)}
 							</div>
+							<div className='button-container'>
+								<button type='submit' disabled={hasErrors()}>
+									Send
+								</button>
+							</div>
 						</div>
-					</div>
-					<div className='button-container'>
-						<button type='submit' disabled={hasErrors()}>
-							Send
-						</button>
 					</div>
 				</form>
 			</div>
