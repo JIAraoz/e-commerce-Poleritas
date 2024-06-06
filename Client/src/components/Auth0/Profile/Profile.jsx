@@ -193,8 +193,10 @@ const Profile = () => {
                         </button>
                         <button onClick={handleReviewClick}>
                             {isReviewVisible ? 'Close review' : 'Open review'}
-                        </button>
-                    </div>
+                      </button>
+                  </div>
+                  </div>
+            <div className='admin'>
                     {isEditProductsVisible && <EditProducts />}
                     {showListUsers && <ListUsers />}
                     {isCreateReviewVisible && <CreateReview userId={userData.userId} />}
