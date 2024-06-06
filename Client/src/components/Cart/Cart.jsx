@@ -91,7 +91,7 @@ export default function Cart() {
                 navigate('/checkout', {
                     state: {
                         cartItems,
-                        cartSubtotal: cartResponse.cartSubtotal,
+                        cartSubtotal: cartResponse.cartSubtotal.toFixed(2),
                         cartId: cartResponse.cartId
                     }
                 });
@@ -123,7 +123,7 @@ export default function Cart() {
                     </div>
                 ))}
                 <div className='Cart-Totals'>
-                    <p>Total: ${cartResponse.cartSubtotal}</p>
+                    <p>Total: ${cartResponse.cartSubtotal.toFixed(2)}</p>
                 </div>
                 <div className='Cart-Checkout'>
                     <button onClick={() => handleBuyCart()}>Checkout</button>

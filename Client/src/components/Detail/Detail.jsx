@@ -10,10 +10,12 @@ import { useEffect, useState } from 'react';
 export default function Detail() {
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
-	const { user } = useAuth0();
+	const { user, loginWithRedirect } = useAuth0();
 	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
 	const [size, setSize] = useState('S');
+
+	const userData = window.localStorage.getItem('userData')
 
 	useEffect(() => {
 		async function getProduct() {
@@ -174,10 +176,14 @@ export default function Detail() {
 						</div>
 					</div>
 					<div className='cart-container'>
-						<button className='add-to-cart' onClick={() => handleAddToCart()}>
-							Add to Cart
-						</button>
-						<p className='free-shipping'>Free Shipping!!</p>
+						{userData ? <div>
+										<button className='add-to-cart' onClick={() => handleAddToCart()}>
+											Add to Cart
+										</button>
+										<p className='free-shipping'>Free Shipping!!</p>
+									</div>
+						: <button className='add-to-cart' onClick={() => loginWithRedirect()}>Log in to buy</button>
+						}
 					</div>
 				</div>
 			</div>
