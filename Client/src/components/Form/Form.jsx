@@ -4,6 +4,8 @@ import Cloudinary from '../Cloudinary/Cloudinary';
 import './Form.css';
 import Validation from '../Validation/Validation';
 import Swal from 'sweetalert2';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 
 export default function Form() {
 	const [categories, setCategories] = useState([]);
@@ -132,6 +134,7 @@ export default function Form() {
 	const hasErrors = () => {
 		return Object.keys(errors).some((key) => errors[key]);
 	};
+
 	return (
 		<div className='back'>
 			<div className='form-box'>

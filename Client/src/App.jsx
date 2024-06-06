@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Profile from './components/Auth0/Profile/Profile';
 import Home from './components/Home/Home';
-import Landing from './components/Landing/Landing';
-import Form from './components/Form/Form';
 import Detail from './components/Detail/Detail';
 import Nav from './components/Nav/Nav';
 import Cart from './components/Cart/Cart';
@@ -13,21 +11,52 @@ import Products from './components/Products/Products';
 import Checkout from './components/Checkout/Checkout';
 import ListUsers from './components/ListUsers/ListUsers';
 import './App.css';
+import axios from 'axios';
+
 function App() {
-	const { isLoading } = useAuth0();
-	const { pathname } = useLocation();
+	const [isBanned, setIsBanned] = useState(false);
+	const { user } = useAuth0();
 
-	if (isLoading) return <h1>Cargando sesión...</h1>;
+	useEffect(() => {
+        const fetchData = async () => {
+            if (user && user.email) {
+                try {
+                    const response = await axios.get(`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`);
 
+                    if (response.data.result.userRol === "Banned") {
+                        setIsBanned(true);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [user]);
+
+    if (isBanned) {
+        return (
+          <div className="banned-container">
+            <div className="robot-banned">
+                <img src="/robot.jpg" alt="Robot" />
+                <div className='baned'>
+                    <h2 className='text-banned'>You are banned</h2>
+                    <p>Write an email to poleritas0@gmail.com for more information.</p>
+                </div>
+            </div>
+        </div>
+        );
+    }
+ 
 	return (
 		<div className='app-container'>
-			{pathname !== '/' && <Nav />}
+			<Nav />
 			<div className='content'>
 				<Routes>
-					<Route path='/' element={<Landing />} />
-					<Route path='/profile' element={<Profile />} />
+					<Route path='/' element={<Home/>} />
 					<Route path='/home' element={<Home />} />
-					<Route path='/form' element={<Form />} />
+					<Route path='/profile' element={<Profile />} />
 					<Route path='/products' element={<Products />} />
 					<Route path='/detail/:id' element={<Detail />} />
 					<Route path='/cart' element={<Cart />} />

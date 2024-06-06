@@ -8,79 +8,79 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 function Nav() {
-	const { user, isAuthenticated } = useAuth0();
-	return (
-		<div className='nav'>
-			<div className='left'>
-				<Link to='/home'>
-					<button>HOME</button>
-				</Link>
-				<Link to='/products'>
-					<button>PRODUCTS</button>
-				</Link>
-				<Link to={'/form'}>
-					<button>FORM</button>
-				</Link>
-				{/* <Link to='/about'>
-					<button>ABOUT</button>
-				</Link> */}
-			</div>
-			<div className='center'>
-				<SearchBar className='searchBar' />
-			</div>
-			<div className='right'>
-				{isAuthenticated ? (
-					<Link to='/cart'>
-						<button>
-							<FontAwesomeIcon icon={faCartShopping} />
-						</button>
-					</Link>
-				) : null}
+    const { user, isAuthenticated } = useAuth0();
+    const userData = JSON.parse(window.localStorage.getItem("userData"));
 
-				{isAuthenticated ? (
-					<Link to='/profile'>
-						<button
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								border: 'none',
-								background: 'none',
-								cursor: 'pointer',
-								padding: 0,
-							}}
-						>
-							{isAuthenticated && user.picture ? (
-								<img
-									src={user.picture}
-									alt='Profile'
-									style={{
-										borderRadius: '50%',
-										width: '40px',
-										height: '40px',
-										marginRight: '8px',
-									}}
-								/>
-							) : (
-								<img
-									src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-									alt='Default Profile'
-									style={{
-										borderRadius: '50%',
-										width: '40px',
-										height: '40px',
-										marginRight: '8px',
-									}}
-								/>
-							)}
-							<span style={{ fontSize: '16px' }}>My Profile</span>
-						</button>
-					</Link>
-				) : (
-					<Login />
-				)}
-			</div>
-		</div>
-	);
+    return (
+        <div className='nav'>
+            <div className='left'>
+                <Link to='/'>
+                    <button>HOME</button>
+                </Link>
+                <Link to='/products'>
+                    <button>PRODUCTS</button>
+                </Link>
+
+                {/* <Link to='/about'>
+                    <button>ABOUT</button>
+                </Link> */}
+            </div>
+            <div className='center'>
+                <SearchBar className='searchBar' />
+            </div>
+            <div className='right'>
+                {isAuthenticated ? (
+                    <Link to='/cart'>
+                        <button>
+                            <FontAwesomeIcon icon={faCartShopping} />
+                        </button>
+                    </Link>
+                ) : null}
+
+                {isAuthenticated ? (
+                    <Link to='/profile'>
+                        <button
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                border: 'none',
+                                background: 'none',
+                                cursor: 'pointer',
+                                padding: 0,
+                            }}
+                        >
+                            {userData && userData.userImage ? (
+                                <img
+                                    src={userData.userImage}
+                                    alt='Profile'
+                                    style={{
+                                        borderRadius: '50%',
+                                        width: '40px',
+                                        height: '40px',
+                                        marginRight: '8px',
+                                    }}
+                                />
+                            ) : (
+                                <img
+                                    src='https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+                                    alt='Default Profile'
+                                    style={{
+                                        borderRadius: '50%',
+                                        width: '40px',
+                                        height: '40px',
+                                        marginRight: '8px',
+                                    }}
+                                />
+                            )}
+                            <span style={{ fontSize: '16px' }}>My Profile</span>
+                        </button>
+                    </Link>
+                ) : (
+                    <Login />
+                )}
+            </div>
+        </div>
+    );
 }
 
 export default Nav;

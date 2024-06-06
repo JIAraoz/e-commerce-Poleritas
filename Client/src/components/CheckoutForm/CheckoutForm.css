@@ -57,17 +57,17 @@
     margin-bottom: 10px;
 }
 
-.elementosCard {
-    padding: 12px;
-    width: 40%;
-    margin-bottom: 20px;
-}
+
 
 .card-element-wrapper label {
     display: block;
-    margin-bottom: 5px;
+   
 }
-
+.elementosCard{
+   margin-top: 1rem;
+    width: 20rem;
+    height: 2rem;
+}
 .btnSave {
     padding: 10px 20px;
     background-color: #28a3a7;

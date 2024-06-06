@@ -9,25 +9,32 @@ const desactivateShoppingCart = async (req, res) => {
                     include: {
                         model: Article,
                         through: {
-                            attributes: ['articleQuantity']
+                            attributes: ['articleQuantity', 'S', 'M', 'L', 'XL', 'XXL']
                         }
                     }
                 });
 
             if (cartToDesactivate) {
-                cartToDesactivate.isActive = false;
-
                 for (const article of cartToDesactivate.articles) {
-                    const newStock = article.articleStock - article.Cart_Articule.articleQuantity;
+                    const cartArticle = article.Cart_Articule;
+                    const newStock = article.articleStock - cartArticle.articleQuantity;
                     if (newStock < 0) {
                         return res.status(400).json({ message: `Insufficient stock for the article ${article.title}` });
                     }
-                }
+                    // Actualizar existencias de tallas
+                    article.articleS -= article.Cart_Articule.S;
+                    article.articleM -= article.Cart_Articule.M;
+                    article.articleL -= article.Cart_Articule.L;
+                    article.articleXL -= article.Cart_Articule.XL;
+                    article.articleXXL -= article.Cart_Articule.XXL;
 
-                for (const article of cartToDesactivate.articles) {
-                    article.articleStock -= article.Cart_Articule.articleQuantity;
+                    // Actualizar existencias generales
+                    article.articleStock -= cartArticle.articleQuantity;
+
                     await article.save();
                 }
+
+                cartToDesactivate.isActive = false;
 
                 await cartToDesactivate.save();
                 return res.status(200).json({ message: 'Cart successfully paid' });
