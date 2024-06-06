@@ -9,6 +9,7 @@ import EditProducts from '../../EditProducts/EditProducts';
 import ListUsers from '../../ListUsers/ListUsers';
 import CreateReview from '../../Review/createReview';
 import Review from '../../Review/Review';
+import ReviewAdmin from '../../Review/reviewAdmin';
 const Profile = () => {
     const { user, isAuthenticated } = useAuth0();
     const [userData, setUserData] = useState({});
@@ -17,7 +18,8 @@ const Profile = () => {
     const [isEditProductsVisible, setIsEditProductsVisible] = useState(false);
     const [showListUsers, setShowListUsers] = useState(false);
     const [isCreateReviewVisible, setIsCreateReviewVisible] = useState(false);
-    const [isReviewVisible, setIsReviewVisible] = useState(false);
+  const [isReviewVisible, setIsReviewVisible] = useState(false);
+  const [isReviewAdminVisible, setIsReviewAdminVisible] = useState(false);
     const [formData, setFormData] = useState({
         userName: '',
         userImage: '',
@@ -61,6 +63,7 @@ const Profile = () => {
         setShowListUsers(false);
         setIsCreateReviewVisible(false);
         setIsReviewVisible(false);
+        setIsReviewAdminVisible(false);
         setIsEditProductsVisible(!isEditProductsVisible);
     };
     const handleEditClick = () => {
@@ -102,6 +105,7 @@ const Profile = () => {
         setIsEditProductsVisible(false);
         setIsCreateReviewVisible(false);
         setIsReviewVisible(false);
+        setIsReviewAdminVisible(false);
         setShowListUsers(!showListUsers);
     };
 
@@ -109,6 +113,7 @@ const Profile = () => {
         setIsEditProductsVisible(false);
         setShowListUsers(false);
         setIsReviewVisible(false);
+        setIsReviewAdminVisible(false);
         setIsCreateReviewVisible(!isCreateReviewVisible);
     };
 
@@ -116,7 +121,15 @@ const Profile = () => {
         setIsEditProductsVisible(false);
         setShowListUsers(false);
         setIsCreateReviewVisible(false);
+        setIsReviewAdminVisible(false);
         setIsReviewVisible(!isReviewVisible);
+  };
+  const handleReviewAdminClick = () => {
+        setIsEditProductsVisible(false);
+        setShowListUsers(false);
+        setIsCreateReviewVisible(false);
+        setIsReviewVisible(false);
+        setIsReviewAdminVisible(!isReviewAdminVisible); // Muestra ReviewAdmin cuando se abre ReviewAdmin
     };
 
     const handleImageUpload = (imageUrl) => {
@@ -193,7 +206,10 @@ const Profile = () => {
                                                             </button>
                                                             <button onClick={handleReviewClick}>
                                                                 {isReviewVisible ? 'Close review' : 'Open review'}
-                                                        </button>
+                                                            </button>
+                                                            <button onClick={handleReviewAdminClick}>
+                                                             {isReviewAdminVisible ? 'Close review admin' : 'Open review admin'}
+                                                    </button>
                                                     </div>
                                                     : null
                   }
@@ -203,6 +219,7 @@ const Profile = () => {
                                                 {isEditProductsVisible && <EditProducts />}
                                                 {showListUsers && <ListUsers />}
                                                 {isReviewVisible && <Review userId={userData.userId} />}
+                                                {isReviewAdminVisible && <ReviewAdmin />}
                                             </div>
                                             : null
             } 
