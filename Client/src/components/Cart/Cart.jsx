@@ -9,7 +9,7 @@ export default function Cart() {
     const { user } = useAuth0();
     const [userData, setUserData] = useState({});
     const [cartItems, setCartItems] = useState([]);
-    const [cartResponse, setCartResponse] = useState(null);  // Nuevo estado para cartResponse
+    const [cartResponse, setCartResponse] = useState(null); // Nuevo estado para cartResponse
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,9 +24,9 @@ export default function Cart() {
                     const cartResponse = await axios.get(
                         `https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`,
                     );
-                    setCartResponse(cartResponse.data.result);  // Guardar cartResponse en el estado
+                    setCartResponse(cartResponse.data.result); // Guardar cartResponse en el estado
                     setCartItems(cartResponse.data.result.articles);
-                    console.log(cartItems)
+                    console.log(cartItems);
                 }
             } catch (error) {
                 Swal.fire({
@@ -46,7 +46,7 @@ export default function Cart() {
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/remove_article_cart?cartid=${cartId}&articleid=${value.articleId}`
                 );
-    
+
                 if (response) {
                     Swal.fire({
                         title: "Eliminated product",
@@ -69,7 +69,7 @@ export default function Cart() {
                 const response = await axios.get(
                     `https://e-commerce-grupo03.onrender.com/cart/cleanShoppingCart?cartId=${cartId}`
                 );
-    
+
                 if (response) {
                     Swal.fire({
                         title: "Trolley cleaned",
@@ -106,22 +106,29 @@ export default function Cart() {
             <div className='Shooping-Cart'>
                 <button onClick={() => handleCleanButton()}>Clean Cart</button>
                 <p className='Shopping-Cart-title'>Shopping Cart</p>
-                {cartItems.map((product) => (
-                    <div key={product.articleId} className='Cart-Item'>
-                        <img src={product.articleImage} alt={product.articleName} />
-                        <div className='Cart-Item-Details'>
-                            <h2>{product.articleName}</h2>
-                            <p>Price: ${product.articlePrice}</p>
-                            <p>Quantity: {product.Cart_Articule.articleQuantity}</p>
+                {cartItems.map((product) => {
+                    const { S, M, L, XL, XXL } = product.Cart_Articule;
+                    const sizes = { S, M, L, XL, XXL };
+
+                    return (
+                        <div key={product.articleId} className='Cart-Item'>
+                            <img src={product.articleImage} alt={product.articleName} />
+                            <div className='Cart-Item-Details'>
+                                <h2>{product.articleName}</h2>
+                                <p>Price: ${product.articlePrice}</p>
+                                {Object.entries(sizes).map(([size, quantity]) => (
+                                    quantity > 0 && <p key={size}>{size}: {quantity}</p>
+                                ))}
+                            </div>
+                            <button
+                                onClick={() => handleRemoveButton(product)}
+                                className='Remove-Button'
+                            >
+                                Remove item
+                            </button>
                         </div>
-                        <button
-                            onClick={() => handleRemoveButton(product)}
-                            className='Remove-Button'
-                        >
-                            Remove item
-                        </button>
-                    </div>
-                ))}
+                    );
+                })}
                 <div className='Cart-Totals'>
                     <p>Total: ${cartResponse.cartSubtotal.toFixed(2)}</p>
                 </div>

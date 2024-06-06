@@ -132,7 +132,6 @@ const CheckoutForm = () => {
     const handleEditAddressClick = () => {
         setIsEditingAddress(true);
     };
-
     return (
         <div className="checkout-form">
             <div className="left-section">
@@ -140,12 +139,22 @@ const CheckoutForm = () => {
                     <div className="cart-summary">
                         <h3>Cart Summary</h3>
                         <ul>
-                            {cartResponse.articles.map((article, index) => (
-                                <li key={index}>
-                                    <img src={article.articleImage} alt="item" />
-                                    {article.articleName} - ${article.articlePrice}
-                                </li>
-                            ))}
+                            {cartResponse.articles.map((article, index) => {
+                                const { S, M, L, XL, XXL } = article.Cart_Articule;
+                                const sizes = { S, M, L, XL, XXL };
+
+                                return (
+                                    <li key={index}>
+                                        <img src={article.articleImage} alt="item" />
+                                        {article.articleName} - ${article.articlePrice}
+                                        <div>
+                                            {Object.entries(sizes).map(([size, quantity]) => (
+                                                quantity > 0 && <p key={size}>{size}: {quantity}</p>
+                                            ))}
+                                        </div>
+                                    </li>
+                                );
+                            })}
                         </ul>
                         <h4>Subtotal: ${cartSubtotal}</h4>
                     </div>
