@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Nav.css';
 import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
@@ -6,9 +6,33 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Login from '../Auth0/Login/Login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Nav() {
 	const { user, isAuthenticated } = useAuth0();
+	
+	useEffect(() => {
+		if (isAuthenticated && user) {
+			// eslint-disable-next-line no-inner-declarations
+			async function fetchUserData() {
+				try {
+					const response = await axios.get(
+						`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
+					);
+					window.localStorage.setItem('userData', JSON.stringify(response.data.result));
+				} catch (error) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'An error has occurred:' + error.message,
+					});
+				}
+			}
+
+			fetchUserData();
+		}
+	}, [isAuthenticated, user]);
 	const userData = JSON.parse(window.localStorage.getItem("userData"));
 	return (
 		<div className='nav'>
