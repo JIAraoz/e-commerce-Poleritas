@@ -102,7 +102,7 @@ export default function Cart() {
 		}
 	};
 
-	if (cartItems && cartItems.length > 0) {
+	if (cartItems.length > 0) {
 		return (
 			<div className='Shooping-Cart'>
 				<button onClick={() => handleCleanButton()}>Clean Cart</button>
