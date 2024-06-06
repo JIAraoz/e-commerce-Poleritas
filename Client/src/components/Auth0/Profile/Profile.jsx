@@ -34,9 +34,10 @@ const Profile = () => {
 
 	useEffect(() => {
 		async function fetchUserData() {
+			const email = user.email
 			try {
 				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`,
+					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${email}`,
 				);
 				setUserData(response.data.result);
 				setFormData({
@@ -189,6 +190,7 @@ const Profile = () => {
 						</button>
 						{isEditing && (
 							<form onSubmit={handleFormSubmit}>
+								<label>Name</label>
 								<input
 									type='text'
 									name='userName'
@@ -196,7 +198,7 @@ const Profile = () => {
 									onChange={handleInputChange}
 									placeholder='Name'
 								/>
-
+								<label>Door number</label>
 								<input
 									type='text'
 									name='userDoorNumber'
@@ -204,6 +206,7 @@ const Profile = () => {
 									onChange={handleInputChange}
 									placeholder='Door Number'
 								/>
+								<label>Street name</label>
 								<input
 									type='text'
 									name='userStreetName'
@@ -211,6 +214,7 @@ const Profile = () => {
 									onChange={handleInputChange}
 									placeholder='Street Name'
 								/>
+								<label>Country</label>
 								<input
 									type='text'
 									name='userCountry'
@@ -218,6 +222,7 @@ const Profile = () => {
 									onChange={handleInputChange}
 									placeholder='Country'
 								/>
+								<label>City</label>
 								<input
 									type='text'
 									name='userCity'

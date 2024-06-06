@@ -9,6 +9,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 function Nav() {
 	const { user, isAuthenticated } = useAuth0();
+	const userData = JSON.parse(window.localStorage.getItem("userData"));
 	return (
 		<div className='nav'>
 			<div className='left'>
@@ -47,9 +48,9 @@ function Nav() {
 								padding: 0,
 							}}
 						>
-							{isAuthenticated && user.picture ? (
+							{isAuthenticated && userData.userImage ? (
 								<img
-									src={user.picture}
+									src={userData.userImage}
 									alt='Profile'
 									style={{
 										borderRadius: '50%',
