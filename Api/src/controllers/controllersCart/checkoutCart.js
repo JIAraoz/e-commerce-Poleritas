@@ -20,6 +20,7 @@ const checkoutCart = async (req, res) => {
             const info = await transporter.sendMail({
                 from: '"Thanks you for your order!" <poleritas0@gmail.com>', // sender address
                 to: email,
+                subject: "Your order",
                 html: `
                     <p>Thank you for your order!</p>
                     <p>Here are the items you purchased:</p>
@@ -36,7 +37,6 @@ const checkoutCart = async (req, res) => {
                             </li>
                         `).join('')}
                     </ul>
-                    <p>Total amount: ${amount}</p>
                 `
             });
             return res.send({ 
