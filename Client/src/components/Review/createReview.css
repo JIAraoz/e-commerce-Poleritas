@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-.container-myreview {
+.container-review {
     max-width: 600px;
     margin: 3rem auto;
     padding: 2rem;
@@ -10,47 +9,55 @@
     font-family: 'Roboto', sans-serif; /* Añade esta línea */
 }
 
-.title-myreview h2 {
+.title-review h2 {
     color: #444;
     text-align: center;
     margin-bottom: 1.5rem;
 }
 
-.editrating-myreview,
-.rating-myreview {
+.form-review {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.label-myreview {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 0rem;
+.rating-review,
+.comment-review {
+    display: flex;
+    flex-direction: column;
 }
 
-.container-myreview textarea {
+.label-review,
+.titlecomment-review {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+textarea {
     padding: 0.5rem;
     border: 1px solid #ddd;
+    height: 100px;
     border-radius: 4px;
     font-size: 1.3rem;
     color: #333;
 }
 
-.container-myreview button {
-    
-    
+.send-review {
+    background-color: #28a745;
+    color: #fff;
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 0rem;
 }
 
+.send-review:hover {
+    background-color: #218838;
+}
 
-
-.container-myreview button:disabled {
+.send-review:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }

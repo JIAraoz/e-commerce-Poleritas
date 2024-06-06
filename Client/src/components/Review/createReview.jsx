@@ -1,91 +1,100 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Rating from 'react-rating-stars-component';
-
+import './createReview.css';
 // eslint-disable-next-line react/prop-types
 const CreateReview = ({ userId, onReviewCreated }) => {
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+	const [rating, setRating] = useState(0);
+	const [comment, setComment] = useState('');
+	const [error, setError] = useState(null);
+	const [success, setSuccess] = useState(null);
 
-  const handleRatingChange = (newRating) => {
-    setRating(newRating);
-    setError(null); // Clear error when user starts changing the rating
-  };
+	const handleRatingChange = (newRating) => {
+		setRating(newRating);
+		setError(null); // Clear error when user starts changing the rating
+	};
 
-  const handleCommentChange = (e) => {
-    setComment(e.target.value);
-  };
+	const handleCommentChange = (e) => {
+		setComment(e.target.value);
+	};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
-    if (rating === 0) {
-      setError('Falta datos por llenar.');
-      return;
-    }
+		if (rating === 0) {
+			setError('Missing data to fill in.');
+			return;
+		}
 
-    try {
-      const backendUrl = 'https://e-commerce-grupo03.onrender.com/review/reviews';
-      const response = await axios.post(backendUrl, {
-        userId,
-        reviewRating: rating,
-        reviewDescription: comment,
-      });
-      console.log('Reseña creada:', response.data);
-      setSuccess('Reseña creada exitosamente.');
-      setError(null);
-      setRating(0);
-      setComment('');
-      onReviewCreated(); // Llamar a la función proporcionada por el padre para indicar que se ha creado la reseña
-    } catch (error) {
-      console.error('Error al crear la reseña:', error);
+		try {
+			const backendUrl =
+				'https://e-commerce-grupo03.onrender.com/review/reviews';
+			const response = await axios.post(backendUrl, {
+				userId,
+				reviewRating: rating,
+				reviewDescription: comment,
+			});
+			console.log('Review created:', response.data);
+			setSuccess('Review successfully created.');
+			setError(null);
+			setRating(0);
+			setComment('');
+			onReviewCreated(); // Call the function provided by the parent to indicate that the review has been created
+		} catch (error) {
+			console.error('Error creating review:', error);
 
-      if (error.response) {
-        console.error('Respuesta del servidor:', error.response.data);
-        setError(error.response.data.message || 'Error al crear la reseña.');
-      } else if (error.request) {
-        console.error('No se recibió respuesta:', error.request);
-        setError('No se recibió respuesta del servidor.');
-      } else {
-        console.error('Error al configurar la solicitud:', error.message);
-        setError('Error al configurar la solicitud.');
-      }
-      setSuccess(null);
-    }
-  };
-
-  return (
-    <div>
-      <h2>Crear Reseña</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="rating">Calificación:</label>
-          <Rating
-            count={5}
-            value={rating}
-            onChange={handleRatingChange}
-            size={24}
-            activeColor="#ffd700"
-          />
-        </div>
-        <div>
-          <label htmlFor="comment">Comentario:</label>
-          <textarea
-            id="comment"
-            value={comment}
-            onChange={handleCommentChange}
-          ></textarea>
-        </div>
-        <button type="submit" disabled={rating === 0}>
-          Enviar Reseña
-        </button>
-      </form>
-    </div>
-  );
+			if (error.response) {
+				console.error('Server response:', error.response.data);
+				setError(error.response.data.message || 'Error creating review.');
+			} else if (error.request) {
+				console.error('No response received:', error.request);
+				setError('No response received from the server.');
+			} else {
+				console.error('Error setting up the request:', error.message);
+				setError('Error setting up the request.');
+			}
+			setSuccess(null);
+		}
+	};
+	return (
+		<div className='container-review'>
+			<div>
+				<div className='title-review'>
+					<h2>Create Review</h2>
+				</div>
+				{error && <p style={{ color: 'red' }}>{error}</p>}
+				{success && <p style={{ color: 'green' }}>{success}</p>}
+				<form onSubmit={handleSubmit} className='form-review'>
+					<div className='rating-review'>
+						<label className='label-review' htmlFor='rating'>
+							Rating:
+						</label>
+						<Rating
+							count={5}
+							value={rating}
+							onChange={handleRatingChange}
+							size={24}
+							activeColor='#ffd700'
+						/>
+					</div>
+					<div className='comment-review'>
+						<label className='titlecomment-review' htmlFor='comment'>
+							Comment:
+						</label>
+						<textarea
+							id='comment'
+							name='comment'
+							value={comment}
+							onChange={handleCommentChange}
+						/>
+					</div>
+					<button className='send-review' type='submit' disabled={rating === 0}>
+						Submit Review
+					</button>
+				</form>
+			</div>
+		</div>
+	);
 };
 
 export default CreateReview;
