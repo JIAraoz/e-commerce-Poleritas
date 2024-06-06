@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Profile from './components/Auth0/Profile/Profile';
 import Home from './components/Home/Home';
 import Detail from './components/Detail/Detail';
@@ -51,7 +51,8 @@ function App() {
 			<Nav />
 			<div className='content'>
 				<Routes>
-					<Route path='/' element={<Home />} />
+					<Route path='/' element={<Navigate to='/Home' />} />
+					<Route path='/home' element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/products' element={<Products />} />
 					<Route path='/detail/:id' element={<Detail />} />
