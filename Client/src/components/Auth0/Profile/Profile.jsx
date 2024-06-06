@@ -199,7 +199,7 @@ const Profile = () => {
                   }
                   </div>
                   {isCreateReviewVisible && <CreateReview userId={userData.userId} />}
-            {userData.userRol === "Admin" ? <div className='admin'>
+            {userData.userRol === "User"||userData.userRol === "Admin" ? <div className='admin'>
                                                 {isEditProductsVisible && <EditProducts />}
                                                 {showListUsers && <ListUsers />}
                                                 {isReviewVisible && <Review userId={userData.userId} />}
