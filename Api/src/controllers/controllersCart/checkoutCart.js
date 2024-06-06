@@ -1,5 +1,5 @@
 const stripe = require('stripe')('sk_test_51PKnNJIDObO0roetYtw0le7i7BXIaAgXRo7Ym79WgUNorek4sdapc89WkE6KEko7qvi9PAJAdn1jPmzxDoHGPEoJ0097q55YRe');
-const { ShoppingCart, Article} = require('../../db');
+const { ShoppingCart, Article, transporter} = require('../../db');
 
 const checkoutCart = async (req, res) => {
    
