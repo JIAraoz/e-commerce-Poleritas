@@ -88,8 +88,8 @@ const Profile = () => {
 		setIsFormVisible(!isFormVisible);
 	};
 
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
 		setFormData({
 			...formData,
 			[name]: value,
@@ -166,9 +166,6 @@ const Profile = () => {
 		setIsReviewAdminVisible(!isReviewAdminVisible); // Muestra ReviewAdmin cuando se abre ReviewAdmin
 	};
 
-	const handleImageUpload = (imageUrl) => {
-		setFormData({ ...formData, userImage: imageUrl });
-	};
 	if (!isAuthenticated) {
 		return <Navigate to='/Home' />;
 	}
@@ -198,7 +195,7 @@ const Profile = () => {
 									onChange={handleInputChange}
 									placeholder='Name'
 								/>
-								<Cloudinary onImageUpload={handleImageUpload} />
+
 								<input
 									type='text'
 									name='userDoorNumber'
