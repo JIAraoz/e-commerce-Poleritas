@@ -18,19 +18,25 @@ async function editArticle(req, res) {
         const article = await Article.findByPk(articleId);
 
         if (!article) {
-        return res.status(404).json({ message: "Artículo no encontrado" });
+            return res.status(404).json({ message: "Artículo no encontrado" });
         }
 
-        if (articleName) article.articleName = articleName;
-        if (articleDescription) article.articleDescription = articleDescription;
-        if (articlePrice) article.articlePrice = articlePrice;
-        if (articleImage) article.articleImage = articleImage;
-        if (articleS) article.articleS = articleS;
-        if (articleM) article.articleM = articleM;
-        if (articleL) article.articleL = articleL;
-        if (articleXL) article.articleXL = articleXL;
-        if (articleXXL) article.articleXXL = articleXXL;
+        // Actualiza los campos del artículo
+        article.articleName = articleName || article.articleName;
+        article.articleDescription = articleDescription || article.articleDescription;
+        article.articlePrice = articlePrice || article.articlePrice;
+        article.articleImage = articleImage || article.articleImage;
+        article.articleS = articleS || article.articleS;
+        article.articleM = articleM || article.articleM;
+        article.articleL = articleL || article.articleL;
+        article.articleXL = articleXL || article.articleXL;
+        article.articleXXL = articleXXL || article.articleXXL;
 
+        // Calcula el stock total
+        const totalStock = (article.articleS || 0) + (article.articleM || 0) + (article.articleL || 0) + (article.articleXL || 0) + (article.articleXXL || 0);
+        article.articleStock = totalStock;
+
+        // Guarda los cambios en la base de datos
         await article.save();
 
         res.status(200).json({ message: "Artículo editado correctamente", article });

@@ -51,3 +51,13 @@
     max-width: 40%; /* Ajusta este valor según tus necesidades */
     overflow-wrap: break-word; /* Esto hará que las palabras largas se rompan y pasen a la siguiente línea */
 }
+
+.editingArticle {
+    z-index: 2; /* Valor alto para asegurar que esté por encima de otros elementos */
+    position:relative;
+}
+
+.editButton {
+    z-index: 1;
+    position:relative;
+}
