@@ -32,6 +32,11 @@ async function editArticle(req, res) {
         article.articleXL = articleXL || article.articleXL;
         article.articleXXL = articleXXL || article.articleXXL;
 
+        article.articleS = Number(article.articleS);
+        article.articleM = Number(article.articleM);
+        article.articleL = Number(article.articleL);
+        article.articleXL = Number(article.articleXL);
+        article.articleXXL = Number(article.articleXXL);
         // Calcula el stock total
         const totalStock = (article.articleS || 0) + (article.articleM || 0) + (article.articleL || 0) + (article.articleXL || 0) + (article.articleXXL || 0);
         article.articleStock = totalStock;
