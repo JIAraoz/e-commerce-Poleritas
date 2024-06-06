@@ -15,7 +15,7 @@ const ReviewList = () => {
       try {
         const response = await axios.get('https://e-commerce-grupo03.onrender.com/review/reviews_list');
         if (response.data && Array.isArray(response.data.result)) {
-          setReviews(response.data.result);
+          setReviews(response.data.result.filter(review => review.user && review.user.userId));
           setError(null);
         } else {
           setError('La respuesta del servidor no contiene un arreglo de reseñas en el campo "result".');
@@ -34,43 +34,50 @@ const ReviewList = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
-    }, 4000); // La reseña se muestra por 4 segundos
+    if (reviews.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
+      }, 4000); // La reseña se muestra por 4 segundos
 
-    return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonte
-  }, [reviews.length]);
+      return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonte
+    }
+  }, [reviews]);
 
   return (
     <div className="review-carousel">
+      <h2>Todas las Reseñas</h2>
       <div className="carousel">
-        {reviews.map((review, index) => (
-          <div
-          key={review.reviewId}
-          className={`review-card ${index === currentIndex ? 'active' : ''}`}
-          >
-            <h2>Todas las Reseñas</h2>
-            <FontAwesomeIcon icon={faArrowRight} />
-            <p>
-              <strong>Usuario:</strong> {review.user ? review.user.userName : 'Anónimo'}
-            </p>
-            <p>
-              <strong>Calificación:</strong> 
-              <Rating
-                count={5}
-                size={24}
-                value={review.reviewRating}
-                edit={false}
-                activeColor="#ffd700"
-              />
-            </p>
-            <p>
-              <strong>Comentario:</strong> {review.reviewDescription}
-            </p>
-          </div>
-        ))}
+        {reviews.length > 0 ? (
+          reviews.map((review, index) => (
+            <div
+              key={review.reviewId}
+              className={`review-card ${index === currentIndex ? 'active' : ''}`}
+              >
+              <FontAwesomeIcon icon={faArrowRight} />
+              <p>
+                <strong>Usuario:</strong> {review.user.userName}
+              </p>
+              <p>
+                <strong>Calificación:</strong> 
+                <Rating
+                  count={5}
+                  size={24}
+                  value={review.reviewRating}
+                  edit={false}
+                  activeColor="#ffd700"
+                />
+              </p>
+              <p>
+                <strong>Comentario:</strong> {review.reviewDescription}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p>No hay reseñas disponibles.</p>
+        )}
       </div>
     </div>
   );
 };
+
 export default ReviewList;
