@@ -23,11 +23,11 @@ const desactivateShoppingCart = async (req, res) => {
                     }
 
                     // Actualizar existencias de tallas
-                    article.articleS -= cartArticle.S;
-                    article.articleM -= cartArticle.M;
-                    article.articleL -= cartArticle.L;
-                    article.articleXL -= cartArticle.XL;
-                    article.articleXXL -= cartArticle.XXL;
+                    article.articleS -= 1;
+                    article.articleM -= 1;
+                    article.articleL -= 1;
+                    article.articleXL -= 1;
+                    article.articleXXL -= 1;
 
                     // Actualizar existencias generales
                     article.articleStock -= cartArticle.articleQuantity;
