@@ -14,21 +14,28 @@ export default function Cart() {
 
     useEffect(() => {
         async function fetchData() {
+        
+            const email=user.email
             try {
                 const userResponse = await axios.get(
-                    `https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
+                    `https://e-commerce-grupo03.onrender.com/user/user_email?email=${email}`
                 );
+                console.log(userResponse);
                 setUserData(userResponse.data.result);
 
                 if (userResponse.data.result.userId) {
+                    console.log(userResponse.data.result.userId);
                     const cartResponse = await axios.get(
-                        `https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`,
+                        `https://e-commerce-grupo03.onrender.com/cart/getShoppingCart?id=${userResponse.data.result.userId}`
                     );
+                    console.log(cartResponse);
                     setCartResponse(cartResponse.data.result);  // Guardar cartResponse en el estado
                     setCartItems(cartResponse.data.result.articles);
-                    console.log(cartItems)
+    
                 }
             } catch (error) {
+                console.log(error);
+                console.log("alerta");
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -37,7 +44,7 @@ export default function Cart() {
             }
         }
         fetchData();
-    }, [user.email]);
+    }, [userData]);
 
     const handleRemoveButton = async (value) => {
         try {
