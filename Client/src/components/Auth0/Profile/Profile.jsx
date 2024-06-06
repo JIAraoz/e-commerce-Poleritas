@@ -98,10 +98,9 @@ const Profile = () => {
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
-        const id = userData.userId
 		try {
 			const response = await axios.put(
-				`https://e-commerce-grupo03.onrender.com/user/editUser?id=${id}`,
+				`https://e-commerce-grupo03.onrender.com/user/editUser?id=${userData.userId}`,
 				formData,
 			);
 			Swal.fire({
@@ -235,14 +234,14 @@ const Profile = () => {
 							? 'Close create review'
 							: 'Open create review'}
 					</button>
+                    <button onClick={handleReviewClick}>
+								{isReviewVisible ? 'Close review' : 'Open review'}
+							</button>
 					{userData.userRol === 'Admin' ? (
 						<div className='button-container'>
 							<button onClick={handleEditProductsClick}>Edit products</button>
 							<button onClick={handleButtonClick}>
 								{showListUsers ? 'Close user list' : 'Open user list'}
-							</button>
-							<button onClick={handleReviewClick}>
-								{isReviewVisible ? 'Close review' : 'Open review'}
 							</button>
 							<button onClick={handleReviewAdminClick}>
 								{isReviewAdminVisible
@@ -256,7 +255,7 @@ const Profile = () => {
 					) : null}
 				</div>
 				{isCreateReviewVisible && <CreateReview userId={userData.userId} />}
-				{userData.userRol === "User"||userData.userRol === 'Admin' ? (
+				{userData.userRol==='User'||userData.userRol === 'Admin' ? (
 					<div className='admin'>
 						{isEditProductsVisible && <EditProducts />}
 						{showListUsers && <ListUsers />}
