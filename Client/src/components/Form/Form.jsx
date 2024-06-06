@@ -4,8 +4,34 @@ import Cloudinary from '../Cloudinary/Cloudinary';
 import './Form.css';
 import Validation from '../Validation/Validation';
 import Swal from 'sweetalert2';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 
 export default function Form() {
+
+	const [isAdmin, setIsAdmin] = useState(true);
+    const { user } = useAuth0();
+	const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user && user.email) {
+                try {
+                    const response = await axios.get(`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`);
+
+                    if (response.data.result.userRol !== "Admin") {
+                        setIsAdmin(false);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            setLoading(false); // Aquí estableces el estado de carga como falso una vez que los datos se han recuperado
+        };
+
+        fetchData();
+    }, [user]);
+
 	const [categories, setCategories] = useState([]);
 	useEffect(() => {
 		const axiosCategories = async () => {
@@ -59,6 +85,15 @@ export default function Form() {
 	useEffect(() => {
 		Validation(articleData, errors, setErrors);
 	}, []);
+
+	if (!isAdmin) {
+        return (
+            <div>
+                <h2>You cant enter here</h2>
+                <Link to={"/"}><button>Back to Home</button></Link>
+            </div>
+        );
+    }
 
 	const handleChange = (event) => {
 		const property = event.target.name;
@@ -132,178 +167,182 @@ export default function Form() {
 	const hasErrors = () => {
 		return Object.keys(errors).some((key) => errors[key]);
 	};
-	return (
-		<div className='back'>
-			<div className='form-box'>
-				<form className='articleForm' onSubmit={handleSubmit}>
-					<div className='product-container'>
-						<div className='image-container-form'>
-							<div>
-								<Cloudinary onImageUpload={handleImageUpload} />
-								{errors.articleImage && (
-									<span className='error-message'>{errors.articleImage}</span>
-								)}
-							</div>
-						</div>
-						<div className='details-container'>
-							<div className='form-group'>
-								<div className='input-label-group'>
-									<p>Name:</p>
-									<input
-										type='text'
-										name='articleName'
-										placeholder='Name of article'
-										value={articleData.articleName}
-										onChange={handleChange}
-									/>
-									{errors.articleName && (
-										<span className='error-message'>{errors.articleName}</span>
+
+	if (loading) {
+		return (
+			<div className='back'>
+				<div className='form-box'>
+					<form className='articleForm' onSubmit={handleSubmit}>
+						<div className='product-container'>
+							<div className='image-container-form'>
+								<div>
+									<Cloudinary onImageUpload={handleImageUpload} />
+									{errors.articleImage && (
+										<span className='error-message'>{errors.articleImage}</span>
 									)}
 								</div>
 							</div>
-							<div className='form-group'>
-								<div className='input-label-group'>
-									<p>Price:</p>
-									<input
-										className='articlePrice'
-										type='text'
-										name='articlePrice'
-										placeholder='Price'
-										value={articleData.articlePrice}
+							<div className='details-container'>
+								<div className='form-group'>
+									<div className='input-label-group'>
+										<p>Name:</p>
+										<input
+											type='text'
+											name='articleName'
+											placeholder='Name of article'
+											value={articleData.articleName}
+											onChange={handleChange}
+										/>
+										{errors.articleName && (
+											<span className='error-message'>{errors.articleName}</span>
+										)}
+									</div>
+								</div>
+								<div className='form-group'>
+									<div className='input-label-group'>
+										<p>Price:</p>
+										<input
+											className='articlePrice'
+											type='text'
+											name='articlePrice'
+											placeholder='Price'
+											value={articleData.articlePrice}
+											onChange={handleChange}
+										/>
+										{errors.articlePrice && (
+											<span className='error-message'>{errors.articlePrice}</span>
+										)}
+									</div>
+								</div>
+								<div className='form-group'>
+									<div className='input-group'>
+										<div className='input-label-group'>
+											<p>Stock S:</p>
+											<input
+												type='number'
+												name='articleS'
+												placeholder='Stock S'
+												value={articleData.articleS}
+												onChange={handleChange}
+												min='0'
+											/>
+											{errors.articleS && (
+												<span className='error-message'>{errors.articleS}</span>
+											)}
+										</div>
+									</div>
+									<div className='input-group'>
+										<div className='input-label-group'>
+											<p>Stock M:</p>
+											<input
+												type='number'
+												name='articleM'
+												placeholder='Stock M'
+												value={articleData.articleM}
+												onChange={handleChange}
+												min='0'
+											/>
+											{errors.articleM && (
+												<span className='error-message'>{errors.articleM}</span>
+											)}
+										</div>
+									</div>
+									<div className='input-group'>
+										<div className='input-label-group'>
+											<p>Stock L:</p>
+											<input
+												type='number'
+												name='articleL'
+												placeholder='Stock L'
+												value={articleData.articleL}
+												onChange={handleChange}
+												min='0'
+											/>
+											{errors.articleL && (
+												<span className='error-message'>{errors.articleL}</span>
+											)}
+										</div>
+									</div>
+	
+									<div className='input-group'>
+										<div className='input-label-group'>
+											<p>Stock XL:</p>
+											<input
+												type='number'
+												name='articleXL'
+												placeholder='Stock XL'
+												value={articleData.articleXL}
+												onChange={handleChange}
+												min='0'
+											/>
+											{errors.articleXL && (
+												<span className='error-message'>{errors.articleXL}</span>
+											)}
+										</div>
+									</div>
+									<div className='input-group'>
+										<div className='input-label-group'>
+											<p>Stock XXL:</p>
+											<input
+												type='number'
+												name='articleXXL'
+												placeholder='Stock XXL'
+												value={articleData.articleXXL}
+												onChange={handleChange}
+												min='0'
+											/>
+											{errors.articleXXL && (
+												<span className='error-message'>{errors.articleXXL}</span>
+											)}
+										</div>
+									</div>
+								</div>
+								<div className='form-group'>
+									<p>Description:</p>
+									<textarea
+										name='articleDescription'
+										placeholder='Description'
+										value={articleData.articleDescription}
 										onChange={handleChange}
-									/>
-									{errors.articlePrice && (
-										<span className='error-message'>{errors.articlePrice}</span>
+									></textarea>
+									{errors.articleDescription && (
+										<span className='error-message'>
+											{errors.articleDescription}
+										</span>
 									)}
 								</div>
-							</div>
-							<div className='form-group'>
-								<div className='input-group'>
-									<div className='input-label-group'>
-										<p>Stock S:</p>
-										<input
-											type='number'
-											name='articleS'
-											placeholder='Stock S'
-											value={articleData.articleS}
-											onChange={handleChange}
-											min='0'
-										/>
-										{errors.articleS && (
-											<span className='error-message'>{errors.articleS}</span>
-										)}
-									</div>
+								<div className='form-group'>
+									<select
+										name='categoryName'
+										value={articleData.categoryName}
+										onChange={handleChange}
+									>
+										<option value=''>Select a category:</option>
+										{categories.map((element) => (
+											<option
+												value={element.categoryName}
+												key={element.categoryId}
+											>
+												{element.categoryName}
+											</option>
+										))}
+									</select>
+	
+									{errors.Category && (
+										<span className='error-message'>{errors.Category}</span>
+									)}
 								</div>
-								<div className='input-group'>
-									<div className='input-label-group'>
-										<p>Stock M:</p>
-										<input
-											type='number'
-											name='articleM'
-											placeholder='Stock M'
-											value={articleData.articleM}
-											onChange={handleChange}
-											min='0'
-										/>
-										{errors.articleM && (
-											<span className='error-message'>{errors.articleM}</span>
-										)}
-									</div>
+								<div className='button-container'>
+									<button type='submit' disabled={hasErrors()}>
+										Send
+									</button>
 								</div>
-								<div className='input-group'>
-									<div className='input-label-group'>
-										<p>Stock L:</p>
-										<input
-											type='number'
-											name='articleL'
-											placeholder='Stock L'
-											value={articleData.articleL}
-											onChange={handleChange}
-											min='0'
-										/>
-										{errors.articleL && (
-											<span className='error-message'>{errors.articleL}</span>
-										)}
-									</div>
-								</div>
-
-								<div className='input-group'>
-									<div className='input-label-group'>
-										<p>Stock XL:</p>
-										<input
-											type='number'
-											name='articleXL'
-											placeholder='Stock XL'
-											value={articleData.articleXL}
-											onChange={handleChange}
-											min='0'
-										/>
-										{errors.articleXL && (
-											<span className='error-message'>{errors.articleXL}</span>
-										)}
-									</div>
-								</div>
-								<div className='input-group'>
-									<div className='input-label-group'>
-										<p>Stock XXL:</p>
-										<input
-											type='number'
-											name='articleXXL'
-											placeholder='Stock XXL'
-											value={articleData.articleXXL}
-											onChange={handleChange}
-											min='0'
-										/>
-										{errors.articleXXL && (
-											<span className='error-message'>{errors.articleXXL}</span>
-										)}
-									</div>
-								</div>
-							</div>
-							<div className='form-group'>
-								<p>Description:</p>
-								<textarea
-									name='articleDescription'
-									placeholder='Description'
-									value={articleData.articleDescription}
-									onChange={handleChange}
-								></textarea>
-								{errors.articleDescription && (
-									<span className='error-message'>
-										{errors.articleDescription}
-									</span>
-								)}
-							</div>
-							<div className='form-group'>
-								<select
-									name='categoryName'
-									value={articleData.categoryName}
-									onChange={handleChange}
-								>
-									<option value=''>Select a category:</option>
-									{categories.map((element) => (
-										<option
-											value={element.categoryName}
-											key={element.categoryId}
-										>
-											{element.categoryName}
-										</option>
-									))}
-								</select>
-
-								{errors.Category && (
-									<span className='error-message'>{errors.Category}</span>
-								)}
-							</div>
-							<div className='button-container'>
-								<button type='submit' disabled={hasErrors()}>
-									Send
-								</button>
 							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 }
+	
