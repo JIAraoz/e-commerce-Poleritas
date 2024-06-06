@@ -38,7 +38,7 @@ export default function Cart() {
 			}
 		}
 		fetchData();
-	}, [user.email]);
+	}, [user]);
 
 	const handleRemoveButton = async (value) => {
 		try {
