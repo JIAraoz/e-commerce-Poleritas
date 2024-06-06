@@ -17,10 +17,10 @@ function Nav() {
 			// eslint-disable-next-line no-inner-declarations
 			async function fetchUserData() {
 				try {
+					console.log("response")	
 					const response = await axios.get(
 						`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
 					);
-					console.log("response")
 					window.localStorage.setItem('userData', JSON.stringify(response.data.result));
 				} catch (error) {
 					Swal.fire({
