@@ -9,7 +9,7 @@ const desactivateShoppingCart = async (req, res) => {
                     include: {
                         model: Article,
                         through: {
-                            attributes: ['articleQuantity']
+                            attributes: ['articleQuantity', 'S', 'M', 'L', 'XL', 'XXL']
                         }
                     }
                 });
@@ -21,7 +21,6 @@ const desactivateShoppingCart = async (req, res) => {
                     if (newStock < 0) {
                         return res.status(400).json({ message: `Insufficient stock for the article ${article.title}` });
                     }
-                    console.log("soy el console log",article.Cart_Articule)
                     // Actualizar existencias de tallas
                     article.articleS -= article.Cart_Articule.S;
                     article.articleM -= article.Cart_Articule.M;
