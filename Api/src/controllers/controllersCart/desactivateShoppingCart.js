@@ -21,7 +21,7 @@ const desactivateShoppingCart = async (req, res) => {
                     if (newStock < 0) {
                         return res.status(400).json({ message: `Insufficient stock for the article ${article.title}` });
                     }
-
+                    console.log(article)
                     // Actualizar existencias de tallas
                     article.articleS -= article.Cart_Articule.S;
                     article.articleM -= article.Cart_Articule.M;
