@@ -16,7 +16,7 @@ const postUser=async(req,res)=>{
                     userName:req.body.userName,
                     userEmail:req.body.userEmail,
                     userImage:req.body.userImage,
-                    userRol:req.body.userRol||'Admin'
+                    userRol:req.body.userRol||'User'
                 }
                 
                 const createdUser= await User.create(user)

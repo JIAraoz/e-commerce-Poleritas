@@ -17,34 +17,32 @@ function App() {
 	const [isBanned, setIsBanned] = useState(false);
 	const { user } = useAuth0();
 
-useEffect(() => {
-		const fetchData = async () => {
-			if (user && user.email) {
-				try {
-					const response = await axios.get(
-						`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`,
-					);
+	useEffect(() => {
+        const fetchData = async () => {
+            if (user && user.email) {
+                try {
+                    const response = await axios.get(`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`);
 
-					if (response.data.result.userRol === 'Banned') {
-						setIsBanned(true);
-					}
-				} catch (error) {
-					console.error(error);
-				}
-			}
-		};
+                    if (response.data.result.userRol === "Banned") {
+                        setIsBanned(true);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        };
 
-		fetchData();
-	}, [user]);
+        fetchData();
+    }, [user]);
 
-	if (isBanned) {
-		return (
-			<div>
-				<h2>You are banned</h2>
-				<p>Write an email to poleritas0@gmail.com for more information.</p>
-			</div>
-		);
-	}
+    if (isBanned) {
+        return (
+            <div>
+                <h2>You are banned</h2>
+                <p>Write an email to poleritas0@gmail.com for more information.</p>
+            </div>
+        );
+    }
  
 	return (
 		<div className='app-container'>

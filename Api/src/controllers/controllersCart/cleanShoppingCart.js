@@ -14,6 +14,7 @@ const cleanShoppingCart=async(req,res)=>{
                 }
             });
             if (cartToClean) {
+                cartToClean.cartSubtotal = 0
                 await Cart_Articule.destroy({
                     where: { shoppingCartCartId: cartId }
                 });
