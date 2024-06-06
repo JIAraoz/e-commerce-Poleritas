@@ -14,19 +14,13 @@ import Checkout from './components/Checkout/Checkout';
 import ListUsers from './components/ListUsers/ListUsers';
 import './App.css';
 function App() {
-	const { isLoading } = useAuth0();
-	const { pathname } = useLocation();
-
-	if (isLoading) return <h1>Cargando sesión...</h1>;
-
 	return (
 		<div className='app-container'>
-			{pathname !== '/' && <Nav />}
+			<Nav />
 			<div className='content'>
 				<Routes>
-					<Route path='/' element={<Landing />} />
+					<Route path='/' element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
-					<Route path='/home' element={<Home />} />
 					<Route path='/form' element={<Form />} />
 					<Route path='/products' element={<Products />} />
 					<Route path='/detail/:id' element={<Detail />} />
