@@ -63,7 +63,11 @@
     display: block;
    
 }
-
+.elementosCard{
+   margin-top: 1rem;
+    width: 20rem;
+    height: 2rem;
+}
 .btnSave {
     padding: 10px 20px;
     background-color: #28a3a7;

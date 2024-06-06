@@ -14,9 +14,10 @@ export default function Cart() {
 
 	useEffect(() => {
 		async function fetchData() {
+            const email=user.email
 			try {
 				const userResponse = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`,
+					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${email}`,
 				);
 				setUserData(userResponse.data.result);
 

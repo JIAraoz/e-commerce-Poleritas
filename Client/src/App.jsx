@@ -17,7 +17,7 @@ function App() {
 	const [isBanned, setIsBanned] = useState(false);
 	const { user } = useAuth0();
 
-	useEffect(() => {
+useEffect(() => {
 		const fetchData = async () => {
 			if (user && user.email) {
 				try {
@@ -45,13 +45,13 @@ function App() {
 			</div>
 		);
 	}
-
+ 
 	return (
 		<div className='app-container'>
 			<Nav />
 			<div className='content'>
 				<Routes>
-					<Route path='/' element={<Navigate to='/Home' />} />
+					<Route path='/' element={<Home/>} />
 					<Route path='/home' element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/products' element={<Products />} />
