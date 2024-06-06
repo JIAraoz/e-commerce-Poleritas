@@ -79,7 +79,9 @@ const CheckoutForm = () => {
             try {
                 const { data } = await axios.post('https://e-commerce-grupo03.onrender.com/cart/checkout', {
                     id,
-                    amount: cartSubtotal * 100 + 50 // Ajuste de cantidad en centavos
+                    amount: cartSubtotal * 100 + 50, // Ajuste de cantidad en centavos
+                    email: user.email,
+                    cartItems
                 });
 
                 console.log(data);

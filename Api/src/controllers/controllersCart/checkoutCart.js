@@ -3,7 +3,7 @@ const { ShoppingCart, Article} = require('../../db');
 
 const checkoutCart = async (req, res) => {
    
-    const { id, amount } = req.body;
+    const { id, amount, email } = req.body;
 
     try {
         const paymentIntent = await stripe.paymentIntents.create({
@@ -17,6 +17,18 @@ const checkoutCart = async (req, res) => {
         
 
         if(paymentIntent){
+            const info = await transporter.sendMail({
+                from: '"Thanks you for your order!" <poleritas0@gmail.com>', // sender address
+                to: email,
+                html: `
+                    <p>Thank you for your order!</p>
+                    <p>Here are the items you purchased:</p>
+                    <ul>
+                        ${cartItems.map(item => `<li>${item.articleName} - ${item.articlePrice}</li>`).join('')}
+                    </ul>
+                    <p>Total amount: ${amount}</p>
+                `
+            });
             return res.send({ 
                 message: 'successful payment',
                 amount: amount
