@@ -89,8 +89,8 @@ const CheckoutForm = () => {
                     elements.getElement(CardElement).clear();
 
                     Swal.fire({
-                        title: 'Compra Exitosa!',
-                        text: 'Muchas gracias por su compra. Le invitamos a dejar una review acerca de la pagina en su perfil.',
+                        title: 'Successful purchase!',
+                        text: 'Thank you very much for your purchase We invite you to leave a review about the website on your profile.',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     }).then((result) => {
