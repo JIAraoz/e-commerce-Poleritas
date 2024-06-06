@@ -81,7 +81,7 @@ const CheckoutForm = () => {
                     id,
                     amount: cartSubtotal * 100 + 50, // Ajuste de cantidad en centavos
                     email: user.email,
-                    cartItems
+                    cartItems: cartResponse.articles
                 });
 
                 console.log(data);

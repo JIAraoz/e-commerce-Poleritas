@@ -3,7 +3,7 @@ const { ShoppingCart, Article, transporter} = require('../../db');
 
 const checkoutCart = async (req, res) => {
    
-    const { id, amount, email } = req.body;
+    const { id, amount, email, cartItems } = req.body;
 
     try {
         const paymentIntent = await stripe.paymentIntents.create({
@@ -24,7 +24,17 @@ const checkoutCart = async (req, res) => {
                     <p>Thank you for your order!</p>
                     <p>Here are the items you purchased:</p>
                     <ul>
-                        ${cartItems.map(item => `<li>${item.articleName} - ${item.articlePrice}</li>`).join('')}
+                        ${cartItems.map(item => `
+                            <li>
+                                <div>
+                                    <img src="${item.articleImage}" alt="item" style="width: 100px; height: 100px; object-fit: cover;">
+                                </div>
+                                <div>
+                                    <p><strong>Name:</strong> ${item.articleName}</p>
+                                    <p><strong>Price:</strong> ${item.articlePrice}</p>
+                                </div>
+                            </li>
+                        `).join('')}
                     </ul>
                     <p>Total amount: ${amount}</p>
                 `
