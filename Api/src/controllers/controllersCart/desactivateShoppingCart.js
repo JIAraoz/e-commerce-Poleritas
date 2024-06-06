@@ -50,9 +50,6 @@ const { ShoppingCart, Article,  Cart_Articule} = require('../../db');
 
 module.exports = desactivateShoppingCart; */
 
-
-const { ShoppingCart, Article, Cart_Article } = require('../../db');
-
 const desactivateShoppingCart = async (req, res) => {
     try {
         const cartId = req.query.cartId;
