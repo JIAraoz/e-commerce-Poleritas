@@ -98,9 +98,10 @@ const Profile = () => {
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
+        const id = userData.userId
 		try {
 			const response = await axios.put(
-				`https://e-commerce-grupo03.onrender.com/user/editUser?id=${userData.userId}`,
+				`https://e-commerce-grupo03.onrender.com/user/editUser?id=${id}`,
 				formData,
 			);
 			Swal.fire({
@@ -255,7 +256,7 @@ const Profile = () => {
 					) : null}
 				</div>
 				{isCreateReviewVisible && <CreateReview userId={userData.userId} />}
-				{userData.userRol === 'Admin' ? (
+				{userData.userRol === "User"||userData.userRol === 'Admin' ? (
 					<div className='admin'>
 						{isEditProductsVisible && <EditProducts />}
 						{showListUsers && <ListUsers />}
