@@ -23,7 +23,7 @@ const postUser=async(req,res)=>{
 
                 if (createdUser) {
                     const info = await transporter.sendMail({
-                        from: '"Welcome to Poleritas!" <mateo.giampietro.10@gmail.com>', // sender address
+                        from: '"Welcome to Poleritas!" <poleritas0@gmail.com>', // sender address
                         to: user.userEmail,
                         subject: "Welcome to Poleritas!", // Subject line
                         html: `
