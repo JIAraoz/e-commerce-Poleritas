@@ -34,9 +34,10 @@ const Profile = () => {
 
 	useEffect(() => {
 		async function fetchUserData() {
+			const email = user.email
 			try {
 				const response = await axios.get(
-					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`,
+					`https://e-commerce-grupo03.onrender.com/user/user_email?email=${email}`,
 				);
 				setUserData(response.data.result);
 				setFormData({
