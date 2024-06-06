@@ -51,8 +51,8 @@ function App() {
 			<Nav />
 			<div className='content'>
 				<Routes>
-                    <Route path='/' element={<Navigate to="/Home" />}  />
-                    <Route path='/home' element={<Home />} />
+					<Route path='/' element={<Navigate to='/Home' />} />
+					<Route path='/home' element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/products' element={<Products />} />
 					<Route path='/detail/:id' element={<Detail />} />
