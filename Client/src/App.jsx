@@ -37,10 +37,15 @@ function App() {
 
     if (isBanned) {
         return (
-            <div>
-                <h2>You are banned</h2>
-                <p>Write an email to poleritas0@gmail.com for more information.</p>
+          <div className="banned-container">
+            <div className="robot-banned">
+                <img src="/robot.jpg" alt="Robot" />
+                <div className='baned'>
+                    <h2 className='text-banned'>You are banned</h2>
+                    <p>Write an email to poleritas0@gmail.com for more information.</p>
+                </div>
             </div>
+        </div>
         );
     }
  

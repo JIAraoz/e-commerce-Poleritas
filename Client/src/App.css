@@ -23,3 +23,36 @@ html, body, #root, .app-container {
 footer {
     margin-top: auto;
 }
+
+/* .robot-banned img{
+   width: 600px;
+    height: auto;
+    border-radius: 50px;
+}
+
+.text-banned{
+   color: black;
+    font-size: 5rem;
+} */
+.robot-banned {
+    display: flex;
+    align-items: center;
+}
+
+.robot-banned img {
+    width: 50rem; /* ajusta el tamaño según sea necesario */
+    margin-right: 10px; /* espacio entre la imagen y el texto */
+}
+
+.baned {
+    text-align: right;
+}
+
+.text-banned {
+    font-size: 6rem; /* ajusta el tamaño de fuente según sea necesario */
+    font-weight: bold;
+}
+
+.baned p {
+    font-size: 30px; /* ajusta el tamaño de fuente según sea necesario */
+}
