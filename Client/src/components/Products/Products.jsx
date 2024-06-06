@@ -40,6 +40,10 @@ export default function Products() {
         fetchProducts(initialCategory, initialSizes, initialOrder, 1);
     }, [location.search]);
 
+    useEffect(() => {
+        fetchProducts(category, selectedSizes, order, 1);
+    }, [query.search]);
+
     const fetchProducts = async (category, sizes, order, page) => {
         setLoading(true);
         setNoResults(false);
