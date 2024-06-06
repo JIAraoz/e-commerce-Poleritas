@@ -183,25 +183,29 @@ const Profile = () => {
                         )}
                         <Logout />
                     </div>
-                    <div className='button-container'>
-                        <button onClick={handleEditProductsClick}>Edit products</button>
-                        <button onClick={handleButtonClick}>
-                            {showListUsers ? 'Close user list' : 'Open user list'}
-                        </button>
-                        <button onClick={handleCreateReviewClick}>
-                            {isCreateReviewVisible ? 'Close create review' : 'Open create review'}
-                        </button>
-                        <button onClick={handleReviewClick}>
-                            {isReviewVisible ? 'Close review' : 'Open review'}
-                      </button>
+                    <button onClick={handleCreateReviewClick}>
+                        {isCreateReviewVisible ? 'Close create review' : 'Open create review'}
+                    </button>
+                    {userData.userRol === "Admin" ? <div className='button-container'>
+                                                            <button onClick={handleEditProductsClick}>Edit products</button>
+                                                            <button onClick={handleButtonClick}>
+                                                                {showListUsers ? 'Close user list' : 'Open user list'}
+                                                            </button>
+                                                            <button onClick={handleReviewClick}>
+                                                                {isReviewVisible ? 'Close review' : 'Open review'}
+                                                        </button>
+                                                    </div>
+                                                    : null
+                  }
                   </div>
-                  </div>
-            <div className='admin'>
-                    {isEditProductsVisible && <EditProducts />}
-                    {showListUsers && <ListUsers />}
-                    {isCreateReviewVisible && <CreateReview userId={userData.userId} />}
-                    {isReviewVisible && <Review userId={userData.userId} />}
-                </div>
+                  {isCreateReviewVisible && <CreateReview userId={userData.userId} />}
+            {userData.userRol === "Admin" ? <div className='admin'>
+                                                {isEditProductsVisible && <EditProducts />}
+                                                {showListUsers && <ListUsers />}
+                                                {isReviewVisible && <Review userId={userData.userId} />}
+                                            </div>
+                                            : null
+            } 
             </div>
         )
     );
