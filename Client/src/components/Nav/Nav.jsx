@@ -20,6 +20,7 @@ function Nav() {
 					const response = await axios.get(
 						`https://e-commerce-grupo03.onrender.com/user/user_email?email=${user.email}`
 					);
+					console.log("response")
 					window.localStorage.setItem('userData', JSON.stringify(response.data.result));
 				} catch (error) {
 					Swal.fire({
