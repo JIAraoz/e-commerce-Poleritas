@@ -11,7 +11,6 @@ function Nav() {
     const { user, isAuthenticated } = useAuth0();
     const userData = JSON.parse(window.localStorage.getItem("userData"));
 
-	console.log(userData)
     return (
         <div className='nav'>
             <div className='left'>
